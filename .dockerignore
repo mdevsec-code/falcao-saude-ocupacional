@@ -1,0 +1,14 @@
+node_modules
+.git
+.github
+dist
+build
+coverage
+.husky
+Dockerfile
+.dockerignore
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+public/mockServiceWorker.js

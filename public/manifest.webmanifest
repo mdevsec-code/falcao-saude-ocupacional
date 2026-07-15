@@ -1,0 +1,20 @@
+{
+  "name": "Falcão · Saúde Ocupacional",
+  "short_name": "Falcão",
+  "description": "Plataforma profissional de gestão de Saúde Ocupacional",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAFAF9",
+  "theme_color": "#C98A2B",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

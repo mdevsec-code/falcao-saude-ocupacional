@@ -1,0 +1,76 @@
+import { ROLES, type Role } from './roles';
+
+export const PERMISSIONS = {
+  APPOINTMENT_READ: 'appointment:read',
+  APPOINTMENT_WRITE: 'appointment:write',
+  APPOINTMENT_DELETE: 'appointment:delete',
+  PATIENT_READ: 'patient:read',
+  PATIENT_WRITE: 'patient:write',
+  EMPLOYEE_READ: 'employee:read',
+  EMPLOYEE_WRITE: 'employee:write',
+  ASO_READ: 'aso:read',
+  ASO_WRITE: 'aso:write',
+  EXAM_READ: 'exam:read',
+  EXAM_WRITE: 'exam:write',
+  REPORT_READ: 'report:read',
+  REPORT_WRITE: 'report:write',
+  USERS_MANAGE: 'users:manage',
+  SETTINGS_MANAGE: 'settings:manage',
+  AUDIT_READ: 'audit:read',
+} as const;
+
+export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
+
+export const ALL_PERMISSIONS: Permission[] = Object.values(PERMISSIONS);
+
+export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
+  [ROLES.ADMIN]: [...ALL_PERMISSIONS],
+
+  [ROLES.MEDICO]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.APPOINTMENT_WRITE,
+    PERMISSIONS.PATIENT_READ,
+    PERMISSIONS.PATIENT_WRITE,
+    PERMISSIONS.ASO_READ,
+    PERMISSIONS.ASO_WRITE,
+    PERMISSIONS.EXAM_READ,
+    PERMISSIONS.REPORT_READ,
+  ],
+
+  [ROLES.ENFERMEIRO]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.APPOINTMENT_WRITE,
+    PERMISSIONS.PATIENT_READ,
+    PERMISSIONS.ASO_READ,
+    PERMISSIONS.EXAM_READ,
+    PERMISSIONS.EXAM_WRITE,
+  ],
+
+  [ROLES.TECNICO_SEGURANCA]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.EMPLOYEE_READ,
+    PERMISSIONS.ASO_READ,
+    PERMISSIONS.EXAM_READ,
+    PERMISSIONS.REPORT_READ,
+  ],
+
+  [ROLES.RH]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.APPOINTMENT_WRITE,
+    PERMISSIONS.EMPLOYEE_READ,
+    PERMISSIONS.EMPLOYEE_WRITE,
+    PERMISSIONS.REPORT_READ,
+  ],
+
+  [ROLES.RECEPCAO]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.APPOINTMENT_WRITE,
+    PERMISSIONS.PATIENT_READ,
+    PERMISSIONS.PATIENT_WRITE,
+    PERMISSIONS.EMPLOYEE_READ,
+  ],
+};
+
+export function hasPermission(role: Role, permission: Permission): boolean {
+  return ROLE_PERMISSIONS[role]?.includes(permission) ?? false;
+}

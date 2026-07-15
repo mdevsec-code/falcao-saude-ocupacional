@@ -1,0 +1,12 @@
+{
+  "required": "Campo obrigatório",
+  "email": "E-mail inválido",
+  "minLength": "Mínimo de {{count}} caracteres",
+  "maxLength": "Máximo de {{count}} caracteres",
+  "minPassword": "A senha deve ter no mínimo 8 caracteres",
+  "maxPassword": "A senha deve ter no máximo 72 caracteres",
+  "cpf": "CPF deve ter 11 dígitos",
+  "cnpj": "CNPJ deve ter 14 dígitos",
+  "phone": "Telefone inválido",
+  "date": "Data inválida"
+}

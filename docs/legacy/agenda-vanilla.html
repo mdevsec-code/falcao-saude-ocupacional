@@ -1,0 +1,510 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#F3F5F2;
+    --surface:#FFFFFF;
+    --ink:#1C2321;
+    --ink-soft:#5B655F;
+    --line:#DCE1DC;
+    --primary:#1B4B43;
+    --primary-soft:#E3ECE9;
+    --accent:#C98A2B;
+    --accent-soft:#F7EAD3;
+    --success:#2F7D5A;
+    --success-soft:#E4F1E9;
+    --danger:#B23A32;
+    --danger-soft:#F8E6E3;
+    --neutral-soft:#EBEDEA;
+    --shadow: 0 1px 2px rgba(28,35,33,0.04), 0 8px 24px rgba(28,35,33,0.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  #app{
+    font-family:'IBM Plex Sans', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    padding:32px 28px 80px;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .display{font-family:'Fraunces', serif;}
+
+  .topbar{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+    max-width:1100px;
+    margin:0 auto 28px;
+  }
+  .brand-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:0 0 6px;
+  }
+  .brand-title{
+    font-size:30px;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+  .btn{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    border-radius:9px;
+    border:1px solid transparent;
+    padding:11px 18px;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:active{ transform:scale(0.97); }
+  .btn-primary{ background:var(--primary); color:#fff; }
+  .btn-primary:hover{ box-shadow:var(--shadow); }
+  .btn-ghost{ background:transparent; color:var(--primary); border-color:var(--line); }
+  .btn-ghost:hover{ background:var(--primary-soft); }
+  .btn-danger-ghost{ background:transparent; color:var(--danger); border-color:var(--danger-soft); }
+  .btn-danger-ghost:hover{ background:var(--danger-soft); }
+
+  .controls{
+    max-width:1100px;
+    margin:0 auto 20px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .search-input{
+    flex:1;
+    min-width:220px;
+    padding:11px 14px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    font-size:14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    background:var(--surface);
+  }
+  .search-input:focus{ outline:2px solid var(--primary); outline-offset:1px; }
+  .status-tabs{ display:flex; gap:6px; background:var(--neutral-soft); padding:4px; border-radius:10px; }
+  .status-tab{
+    border:none; background:transparent; padding:8px 13px; border-radius:7px;
+    font-size:13px; font-weight:600; color:var(--ink-soft); cursor:pointer;
+    font-family:'IBM Plex Sans', sans-serif;
+  }
+  .status-tab.active{ background:var(--surface); color:var(--primary); box-shadow:var(--shadow); }
+
+  .content{ max-width:1100px; margin:0 auto; }
+  .date-group{ margin-bottom:26px; }
+  .date-heading{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 10px 4px;
+  }
+  .cards{ display:flex; flex-direction:column; gap:10px; }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:6px solid var(--neutral-soft);
+    border-radius:11px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    cursor:pointer;
+    transition:box-shadow .12s ease, transform .12s ease;
+  }
+  .card:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
+  .card.status-agendado{ border-left-color:var(--accent); }
+  .card.status-realizado{ border-left-color:var(--success); }
+  .card.status-cancelado{ border-left-color:var(--ink-soft); opacity:0.6; }
+
+  .card-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:15px;
+    color:var(--primary);
+    min-width:56px;
+  }
+  .card-main{ flex:1; min-width:0; }
+  .card-name{ font-weight:600; font-size:15px; margin:0 0 2px; }
+  .card-sub{ font-size:12.5px; color:var(--ink-soft); margin:0; }
+  .card-sub .cid-tag{
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--primary-soft);
+    color:var(--primary);
+    padding:1px 6px;
+    border-radius:5px;
+    margin-right:6px;
+  }
+  .badge{
+    font-size:11.5px;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:20px;
+    white-space:nowrap;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .badge-agendado{ background:var(--accent-soft); color:var(--accent); }
+  .badge-realizado{ background:var(--success-soft); color:var(--success); }
+  .badge-cancelado{ background:var(--neutral-soft); color:var(--ink-soft); }
+  .badge-apto{ background:var(--success-soft); color:var(--success); }
+  .badge-apto_restricao{ background:var(--accent-soft); color:var(--accent); }
+  .badge-inapto{ background:var(--danger-soft); color:var(--danger); }
+  .badge-encaminhado{ background:var(--primary-soft); color:var(--primary); }
+
+  .empty{
+    text-align:center;
+    padding:70px 20px;
+    color:var(--ink-soft);
+  }
+  .empty .display{ font-size:22px; color:var(--ink); margin-bottom:6px; }
+
+  /* Drawer */
+  .overlay{
+    position:fixed; inset:0; background:rgba(28,35,33,0.35);
+    display:none; align-items:stretch; justify-content:flex-end; z-index:50;
+  }
+  .overlay.open{ display:flex; }
+  .drawer{
+    background:var(--bg);
+    width:min(560px, 100%);
+    height:100%;
+    overflow-y:auto;
+    padding:28px 28px 40px;
+    box-shadow:-8px 0 30px rgba(0,0,0,0.12);
+  }
+  .drawer-header{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; }
+  .drawer-title{ font-size:22px; font-weight:600; margin:0; }
+  .close-x{
+    border:none; background:var(--neutral-soft); width:32px; height:32px; border-radius:8px;
+    cursor:pointer; font-size:16px; color:var(--ink-soft); line-height:1;
+  }
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--primary); margin:26px 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .section-label::after{ content:''; flex:1; height:1px; background:var(--line); }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:12.5px; font-weight:600; color:var(--ink-soft); margin-bottom:5px; }
+  .field input[type=text], .field input[type=date], .field input[type=time], .field textarea, .field select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    background:var(--surface);
+    color:var(--ink);
+  }
+  .field textarea{ min-height:70px; resize:vertical; font-family:'IBM Plex Sans', sans-serif; }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:2px solid var(--primary); outline-offset:1px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .pill-group{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pill-option{
+    border:1px solid var(--line); background:var(--surface); padding:9px 14px; border-radius:20px;
+    font-size:13px; font-weight:600; cursor:pointer; color:var(--ink-soft);
+  }
+  .pill-option.selected-apto{ background:var(--success-soft); border-color:var(--success); color:var(--success); }
+  .pill-option.selected-apto_restricao{ background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  .pill-option.selected-inapto{ background:var(--danger-soft); border-color:var(--danger); color:var(--danger); }
+  .pill-option.selected-encaminhado{ background:var(--primary-soft); border-color:var(--primary); color:var(--primary); }
+  .pill-option.selected-sim{ background:var(--danger-soft); border-color:var(--danger); color:var(--danger); }
+  .pill-option.selected-nao{ background:var(--success-soft); border-color:var(--success); color:var(--success); }
+  .pill-option.selected-nao_avaliado{ background:var(--neutral-soft); border-color:var(--ink-soft); color:var(--ink-soft); }
+
+  .drawer-actions{ display:flex; gap:10px; margin-top:26px; }
+  .drawer-actions .btn{ flex:1; }
+  .hint{ font-size:12px; color:var(--ink-soft); margin-top:-6px; margin-bottom:14px; }
+  .save-status{ font-size:12px; color:var(--ink-soft); text-align:center; margin-top:10px; min-height:16px; }
+</style>
+
+<div id="app">
+  <div class="topbar">
+    <div>
+      <p class="brand-eyebrow">Saúde Ocupacional · Central de Atendimentos</p>
+      <h1 class="brand-title display">Agenda de Atendimentos</h1>
+    </div>
+    <button class="btn btn-primary" onclick="openDrawer(null)">+ Novo agendamento</button>
+  </div>
+
+  <div class="controls">
+    <input class="search-input" id="searchInput" type="text" placeholder="Buscar por colaborador, matrícula ou CID..." oninput="render()" />
+    <div class="status-tabs" id="statusTabs"></div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="empty">Carregando agenda...</div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="drawer" id="drawer"></div>
+</div>
+
+<script>
+const STORAGE_KEY = 'agendamentos-data';
+let records = [];
+let currentFilter = 'todos';
+let editingId = null;
+let draftPost = {}; // temp state for pill selections while drawer open
+
+const STATUS_LABELS = { agendado:'Agendado', realizado:'Realizado', cancelado:'Cancelado' };
+const CONCLUSAO_LABELS = { apto:'Apto', apto_restricao:'Apto c/ restrição', inapto:'Inapto', encaminhado:'Encaminhado' };
+const ALTURA_LABELS = { sim:'Sim', nao:'Não', nao_avaliado:'Não avaliado' };
+
+function uid(){ return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+async function loadRecords(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    records = res && res.value ? JSON.parse(res.value) : [];
+  }catch(e){
+    records = [];
+  }
+  renderTabs();
+  render();
+}
+
+async function persist(){
+  const statusEl = document.getElementById('saveStatus');
+  try{
+    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(records), false);
+    if(!result) throw new Error('sem resultado');
+    if(statusEl) statusEl.textContent = 'Salvo.';
+  }catch(e){
+    if(statusEl) statusEl.textContent = 'Não foi possível salvar. Tente novamente.';
+  }
+}
+
+function renderTabs(){
+  const tabs = [
+    {key:'todos', label:'Todos'},
+    {key:'agendado', label:'Agendados'},
+    {key:'realizado', label:'Realizados'},
+    {key:'cancelado', label:'Cancelados'}
+  ];
+  document.getElementById('statusTabs').innerHTML = tabs.map(t =>
+    `<button class="status-tab ${currentFilter===t.key?'active':''}" onclick="setFilter('${t.key}')">${t.label}</button>`
+  ).join('');
+}
+
+function setFilter(key){ currentFilter = key; renderTabs(); render(); }
+
+function fmtDateHeading(dateStr){
+  if(!dateStr) return 'Sem data';
+  const [y,m,d] = dateStr.split('-');
+  const date = new Date(Number(y), Number(m)-1, Number(d));
+  return date.toLocaleDateString('pt-BR', { weekday:'long', day:'2-digit', month:'long', year:'numeric' });
+}
+
+function render(){
+  const search = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  let list = records.filter(r=>{
+    if(currentFilter !== 'todos' && r.status !== currentFilter) return false;
+    if(!search) return true;
+    return (r.nome||'').toLowerCase().includes(search)
+      || (r.matricula||'').toLowerCase().includes(search)
+      || (r.cid||'').toLowerCase().includes(search);
+  });
+
+  list.sort((a,b)=> (a.data+a.hora).localeCompare(b.data+b.hora));
+
+  const content = document.getElementById('content');
+  if(list.length === 0){
+    content.innerHTML = `<div class="empty">
+      <div class="display">Nenhum agendamento encontrado</div>
+      <div>Ajuste os filtros ou crie um novo agendamento para começar.</div>
+    </div>`;
+    return;
+  }
+
+  const groups = {};
+  list.forEach(r=>{
+    const key = r.data || 'sem-data';
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(r);
+  });
+
+  const orderedKeys = Object.keys(groups).sort();
+  content.innerHTML = orderedKeys.map(dateKey=>{
+    const cards = groups[dateKey].map(r=>{
+      const statusBadge = `<span class="badge badge-${r.status}">${STATUS_LABELS[r.status]}</span>`;
+      const conclusaoBadge = r.conclusao ? `<span class="badge badge-${r.conclusao}">${CONCLUSAO_LABELS[r.conclusao]}</span>` : '';
+      return `<div class="card status-${r.status}" onclick="openDrawer('${r.id}')">
+        <div class="card-time mono">${r.hora||'--:--'}</div>
+        <div class="card-main">
+          <p class="card-name">${escapeHtml(r.nome || 'Colaborador sem nome')}</p>
+          <p class="card-sub">${r.cid ? `<span class="cid-tag">${escapeHtml(r.cid)}</span>` : ''}${escapeHtml(r.setor || '')}${r.setor && r.matricula ? ' · ' : ''}${r.matricula ? 'Mat. '+escapeHtml(r.matricula) : ''}</p>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">${conclusaoBadge}${statusBadge}</div>
+      </div>`;
+    }).join('');
+    return `<div class="date-group">
+      <p class="date-heading">${fmtDateHeading(dateKey)}</p>
+      <div class="cards">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function openDrawer(id){
+  editingId = id;
+  const rec = id ? records.find(r=>r.id===id) : {
+    id: uid(), nome:'', matricula:'', setor:'', data: new Date().toISOString().slice(0,10), hora:'',
+    cid:'', patologia:'', descricaoAtendimento:'', status:'agendado',
+    atividadeRestrita:'nao_avaliado', descricaoRestricao:'', aptoAltura:'nao_avaliado',
+    observacoesPos:'', conclusao:'', conclusaoDescricao:''
+  };
+  draftPost = { conclusao: rec.conclusao||'', atividadeRestrita: rec.atividadeRestrita||'nao_avaliado', aptoAltura: rec.aptoAltura||'nao_avaliado' };
+
+  const drawer = document.getElementById('drawer');
+  drawer.innerHTML = `
+    <div class="drawer-header">
+      <h2 class="drawer-title display">${id ? 'Editar atendimento' : 'Novo agendamento'}</h2>
+      <button class="close-x" onclick="closeDrawer()">✕</button>
+    </div>
+
+    <div class="section-label">Dados do colaborador</div>
+    <div class="field"><label>Nome completo</label><input type="text" id="f_nome" value="${escapeAttr(rec.nome)}" placeholder="Ex.: Maria da Silva"/></div>
+    <div class="row2">
+      <div class="field"><label>Matrícula</label><input type="text" id="f_matricula" value="${escapeAttr(rec.matricula)}" placeholder="0000"/></div>
+      <div class="field"><label>Setor / cargo</label><input type="text" id="f_setor" value="${escapeAttr(rec.setor)}" placeholder="Ex.: Produção"/></div>
+    </div>
+
+    <div class="section-label">Agendamento</div>
+    <div class="row2">
+      <div class="field"><label>Data</label><input type="date" id="f_data" value="${rec.data||''}"/></div>
+      <div class="field"><label>Horário</label><input type="time" id="f_hora" value="${rec.hora||''}"/></div>
+    </div>
+    <div class="field">
+      <label>Situação</label>
+      <select id="f_status">
+        <option value="agendado" ${rec.status==='agendado'?'selected':''}>Agendado</option>
+        <option value="realizado" ${rec.status==='realizado'?'selected':''}>Realizado</option>
+        <option value="cancelado" ${rec.status==='cancelado'?'selected':''}>Cancelado</option>
+      </select>
+    </div>
+
+    <div class="section-label">Patologia e atendimento</div>
+    <div class="row2">
+      <div class="field"><label>CID</label><input type="text" id="f_cid" value="${escapeAttr(rec.cid)}" placeholder="Ex.: M54.5"/></div>
+      <div class="field"><label>Descrição da patologia</label><input type="text" id="f_patologia" value="${escapeAttr(rec.patologia)}" placeholder="Ex.: Lombalgia"/></div>
+    </div>
+    <div class="field"><label>Descrição do atendimento</label><textarea id="f_descricao" placeholder="Motivo da consulta, relato do colaborador, procedimentos realizados...">${escapeHtml(rec.descricaoAtendimento||'')}</textarea></div>
+
+    <div class="section-label">Pós-atendimento</div>
+    <div class="field">
+      <label>Atividade restrita?</label>
+      <div class="pill-group" id="pg_restrita">
+        ${['sim','nao','nao_avaliado'].map(v=>`<button type="button" class="pill-option ${draftPost.atividadeRestrita===v?'selected-'+v:''}" onclick="selectPill('pg_restrita','atividadeRestrita','${v}')">${v==='sim'?'Sim':v==='nao'?'Não':'Não avaliado'}</button>`).join('')}
+      </div>
+    </div>
+    <div class="field"><label>Descrição da restrição (se houver)</label><textarea id="f_descricaoRestricao" placeholder="Ex.: Evitar levantamento de peso acima de 5kg por 7 dias">${escapeHtml(rec.descricaoRestricao||'')}</textarea></div>
+
+    <div class="field">
+      <label>Apto para trabalho em altura?</label>
+      <div class="pill-group" id="pg_altura">
+        ${['sim','nao','nao_avaliado'].map(v=>`<button type="button" class="pill-option ${draftPost.aptoAltura===v?'selected-'+v:''}" onclick="selectPill('pg_altura','aptoAltura','${v}')">${v==='sim'?'Sim':v==='nao'?'Não':'Não avaliado'}</button>`).join('')}
+      </div>
+    </div>
+
+    <div class="field"><label>Observações pós-atendimento</label><textarea id="f_obsPos" placeholder="Orientações passadas, retorno agendado, encaminhamentos...">${escapeHtml(rec.observacoesPos||'')}</textarea></div>
+
+    <div class="section-label">Conclusão do atendimento</div>
+    <div class="field">
+      <div class="pill-group" id="pg_conclusao">
+        ${['apto','apto_restricao','inapto','encaminhado'].map(v=>`<button type="button" class="pill-option ${draftPost.conclusao===v?'selected-'+v:''}" onclick="selectPill('pg_conclusao','conclusao','${v}')">${CONCLUSAO_LABELS[v]}</button>`).join('')}
+      </div>
+    </div>
+    <div class="field"><label>Detalhes da conclusão</label><textarea id="f_conclusaoDescricao" placeholder="Ex.: Afastamento de 3 dias, retorno em reavaliação em 07/07">${escapeHtml(rec.conclusaoDescricao||'')}</textarea></div>
+
+    <div class="drawer-actions">
+      ${id ? `<button class="btn btn-danger-ghost" onclick="deleteRecord('${id}')">Excluir</button>` : ''}
+      <button class="btn btn-primary" onclick="saveRecord()">Salvar atendimento</button>
+    </div>
+    <div class="save-status" id="saveStatus"></div>
+  `;
+
+  document.getElementById('overlay').classList.add('open');
+}
+
+function selectPill(groupId, field, value){
+  draftPost[field] = value;
+  const group = document.getElementById(groupId);
+  [...group.children].forEach(btn=>{
+    btn.className = 'pill-option';
+  });
+  const options = groupId === 'pg_conclusao' ? ['apto','apto_restricao','inapto','encaminhado'] : ['sim','nao','nao_avaliado'];
+  [...group.children].forEach((btn,i)=>{
+    if(options[i]===value) btn.classList.add('selected-'+value);
+  });
+}
+
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  editingId = null;
+}
+
+async function saveRecord(){
+  const data = {
+    id: editingId || uid(),
+    nome: document.getElementById('f_nome').value.trim(),
+    matricula: document.getElementById('f_matricula').value.trim(),
+    setor: document.getElementById('f_setor').value.trim(),
+    data: document.getElementById('f_data').value,
+    hora: document.getElementById('f_hora').value,
+    status: document.getElementById('f_status').value,
+    cid: document.getElementById('f_cid').value.trim(),
+    patologia: document.getElementById('f_patologia').value.trim(),
+    descricaoAtendimento: document.getElementById('f_descricao').value.trim(),
+    atividadeRestrita: draftPost.atividadeRestrita || 'nao_avaliado',
+    descricaoRestricao: document.getElementById('f_descricaoRestricao').value.trim(),
+    aptoAltura: draftPost.aptoAltura || 'nao_avaliado',
+    observacoesPos: document.getElementById('f_obsPos').value.trim(),
+    conclusao: draftPost.conclusao || '',
+    conclusaoDescricao: document.getElementById('f_conclusaoDescricao').value.trim(),
+  };
+
+  if(!data.nome){
+    document.getElementById('saveStatus').textContent = 'Informe o nome do colaborador antes de salvar.';
+    return;
+  }
+
+  const idx = records.findIndex(r=>r.id===data.id);
+  if(idx>=0) records[idx] = data; else records.push(data);
+
+  document.getElementById('saveStatus').textContent = 'Salvando...';
+  await persist();
+  render();
+  setTimeout(()=>{ closeDrawer(); }, 350);
+}
+
+async function deleteRecord(id){
+  records = records.filter(r=>r.id!==id);
+  await persist();
+  closeDrawer();
+  render();
+}
+
+function escapeAttr(str){ return escapeHtml(str||''); }
+
+document.getElementById('overlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'overlay') closeDrawer();
+});
+
+loadRecords();
+</script>

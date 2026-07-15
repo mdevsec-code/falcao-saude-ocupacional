@@ -1,0 +1,74 @@
+{
+  "app": {
+    "name": "Falcão Saúde Ocupacional",
+    "shortName": "Falcão"
+  },
+  "actions": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "back": "Voltar",
+    "next": "Avançar",
+    "previous": "Voltar",
+    "close": "Fechar",
+    "open": "Abrir",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "clear": "Limpar",
+    "retry": "Tentar novamente",
+    "loading": "Carregando…",
+    "add": "Adicionar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "submit": "Enviar",
+    "view": "Visualizar",
+    "more": "Mais"
+  },
+  "states": {
+    "empty": "Nada por aqui",
+    "loading": "Carregando…",
+    "error": "Algo deu errado"
+  },
+  "nav": {
+    "home": "Início",
+    "dashboard": "Dashboard",
+    "agenda": "Agenda",
+    "appointments": "Agendamentos",
+    "patients": "Pacientes",
+    "employees": "Colaboradores",
+    "companies": "Empresas",
+    "attendances": "Atendimentos",
+    "records": "Prontuários",
+    "cid": "CID",
+    "exams": "Exames",
+    "aso": "ASO",
+    "reports": "Relatórios",
+    "users": "Usuários",
+    "permissions": "Permissões",
+    "settings": "Configurações",
+    "profile": "Perfil",
+    "audit": "Auditoria",
+    "underConstruction": "Em construção"
+  },
+  "theme": {
+    "light": "Tema claro",
+    "dark": "Tema escuro",
+    "switchToLight": "Ativar tema claro",
+    "switchToDark": "Ativar tema escuro"
+  },
+  "sidebar": {
+    "overview": "Visão geral",
+    "attendance": "Atendimento",
+    "clinical": "Clínico",
+    "management": "Gestão",
+    "comingSoon": "Em breve"
+  },
+  "footer": {
+    "version": "Falcão · v{{version}}"
+  },
+  "branding": {
+    "health": "Saúde Ocupacional"
+  }
+}

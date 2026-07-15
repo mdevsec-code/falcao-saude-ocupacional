@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "lokalise.i18n-ally",
+    "vitest.explorer",
+    "EditorConfig.EditorConfig",
+    "Vue.volar",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "eamodio.gitlens",
+    "vivaxy.vscode-conventional-commits",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}

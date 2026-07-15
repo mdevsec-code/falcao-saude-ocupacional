@@ -1,0 +1,37 @@
+# Labeler automático de PRs. Requer a action "actions/labeler@v5".
+# Documentação: https://github.com/actions/labeler
+
+'area:ui':
+  - changed-files:
+      - any-glob-to-any-file: ['src/components/**', 'src/styles/**', 'src/assets/**']
+
+'area:auth':
+  - changed-files:
+      - any-glob-to-any-file: ['src/features/auth/**', 'src/store/authStore.ts']
+
+'area:dashboard':
+  - changed-files:
+      - any-glob-to-any-file: ['src/features/dashboard/**']
+
+'area:infra':
+  - changed-files:
+      - any-glob-to-any-file: [
+          'package.json',
+          'tsconfig*.json',
+          'vite.config.ts',
+          'vitest.config.ts',
+          'tailwind.config.ts',
+          '.github/**',
+        ]
+
+'area:docs':
+  - changed-files:
+      - any-glob-to-any-file: ['docs/**', '*.md']
+
+'area:tests':
+  - changed-files:
+      - any-glob-to-any-file: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', 'src/test/**']
+
+'kind:dependencies':
+  - changed-files:
+      - any-glob-to-any-file: ['package-lock.json']

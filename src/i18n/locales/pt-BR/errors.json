@@ -1,0 +1,13 @@
+{
+  "generic": {
+    "title": "Algo deu errado",
+    "description": "Não foi possível completar a operação. Tente novamente em alguns instantes."
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A rota solicitada não pôde ser carregada."
+  },
+  "network": "Falha de rede. Verifique sua conexão.",
+  "unauthorized": "Você não tem permissão para realizar essa ação.",
+  "sessionExpired": "Sua sessão expirou. Entre novamente para continuar."
+}
