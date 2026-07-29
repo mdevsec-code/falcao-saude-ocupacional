@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Stethoscope, User } from 'lucide-react';
 
@@ -12,11 +12,21 @@ import { formatCPF } from '@/utils/format';
 const MAX_RESULTS = 5;
 const MIN_QUERY_LENGTH = 2;
 
-export function GlobalSearch() {
+interface GlobalSearchProps {
+  /** Foca o campo ao montar — só use após uma ação explícita do usuário (ex.: abrir a busca mobile). */
+  focusOnMount?: boolean;
+}
+
+export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const { data: patients } = usePatients();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (focusOnMount) inputRef.current?.focus();
+  }, [focusOnMount]);
 
   const debouncedQuery = useDebounce(query, 200);
   const q = debouncedQuery.trim().toLowerCase();
@@ -56,6 +66,7 @@ export function GlobalSearch() {
   return (
     <div className="relative">
       <Input
+        ref={inputRef}
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);

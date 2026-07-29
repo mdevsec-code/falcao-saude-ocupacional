@@ -1,5 +1,6 @@
-import { type ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { type ReactNode, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import {
   LayoutDashboard,
   CalendarDays,
@@ -16,6 +17,7 @@ import {
   UserCog,
   KeyRound,
   ScrollText,
+  X,
   type LucideIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -116,9 +118,51 @@ const SECTIONS: NavSection[] = [
 
 export function Sidebar(): ReactNode {
   const collapsed = useUIStore((s) => s.sidebarCollapsed);
+  const mobileNavOpen = useUIStore((s) => s.mobileNavOpen);
+  const setMobileNavOpen = useUIStore((s) => s.setMobileNavOpen);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isCompact = isDesktop && collapsed;
   const { t } = useTranslation('common');
+  const { pathname } = useLocation();
+
+  // Fecha o drawer automaticamente ao navegar (evita ficar aberto sobre a nova página).
+  useEffect(() => {
+    if (!isDesktop) setMobileNavOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  const onNavigate = !isDesktop ? () => setMobileNavOpen(false) : undefined;
+
+  if (!isDesktop) {
+    return (
+      <DialogPrimitive.Root open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+        <DialogPrimitive.Portal>
+          <DialogPrimitive.Overlay
+            className={cn(
+              'fixed inset-0 z-modal-backdrop bg-neutral-900/50 backdrop-blur-sm',
+              'data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in',
+            )}
+          />
+          <DialogPrimitive.Content
+            className={cn(
+              'fixed inset-y-0 left-0 z-modal flex h-full w-72 max-w-[85vw] flex-col',
+              'border-r border-border bg-surface shadow-lg focus:outline-none',
+              'data-[state=open]:animate-slide-in-left data-[state=closed]:animate-slide-out-left',
+            )}
+          >
+            <DialogPrimitive.Title className="sr-only">{t('app.shortName')}</DialogPrimitive.Title>
+            <DialogPrimitive.Close
+              className="absolute right-3 top-3 rounded-md p-1.5 text-ink-soft hover:bg-hover hover:text-ink focus:outline-none focus-visible:shadow-focus"
+              aria-label={t('actions.close')}
+            >
+              <X className="h-4 w-4" />
+            </DialogPrimitive.Close>
+            <SidebarBody isCompact={false} onNavigate={onNavigate} />
+          </DialogPrimitive.Content>
+        </DialogPrimitive.Portal>
+      </DialogPrimitive.Root>
+    );
+  }
 
   return (
     <aside
@@ -129,6 +173,21 @@ export function Sidebar(): ReactNode {
         'transition-[width] duration-base ease-out',
       )}
     >
+      <SidebarBody isCompact={isCompact} />
+    </aside>
+  );
+}
+
+interface SidebarBodyProps {
+  isCompact: boolean;
+  onNavigate?: () => void;
+}
+
+function SidebarBody({ isCompact, onNavigate }: SidebarBodyProps): ReactNode {
+  const { t } = useTranslation('common');
+
+  return (
+    <>
       <div
         className={cn(
           'flex items-center gap-2.5 border-b border-border px-4 py-4',
@@ -158,7 +217,7 @@ export function Sidebar(): ReactNode {
               <ul className="space-y-0.5">
                 {section.items.map((item) => (
                   <li key={item.to}>
-                    <SidebarLink item={item} compact={isCompact} />
+                    <SidebarLink item={item} compact={isCompact} onNavigate={onNavigate} />
                   </li>
                 ))}
               </ul>
@@ -175,16 +234,17 @@ export function Sidebar(): ReactNode {
       >
         {isCompact ? 'v0.2' : t('footer.version', { version: '0.2.0' })}
       </div>
-    </aside>
+    </>
   );
 }
 
 interface SidebarLinkProps {
   item: NavItem;
   compact: boolean;
+  onNavigate?: () => void;
 }
 
-function SidebarLink({ item, compact }: SidebarLinkProps): ReactNode {
+function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode {
   const { icon: Icon, label, to, enabled } = item;
   const { t } = useTranslation('common');
   const { can } = useAuth();
@@ -221,6 +281,7 @@ function SidebarLink({ item, compact }: SidebarLinkProps): ReactNode {
     <NavLink
       to={to}
       end={to === ROUTE_PATHS.DASHBOARD}
+      onClick={onNavigate}
       className={({ isActive }) =>
         cn(
           baseClasses,

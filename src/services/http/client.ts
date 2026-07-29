@@ -13,7 +13,9 @@ const TOKEN_KEY = 'falcao-auth';
  */
 function getAuthToken(): string | null {
   try {
-    const raw = localStorage.getItem(TOKEN_KEY);
+    // "Lembrar de mim" desmarcado grava em sessionStorage, não localStorage
+    // (ver `store/authStore.ts`) — checa os dois.
+    const raw = localStorage.getItem(TOKEN_KEY) ?? sessionStorage.getItem(TOKEN_KEY);
     if (!raw) return null;
     const parsed: unknown = JSON.parse(raw);
     if (

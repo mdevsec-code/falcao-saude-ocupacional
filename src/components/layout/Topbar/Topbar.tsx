@@ -1,7 +1,7 @@
-import { type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Bell, ChevronsLeft, ChevronsRight, LogOut } from 'lucide-react';
+import { Bell, ChevronsLeft, ChevronsRight, LogOut, Menu, Search, X } from 'lucide-react';
 
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
@@ -27,12 +27,32 @@ export function Topbar(): ReactNode {
   const crumbs = useBreadcrumb();
   const collapsed = useUIStore((s) => s.sidebarCollapsed);
   const toggle = useUIStore((s) => s.toggleSidebar);
+  const toggleMobileNav = useUIStore((s) => s.toggleMobileNav);
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const { user, isAuthenticated, signOut } = useAuth();
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   async function handleSignOut(): Promise<void> {
     await signOut();
     navigate(ROUTE_PATHS.LOGIN);
+  }
+
+  if (!isDesktop && mobileSearchOpen) {
+    return (
+      <header className="z-sticky sticky top-0 flex items-center gap-2 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md">
+        <div className="flex-1">
+          <GlobalSearch focusOnMount />
+        </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setMobileSearchOpen(false)}
+          aria-label="Fechar busca"
+        >
+          <X className="h-4 w-4" />
+        </Button>
+      </header>
+    );
   }
 
   return (
@@ -41,7 +61,7 @@ export function Topbar(): ReactNode {
         'z-sticky sticky top-0 flex items-center gap-3 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md sm:px-6',
       )}
     >
-      {isDesktop && (
+      {isDesktop ? (
         <Button
           variant="ghost"
           size="icon"
@@ -49,6 +69,10 @@ export function Topbar(): ReactNode {
           aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
         >
           {collapsed ? <ChevronsRight className="h-4 w-4" /> : <ChevronsLeft className="h-4 w-4" />}
+        </Button>
+      ) : (
+        <Button variant="ghost" size="icon" onClick={toggleMobileNav} aria-label="Abrir menu">
+          <Menu className="h-4 w-4" />
         </Button>
       )}
 
@@ -79,6 +103,16 @@ export function Topbar(): ReactNode {
           <GlobalSearch />
         </div>
 
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden"
+          onClick={() => setMobileSearchOpen(true)}
+          aria-label="Buscar"
+        >
+          <Search className="h-4 w-4" />
+        </Button>
+
         <Button variant="ghost" size="icon" aria-label="Notificações">
           <Bell className="h-4 w-4" />
         </Button>
@@ -91,8 +125,9 @@ export function Topbar(): ReactNode {
             size="sm"
             onClick={() => void handleSignOut()}
             leftIcon={<LogOut className="h-4 w-4" />}
+            aria-label="Sair"
           >
-            Sair
+            <span className="hidden sm:inline">Sair</span>
           </Button>
         )}
 
