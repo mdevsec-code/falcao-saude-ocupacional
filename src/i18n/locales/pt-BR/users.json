@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Administração",
+    "title": "Usuários",
+    "description": "Contas de acesso ao sistema e seus perfis (RBAC)."
+  },
+  "error": {
+    "title": "Não foi possível carregar os usuários",
+    "description": "Tente novamente em instantes."
+  }
+}

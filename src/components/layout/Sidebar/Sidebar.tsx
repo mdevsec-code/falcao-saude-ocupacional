@@ -5,14 +5,16 @@ import {
   CalendarDays,
   CalendarPlus,
   Users,
-  Building2,
   ClipboardList,
   FileText,
   Stethoscope,
   FlaskConical,
   ShieldCheck,
   BarChart3,
+  Activity,
   Settings,
+  UserCog,
+  KeyRound,
   type LucideIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +26,7 @@ import { useUIStore } from '@/store/uiStore';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { ROUTE_PATHS } from '@/constants/routes';
-import type { Permission } from '@/constants/permissions';
+import { PERMISSIONS, type Permission } from '@/constants/permissions';
 
 interface NavItem {
   label: string;
@@ -44,7 +46,7 @@ const SECTIONS: NavSection[] = [
     title: 'sidebar.overview',
     items: [
       { label: 'nav.dashboard', to: ROUTE_PATHS.DASHBOARD, icon: LayoutDashboard, enabled: true },
-      { label: 'nav.agenda', to: ROUTE_PATHS.AGENDA, icon: CalendarDays, enabled: false },
+      { label: 'nav.agenda', to: ROUTE_PATHS.AGENDA, icon: CalendarDays, enabled: true },
     ],
   },
   {
@@ -54,33 +56,52 @@ const SECTIONS: NavSection[] = [
         label: 'nav.appointments',
         to: ROUTE_PATHS.AGENDAMENTOS,
         icon: CalendarPlus,
-        enabled: false,
+        enabled: true,
       },
-      { label: 'nav.patients', to: ROUTE_PATHS.PACIENTES, icon: Users, enabled: false },
-      { label: 'nav.employees', to: ROUTE_PATHS.COLABORADORES, icon: Users, enabled: false },
-      { label: 'nav.companies', to: ROUTE_PATHS.EMPRESAS, icon: Building2, enabled: false },
+      { label: 'nav.patients', to: ROUTE_PATHS.PACIENTES, icon: Users, enabled: true },
       {
         label: 'nav.attendances',
         to: ROUTE_PATHS.ATENDIMENTOS,
         icon: ClipboardList,
-        enabled: false,
+        enabled: true,
       },
-      { label: 'nav.records', to: ROUTE_PATHS.PRONTUARIOS, icon: FileText, enabled: false },
+      { label: 'nav.records', to: ROUTE_PATHS.PRONTUARIOS, icon: FileText, enabled: true },
     ],
   },
   {
     title: 'sidebar.clinical',
     items: [
-      { label: 'nav.cid', to: ROUTE_PATHS.CID, icon: Stethoscope, enabled: false },
-      { label: 'nav.exams', to: ROUTE_PATHS.EXAMES, icon: FlaskConical, enabled: false },
-      { label: 'nav.aso', to: ROUTE_PATHS.ASO, icon: ShieldCheck, enabled: false },
+      { label: 'nav.cid', to: ROUTE_PATHS.CID, icon: Stethoscope, enabled: true },
+      { label: 'nav.exams', to: ROUTE_PATHS.EXAMES, icon: FlaskConical, enabled: true },
+      { label: 'nav.aso', to: ROUTE_PATHS.ASO, icon: ShieldCheck, enabled: true },
     ],
   },
   {
     title: 'sidebar.management',
     items: [
-      { label: 'nav.reports', to: ROUTE_PATHS.RELATORIOS, icon: BarChart3, enabled: false },
-      { label: 'nav.settings', to: ROUTE_PATHS.CONFIGURACOES, icon: Settings, enabled: false },
+      { label: 'nav.reports', to: ROUTE_PATHS.RELATORIOS, icon: BarChart3, enabled: true },
+      { label: 'nav.atestados', to: ROUTE_PATHS.ATESTADOS, icon: Activity, enabled: true },
+      {
+        label: 'nav.users',
+        to: ROUTE_PATHS.USUARIOS,
+        icon: UserCog,
+        enabled: true,
+        requires: PERMISSIONS.USERS_MANAGE,
+      },
+      {
+        label: 'nav.permissions',
+        to: ROUTE_PATHS.PERMISSOES,
+        icon: KeyRound,
+        enabled: true,
+        requires: PERMISSIONS.USERS_MANAGE,
+      },
+      {
+        label: 'nav.settings',
+        to: ROUTE_PATHS.CONFIGURACOES,
+        icon: Settings,
+        enabled: true,
+        requires: PERMISSIONS.SETTINGS_MANAGE,
+      },
     ],
   },
 ];
@@ -106,7 +127,7 @@ export function Sidebar(): ReactNode {
           isCompact && 'justify-center px-2',
         )}
       >
-        <FalcaoLogo className="h-8 w-8 shrink-0 text-neutral-900" />
+        <FalcaoLogo className="h-9 w-auto shrink-0" bgClassName="rounded-md bg-neutral-0 p-1" />
         {!isCompact && (
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-ink">{t('app.shortName')}</p>

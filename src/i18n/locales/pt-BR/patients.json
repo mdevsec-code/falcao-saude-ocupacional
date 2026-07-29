@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Atendimento",
+    "title": "Pacientes",
+    "description": "Cadastro de colaboradores atendidos pela Saúde Ocupacional."
+  },
+  "error": {
+    "title": "Não foi possível carregar os pacientes",
+    "description": "Tente novamente em instantes."
+  }
+}

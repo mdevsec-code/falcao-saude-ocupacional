@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Clínico",
+    "title": "Tipos de Exame",
+    "description": "Catálogo de exames disponíveis para agendamento e atendimento, com duração e periodicidade padrão."
+  },
+  "error": {
+    "title": "Não foi possível carregar os tipos de exame",
+    "description": "Tente novamente em instantes."
+  }
+}

@@ -1,24 +1,26 @@
 /* ============================================
    🦅 Falcão Saúde Ocupacional — Design Tokens
-   Baseado na identidade visual da logo:
-   Preto, Branco, Dourado e Cinza.
+   Extraídos por amostragem de pixel da logo oficial
+   (src/assets/logo/Logo-Falcão.jpeg): dourado #FEBD03,
+   preto #0A0A0A, cinza #5C5C5D, branco. Ver
+   src/assets/logo/FalcaoLogo.tsx.
    ============================================ */
 
 :root {
-  /* ---------- Brand — Dourado ---------- */
-  --color-brand-gold-50: 250 243 225;
-  --color-brand-gold-100: 244 228 184;
-  --color-brand-gold-300: 229 181 71;
-  --color-brand-gold-500: 201 138 43; /* primary brand */
-  --color-brand-gold-700: 140 94 18;
-  --color-brand-gold-900: 63 42 6;
+  /* ---------- Brand — Dourado (hue ~44°, da logo) ---------- */
+  --color-brand-gold-50: 255 248 230;
+  --color-brand-gold-100: 255 235 179;
+  --color-brand-gold-300: 253 191 42; /* = #FDBF2A, tom quase idêntico ao dourado da logo */
+  --color-brand-gold-500: 172 126 6; /* primary brand — ações/botões (contraste com branco) */
+  --color-brand-gold-700: 138 99 4;
+  --color-brand-gold-900: 62 42 2;
 
-  /* ---------- Accent histórico — Verde-petróleo ---------- */
-  --color-accent-50: 227 236 233;
-  --color-accent-100: 199 219 213;
-  --color-accent-500: 27 75 67;
-  --color-accent-700: 19 53 47;
-  --color-accent-900: 10 28 25;
+  /* ---------- Accent — Preto/grafite (da logo) ---------- */
+  --color-accent-50: 233 233 230;
+  --color-accent-100: 214 214 208;
+  --color-accent-500: 43 43 38;
+  --color-accent-700: 26 26 22;
+  --color-accent-900: 12 12 10; /* ≈ #0C0C0A, preto da logo */
 
   /* ---------- Neutrals ---------- */
   --color-neutral-0: 255 255 255;
@@ -32,7 +34,7 @@
 
   /* ---------- Semantic ---------- */
   --color-success: 47 125 90;
-  --color-warning: 201 138 43;
+  --color-warning: 172 126 6;
   --color-danger: 178 58 50;
   --color-info: 44 93 138;
 
@@ -80,7 +82,7 @@
   --shadow-sm: 0 1px 2px rgba(20, 20, 15, 0.04), 0 1px 3px rgba(20, 20, 15, 0.04);
   --shadow-md: 0 1px 2px rgba(20, 20, 15, 0.04), 0 8px 24px rgba(20, 20, 15, 0.06);
   --shadow-lg: 0 8px 32px rgba(20, 20, 15, 0.08), 0 2px 8px rgba(20, 20, 15, 0.04);
-  --shadow-focus: 0 0 0 3px rgba(201, 138, 43, 0.18);
+  --shadow-focus: 0 0 0 3px rgba(172, 126, 6, 0.22);
 
   /* ---------- Motion ---------- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -116,5 +118,5 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-focus: 0 0 0 3px rgba(229, 181, 71, 0.28);
+  --shadow-focus: 0 0 0 3px rgba(253, 191, 42, 0.32);
 }

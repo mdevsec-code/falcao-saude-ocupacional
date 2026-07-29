@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Atendimento",
+    "title": "Atendimentos",
+    "description": "Registro de consultas realizadas e conclusão clínica por paciente."
+  },
+  "error": {
+    "title": "Não foi possível carregar os atendimentos",
+    "description": "Tente novamente em instantes."
+  }
+}

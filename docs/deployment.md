@@ -134,6 +134,12 @@ disponíveis **no momento do build** (não no runtime).
 - [ ] Smoke test em `/login` e `/`.
 - [ ] Healthcheck da API real (Etapa 3+).
 - [ ] Versão bumped no `package.json` e `package-lock.json`.
+- [ ] **Azure only**: atualizar `Content-Security-Policy` em
+  `azure/staticwebapp.config.json` — o `connect-src` hoje só libera
+  `'self'` + Google Fonts. Quando o backend real (Etapa 3) estiver no ar,
+  adicionar o domínio da API ali, senão todo `fetch()` para fora do
+  domínio do front é bloqueado pelo browser. Vercel/Netlify não têm CSP
+  configurado, então não têm esse problema.
 
 ## Rollback
 

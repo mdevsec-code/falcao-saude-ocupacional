@@ -1,18 +1,41 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
-import { Mail, Lock, Eye, EyeOff, LogIn, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, LogIn, ShieldCheck, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui';
+import { Checkbox } from '@/components/ui/Checkbox';
+import { Label } from '@/components/ui/Label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui';
 import { FalcaoLogo } from '@/assets/logo/FalcaoLogo';
+import falcaoMark from '@/assets/logo/falcao-mark.png';
+import { brand } from '@/config/brand';
+import { ROLE_LABELS } from '@/constants/roles';
+import { DEMO_USERS } from '@/services/msw/fixtures/users';
 import { useAuth } from '../hooks/useAuth';
 import { loginSchema, type LoginInput } from '../types';
 import { ROUTE_PATHS } from '@/constants/routes';
+
+const DEMO_PASSWORD = 'admin123';
+const ACTIVE_DEMO_USERS = DEMO_USERS.filter((u) => u.status === 'active');
 
 export function LoginPage(): ReactNode {
   const navigate = useNavigate();
@@ -21,9 +44,11 @@ export function LoginPage(): ReactNode {
 
   const [credentialsError, setCredentialsError] = useState<string | null>(null);
   const [showPwd, setShowPwd] = useState(false);
+  const [isQuickLoggingIn, setIsQuickLoggingIn] = useState(false);
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginInput>({
@@ -32,20 +57,30 @@ export function LoginPage(): ReactNode {
     defaultValues: { email: '', password: '', rememberMe: false },
   });
 
-  if (isAuthenticated) {
-    navigate(ROUTE_PATHS.DASHBOARD, { replace: true });
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(ROUTE_PATHS.DASHBOARD, { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
-  const onSubmit = handleSubmit(async (data) => {
+  async function attemptSignIn(email: string, password: string) {
     setCredentialsError(null);
-    const result = await signIn(data.email, data.password);
+    const result = await signIn(email, password);
     if (!result.ok) {
       setCredentialsError(result.error);
       toast.error(result.error);
       return;
     }
     navigate(ROUTE_PATHS.DASHBOARD, { replace: true });
-  });
+  }
+
+  const onSubmit = handleSubmit((data) => attemptSignIn(data.email, data.password));
+
+  async function handleQuickLogin(email: string) {
+    setIsQuickLoggingIn(true);
+    await attemptSignIn(email, DEMO_PASSWORD);
+    setIsQuickLoggingIn(false);
+  }
 
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
@@ -62,25 +97,61 @@ export function LoginPage(): ReactNode {
           }}
         />
 
-        <FalcaoLogo variant="wordmark" className="relative h-14 w-auto text-white" />
+        <img
+          src={falcaoMark}
+          alt=""
+          className="pointer-events-none absolute -bottom-16 -right-16 h-[26rem] w-auto object-contain opacity-[0.07] grayscale invert"
+        />
 
-        <div className="relative space-y-2">
-          <p className="font-display text-2xl font-semibold text-white">
-            {t('auth:login.sidePanel.title')}
-          </p>
-          <p className="text-sm text-white/70">{t('auth:login.sidePanel.subtitle')}</p>
-          <div className="flex items-center gap-2 pt-3 text-xs text-white/50">
-            <ShieldCheck className="h-3.5 w-3.5" />
+        <FalcaoLogo
+          variant="wordmark"
+          className="relative h-16 w-auto max-w-[280px] animate-fade-in"
+          bgClassName="rounded-lg bg-white p-3 shadow-md ring-1 ring-black/5"
+        />
+
+        <div className="relative animate-slide-up space-y-4">
+          <div className="space-y-2">
+            <p className="font-display text-2xl font-semibold text-white">
+              {t('auth:login.sidePanel.title')}
+            </p>
+            <p className="max-w-sm text-sm text-white/70">{t('auth:login.sidePanel.tagline')}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {brand.roles.map((role) => (
+              <span
+                key={role}
+                className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-2xs font-medium text-white/80 backdrop-blur-sm"
+              >
+                {role}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-white/50">
+            <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
             <span>{t('auth:login.sidePanel.compliance')}</span>
           </div>
         </div>
       </aside>
 
       {/* ────────── Direita: formulário ────────── */}
-      <main className="flex flex-col items-center justify-center bg-bg px-4 py-10 sm:px-8">
-        <Card className="w-full max-w-md border-border shadow-md">
+      <main className="relative flex flex-col items-center justify-center overflow-hidden bg-bg px-4 py-10 sm:px-8">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(50% 40% at 50% 0%, rgb(var(--color-brand-gold-500) / 0.08), transparent 70%)',
+          }}
+        />
+
+        <Card className="relative w-full max-w-md animate-scale-in overflow-hidden border-border shadow-md">
           <CardHeader className="items-center text-center">
-            <FalcaoLogo className="h-10 w-10 text-neutral-900" />
+            <FalcaoLogo
+              className="h-12 w-auto"
+              bgClassName="rounded-md bg-white p-1.5 shadow-sm ring-1 ring-border"
+            />
             <CardTitle className="mt-3">{t('auth:login.title')}</CardTitle>
             <CardDescription>{t('auth:login.subtitle')}</CardDescription>
           </CardHeader>
@@ -127,17 +198,25 @@ export function LoginPage(): ReactNode {
               />
 
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-xs text-ink-soft">
-                  <input
-                    {...register('rememberMe')}
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-border text-brand-gold-500 focus:ring-brand-gold-500"
+                <Label className="flex items-center gap-2 font-normal text-ink-soft">
+                  <Controller
+                    control={control}
+                    name="rememberMe"
+                    render={({ field }) => (
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    )}
                   />
                   {t('auth:login.fields.rememberMe')}
-                </label>
+                </Label>
 
-                <Button asChild variant="link" size="sm" className="h-auto px-0 text-xs">
-                  <a href="#esqueci">{t('auth:login.actions.forgotPassword')}</a>
+                <Button
+                  type="button"
+                  variant="link"
+                  size="sm"
+                  className="h-auto px-0 text-xs"
+                  onClick={() => toast.info(t('auth:login.actions.forgotPasswordUnavailable'))}
+                >
+                  {t('auth:login.actions.forgotPassword')}
                 </Button>
               </div>
 
@@ -162,9 +241,32 @@ export function LoginPage(): ReactNode {
               </Button>
             </form>
           </CardContent>
+
+          <CardFooter className="flex-col items-stretch gap-2 bg-brand-gold-50/40">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-brand-gold-900">
+              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+              {t('auth:login.demo.title')}
+            </div>
+            <p className="text-xs text-ink-soft">{t('auth:login.demo.description')}</p>
+            <Select onValueChange={(email) => void handleQuickLogin(email)} disabled={isQuickLoggingIn}>
+              <SelectTrigger className="w-full bg-surface">
+                <SelectValue placeholder="Entrar rapidamente como…" />
+              </SelectTrigger>
+              <SelectContent>
+                {ACTIVE_DEMO_USERS.map((demoUser) => (
+                  <SelectItem key={demoUser.id} value={demoUser.email}>
+                    {demoUser.name} — {ROLE_LABELS[demoUser.role]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-2xs text-ink-soft">
+              Todas as contas de demonstração usam a senha <span className="font-mono">{DEMO_PASSWORD}</span>.
+            </p>
+          </CardFooter>
         </Card>
 
-        <p className="mt-6 text-2xs text-muted">Falcão Construções e Engenharia © 2026</p>
+        <p className="relative mt-6 text-2xs text-muted">{brand.copyright}</p>
       </main>
     </div>
   );

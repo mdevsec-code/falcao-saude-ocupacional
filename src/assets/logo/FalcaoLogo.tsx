@@ -1,116 +1,78 @@
-import { type SVGProps } from 'react';
+import { type CSSProperties, type ImgHTMLAttributes } from 'react';
+
+import logoMark from './falcao-mark.png';
+import logoWordmark from './falcao-wordmark.png';
 
 export type FalcaoLogoVariant = 'mark' | 'wordmark';
 
-export interface FalcaoLogoProps extends SVGProps<SVGSVGElement> {
+export interface FalcaoLogoProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /**
-   * `mark` (padrão) — brandmark 40×40 com silhueta de falcão + "A".
-   * `wordmark` — marca + wordmark "FALCÃO / SAÚDE OCUPACIONAL" (200×48).
+   * `mark` (padrão) — silhueta do falcão isolada (recorte com fundo
+   * transparente, 585×790). Use em sidebar, avatar de login, favicon.
+   * `wordmark` — logo completa com "FALCÃO", "Construções" e "Engenharia"
+   * (recorte com fundo transparente, 1540×780). Use em painéis e header.
+   *
+   * O tamanho é resolvido pela imagem em si (via `aspect-ratio` + a
+   * dimensão que você definir em `className`/`style`) — defina apenas
+   * `width` OU `height`, nunca as duas, senão a imagem distorce ou sobra
+   * espaço vazio ao redor dela.
    */
   variant?: FalcaoLogoVariant;
+  /**
+   * Classes do "card" ao redor da logo (fundo, padding, borda, sombra).
+   * Como esse wrapper não tem tamanho fixo — ele apenas envolve a imagem
+   * já dimensionada — qualquer `p-*` aqui vira respiro real ao redor do
+   * falcão, sem brigar com o aspect-ratio. Padrão: `'transparent'`.
+   */
+  bgClassName?: string;
 }
+
+const MARK_ASPECT_RATIO = '585 / 790';
+const WORDMARK_ASPECT_RATIO = '1540 / 780';
 
 /**
- * Logo estilizada da Falcão Construções e Engenharia.
- * Inspirada na identidade enviada (preto + dourado).
+ * Logo oficial da Falcão Construções e Engenharia.
  *
- * Lê-se como um "A" em tamanhos pequenos (sidebar) e revela a silhueta de
- * um falcão com asas abertas e bico em tamanhos maiores (login, marketing).
+ * Ambos os assets (`falcao-mark.png`, `falcao-wordmark.png`) são recortes
+ * com fundo transparente gerados a partir da arte original
+ * (`Logo-Falcão.jpeg`), isolando exatamente a silhueta do falcão ou o
+ * lockup completo. A imagem carrega seu próprio `aspect-ratio`, então
+ * ela sempre preenche a área definida sem sobra nem distorção — o
+ * wrapper (`bgClassName`) só existe para dar um fundo/padding opcional.
  */
-export function FalcaoLogo({ variant = 'mark', className, ...rest }: FalcaoLogoProps) {
-  if (variant === 'wordmark') {
-    return (
-      <svg
-        viewBox="0 0 200 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        aria-label="Falcão · Saúde Ocupacional"
-        {...rest}
-      >
-        {/* Brandmark (mesma composição da variante 'mark', escalada em 0–40) */}
-        <g>
-          <rect width="40" height="40" rx="10" fill="currentColor" />
-          {/* Asas / "A" */}
-          <path
-            d="M8 32 L20 8 L32 32 M12 24 L28 24"
-            stroke="rgb(var(--color-brand-gold-500))"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {/* Bico do falcão (curva partindo do apex para a direita) */}
-          <path
-            d="M20 8 Q26 11 27 16 Q24 16 21 14"
-            stroke="rgb(var(--color-brand-gold-500))"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {/* Âncora / olho */}
-          <circle cx="20" cy="30" r="1.4" fill="rgb(var(--color-brand-gold-500))" />
-        </g>
+export function FalcaoLogo({
+  variant = 'mark',
+  bgClassName = '',
+  className,
+  alt,
+  style,
+  ...rest
+}: FalcaoLogoProps) {
+  const isWordmark = variant === 'wordmark';
 
-        {/* Wordmark */}
-        <text
-          x="50"
-          y="24"
-          fontFamily="var(--font-display)"
-          fontSize="20"
-          fontWeight="700"
-          letterSpacing="0.04em"
-          fill="currentColor"
-        >
-          FALCÃO
-        </text>
-        <text
-          x="50"
-          y="38"
-          fontFamily="var(--font-sans)"
-          fontSize="8.5"
-          fontWeight="500"
-          letterSpacing="0.22em"
-          fill="currentColor"
-          opacity="0.7"
-        >
-          SAÚDE OCUPACIONAL
-        </text>
-      </svg>
-    );
-  }
+  const aspectStyle: CSSProperties = {
+    aspectRatio: isWordmark ? WORDMARK_ASPECT_RATIO : MARK_ASPECT_RATIO,
+  };
 
   return (
-    <svg
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-label="Falcão"
-      {...rest}
+    <span
+      className={['inline-flex items-center justify-center', bgClassName]
+        .filter(Boolean)
+        .join(' ')}
     >
-      {/* Container — currentColor deixa o parent controlar o tom */}
-      <rect width="40" height="40" rx="10" fill="currentColor" />
-
-      {/* Asas / "A" estilizado */}
-      <path
-        d="M8 32 L20 8 L32 32 M12 24 L28 24"
-        stroke="rgb(var(--color-brand-gold-500))"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <img
+        src={isWordmark ? logoWordmark : logoMark}
+        alt={alt ?? (isWordmark ? 'Falcão Construções e Engenharia' : 'Falcão')}
+        decoding="async"
+        loading="lazy"
+        className={['block object-contain object-center', isWordmark ? '' : 'rounded-md', className]
+          .filter(Boolean)
+          .join(' ')}
+        style={{ ...aspectStyle, ...style }}
+        {...rest}
       />
-
-      {/* Bico do falcão */}
-      <path
-        d="M20 8 Q26 11 27 16 Q24 16 21 14"
-        stroke="rgb(var(--color-brand-gold-500))"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-
-      {/* Âncora visual / olho */}
-      <circle cx="20" cy="30" r="1.4" fill="rgb(var(--color-brand-gold-500))" />
-    </svg>
+    </span>
   );
 }
+
+export default FalcaoLogo;

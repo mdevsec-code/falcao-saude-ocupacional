@@ -10,11 +10,11 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  neutral: 'bg-neutral-100 text-ink-soft',
-  success: 'bg-green-50 text-success border border-green-100',
+  neutral: 'bg-hover text-ink-soft',
+  success: 'bg-success/10 text-success border border-success/20',
   warning: 'bg-brand-gold-50 text-brand-gold-700 border border-brand-gold-100',
-  danger: 'bg-red-50 text-danger border border-red-100',
-  info: 'bg-blue-50 text-info border border-blue-100',
+  danger: 'bg-danger/10 text-danger border border-danger/20',
+  info: 'bg-info/10 text-info border border-info/20',
   brand: 'bg-brand-gold-100 text-brand-gold-900 border border-brand-gold-300',
   accent: 'bg-accent-50 text-accent-700 border border-accent-100',
   outline: 'bg-transparent text-ink-soft border border-border',

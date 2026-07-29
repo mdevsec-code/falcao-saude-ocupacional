@@ -1,0 +1,39 @@
+{
+  "page": {
+    "eyebrow": "Controle de Atestados",
+    "title": "Atestados Médicos",
+    "description": "Análise de afastamentos por atestado médico: volume, dias, setores e recorrência."
+  },
+  "filtersCard": {
+    "title": "Filtros",
+    "description": "Refine a análise pelo período, setor, função e mais."
+  },
+  "kpis": {
+    "total": "Total de Atestados",
+    "totalDias": "Total de Dias Afastados",
+    "colaboradores": "Colaboradores Afastados",
+    "setorTop": "Setor Mais Afetado",
+    "sla": "SLA Médio de Lançamento",
+    "recorrencia": "Taxa de Recorrência"
+  },
+  "charts": {
+    "evolucao": { "title": "Evolução Mensal", "description": "Nº de atestados e dias afastados por competência" },
+    "funcao": { "title": "Distribuição por Função", "description": "Top 6 funções + outros" },
+    "setor": { "title": "Atestados por Setor", "description": "Onde os afastamentos mais ocorrem" },
+    "cid": { "title": "Principais Motivos (CID)", "description": "Por que os atestados acontecem" },
+    "acumulado": { "title": "Dias Afastados Acumulados", "description": "Tendência ao longo do período" },
+    "lideranca": { "title": "Liderança Mais Impactada", "description": "Atestados por gestor direto" },
+    "heatmap": { "title": "Mapa de Calor — Setor x Competência", "description": "Concentração de atestados por mês e setor" },
+    "timeline": { "title": "Lançamentos Recentes", "description": "Linha do tempo dos últimos registros" },
+    "alerts": { "title": "O que precisa de atenção", "description": "Recorrência de atestados e SLA de lançamento" },
+    "table": { "title": "Registros Detalhados", "description": "Todos os atestados do período filtrado" }
+  },
+  "empty": {
+    "title": "Nenhum registro no período filtrado",
+    "description": "Ajuste os filtros para ver os indicadores."
+  },
+  "error": {
+    "title": "Não foi possível carregar os atestados.",
+    "description": "Tente novamente em instantes."
+  }
+}

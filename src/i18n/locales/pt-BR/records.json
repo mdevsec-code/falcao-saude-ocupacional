@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Atendimento",
+    "title": "Prontuários",
+    "description": "Histórico consolidado de atendimentos por paciente."
+  },
+  "error": {
+    "title": "Não foi possível carregar os prontuários",
+    "description": "Tente novamente em instantes."
+  }
+}

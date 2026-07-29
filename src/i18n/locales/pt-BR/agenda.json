@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Atendimento",
+    "title": "Agenda",
+    "description": "Calendário de consultas e exames ocupacionais."
+  },
+  "error": {
+    "title": "Não foi possível carregar a agenda",
+    "description": "Tente novamente em instantes."
+  }
+}

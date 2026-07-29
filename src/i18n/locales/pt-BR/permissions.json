@@ -1,0 +1,8 @@
+{
+  "page": {
+    "eyebrow": "Administração",
+    "title": "Permissões",
+    "description": "Matriz de permissões por perfil de acesso (RBAC).",
+    "footnote": "Permissões são definidas por perfil, não individualmente por usuário. Para alterar o acesso de alguém, altere seu perfil em Usuários."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Segurança do Trabalho",
+    "title": "ASO — Aptidão por Atividade",
+    "description": "Painel de aptidão dos colaboradores para atividades de risco (altura, espaço confinado, máquinas, eletricidade)."
+  },
+  "error": {
+    "title": "Não foi possível carregar o painel de ASO",
+    "description": "Tente novamente em instantes."
+  }
+}

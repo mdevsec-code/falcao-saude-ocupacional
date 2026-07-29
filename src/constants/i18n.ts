@@ -7,7 +7,27 @@ export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = 'pt-BR';
 
-export const NAMESPACES = ['common', 'auth', 'dashboard', 'validation', 'errors'] as const;
+export const NAMESPACES = [
+  'common',
+  'auth',
+  'dashboard',
+  'validation',
+  'errors',
+  'reports',
+  'appointments',
+  'atestados',
+  'agenda',
+  'patients',
+  'attendances',
+  'records',
+  'aso',
+  'users',
+  'permissions',
+  'exams',
+  'cid',
+  'profile',
+  'settings',
+] as const;
 
 export type Namespace = (typeof NAMESPACES)[number];
 

@@ -9,6 +9,7 @@ export const brand = {
   tagline: 'Saúde Ocupacional de alto padrão',
   description:
     'Plataforma profissional de gestão de Saúde Ocupacional para Recepção, Médicos, Enfermeiros, Técnicos de Segurança, RH e Administradores.',
+  roles: ['Recepção', 'Médicos', 'Enfermeiros', 'Téc. Segurança', 'RH', 'Administradores'] as string[],
   copyright: `© ${new Date().getFullYear()} Falcão Construções e Engenharia. Todos os direitos reservados.`,
   privacy: 'Acesso restrito · LGPD',
 } as const;

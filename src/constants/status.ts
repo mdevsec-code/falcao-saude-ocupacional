@@ -34,3 +34,17 @@ export const APPOINTMENT_CONCLUSION_LABELS: Record<AppointmentConclusion, string
   [APPOINTMENT_CONCLUSION.INAPTO]: 'Inapto',
   [APPOINTMENT_CONCLUSION.ENCAMINHADO]: 'Encaminhado',
 };
+
+export const PATIENT_STATUS = {
+  ATIVO: 'ativo',
+  INATIVO: 'inativo',
+  AFASTADO: 'afastado',
+} as const;
+
+export type PatientStatus = (typeof PATIENT_STATUS)[keyof typeof PATIENT_STATUS];
+
+export const PATIENT_STATUS_LABELS: Record<PatientStatus, string> = {
+  [PATIENT_STATUS.ATIVO]: 'Ativo',
+  [PATIENT_STATUS.INATIVO]: 'Inativo',
+  [PATIENT_STATUS.AFASTADO]: 'Afastado',
+};

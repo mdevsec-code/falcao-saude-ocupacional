@@ -39,6 +39,7 @@ export default defineConfig({
           'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
           'http-vendor': ['axios'],
+          'export-vendor': ['jspdf', 'jspdf-autotable', 'exceljs'],
           icons: ['lucide-react'],
         },
       },

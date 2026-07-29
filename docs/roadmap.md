@@ -14,8 +14,14 @@ Status atual e evolução planejada do projeto. Veja também o
   Tooltip, Separator, Avatar)
 - [x] AppShell (Sidebar + Topbar), ThemeToggle (light/dark)
 - [x] Dashboard de boas-vindas com KPIs placeholder
-- [x] Login mockado (`admin@falcao.com / admin123`) com AuthStore Zustand
-- [x] RBAC constants (`roles.ts`, `permissions.ts`)
+- [x] Login mockado com AuthStore Zustand — 8 contas ativas de demonstração cobrindo
+  todos os perfis (admin, médico ×2, enfermeiro, técnico de segurança, RH,
+  recepção ×2; há também 1 conta RH inativa para testar bloqueio de login),
+  todas com senha `admin123`; seletor de "login rápido" na tela de login
+  (`services/msw/fixtures/users.ts`, `services/msw/handlers/auth.ts`)
+- [x] RBAC constants (`roles.ts`, `permissions.ts`) — hoje com UI própria:
+  `features/users` (CRUD de contas, gate `PERMISSIONS.USERS_MANAGE`) e
+  `features/permissions` (matriz de permissões por perfil, somente leitura)
 - [x] Status constants para domínio de atendimento
 - [x] Logo SVG (variantes `mark` e `wordmark`)
 
@@ -102,34 +108,53 @@ Status atual e evolução planejada do projeto. Veja também o
 - [ ] Sentry SDK (front + back)
 - [ ] Auditoria de acessos (LGPD)
 
-## 🔜 Etapa 4 — Agenda (v0.4.0)
+## 🚧 Etapa 4 — Agenda (v0.4.0)
 
-> Reforma completa do módulo de agenda.
+> Reforma do módulo de agenda em curso. Primeira fatia entregue como
+> `features/agenda` (mock via MSW) — sem FullCalendar/WebSocket ainda.
 
-- [ ] FullCalendar (React) integrado
-- [ ] CRUD de agendamentos com RHF + Zod
-- [ ] Visualizações: dia, semana, mês, lista
+- [x] CRUD de agendamentos com RHF + Zod (`AppointmentDialog`)
+- [x] Visualizações: mês, semana, dia (grades construídas em Tailwind, sem lib externa)
+- [x] Conflito de horário em tempo real (mesmo médico, mesmo dia, sobreposição de minutos)
+- [x] Filtros: médico, status, tipo de exame
+- [ ] FullCalendar (React) integrado — grades atuais são handmade; avaliar se compensa a dependência
 - [ ] Drag & drop, resize, recursão
-- [ ] Conflito de horário em tempo real
-- [ ] WebSocket para sincronização multiusuário
-- [ ] Filtros: médico, status, tipo de exame
+- [ ] WebSocket para sincronização multiusuário (depende de backend real — Etapa 3)
 - [ ] Exportação iCal/CSV
 
-## 🔜 Etapa 5 — Atendimentos & Pacientes (v0.5.0)
+## 🚧 Etapa 5 — Atendimentos & Pacientes (v0.5.0)
 
-- [ ] CRUD de pacientes (com validação de CPF/CNPJ)
-- [ ] Prontuário eletrônico (timeline)
+> Falcão é a única empresa atendida pela plataforma (não é multi-tenant) —
+> não há módulo de "Empresas"/"Colaboradores" separado: um paciente já é,
+> por definição, um colaborador da Falcão. Os itens de nav/rotas
+> correspondentes foram removidos para não sugerir um modelo que não existe.
+
+- [x] CRUD de pacientes (com validação de CPF) — `features/patients`
+- [x] Registro de atendimentos (consulta realizada + conclusão clínica: apto/apto c/ restrição/inapto/encaminhado) — `features/attendances`, vinculado a `patientId` real (não texto solto)
+- [x] Prontuário eletrônico (timeline consolidada por paciente) — `features/records`, acessível via `/prontuarios?patientId=` a partir do cadastro de pacientes
 - [ ] Histórico de exames
 - [ ] Upload de anexos (S3 ou MinIO)
 - [ ] Assinatura digital de documentos
 - [ ] Exportação PDF
 
-## 🔜 Etapa 6 — Exames, ASO, Relatórios (v0.6.0)
+## 🚧 Etapa 6 — Exames, ASO, Relatórios (v0.6.0)
 
-- [ ] Cadastro de tipos de exame
+> ASO aqui é modelado como aptidão **por atividade de risco** (não um
+> apto/inapto genérico) — decisão explícita do usuário: Falcão é
+> construtora/engenharia, então o que importa é saber se o colaborador
+> está apto para trabalho em altura (NR-35), espaço confinado (NR-33),
+> máquinas pesadas (NR-12), eletricidade (NR-10) etc. individualmente.
+> Ver `constants/duties.ts`.
+
+- [x] Cadastro de tipos de exame — `features/exams` (CRUD real, `/exames`). Antes era um array
+  estático duplicado em `agenda`/`attendances`; agora é fonte única
+  (`EXAM_TYPES_FIXTURE`) consumida ao vivo pelos dois, sem listas desconectadas
+- [x] Referência de CID-10 — `features/cid`, `/cid`, recorte curado (não exaustivo) focado em
+  osteomuscular/auditivo/respiratório/mental/dermatológico/traumatismos relevantes a canteiro de obras
 - [ ] Workflow de resultado (laudo → revisão → liberação)
-- [ ] Emissão de ASO com template
-- [ ] Relatórios gerenciais (Chart.js ou Recharts)
+- [x] Emissão de ASO com template — `utils/exports/aso.ts` (PDF por atendimento, com aptidão por atividade)
+- [x] Painel de aptidão por atividade de risco — `features/aso`, `/aso`, cruza `features/attendances` × `features/patients`
+- [x] Relatórios gerenciais (Recharts) — `features/reports`, `features/atestados`
 - [ ] BI / Analytics (Metabase ou similar)
 
 ## 🔜 Etapa 7 — Observabilidade, LGPD, Auditoria (v0.7.0)

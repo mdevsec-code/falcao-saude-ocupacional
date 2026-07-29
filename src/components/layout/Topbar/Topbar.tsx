@@ -102,9 +102,11 @@ export function Topbar(): ReactNode {
           </Button>
         )}
 
-        <Avatar className="ml-1">
-          <AvatarFallback>{getInitials(user?.name ?? 'Falcão')}</AvatarFallback>
-        </Avatar>
+        <Link to={ROUTE_PATHS.PERFIL} aria-label="Ver perfil" className="ml-1">
+          <Avatar>
+            <AvatarFallback>{getInitials(user?.name ?? 'Falcão')}</AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </header>
   );

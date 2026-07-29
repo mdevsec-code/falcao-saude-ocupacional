@@ -1,8 +1,13 @@
 import { http, HttpResponse, delay } from 'msw';
-import { ADMIN_USER } from '../fixtures/users';
+import { ADMIN_USER, DEMO_USERS, type UserFixture } from '../fixtures/users';
 
-const ADMIN_EMAIL = 'admin@falcao.com';
-const ADMIN_PASSWORD = 'admin123';
+/**
+ * Ambiente de demonstração: todas as contas em `DEMO_USERS` compartilham
+ * a mesma senha, para permitir testar RBAC logando com perfis diferentes
+ * (médico, enfermeiro, RH, recepção, técnico de segurança) sem precisar
+ * memorizar uma senha por conta.
+ */
+const DEMO_PASSWORD = 'admin123';
 
 interface LoginRequestBody {
   email?: string;
@@ -16,13 +21,17 @@ function generateToken(): string {
   return `mock-${Math.random().toString(36).slice(2)}`;
 }
 
-function generateSession(user = ADMIN_USER) {
+function generateSession(user: UserFixture) {
   return {
     user,
     token: generateToken(),
     expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString(),
   };
 }
+
+// Última sessão emitida — usado por `/auth/me` para refletir quem
+// efetivamente logou (em vez de sempre retornar o admin).
+let lastSessionUser: UserFixture = ADMIN_USER;
 
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
@@ -31,17 +40,20 @@ export const authHandlers = [
     const email = (body.email ?? '').trim().toLowerCase();
     const password = body.password ?? '';
 
-    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    const user = DEMO_USERS.find((u) => u.email.toLowerCase() === email);
+
+    if (!user || password !== DEMO_PASSWORD || user.status === 'inactive') {
       return HttpResponse.json(
         {
           code: 'INVALID_CREDENTIALS',
-          message: 'Credenciais inválidas',
+          message: user?.status === 'inactive' ? 'Usuário inativo' : 'Credenciais inválidas',
         },
         { status: 401 },
       );
     }
 
-    return HttpResponse.json(generateSession(), { status: 200 });
+    lastSessionUser = user;
+    return HttpResponse.json(generateSession(user), { status: 200 });
   }),
 
   http.post('/api/auth/logout', async () => {
@@ -51,6 +63,6 @@ export const authHandlers = [
 
   http.get('/api/auth/me', async () => {
     await delay(120);
-    return HttpResponse.json(generateSession());
+    return HttpResponse.json(generateSession(lastSessionUser));
   }),
 ];

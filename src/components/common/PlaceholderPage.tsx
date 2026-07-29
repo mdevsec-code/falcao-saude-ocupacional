@@ -9,6 +9,8 @@ interface PlaceholderPageProps {
   title: string;
   description?: string;
   features?: string[];
+  /** Conteúdo adicional exibido abaixo do cartão de "em construção". */
+  children?: ReactNode;
 }
 
 const DEFAULT_FEATURES = [
@@ -22,6 +24,7 @@ export function PlaceholderPage({
   title,
   description = 'Este módulo está sendo preparado. A próxima etapa de implementação ativará esta área com dados, formulários e fluxos completos.',
   features = DEFAULT_FEATURES,
+  children,
 }: PlaceholderPageProps): ReactNode {
   // Mantém o título da aba coerente com o módulo
   useEffect(() => {
@@ -44,7 +47,7 @@ export function PlaceholderPage({
         }
       />
 
-      <div className="px-6 py-10 sm:px-8">
+      <div className="space-y-6 px-6 py-10 sm:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 rounded-xl border border-dashed border-border bg-surface p-10 text-center">
           <div
             aria-hidden="true"
@@ -65,6 +68,8 @@ export function PlaceholderPage({
             ))}
           </ul>
         </div>
+
+        {children}
       </div>
     </>
   );

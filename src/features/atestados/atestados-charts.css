@@ -1,0 +1,40 @@
+/*
+ * Paleta de gráficos do módulo Atestados.
+ * Categórica (identidade — donut de Função) validada com
+ * scripts/validate_palette.js da skill dataviz contra as superfícies
+ * reais do app (claro #ffffff / escuro #181813): 7 slots, sem FAIL,
+ * pior par CVD ΔE 9.1 claro / 8.4 escuro (piso ≥ 8).
+ * Sequencial (magnitude — barras/heatmap/área) é a mesma família azul,
+ * um único hue, mais claro→mais escuro.
+ */
+:root {
+  --atestados-series-1: #2a78d6; /* nº de atestados */
+  --atestados-series-2: #eb6834; /* dias afastados */
+  --atestados-series-3: #1baf7a;
+  --atestados-series-4: #eda100;
+  --atestados-series-5: #e87ba4;
+  --atestados-series-6: #008300;
+  --atestados-series-7: #4a3aa7;
+
+  --atestados-sequential-200: #9ec5f4;
+  --atestados-sequential-300: #6da7ec;
+  --atestados-sequential-400: #3987e5;
+  --atestados-sequential-500: #256abf;
+  --atestados-sequential-600: #184f95;
+}
+
+.dark {
+  --atestados-series-1: #3987e5;
+  --atestados-series-2: #d95926;
+  --atestados-series-3: #199e70;
+  --atestados-series-4: #c98500;
+  --atestados-series-5: #d55181;
+  --atestados-series-6: #008300;
+  --atestados-series-7: #9085e9;
+
+  --atestados-sequential-200: #3987e5;
+  --atestados-sequential-300: #256abf;
+  --atestados-sequential-400: #184f95;
+  --atestados-sequential-500: #104281;
+  --atestados-sequential-600: #0d366b;
+}

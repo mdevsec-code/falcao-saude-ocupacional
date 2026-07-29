@@ -2,7 +2,7 @@
   "welcome": {
     "eyebrow": "Visão geral",
     "title": "Bem-vindo à plataforma Falcão",
-    "description": "Esta é a nova central da Saúde Ocupacional. A interface está pronta — os módulos serão ativados nas próximas etapas da migração.",
+    "description": "Central de Saúde Ocupacional da Falcão Construções e Engenharia.",
     "openAgenda": "Abrir agenda"
   },
   "kpis": {
@@ -10,39 +10,5 @@
     "waiting": "Aguardando",
     "attendances": "Atendimentos",
     "pending": "Pendências"
-  },
-  "roadmap": {
-    "title": "Próximas etapas de implementação",
-    "description": "Cada etapa mantém o sistema funcional. Você pode acompanhar o progresso aqui.",
-    "badge": "Etapa 1 · Fundação",
-    "items": {
-      "foundation": {
-        "title": "Fundação + Design System + Shell",
-        "description": "Tokens, paleta dourada, sidebar, topbar, theme toggle, base de componentes."
-      },
-      "auth": {
-        "title": "Autenticação & RBAC",
-        "description": "Tela de login, perfis, gates declarativos de permissão."
-      },
-      "agenda": {
-        "title": "Agenda (reforma)",
-        "description": "Migração do módulo original com views dia/semana/mês e drag-and-drop."
-      },
-      "clinical": {
-        "title": "Atendimentos & Pacientes",
-        "description": "CRUD de pacientes, prontuário, timeline de atendimentos."
-      },
-      "wrap": {
-        "title": "Dashboard, Exames, ASO, Relatórios, polish",
-        "description": "Módulos finais, gráficos, auditoria e cobertura de testes."
-      }
-    }
-  },
-  "identity": {
-    "title": "Identidade da plataforma",
-    "description": "Direção visual aplicada em toda a UI.",
-    "primary": "Primária",
-    "accent": "Accent (histórico)",
-    "typography": "Tipografia"
   }
 }

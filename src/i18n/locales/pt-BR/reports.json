@@ -1,0 +1,36 @@
+{
+  "eyebrow": "Exportação",
+  "title": "Relatórios",
+  "description": "Gere relatórios operacionais, exporte em PDF ou Excel e envie o resumo por WhatsApp para a equipe responsável.",
+  "filters": {
+    "title": "Filtros",
+    "description": "Refine o conjunto de registros antes de exportar.",
+    "kind": "Tipo de relatório",
+    "from": "De",
+    "to": "Até",
+    "company": "Empresa",
+    "allCompanies": "Todas as empresas"
+  },
+  "actions": {
+    "title": "Exportar",
+    "pdf": "Baixar PDF",
+    "excel": "Baixar Excel",
+    "whatsapp": "Enviar por WhatsApp"
+  },
+  "preview": {
+    "title": "Pré-visualização",
+    "description": "Estes são os registros que serão exportados. As colunas refletem o que sai em PDF e Excel.",
+    "empty": {
+      "title": "Nenhum registro encontrado",
+      "description": "Ajuste os filtros para visualizar os dados."
+    }
+  },
+  "toast": {
+    "pdfSuccess": "PDF gerado com sucesso",
+    "pdfError": "Falha ao gerar PDF",
+    "excelSuccess": "Planilha gerada com sucesso",
+    "excelError": "Falha ao gerar planilha",
+    "whatsappSent": "Abrindo conversa no WhatsApp",
+    "whatsappInvalid": "Número de WhatsApp inválido"
+  }
+}

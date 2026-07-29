@@ -26,7 +26,7 @@ const config: Config = {
           700: 'rgb(var(--color-neutral-700) / <alpha-value>)',
           900: 'rgb(var(--color-neutral-900) / <alpha-value>)',
         },
-        // Accent histórico (verde-petróleo)
+        // Accent (preto/grafite da logo)
         accent: {
           50: 'rgb(var(--color-accent-50) / <alpha-value>)',
           100: 'rgb(var(--color-accent-100) / <alpha-value>)',

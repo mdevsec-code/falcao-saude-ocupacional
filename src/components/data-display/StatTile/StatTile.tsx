@@ -11,9 +11,9 @@ export interface StatTileProps {
 }
 
 const deltaClasses = {
-  up: 'text-success bg-green-50',
-  down: 'text-danger bg-red-50',
-  flat: 'text-ink-soft bg-neutral-100',
+  up: 'text-success bg-success/10',
+  down: 'text-danger bg-danger/10',
+  flat: 'text-ink-soft bg-hover',
 } as const;
 
 export function StatTile({ label, value, delta, icon, className }: StatTileProps) {

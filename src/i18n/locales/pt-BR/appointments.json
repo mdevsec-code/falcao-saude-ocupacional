@@ -1,0 +1,14 @@
+{
+  "eyebrow": "Atendimento",
+  "title": "Agendamentos",
+  "description": "Lista de consultas e exames marcados.",
+  "whatsappReturn": {
+    "label": "Retorno por WhatsApp",
+    "message": "Olá! Aqui é da equipe de Saúde Ocupacional da {company}. Tudo bem? Estamos entrando em contato para agendar seu retorno de {exam}. Você poderia nos confirmar a melhor data e horário?",
+    "toast": {
+      "sent": "Conversa do WhatsApp aberta",
+      "invalid": "Número de WhatsApp inválido para este paciente",
+      "missing": "Paciente sem telefone cadastrado"
+    }
+  }
+}

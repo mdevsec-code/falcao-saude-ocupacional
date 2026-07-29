@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { ROLES } from '@/constants/roles';
+import { DEMO_USERS } from '@/services/msw/fixtures/users';
 import type { AuthSession, User } from '@/types/auth';
 
 export type SignInResult = { ok: true; session: AuthSession } | { ok: false; error: string };
@@ -12,17 +12,17 @@ export interface AuthState {
   signOut: () => Promise<void>;
 }
 
-// Credenciais hardcoded — apenas o usuário `admin` nesta iteração.
+// Ambiente de demonstração: todas as contas em `DEMO_USERS` compartilham
+// a mesma senha (ver também `services/msw/handlers/auth.ts`, que é quem
+// de fato responde no browser — este arquivo só serve de fallback).
 // TODO(api-real): substituir `signIn` por chamada real via `authApi`.
-const ADMIN_EMAIL = 'admin@falcao.com';
-const ADMIN_PASSWORD = 'admin123';
+const DEMO_PASSWORD = 'admin123';
 
-const ADMIN_USER: User = {
-  id: 'u-admin-001',
-  name: 'Administrador Falcão',
-  email: ADMIN_EMAIL,
-  role: ROLES.ADMIN,
-};
+function findDemoUser(email: string): User | null {
+  const match = DEMO_USERS.find((u) => u.email.toLowerCase() === email && u.status === 'active');
+  if (!match) return null;
+  return { id: match.id, name: match.name, email: match.email, role: match.role };
+}
 
 function generateMockToken(): string {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
@@ -42,9 +42,10 @@ export const useAuthStore = create<AuthState>()(
         // Simula latência — quando o MSW estiver habilitado, esta chamada
         // é interceptada e validada pelo handler `POST /api/auth/login`.
         if (typeof window === 'undefined') {
-          if (normalizedEmail === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+          const demoUser = findDemoUser(normalizedEmail);
+          if (demoUser && password === DEMO_PASSWORD) {
             const session: AuthSession = {
-              user: ADMIN_USER,
+              user: demoUser,
               token: generateMockToken(),
               expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString(),
             };
@@ -69,10 +70,11 @@ export const useAuthStore = create<AuthState>()(
           set({ session });
           return { ok: true, session };
         } catch {
-          // Fallback para credenciais hardcoded se MSW não estiver rodando
-          if (normalizedEmail === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+          // Fallback para as contas de demonstração se MSW não estiver rodando
+          const demoUser = findDemoUser(normalizedEmail);
+          if (demoUser && password === DEMO_PASSWORD) {
             const session: AuthSession = {
-              user: ADMIN_USER,
+              user: demoUser,
               token: generateMockToken(),
               expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString(),
             };
