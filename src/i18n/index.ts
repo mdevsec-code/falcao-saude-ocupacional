@@ -24,6 +24,7 @@ import exams from './locales/pt-BR/exams.json';
 import cid from './locales/pt-BR/cid.json';
 import profile from './locales/pt-BR/profile.json';
 import settings from './locales/pt-BR/settings.json';
+import audit from './locales/pt-BR/audit.json';
 
 const resources = {
   'pt-BR': {
@@ -46,6 +47,7 @@ const resources = {
     cid,
     profile,
     settings,
+    audit,
   },
 } as const;
 

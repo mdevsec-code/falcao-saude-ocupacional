@@ -1,5 +1,8 @@
 import { http, HttpResponse, delay } from 'msw';
 import { ATTENDANCES_FIXTURE, type AttendanceRecord } from '../fixtures/attendances';
+import { AUDIT_ACTIONS, AUDIT_ENTITY_TYPES } from '@/constants/audit';
+import { recordAuditEvent } from './audit';
+import { getLastSessionUser } from './auth';
 
 /**
  * Store mutável em memória — simula um backend real para CRUD de
@@ -7,6 +10,22 @@ import { ATTENDANCES_FIXTURE, type AttendanceRecord } from '../fixtures/attendan
  */
 let store: AttendanceRecord[] = ATTENDANCES_FIXTURE.map((r) => ({ ...r }));
 let nextId = store.length + 1;
+
+function logAttendanceEvent(
+  action: (typeof AUDIT_ACTIONS)['CREATE' | 'UPDATE' | 'DELETE'],
+  record: Pick<AttendanceRecord, 'id' | 'patientName' | 'examType'>,
+): void {
+  const actor = getLastSessionUser();
+  recordAuditEvent({
+    actorId: actor.id,
+    actorName: actor.name,
+    actorRole: actor.role,
+    action,
+    entityType: AUDIT_ENTITY_TYPES.ATTENDANCE,
+    entityId: record.id,
+    entityLabel: `${record.patientName} — ${record.examType}`,
+  });
+}
 
 export const attendancesHandlers = [
   http.get('/api/attendances', async () => {
@@ -19,6 +38,7 @@ export const attendancesHandlers = [
     const body = (await request.json()) as Omit<AttendanceRecord, 'id'>;
     const record: AttendanceRecord = { ...body, id: `att-${String(nextId++).padStart(4, '0')}` };
     store = [record, ...store];
+    logAttendanceEvent(AUDIT_ACTIONS.CREATE, record);
     return HttpResponse.json(record, { status: 201 });
   }),
 
@@ -36,17 +56,19 @@ export const attendancesHandlers = [
     }
     const updated: AttendanceRecord = { ...current, ...patch, id: current.id };
     store = [...store.slice(0, idx), updated, ...store.slice(idx + 1)];
+    logAttendanceEvent(AUDIT_ACTIONS.UPDATE, updated);
     return HttpResponse.json(updated);
   }),
 
   http.delete('/api/attendances/:id', async ({ params }) => {
     await delay(200);
     const { id } = params;
-    const existed = store.some((r) => r.id === id);
-    if (!existed) {
+    const existing = store.find((r) => r.id === id);
+    if (!existing) {
       return HttpResponse.json({ message: 'Atendimento não encontrado' }, { status: 404 });
     }
     store = store.filter((r) => r.id !== id);
+    logAttendanceEvent(AUDIT_ACTIONS.DELETE, existing);
     return new HttpResponse(null, { status: 204 });
   }),
 ];

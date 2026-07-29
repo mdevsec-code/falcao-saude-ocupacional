@@ -1,29 +1,24 @@
 import { type ReactNode, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Construction, ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { ROUTE_PATHS } from '@/constants/routes';
+import falcaoMark from '@/assets/logo/falcao-mark.png';
 
 interface PlaceholderPageProps {
   title: string;
   description?: string;
+  /** Itens específicos do que está a caminho para este módulo (opcional). */
   features?: string[];
   /** Conteúdo adicional exibido abaixo do cartão de "em construção". */
   children?: ReactNode;
 }
 
-const DEFAULT_FEATURES = [
-  'Interface responsiva',
-  'Acessibilidade AA',
-  'Integração com a API',
-  'Testes E2E',
-];
-
 export function PlaceholderPage({
   title,
-  description = 'Este módulo está sendo preparado. A próxima etapa de implementação ativará esta área com dados, formulários e fluxos completos.',
-  features = DEFAULT_FEATURES,
+  description = 'Estamos preparando este módulo com todo o cuidado. Em breve, novidades por aqui.',
+  features,
   children,
 }: PlaceholderPageProps): ReactNode {
   // Mantém o título da aba coerente com o módulo
@@ -37,7 +32,7 @@ export function PlaceholderPage({
   return (
     <>
       <PageHeader
-        eyebrow="Em construção"
+        eyebrow="Em breve"
         title={title}
         description={description}
         actions={
@@ -48,25 +43,36 @@ export function PlaceholderPage({
       />
 
       <div className="space-y-6 px-6 py-10 sm:px-8">
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 rounded-xl border border-dashed border-border bg-surface p-10 text-center">
+        <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-5 overflow-hidden rounded-xl border border-border bg-surface p-10 text-center shadow-sm">
+          <img
+            src={falcaoMark}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-10 -right-10 h-48 w-auto object-contain opacity-[0.04]"
+          />
+
           <div
             aria-hidden="true"
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold-50 text-brand-gold-700"
+            className="relative flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold-50 text-brand-gold-700"
           >
-            <Construction className="h-7 w-7" />
+            <Sparkles className="h-6 w-6" />
           </div>
-          <div>
-            <h2 className="font-display text-2xl font-semibold text-ink">{title} chega em breve</h2>
-            <p className="mt-2 text-sm text-ink-soft">{description}</p>
+
+          <div className="relative">
+            <h2 className="font-display text-2xl font-semibold text-ink">{title}</h2>
+            <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">{description}</p>
           </div>
-          <ul className="grid grid-cols-1 gap-2 text-left text-sm text-ink-soft sm:grid-cols-2">
-            {features.map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <Sparkles className="h-3.5 w-3.5 text-brand-gold-700" />
-                {item}
-              </li>
-            ))}
-          </ul>
+
+          {features && features.length > 0 && (
+            <ul className="relative grid grid-cols-1 gap-2 text-left text-sm text-ink-soft sm:grid-cols-2">
+              {features.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Sparkles className="h-3.5 w-3.5 shrink-0 text-brand-gold-700" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {children}

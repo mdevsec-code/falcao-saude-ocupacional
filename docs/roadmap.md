@@ -157,12 +157,17 @@ Status atual e evolução planejada do projeto. Veja também o
 - [x] Relatórios gerenciais (Recharts) — `features/reports`, `features/atestados`
 - [ ] BI / Analytics (Metabase ou similar)
 
-## 🔜 Etapa 7 — Observabilidade, LGPD, Auditoria (v0.7.0)
+## 🚧 Etapa 7 — Observabilidade, LGPD, Auditoria (v0.7.0)
 
 - [ ] Sentry (front + back)
 - [ ] OpenTelemetry / Jaeger
 - [ ] Logs estruturados (pino)
-- [ ] Auditoria de acessos e alterações
+- [x] Auditoria de acessos e alterações — `features/audit`, `/auditoria` (restrito a `PERMISSIONS.AUDIT_READ`,
+  hoje só ADMIN). Login/logout/tentativas falhas e CRUD de pacientes, atendimentos, usuários e tipos de
+  exame geram evento (`recordAuditEvent`, `services/msw/handlers/audit.ts`). Filtros por ação/área/busca,
+  exportação PDF/Excel. **Nota:** roda sobre o mesmo MSW mock das demais telas — quando o backend real da
+  Etapa 3 existir, os eventos devem ser gravados no banco (append-only, sem edição/exclusão) para valerem
+  como prova de auditoria de fato.
 - [ ] Right-to-be-forgotten (LGPD art. 18)
 - [ ] Data retention policy
 - [ ] SLOs (99.5% disponibilidade, p95 < 500ms)
