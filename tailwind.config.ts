@@ -118,6 +118,14 @@ const config: Config = {
           from: { transform: 'translateY(8px)', opacity: '0' },
           to: { transform: 'translateY(0)', opacity: '1' },
         },
+        'slide-in-left': {
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(0)' },
+        },
+        'slide-out-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
         'scale-in': {
           from: { transform: 'scale(0.96)', opacity: '0' },
           to: { transform: 'scale(1)', opacity: '1' },
@@ -140,6 +148,8 @@ const config: Config = {
         'fade-out': 'fade-out var(--duration-base) var(--ease-out)',
         'slide-in-right': 'slide-in-right var(--duration-base) var(--ease-out)',
         'slide-up': 'slide-up var(--duration-base) var(--ease-out)',
+        'slide-in-left': 'slide-in-left var(--duration-base) var(--ease-out)',
+        'slide-out-left': 'slide-out-left var(--duration-base) var(--ease-out)',
         'scale-in': 'scale-in var(--duration-base) var(--ease-out)',
         'accordion-down': 'accordion-down var(--duration-base) var(--ease-out)',
         'accordion-up': 'accordion-up var(--duration-base) var(--ease-out)',

@@ -1,11 +1,12 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslation } from 'react-i18next';
-import { Mail, Lock, Eye, EyeOff, LogIn, ShieldCheck, Sparkles } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, LogIn, ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
@@ -45,6 +46,11 @@ export function LoginPage(): ReactNode {
   const [credentialsError, setCredentialsError] = useState<string | null>(null);
   const [showPwd, setShowPwd] = useState(false);
   const [isQuickLoggingIn, setIsQuickLoggingIn] = useState(false);
+  const [capsLockOn, setCapsLockOn] = useState(false);
+
+  function handlePasswordKeyEvent(event: KeyboardEvent<HTMLInputElement>) {
+    setCapsLockOn(event.getModifierState('CapsLock'));
+  }
 
   const {
     register,
@@ -63,9 +69,9 @@ export function LoginPage(): ReactNode {
     }
   }, [isAuthenticated, navigate]);
 
-  async function attemptSignIn(email: string, password: string) {
+  async function attemptSignIn(email: string, password: string, rememberMe: boolean) {
     setCredentialsError(null);
-    const result = await signIn(email, password);
+    const result = await signIn(email, password, rememberMe);
     if (!result.ok) {
       setCredentialsError(result.error);
       toast.error(result.error);
@@ -74,11 +80,13 @@ export function LoginPage(): ReactNode {
     navigate(ROUTE_PATHS.DASHBOARD, { replace: true });
   }
 
-  const onSubmit = handleSubmit((data) => attemptSignIn(data.email, data.password));
+  const onSubmit = handleSubmit((data) =>
+    attemptSignIn(data.email, data.password, data.rememberMe),
+  );
 
   async function handleQuickLogin(email: string) {
     setIsQuickLoggingIn(true);
-    await attemptSignIn(email, DEMO_PASSWORD);
+    await attemptSignIn(email, DEMO_PASSWORD, true);
     setIsQuickLoggingIn(false);
   }
 
@@ -146,6 +154,10 @@ export function LoginPage(): ReactNode {
           }}
         />
 
+        <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
+          <ThemeToggle />
+        </div>
+
         <Card className="relative w-full max-w-md animate-scale-in overflow-hidden border-border shadow-md">
           <CardHeader className="items-center text-center">
             <FalcaoLogo
@@ -170,32 +182,42 @@ export function LoginPage(): ReactNode {
                 required
               />
 
-              <Input
-                {...register('password')}
-                type={showPwd ? 'text' : 'password'}
-                label={t('auth:login.fields.password')}
-                placeholder={t('auth:login.fields.passwordPlaceholder')}
-                autoComplete="current-password"
-                leftIcon={<Lock className="h-4 w-4" />}
-                rightIcon={
-                  <button
-                    type="button"
-                    onClick={() => setShowPwd((s) => !s)}
-                    aria-label={
-                      showPwd
-                        ? t('auth:login.actions.hidePassword')
-                        : t('auth:login.actions.showPassword')
-                    }
-                    aria-pressed={showPwd}
-                    className="text-ink-soft hover:text-ink focus:outline-none focus-visible:text-ink"
-                  >
-                    {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                }
-                error={errors.password?.message}
-                disabled={isSubmitting}
-                required
-              />
+              <div>
+                <Input
+                  {...register('password')}
+                  type={showPwd ? 'text' : 'password'}
+                  label={t('auth:login.fields.password')}
+                  placeholder={t('auth:login.fields.passwordPlaceholder')}
+                  autoComplete="current-password"
+                  leftIcon={<Lock className="h-4 w-4" />}
+                  onKeyDown={handlePasswordKeyEvent}
+                  onKeyUp={handlePasswordKeyEvent}
+                  rightIcon={
+                    <button
+                      type="button"
+                      onClick={() => setShowPwd((s) => !s)}
+                      aria-label={
+                        showPwd
+                          ? t('auth:login.actions.hidePassword')
+                          : t('auth:login.actions.showPassword')
+                      }
+                      aria-pressed={showPwd}
+                      className="text-ink-soft hover:text-ink focus:outline-none focus-visible:text-ink"
+                    >
+                      {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  }
+                  error={errors.password?.message}
+                  disabled={isSubmitting}
+                  required
+                />
+                {capsLockOn && (
+                  <p className="mt-1.5 flex items-center gap-1.5 text-xs text-warning">
+                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    Caps Lock está ativado.
+                  </p>
+                )}
+              </div>
 
               <div className="flex items-center justify-between">
                 <Label className="flex items-center gap-2 font-normal text-ink-soft">

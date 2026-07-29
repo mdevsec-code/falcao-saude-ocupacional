@@ -8,7 +8,11 @@ export interface UseAuthReturn {
   session: ReturnType<typeof useAuthSession>;
   user: ReturnType<typeof useCurrentUser>;
   isAuthenticated: boolean;
-  signIn: (email: string, password: string) => Promise<{ ok: true } | { ok: false; error: string }>;
+  signIn: (
+    email: string,
+    password: string,
+    rememberMe?: boolean,
+  ) => Promise<{ ok: true } | { ok: false; error: string }>;
   signOut: () => Promise<void>;
   hasRole: (role: Role | Role[]) => boolean;
   can: (permission: Permission) => boolean;
@@ -23,8 +27,8 @@ export function useAuth(): UseAuthReturn {
   const isAuthenticated = session !== null;
 
   const signIn = useCallback(
-    async (email: string, password: string) => {
-      const result = await signInFn(email, password);
+    async (email: string, password: string, rememberMe?: boolean) => {
+      const result = await signInFn(email, password, rememberMe);
       if (result.ok) return { ok: true as const };
       return { ok: false as const, error: result.error };
     },

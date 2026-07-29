@@ -8,9 +8,45 @@ export type SignInResult = { ok: true; session: AuthSession } | { ok: false; err
 export interface AuthState {
   session: AuthSession | null;
   isAuthenticated: () => boolean;
-  signIn: (email: string, password: string) => Promise<SignInResult>;
+  signIn: (email: string, password: string, rememberMe?: boolean) => Promise<SignInResult>;
   signOut: () => Promise<void>;
 }
+
+/**
+ * "Lembrar de mim" real: quando marcado, a sessão vai para `localStorage`
+ * (sobrevive ao fechar o navegador); quando desmarcado, vai para
+ * `sessionStorage` (some ao fechar a aba/navegador). A escolha de storage
+ * é decidida em tempo real por este flag, também persistido em
+ * `localStorage` (ele próprio precisa sobreviver ao reload para sabermos
+ * onde procurar a sessão no próximo boot).
+ */
+const REMEMBER_FLAG_KEY = 'falcao-auth-remember';
+
+function shouldRemember(): boolean {
+  if (typeof window === 'undefined') return true;
+  return localStorage.getItem(REMEMBER_FLAG_KEY) !== 'false';
+}
+
+function setRememberFlag(remember: boolean): void {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(REMEMBER_FLAG_KEY, remember ? 'true' : 'false');
+}
+
+const dynamicAuthStorage = {
+  getItem: (name: string): string | null => {
+    if (typeof window === 'undefined') return null;
+    return (shouldRemember() ? localStorage : sessionStorage).getItem(name);
+  },
+  setItem: (name: string, value: string): void => {
+    if (typeof window === 'undefined') return;
+    (shouldRemember() ? localStorage : sessionStorage).setItem(name, value);
+  },
+  removeItem: (name: string): void => {
+    if (typeof window === 'undefined') return;
+    localStorage.removeItem(name);
+    sessionStorage.removeItem(name);
+  },
+};
 
 // Ambiente de demonstração: todas as contas em `DEMO_USERS` compartilham
 // a mesma senha (ver também `services/msw/handlers/auth.ts`, que é quem
@@ -37,8 +73,9 @@ export const useAuthStore = create<AuthState>()(
       session: null,
       isAuthenticated: (): boolean => get().session !== null,
 
-      signIn: async (email: string, password: string) => {
+      signIn: async (email: string, password: string, rememberMe = true) => {
         const normalizedEmail = email.trim().toLowerCase();
+        setRememberFlag(rememberMe);
         // Simula latência — quando o MSW estiver habilitado, esta chamada
         // é interceptada e validada pelo handler `POST /api/auth/login`.
         if (typeof window === 'undefined') {
@@ -98,7 +135,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'falcao-auth',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => dynamicAuthStorage),
       partialize: (state) => ({ session: state.session }),
     },
   ),
