@@ -78,6 +78,10 @@ const SettingsPage = lazy(() =>
   import('@/features/settings/pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
 );
 
+const AuditPage = lazy(() =>
+  import('@/features/audit/pages/AuditPage').then((m) => ({ default: m.AuditPage })),
+);
+
 const withSuspense = (element: ReactNode) => (
   <Suspense fallback={<LoadingState />}>{element}</Suspense>
 );
@@ -97,7 +101,7 @@ const protectedRoutes: RouteObject[] = [
   { path: ROUTE_PATHS.PERMISSOES, element: withSuspense(<PermissionsPage />) },
   { path: ROUTE_PATHS.CONFIGURACOES, element: withSuspense(<SettingsPage />) },
   { path: ROUTE_PATHS.PERFIL, element: withSuspense(<ProfilePage />) },
-  { path: ROUTE_PATHS.AUDITORIA, element: <PlaceholderPage title="Auditoria" /> },
+  { path: ROUTE_PATHS.AUDITORIA, element: withSuspense(<AuditPage />) },
 ];
 
 const routes: RouteObject[] = [
@@ -119,7 +123,7 @@ const routes: RouteObject[] = [
   {
     path: ROUTE_PATHS.PLACEHOLDER,
     element: <AppShell />,
-    children: [{ index: true, element: <PlaceholderPage title="Em construção" /> }],
+    children: [{ index: true, element: <PlaceholderPage title="Novidade a caminho" /> }],
   },
   { path: ROUTE_PATHS.NOT_FOUND, element: <NotFoundPage /> },
   { path: '*', element: <Navigate to={ROUTE_PATHS.DASHBOARD} replace /> },

@@ -15,6 +15,7 @@ import {
   Settings,
   UserCog,
   KeyRound,
+  ScrollText,
   type LucideIcon,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -101,6 +102,13 @@ const SECTIONS: NavSection[] = [
         icon: Settings,
         enabled: true,
         requires: PERMISSIONS.SETTINGS_MANAGE,
+      },
+      {
+        label: 'nav.audit',
+        to: ROUTE_PATHS.AUDITORIA,
+        icon: ScrollText,
+        enabled: true,
+        requires: PERMISSIONS.AUDIT_READ,
       },
     ],
   },

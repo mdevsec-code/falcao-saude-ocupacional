@@ -193,7 +193,7 @@ export function generateAsoPdf(input: AsoInput): jsPDF {
     pageHeight - 24,
   );
 
-  const fileDate = input.attendanceDate.replace(/-/g, '');
+  const fileDate = input.attendanceDate.replaceAll('-', '');
   const safeName = input.patientName.trim().toLowerCase().replace(/\s+/g, '-');
   doc.save(`aso_${safeName}_${fileDate}.pdf`);
 

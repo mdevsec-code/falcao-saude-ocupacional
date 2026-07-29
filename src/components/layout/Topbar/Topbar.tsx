@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Search, Bell, ChevronsLeft, ChevronsRight, LogOut } from 'lucide-react';
+import { Bell, ChevronsLeft, ChevronsRight, LogOut } from 'lucide-react';
 
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { GlobalSearch } from './GlobalSearch';
 import { useUIStore } from '@/store/uiStore';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useAuth } from '@/features/auth/hooks/useAuth';
@@ -76,13 +76,7 @@ export function Topbar(): ReactNode {
 
       <div className="ml-auto flex items-center gap-2">
         <div className="hidden w-72 lg:block">
-          <Input
-            placeholder="Buscar paciente, CID, matrícula…"
-            leftIcon={<Search className="h-4 w-4" />}
-            aria-label="Busca global"
-            disabled
-            hint="Disponível nas próximas etapas"
-          />
+          <GlobalSearch />
         </div>
 
         <Button variant="ghost" size="icon" aria-label="Notificações">

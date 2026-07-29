@@ -84,6 +84,15 @@ const config: Config = {
         focus: 'var(--shadow-focus)',
         'inner-soft': 'inset 0 1px 2px rgba(0,0,0,0.04)',
       },
+      zIndex: {
+        dropdown: 'var(--z-dropdown)',
+        sticky: 'var(--z-sticky)',
+        'modal-backdrop': 'var(--z-modal-backdrop)',
+        modal: 'var(--z-modal)',
+        popover: 'var(--z-popover)',
+        toast: 'var(--z-toast)',
+        tooltip: 'var(--z-tooltip)',
+      },
       transitionTimingFunction: {
         out: 'var(--ease-out)',
       },

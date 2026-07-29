@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -29,7 +30,8 @@ const CATEGORIES: CidCategory[] = [
 
 export function CidPage() {
   const { t } = useTranslation('cid');
-  const [search, setSearch] = useState('');
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState(() => searchParams.get('q') ?? '');
   const [category, setCategory] = useState<string>(ALL_VALUE);
 
   const filtered = useMemo(() => {

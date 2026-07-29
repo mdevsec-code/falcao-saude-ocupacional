@@ -1,0 +1,11 @@
+{
+  "page": {
+    "eyebrow": "Conformidade",
+    "title": "Auditoria",
+    "description": "Trilha de acessos e alterações para conformidade com a LGPD — quem viu ou editou cada registro, e quando."
+  },
+  "error": {
+    "title": "Não foi possível carregar a trilha de auditoria",
+    "description": "Tente novamente em instantes."
+  }
+}
