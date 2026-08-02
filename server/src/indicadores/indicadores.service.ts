@@ -14,7 +14,9 @@ export class IndicadoresService {
   ) {}
 
   findAll(): Promise<AccidentIndicator[]> {
-    return this.prisma.accidentIndicator.findMany({ orderBy: [{ year: 'desc' }, { month: 'desc' }] });
+    return this.prisma.accidentIndicator.findMany({
+      orderBy: [{ year: 'desc' }, { month: 'desc' }],
+    });
   }
 
   async create(dto: CreateAccidentIndicatorDto, actor: RequestUser): Promise<AccidentIndicator> {
