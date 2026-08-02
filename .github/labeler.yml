@@ -13,6 +13,18 @@
   - changed-files:
       - any-glob-to-any-file: ['src/features/dashboard/**']
 
+'area:features':
+  - changed-files:
+      - any-glob-to-any-file: ['src/features/**']
+
+'area:backend':
+  - changed-files:
+      - any-glob-to-any-file: ['server/**']
+
+'area:i18n':
+  - changed-files:
+      - any-glob-to-any-file: ['src/i18n/**']
+
 'area:infra':
   - changed-files:
       - any-glob-to-any-file: [

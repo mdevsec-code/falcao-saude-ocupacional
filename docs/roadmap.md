@@ -118,6 +118,14 @@ Status atual e evolução planejada do projeto. Veja também o
   por médico), `exam-types`; leitura de `atestados` e `audit` — todos
   gravando na trilha de auditoria via `AuditService`. Build/typecheck do
   backend passando (`server/README.md` tem a tabela completa de rotas)
+- [x] CRUD completo de `ferias`, `desvios`, `indicadores` e `cid` —
+  adicionado depois que os módulos equivalentes do frontend (Férias,
+  Segurança do Trabalho, CID manual) foram construídos sem backend
+  correspondente. Modelos Prisma + módulos NestJS espelhando o padrão de
+  `patients`, todos gravando auditoria. Build/typecheck passando; migration
+  ainda não foi rodada em nenhum banco real (sem Postgres disponível no
+  ambiente em que foi escrito) — ver checklist de deploy em
+  `server/README.md`
 - [ ] Portar a matriz granular `PERMISSIONS`/`ROLE_PERMISSIONS` do
   frontend para o backend — os guards hoje usam uma lista simplificada de
   perfis por endpoint (`@Roles(...)`), não as permissões finas do frontend
@@ -175,11 +183,38 @@ Status atual e evolução planejada do projeto. Veja também o
   (`EXAM_TYPES_FIXTURE`) consumida ao vivo pelos dois, sem listas desconectadas
 - [x] Referência de CID-10 — `features/cid`, `/cid`, recorte curado (não exaustivo) focado em
   osteomuscular/auditivo/respiratório/mental/dermatológico/traumatismos relevantes a canteiro de obras
+- [x] Cadastro manual de códigos CID complementares ao catálogo curado — CRUD completo (criar/editar/
+  remover), categorias com cor própria, copiar código com um clique; o catálogo curado em si continua
+  estático (não editável pela UI)
 - [ ] Workflow de resultado (laudo → revisão → liberação)
 - [x] Emissão de ASO com template — `utils/exports/aso.ts` (PDF por atendimento, com aptidão por atividade)
 - [x] Painel de aptidão por atividade de risco — `features/aso`, `/aso`, cruza `features/attendances` × `features/patients`
 - [x] Relatórios gerenciais (Recharts) — `features/reports`, `features/atestados`
 - [ ] BI / Analytics (Metabase ou similar)
+
+## ✅ Etapa 6.5 — Recursos Humanos & Segurança do Trabalho (v0.6.1)
+
+> Dois módulos que não estavam no plano original — adicionados a partir de
+> necessidades reais levantadas depois da Etapa 6. Backend correspondente
+> construído na mesma leva que os módulos (ver Etapa 3).
+
+- [x] Férias — `features/ferias`, `/ferias`. Controle de períodos de férias
+  por colaborador: data de início/fim, dias corridos calculados
+  automaticamente, status (agendada/em andamento/concluída/cancelada), KPIs
+- [x] Segurança do Trabalho — `features/seguranca`, `/seguranca`, duas abas:
+  - **Desvios**: log de desvios de segurança de campo (9 classificações —
+    comportamental, EPI, procedimento, sinalização, etc.), com local,
+    encarregado, técnico responsável e ação corretiva. Modelado a partir de
+    um controle real em planilha já usado pela empresa (só a estrutura foi
+    replicada, não os dados históricos)
+  - **Indicadores de acidentes**: lançamento mensal (empregados, acidentes
+    com/sem afastamento, dias perdidos) com Taxa de Frequência, Taxa de
+    Gravidade e Índice Relativo calculados automaticamente conforme
+    **NBR 14280**, gráfico de evolução mensal
+- [x] Permissões novas `deviation:read`/`deviation:write` — o perfil
+  `TECNICO_SEGURANCA` não tinha nenhuma permissão de escrita antes disso
+- [x] Sidebar reorganizada em categorias (Segurança do Trabalho e RH viraram
+  seções próprias, antes misturadas em "Gestão")
 
 ## 🚧 Etapa 7 — Observabilidade, LGPD, Auditoria (v0.7.0)
 

@@ -2,29 +2,45 @@
 
 > Plataforma profissional de gestão de Saúde Ocupacional para Recepção, Médicos, Enfermeiros, Técnicos de Segurança, RH e Administradores — Falcão Construções e Engenharia.
 
-[![CI](https://github.com/falcao-eng/falcao-saude-ocupacional/actions/workflows/ci.yml/badge.svg)](https://github.com/falcao-eng/falcao-saude-ocupacional/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/falcao-eng/falcao-saude-ocupacional/actions/workflows/codeql.yml/badge.svg)](https://github.com/falcao-eng/falcao-saude-ocupacional/actions/workflows/codeql.yml)
+[![CI](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node 20+](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](.nvmrc)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF.svg)](https://vitejs.dev/)
 
-Aplicação web enterprise, modular, tipada e testada, preparada para uso diário
-em clínicas de saúde ocupacional. Construída com **React 18 + TypeScript +
-Vite + TailwindCSS + Radix UI + TanStack Query + Axios + Zod + React Hook
-Form + i18next + MSW + Vitest**.
+Aplicação web enterprise, modular, tipada e testada, para uso diário na
+gestão de saúde e segurança ocupacional da Falcão Construções e Engenharia.
+Construída com **React 18 + TypeScript + Vite + TailwindCSS + Radix UI +
+TanStack Query + Axios + Zod + React Hook Form + Framer Motion + i18next +
+MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
+(`server/`).
 
 ---
 
 ## ✨ Recursos
 
-- **Design System próprio** baseado em tokens (CSS variables) com light/dark mode
-- **Autenticação & RBAC** com `RequireAuth`, gate declarativo `<Can>` e 6 perfis
+- **17 módulos operacionais**: Dashboard, Agenda, Agendamentos, Pacientes,
+  Atendimentos, Prontuários, CID (catálogo + cadastro manual), Exames, ASO
+  (aptidão por atividade de risco), Relatórios, Atestados, Férias, Segurança
+  do Trabalho (desvios + indicadores de acidentes NBR 14280), Usuários,
+  Permissões, Configurações e Auditoria (trilha LGPD)
+- **Backend real** (`server/`, NestJS + Prisma + PostgreSQL) — auth JWT,
+  RBAC por perfil, auditoria persistida; ver [`server/README.md`](server/README.md)
+- **Design System próprio** baseado em tokens (CSS variables) com light/dark
+  mode cuidado nas duas direções, não só invertido
+- **Autenticação & RBAC** com `RequireAuth`, `RequirePermission` (bloqueio
+  por rota, não só esconder o link), gate declarativo `<Can>` e 6 perfis
 - **Camada HTTP** central (Axios com interceptors + `ApiError` normalizado)
-- **Mock de API** (MSW) com handlers prontos para auth e dashboard
-- **Validação tipada** com Zod em formulários e contratos
-- **Internacionalização** com `react-i18next` (PT-BR completo, infra para EN)
+- **Mock de API** (MSW) cobrindo todos os 17 módulos — permite rodar o
+  frontend inteiro sem backend, útil para demo e desenvolvimento
+- **Validação tipada** com Zod em formulários e contratos, mensagens
+  traduzidas nos 3 idiomas
+- **Internacionalização completa** com `react-i18next` — pt-BR, en-US e
+  zh-CN, carregados automaticamente por `import.meta.glob`
 - **Acessibilidade AA** (Radix UI Primitives + jsx-a11y)
+- **Animações** com Framer Motion — indicador de navegação ativo animado,
+  transições de página, entrada escalonada de listas
 - **CI** com lint + typecheck + test + build
 - **Deploy** em Vercel, Netlify, Azure Static Web Apps e Docker
 
@@ -57,7 +73,11 @@ Form + i18next + MSW + Vitest**.
 
 ## 🏗️ Arquitetura
 
-Clean Architecture em camadas, com **feature-first** dentro de `src/`:
+Clean Architecture em camadas, com **feature-first** dentro de `src/`. Cada
+módulo em `features/` segue o mesmo padrão interno: `types.ts` (schema Zod +
+conversões), `services/*.api.ts`, `hooks/use*.ts` (React Query),
+`components/` (tabela, filtros, diálogo criar/editar, diálogo excluir),
+`pages/*.tsx`.
 
 ```
 src/
@@ -66,20 +86,28 @@ src/
 ├── components/       # DS primitivos (ui/...), layout, feedback, common, error
 ├── config/           # env (Zod), features, brand
 ├── constants/        # routes, roles, permissions, status, i18n
-├── features/         # auth/, dashboard/ (componentes, hooks, services, validators)
-├── hooks/            # useDebounce, useDisclosure, useMediaQuery, useTheme, usePermission
-├── i18n/             # i18next + locales
-├── lib/              # Integrações de baixo nível
-├── services/         # http/ (cliente Axios), msw/ (mock de API)
+├── features/         # auth, dashboard, agenda, appointments, patients,
+│                      # attendances, records, cid, exams, aso, reports,
+│                      # atestados, ferias, seguranca, users, permissions,
+│                      # settings, audit, profile
+├── hooks/            # useDebounce, useDisclosure, useMediaQuery, useTheme, useCountUp
+├── i18n/             # i18next + locales (pt-BR, en-US, zh-CN)
+├── services/         # http/ (cliente Axios), msw/ (mock de API — fixtures + handlers)
 ├── store/            # Stores globais Zustand (auth, ui, notification)
 ├── styles/           # tokens, reset, tailwind
 ├── test/             # setup, render, mocks
 ├── types/            # api, auth, domain, env
-├── utils/            # cn, format, assert, delay, id, result
-└── validators/       # Zod schemas (common, auth)
+├── utils/            # cn, format, assert, delay, id, result, locale
+└── validators/       # Zod schemas compartilhados (common, auth)
+
+server/               # API real — NestJS + Prisma + PostgreSQL
+├── prisma/           # schema.prisma, seed.ts
+└── src/               # um módulo Nest por recurso, mesmo nome do
+                        # equivalente em src/services/msw/handlers/
 ```
 
-Para a visão completa, veja [`docs/architecture.md`](docs/architecture.md).
+Para a visão completa do frontend, veja [`docs/architecture.md`](docs/architecture.md).
+Para a API real, veja [`server/README.md`](server/README.md).
 
 ---
 
@@ -98,7 +126,7 @@ Para a visão completa, veja [`docs/architecture.md`](docs/architecture.md).
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/falcao-eng/falcao-saude-ocupacional.git
+git clone https://github.com/mdevsec-code/falcao-saude-ocupacional.git
 cd falcao-saude-ocupacional
 
 # 2. Instale dependências
@@ -110,6 +138,12 @@ npm run msw:init
 # 4. Copie .env.example para .env.local (opcional)
 cp .env.example .env.local
 ```
+
+> Isso roda só o frontend, com a API mockada (MSW) — suficiente para
+> desenvolver/demonstrar qualquer tela. Para rodar contra o backend real
+> (NestJS + Prisma + PostgreSQL) em vez do mock, siga
+> [`server/README.md`](server/README.md) e depois ajuste
+> `VITE_API_URL`/`VITE_ENABLE_MSW=false` abaixo.
 
 ### Variáveis de ambiente
 
@@ -176,7 +210,8 @@ depois de entrar:
 ├── docker/              # nginx.conf
 ├── docs/                # architecture, api, deployment, roadmap, decisions
 ├── public/              # favicon, manifest, robots
-├── src/                 # Aplicação
+├── server/              # API real (NestJS + Prisma + PostgreSQL) — ver server/README.md
+├── src/                 # Aplicação frontend
 ├── Dockerfile
 ├── docker-compose.yml
 ├── LICENSE
@@ -196,16 +231,19 @@ depois de entrar:
 
 ## 📍 Roadmap
 
-O projeto está na **Etapa 2 — Refatoração Enterprise (atual)**.
-Próximas etapas:
+Etapas 1, 2, 4, 5 e 6 concluídas — os 17 módulos operacionais listados em
+[Recursos](#-recursos) estão todos no ar (sobre MSW). Em andamento:
 
-- **Etapa 3 — API real & Autenticação OAuth2** (substituir MSW)
-- **Etapa 4 — Agenda (reforma)** com FullCalendar + RHF + Zod
-- **Etapa 5 — Atendimentos & Pacientes** (CRUD, prontuário, timeline)
-- **Etapa 6 — Dashboard analytics, Exames, ASO, Relatórios, polish**
-- **Etapa 7 — Auditoria, LGPD, observabilidade, SLOs**
+- **Etapa 3 — API real** — backend NestJS + Prisma cobre todos os módulos
+  (controller + service + DTO), falta rodar a migration num Postgres real,
+  apontar o frontend para a API (`VITE_ENABLE_MSW=false`) e adicionar
+  OAuth2/refresh tokens
+- **Etapa 7 — Observabilidade, LGPD, auditoria** — auditoria (LGPD) já em
+  produção; faltam Sentry, OpenTelemetry, logs estruturados, SLOs
+- **Etapa 8 — Mobile (PWA → React Native)** — não iniciada
 
-Veja [`docs/roadmap.md`](docs/roadmap.md) para detalhes.
+Veja [`docs/roadmap.md`](docs/roadmap.md) para o detalhamento etapa a etapa
+e [`server/README.md`](server/README.md) para o estado exato do backend.
 
 ---
 

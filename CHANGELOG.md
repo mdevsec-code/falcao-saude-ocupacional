@@ -6,6 +6,54 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### ✨ Adicionado
+
+- **Backend real** (`server/`, NestJS + Prisma + PostgreSQL) — auth JWT +
+  bcrypt + rate limit, RBAC por perfil, auditoria persistida; CRUD completo
+  de usuários, pacientes, atendimentos (com `dutyFitness` aninhado), agenda
+  (com checagem de conflito de horário), tipos de exame, férias, desvios de
+  segurança, indicadores de acidentes (NBR 14280) e cadastro manual de CID;
+  leitura de atestados. Ver [`server/README.md`](server/README.md)
+- **Módulo Férias** (`features/ferias`, `/ferias`) — controle de períodos de
+  férias por colaborador
+- **Módulo Segurança do Trabalho** (`features/seguranca`, `/seguranca`) —
+  log de desvios de segurança (9 classificações) + indicadores mensais de
+  acidentes com Taxa de Frequência/Gravidade/Índice Relativo calculados
+  conforme NBR 14280
+- **CID — cadastro manual** — complementa o catálogo curado estático com
+  códigos adicionados pela própria equipe, categorias coloridas,
+  copiar-código-com-um-clique
+- **Guard de permissão por rota** (`RequirePermission`) — antes, uma
+  permissão insuficiente só escondia o link da Sidebar; navegação direta
+  pela URL contornava o controle de acesso
+- Internacionalização completa em **3 idiomas** (pt-BR, en-US, zh-CN) em
+  todos os módulos, incluindo mensagens de validação de formulário
+  (antes hardcoded em português nos schemas Zod, independente do idioma
+  ativo)
+- Indicador de navegação ativo animado na Sidebar (Framer Motion,
+  `layoutId` compartilhado), transições de página, entrada escalonada de
+  linhas em todas as tabelas
+- Correção de contraste no modo escuro para os tons "chip" da cor da marca
+
+### 🔄 Modificado
+
+- Fallback de senha de desenvolvimento no login restrito a build `DEV` —
+  antes rodava em produção também, sem backend real conectado
+- Animações de abrir/fechar do `Select`/`Tooltip`/`DropdownMenu` corrigidas
+  (referenciavam um plugin Tailwind que não está instalado — não tinham
+  nenhuma animação de fato)
+- Sidebar reorganizada em categorias mais claras (Segurança do Trabalho,
+  RH, Relatórios e Administração, antes tudo dentro de "Gestão")
+- Dados de demonstração (KPIs do dashboard, fixtures de relatórios)
+  zerados — a plataforma começa vazia por padrão
+
+### ❌ Removido
+
+- `atestados.json` — dump de 29 mil linhas de dados de exemplo, órfão e sem
+  nenhuma referência no código
+
+## [0.2.0] — Refatoração Enterprise
+
 ### ✨ Adicionado (Em refatoração enterprise)
 
 - **Infraestrutura de build e tooling**
@@ -97,5 +145,6 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 - Status constants para domínio de atendimento
 - Logo SVG (variantes `mark` e `wordmark`)
 
-[Unreleased]: https://github.com/falcao-eng/falcao-saude-ocupacional/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/falcao-eng/falcao-saude-ocupacional/releases/tag/v0.1.0
+[Unreleased]: https://github.com/mdevsec-code/falcao-saude-ocupacional/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/mdevsec-code/falcao-saude-ocupacional/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/mdevsec-code/falcao-saude-ocupacional/releases/tag/v0.1.0
