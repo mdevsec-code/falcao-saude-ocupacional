@@ -41,7 +41,8 @@ const SelectContent = forwardRef<
       position={position}
       className={cn(
         'relative z-50 max-h-96 min-w-[10rem] overflow-hidden rounded-md border border-border bg-surface text-ink shadow-md',
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+        'origin-[var(--radix-select-content-transform-origin)]',
+        'data-[state=closed]:animate-scale-out data-[state=open]:animate-scale-in',
         position === 'popper' && 'data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1',
         className,
       )}

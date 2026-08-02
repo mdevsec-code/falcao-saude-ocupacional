@@ -1,0 +1,31 @@
+{
+  "page": {
+    "eyebrow": "接诊",
+    "title": "病历",
+    "description": "按患者整理的接诊历史记录。"
+  },
+  "error": {
+    "title": "无法加载病历",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "retry": "重试"
+  },
+  "search": {
+    "placeholder": "搜索患者…"
+  },
+  "list": {
+    "empty": "未找到任何患者。"
+  },
+  "detail": {
+    "selectTitle": "请选择一位患者",
+    "selectDescription": "从左侧列表中选择一位患者以查看病历。",
+    "admission": "入职日期：{{date}}",
+    "attendanceCount": "{{count}} 次接诊",
+    "historyTitle": "接诊历史"
+  },
+  "timeline": {
+    "emptyTitle": "暂无接诊记录",
+    "emptyDescription": "该患者目前还没有接诊历史记录。"
+  }
+}

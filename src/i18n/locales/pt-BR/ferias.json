@@ -1,0 +1,95 @@
+{
+  "validation": {
+    "dateRangeInvalid": "A data de término deve ser igual ou posterior à data de início"
+  },
+  "page": {
+    "eyebrow": "Recursos Humanos",
+    "title": "Férias",
+    "description": "Controle dos períodos de férias dos colaboradores."
+  },
+  "error": {
+    "title": "Não foi possível carregar as férias",
+    "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "new": "Novas férias",
+    "retry": "Tentar novamente"
+  },
+  "kpi": {
+    "total": "Total de períodos",
+    "scheduled": "Agendadas",
+    "ongoing": "Em andamento",
+    "completed": "Concluídas"
+  },
+  "dialog": {
+    "createTitle": "Novas férias",
+    "editTitle": "Editar férias",
+    "createDescription": "Cadastre um novo período de férias.",
+    "editDescription": "Atualize os dados deste período de férias.",
+    "fields": {
+      "patientName": { "label": "Colaborador", "placeholder": "Nome completo" },
+      "sector": { "label": "Setor" },
+      "role": { "label": "Função/Cargo", "placeholder": "Ex.: Pedreiro" },
+      "startDate": { "label": "Início" },
+      "endDate": { "label": "Término" },
+      "status": { "label": "Status" },
+      "notes": { "label": "Observações", "placeholder": "Detalhes adicionais (opcional)" }
+    },
+    "cancel": "Cancelar",
+    "submitCreate": "Cadastrar férias",
+    "submitEdit": "Salvar alterações"
+  },
+  "table": {
+    "patientName": "Colaborador",
+    "sector": "Setor",
+    "role": "Função",
+    "startDate": "Início",
+    "endDate": "Término",
+    "days": "Dias",
+    "status": "Status",
+    "actions": "Ações",
+    "searchPlaceholder": "Pesquisar na tabela…",
+    "exportExcel": "Exportar Excel",
+    "exportTitle": "Controle de Férias",
+    "generatedAt": "Gerado em",
+    "total": "Total",
+    "editAria": "Editar férias",
+    "deleteAria": "Remover férias",
+    "prevPageAria": "Página anterior",
+    "nextPageAria": "Próxima página",
+    "showingRange": "Mostrando {{start}}–{{end}} de {{total}} períodos",
+    "pageOf": "Página {{current}} de {{total}}"
+  },
+  "toast": {
+    "exportSuccess": "Exportação concluída.",
+    "exportError": "Não foi possível exportar a planilha.",
+    "createSuccess": "Férias cadastradas.",
+    "createError": "Não foi possível cadastrar as férias.",
+    "updateSuccess": "Férias atualizadas.",
+    "updateError": "Não foi possível atualizar as férias.",
+    "deleteSuccess": "Férias removidas.",
+    "deleteError": "Não foi possível remover as férias."
+  },
+  "empty": {
+    "title": "Nenhum período de férias encontrado",
+    "description": "Ajuste os filtros ou a busca."
+  },
+  "filters": {
+    "title": "Filtros",
+    "all": "Todos",
+    "search": { "label": "Busca", "placeholder": "Nome ou função…" },
+    "sector": { "label": "Setor" },
+    "status": { "label": "Status" },
+    "chipSector": "Setor: {{value}}",
+    "chipStatus": "Status: {{value}}",
+    "chipSearch": "Busca: \"{{value}}\"",
+    "removeChipAria": "Remover filtro {{label}}",
+    "clearAll": "Limpar tudo"
+  },
+  "deleteDialog": {
+    "title": "Remover férias?",
+    "description": "O período de férias de <strong>{{name}}</strong> será removido permanentemente. Essa ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Remover"
+  }
+}

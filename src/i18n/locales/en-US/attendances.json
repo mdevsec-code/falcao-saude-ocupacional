@@ -1,0 +1,129 @@
+{
+  "page": {
+    "eyebrow": "Front Desk",
+    "title": "Visits",
+    "description": "Record of completed appointments and clinical closure per patient."
+  },
+  "error": {
+    "title": "Unable to load the visits",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "new": "New Visit"
+  },
+  "kpi": {
+    "total": "Total visits",
+    "aptos": "Fit",
+    "restricao": "Fit with restriction",
+    "atencao": "Unfit / Referred"
+  },
+  "dialog": {
+    "createTitle": "New Visit",
+    "editTitle": "Edit Visit",
+    "createDescription": "Record a completed clinical visit.",
+    "editDescription": "Update the visit details.",
+    "fields": {
+      "patient": "Patient",
+      "patientPlaceholder": "Select the patient",
+      "examType": "Exam type",
+      "doctor": "Physician",
+      "attendanceDate": "Visit date",
+      "conclusion": "Conclusion",
+      "dutyFitness": "Fitness by risk activity",
+      "dutyFitnessHint": "Assess the employee's fitness for the activities relevant to their role.",
+      "restrictionNotes": "Restrictions",
+      "restrictionNotesPlaceholder": "Describe the restriction applied",
+      "notes": "Notes",
+      "notesPlaceholder": "Additional details (optional)"
+    },
+    "dutyStatus": {
+      "notAssessed": "Not assessed",
+      "fit": "Fit",
+      "unfit": "Unfit"
+    },
+    "actions": {
+      "saveCreate": "Record visit",
+      "saveEdit": "Save changes"
+    }
+  },
+  "delete": {
+    "title": "Remove visit?",
+    "descriptionBefore": "The visit for ",
+    "descriptionAfter": " will be permanently removed. This action cannot be undone.",
+    "confirm": "Remove"
+  },
+  "table": {
+    "columns": {
+      "date": "Date",
+      "patient": "Patient",
+      "exam": "Exam",
+      "doctor": "Physician",
+      "conclusion": "Conclusion",
+      "restrictionNotes": "Restrictions",
+      "actions": "Actions"
+    },
+    "search": {
+      "placeholder": "Search the table…"
+    },
+    "actions": {
+      "exportExcel": "Export Excel",
+      "downloadAso": "Download ASO",
+      "edit": "Edit visit",
+      "remove": "Remove visit"
+    },
+    "pagination": {
+      "showing": "Showing {{from}}–{{to}} of {{total}} visits",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {{current}} of {{total}}"
+    }
+  },
+  "export": {
+    "title": "Visits",
+    "generatedAt": "Generated on",
+    "total": "Total"
+  },
+  "empty": {
+    "title": "No visits found",
+    "description": "Adjust the filters or the search."
+  },
+  "toast": {
+    "exportSuccess": "Export completed.",
+    "exportError": "Unable to export the spreadsheet.",
+    "asoSuccess": "ASO generated.",
+    "asoError": "Unable to generate the ASO.",
+    "createSuccess": "Visit recorded.",
+    "createError": "Unable to record the visit.",
+    "updateSuccess": "Visit updated.",
+    "updateError": "Unable to update the visit.",
+    "deleteSuccess": "Visit removed.",
+    "deleteError": "Unable to remove the visit."
+  },
+  "filters": {
+    "heading": "Filters",
+    "fields": {
+      "patient": "Patient",
+      "doctor": "Physician",
+      "examType": "Exam type",
+      "conclusion": "Conclusion",
+      "periodStart": "Period (start)",
+      "periodEndAria": "Until"
+    },
+    "options": {
+      "all": "All",
+      "allFeminine": "All"
+    },
+    "chips": {
+      "patient": "Patient: {{name}}",
+      "doctor": "Physician: {{name}}",
+      "exam": "Exam: {{name}}",
+      "conclusion": "Conclusion: {{name}}",
+      "from": "From {{date}}",
+      "until": "Until {{date}}",
+      "removeAria": "Remove filter {{label}}"
+    },
+    "actions": {
+      "clearAll": "Clear all"
+    }
+  }
+}

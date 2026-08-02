@@ -1,0 +1,68 @@
+{
+  "page": {
+    "eyebrow": "Administration",
+    "title": "Users",
+    "description": "System access accounts and their roles (RBAC)."
+  },
+  "error": {
+    "title": "Unable to load the users",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "createNew": "New user",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "saveChanges": "Save changes",
+    "createUser": "Create user",
+    "remove": "Remove"
+  },
+  "dialog": {
+    "editTitle": "Edit user",
+    "createTitle": "New user",
+    "editDescription": "Update the user's access information.",
+    "createDescription": "Register a new user and set their access role."
+  },
+  "form": {
+    "fullName": "Full name",
+    "fullNamePlaceholder": "User's name",
+    "email": "Email",
+    "emailPlaceholder": "user@falcao.com",
+    "role": "Access role",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "table": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "searchPlaceholder": "Search user…",
+    "youSuffix": "(you)",
+    "editAria": "Edit user",
+    "deleteAria": "Remove user",
+    "cannotDeleteSelf": "You cannot remove your own user"
+  },
+  "empty": {
+    "title": "No users found",
+    "description": "Adjust your search."
+  },
+  "deleteDialog": {
+    "title": "Remove user?",
+    "descriptionBefore": "",
+    "descriptionAfter": "'s access will be permanently removed. This action cannot be undone."
+  },
+  "toast": {
+    "createSuccess": "User created.",
+    "createError": "Unable to create the user.",
+    "updateSuccess": "User updated.",
+    "updateError": "Unable to update the user.",
+    "deleteSuccess": "User removed.",
+    "deleteError": "Unable to remove the user."
+  }
+}

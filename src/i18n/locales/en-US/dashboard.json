@@ -1,0 +1,49 @@
+{
+  "welcome": {
+    "eyebrow": "Overview",
+    "title": "Welcome to the Falcão platform",
+    "description": "Occupational Health hub for Falcão Construções e Engenharia.",
+    "openAgenda": "Open schedule"
+  },
+  "kpis": {
+    "appointmentsToday": "Appointments today",
+    "waiting": "Waiting",
+    "attendances": "Visits",
+    "pending": "Pending items"
+  },
+  "kpiSection": {
+    "title": "Today's indicators"
+  },
+  "error": {
+    "message": "Unable to load the indicators.",
+    "retry": "Try again"
+  },
+  "quickLinks": {
+    "title": "Quick access",
+    "agenda": { "label": "Schedule", "description": "Appointment calendar" },
+    "agendamentos": { "label": "Appointments", "description": "Today's list" },
+    "pacientes": { "label": "Patients", "description": "Employee registry" },
+    "atendimentos": { "label": "Visits", "description": "Completed visits" },
+    "prontuarios": { "label": "Medical Records", "description": "History by patient" },
+    "aso": { "label": "ASO", "description": "Fitness by activity" },
+    "exames": { "label": "Exams", "description": "Exam catalog" },
+    "cid": { "label": "CID", "description": "Code reference" },
+    "atestados": { "label": "Certificates", "description": "Analysis and metrics" },
+    "relatorios": { "label": "Reports", "description": "Export and filters" },
+    "usuarios": { "label": "Users", "description": "Access accounts" },
+    "permissoes": { "label": "Permissions", "description": "Role matrix" },
+    "configuracoes": { "label": "Settings", "description": "System and notifications" }
+  },
+  "agendaCard": {
+    "title": "Today's schedule",
+    "viewAll": "View schedule",
+    "emptyTitle": "No appointments today",
+    "emptyDescription": "Today's schedule is clear.",
+    "moreAppointments": "+{{count}} more appointment(s) — view full schedule"
+  },
+  "summary": {
+    "readyDescription": "Platform ready to use.",
+    "activeModules": "Active modules",
+    "helpText": "Need help? Check the side menu or contact an administrator in Users."
+  }
+}

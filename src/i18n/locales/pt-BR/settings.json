@@ -3,5 +3,34 @@
     "eyebrow": "Administração",
     "title": "Configurações",
     "description": "Informações do sistema, localização e notificações."
+  },
+  "system": {
+    "title": "Informações do sistema",
+    "description": "Ambiente e versão em execução.",
+    "application": "Aplicação",
+    "version": "Versão",
+    "environment": "Ambiente",
+    "production": "Produção",
+    "development": "Desenvolvimento",
+    "dataSource": "Fonte de dados",
+    "mockSource": "Mock (MSW)",
+    "realApiSource": "API real",
+    "api": "API"
+  },
+  "localization": {
+    "title": "Localização",
+    "description": "Idioma e formato padrão da plataforma.",
+    "currentLanguage": "Idioma atual",
+    "timezone": "Fuso horário"
+  },
+  "notifications": {
+    "title": "Notificações",
+    "description": "Alertas enviados para administradores e recepção.",
+    "newAppointments": "Novos agendamentos",
+    "pendingAtestados": "Atestados pendentes de lançamento",
+    "examReminders": "Lembretes de exame periódico (NR-7)"
+  },
+  "toast": {
+    "prefsNotPersisted": "Preferências ainda não são persistidas nesta versão."
   }
 }

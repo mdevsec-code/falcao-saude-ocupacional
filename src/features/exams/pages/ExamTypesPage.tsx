@@ -8,7 +8,11 @@ import { ErrorState } from '@/components/feedback/ErrorState';
 import { Button } from '@/components/ui/Button';
 
 import { useExamTypes } from '../hooks/useExamTypes';
-import { useCreateExamType, useDeleteExamType, useUpdateExamType } from '../hooks/useExamTypeMutations';
+import {
+  useCreateExamType,
+  useDeleteExamType,
+  useUpdateExamType,
+} from '../hooks/useExamTypeMutations';
 import { fromFormInput } from '../types';
 import type { ExamTypeFormInput, ExamTypeRecord } from '../types';
 
@@ -63,7 +67,7 @@ export function ExamTypesPage() {
         description={t('exams:page.description')}
         actions={
           <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={handleCreate}>
-            Novo tipo de exame
+            {t('exams:actions.new')}
           </Button>
         }
       />
@@ -83,7 +87,7 @@ export function ExamTypesPage() {
             description={t('exams:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('exams:actions.retry')}
               </Button>
             }
           />

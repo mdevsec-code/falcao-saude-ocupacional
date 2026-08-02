@@ -3,5 +3,25 @@
     "eyebrow": "Conta",
     "title": "Perfil",
     "description": "Seus dados de acesso e preferências."
+  },
+  "preferences": {
+    "title": "Preferências",
+    "description": "Aparência e idioma da plataforma.",
+    "darkTheme": "Tema escuro",
+    "toggleTheme": "Alternar tema",
+    "language": "Idioma"
+  },
+  "security": {
+    "title": "Segurança",
+    "description": "Alterar senha de acesso.",
+    "currentPassword": "Senha atual",
+    "newPassword": "Nova senha",
+    "confirmPassword": "Confirmar nova senha",
+    "updateButton": "Atualizar senha",
+    "roleLabel": "Perfil",
+    "passwordMismatch": "As senhas não coincidem"
+  },
+  "toast": {
+    "passwordNotPersisted": "Alteração de senha ainda não é persistida nesta versão."
   }
 }

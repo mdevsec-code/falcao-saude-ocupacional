@@ -1,0 +1,75 @@
+{
+  "eyebrow": "导出",
+  "title": "报表",
+  "description": "生成运营报表，导出为 PDF 或 Excel 格式，并通过 WhatsApp 将摘要发送给相关团队。",
+  "subtitle": "{{kind}} · {{count}} 条记录",
+  "filters": {
+    "title": "筛选条件",
+    "description": "导出前请筛选所需的记录范围。",
+    "kind": "报表类型",
+    "from": "起始日期",
+    "to": "截止日期",
+    "company": "公司",
+    "allCompanies": "所有公司"
+  },
+  "actions": {
+    "title": "导出",
+    "pdf": "下载 PDF",
+    "excel": "下载 Excel",
+    "whatsapp": "通过 WhatsApp 发送"
+  },
+  "preview": {
+    "title": "预览",
+    "description": "以下是将要导出的记录，列内容与 PDF 和 Excel 导出结果一致。",
+    "empty": {
+      "title": "未找到任何记录",
+      "description": "请调整筛选条件以查看数据。"
+    }
+  },
+  "columns": {
+    "date": "日期",
+    "patient": "患者",
+    "company": "公司",
+    "sector": "部门",
+    "exam": "检查项目",
+    "status": "状态",
+    "professional": "负责人",
+    "notes": "备注"
+  },
+  "meta": {
+    "from": "起始日期",
+    "to": "截止日期",
+    "company": "公司",
+    "generatedAt": "生成时间"
+  },
+  "whatsapp": {
+    "period": "期间：{{from}} 至 {{to}}",
+    "periodStart": "起始",
+    "periodEnd": "今天",
+    "totalRecords": "记录总数：{{count}}",
+    "noRecords": "该期间内无记录。",
+    "contactName": "团队"
+  },
+  "toast": {
+    "pdfSuccess": "PDF 生成成功",
+    "pdfError": "PDF 生成失败",
+    "excelSuccess": "表格生成成功",
+    "excelError": "表格生成失败",
+    "whatsappSent": "正在打开 WhatsApp 对话",
+    "whatsappInvalid": "WhatsApp 号码无效"
+  },
+  "kinds": {
+    "agendamentos": "预约",
+    "atendimentos": "接诊记录",
+    "aso": "综合 ASO",
+    "aso_a_ptos": "入职 ASO",
+    "aso_periodicos": "定期 ASO"
+  },
+  "kindDates": {
+    "agendamentos": "预约期间",
+    "atendimentos": "接诊期间",
+    "aso": "ASO 签发期间",
+    "aso_a_ptos": "入职期间",
+    "aso_periodicos": "定期检查期间"
+  }
+}

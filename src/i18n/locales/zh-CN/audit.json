@@ -1,0 +1,54 @@
+{
+  "page": {
+    "eyebrow": "合规",
+    "title": "审计",
+    "description": "用于 LGPD（巴西数据保护法）合规的访问与变更记录追踪 — 记录谁在何时查看或编辑了每条记录。"
+  },
+  "error": {
+    "title": "无法加载审计记录",
+    "description": "请稍后重试。"
+  },
+  "kpi": {
+    "total": "已记录事件",
+    "today": "今日事件",
+    "loginFailed": "登录失败次数",
+    "patientAccess": "患者数据访问次数"
+  },
+  "actions": {
+    "exportPdf": "PDF",
+    "exportExcel": "Excel"
+  },
+  "toast": {
+    "pdfSuccess": "PDF 生成成功。",
+    "pdfError": "无法生成 PDF。",
+    "excelSuccess": "电子表格生成成功。",
+    "excelError": "无法导出电子表格。"
+  },
+  "filters": {
+    "searchPlaceholder": "按用户或记录搜索…",
+    "actionPlaceholder": "操作",
+    "allActions": "全部操作",
+    "entityPlaceholder": "区域",
+    "allEntities": "全部区域"
+  },
+  "table": {
+    "columns": {
+      "timestamp": "日期/时间",
+      "actor": "用户",
+      "role": "角色",
+      "action": "操作",
+      "entity": "区域",
+      "record": "记录",
+      "detail": "详情"
+    },
+    "truncatedNote": "显示最近 {{shown}} 条事件，共 {{total}} 条。导出为 PDF 或 Excel 可查看完整列表。"
+  },
+  "empty": {
+    "title": "未找到事件",
+    "description": "请调整搜索内容或筛选条件。"
+  },
+  "export": {
+    "title": "审计日志",
+    "subtitle_other": "{{brand}} · {{count}} 条记录"
+  }
+}

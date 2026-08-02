@@ -21,7 +21,7 @@ export function StatTile({ label, value, delta, icon, className }: StatTileProps
     <div
       className={cn(
         'group relative flex flex-col gap-3 rounded-lg border border-border bg-surface p-5',
-        'transition-shadow duration-base hover:shadow-md',
+        'transition-[transform,box-shadow] duration-base ease-out hover:-translate-y-0.5 hover:shadow-md',
         className,
       )}
     >
@@ -29,7 +29,7 @@ export function StatTile({ label, value, delta, icon, className }: StatTileProps
         <span className="text-xs font-semibold uppercase tracking-wide text-ink-soft">{label}</span>
         {icon && (
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-gold-50 text-brand-gold-700"
+            className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-gold-50 text-brand-gold-700 transition-transform duration-base ease-out group-hover:scale-110"
             aria-hidden="true"
           >
             {icon}

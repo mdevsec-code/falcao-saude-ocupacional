@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { motion } from 'framer-motion';
 import {
   LayoutDashboard,
   CalendarDays,
@@ -13,6 +14,8 @@ import {
   ShieldCheck,
   BarChart3,
   Activity,
+  Plane,
+  ShieldAlert,
   Settings,
   UserCog,
   KeyRound,
@@ -77,13 +80,49 @@ const SECTIONS: NavSection[] = [
       { label: 'nav.cid', to: ROUTE_PATHS.CID, icon: Stethoscope, enabled: true },
       { label: 'nav.exams', to: ROUTE_PATHS.EXAMES, icon: FlaskConical, enabled: true },
       { label: 'nav.aso', to: ROUTE_PATHS.ASO, icon: ShieldCheck, enabled: true },
+      { label: 'nav.atestados', to: ROUTE_PATHS.ATESTADOS, icon: Activity, enabled: true },
     ],
   },
   {
-    title: 'sidebar.management',
+    title: 'sidebar.safety',
+    items: [
+      {
+        label: 'nav.safety',
+        to: ROUTE_PATHS.SEGURANCA,
+        icon: ShieldAlert,
+        enabled: true,
+        requires: PERMISSIONS.DEVIATION_READ,
+      },
+    ],
+  },
+  {
+    title: 'sidebar.hr',
+    items: [
+      {
+        label: 'nav.vacation',
+        to: ROUTE_PATHS.FERIAS,
+        icon: Plane,
+        enabled: true,
+        requires: PERMISSIONS.EMPLOYEE_READ,
+      },
+    ],
+  },
+  {
+    title: 'sidebar.reports',
     items: [
       { label: 'nav.reports', to: ROUTE_PATHS.RELATORIOS, icon: BarChart3, enabled: true },
-      { label: 'nav.atestados', to: ROUTE_PATHS.ATESTADOS, icon: Activity, enabled: true },
+      {
+        label: 'nav.audit',
+        to: ROUTE_PATHS.AUDITORIA,
+        icon: ScrollText,
+        enabled: true,
+        requires: PERMISSIONS.AUDIT_READ,
+      },
+    ],
+  },
+  {
+    title: 'sidebar.admin',
+    items: [
       {
         label: 'nav.users',
         to: ROUTE_PATHS.USUARIOS,
@@ -105,13 +144,6 @@ const SECTIONS: NavSection[] = [
         enabled: true,
         requires: PERMISSIONS.SETTINGS_MANAGE,
       },
-      {
-        label: 'nav.audit',
-        to: ROUTE_PATHS.AUDITORIA,
-        icon: ScrollText,
-        enabled: true,
-        requires: PERMISSIONS.AUDIT_READ,
-      },
     ],
   },
 ];
@@ -123,6 +155,7 @@ export function Sidebar(): ReactNode {
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isCompact = isDesktop && collapsed;
   const { t } = useTranslation('common');
+  const mainNavAriaLabel = t('sidebar.mainNavAriaLabel');
   const { pathname } = useLocation();
 
   // Fecha o drawer automaticamente ao navegar (evita ficar aberto sobre a nova página).
@@ -147,7 +180,7 @@ export function Sidebar(): ReactNode {
             className={cn(
               'fixed inset-y-0 left-0 z-modal flex h-full w-72 max-w-[85vw] flex-col',
               'border-r border-border bg-surface shadow-lg focus:outline-none',
-              'data-[state=open]:animate-slide-in-left data-[state=closed]:animate-slide-out-left',
+              'data-[state=closed]:animate-slide-out-left data-[state=open]:animate-slide-in-left',
             )}
           >
             <DialogPrimitive.Title className="sr-only">{t('app.shortName')}</DialogPrimitive.Title>
@@ -166,9 +199,9 @@ export function Sidebar(): ReactNode {
 
   return (
     <aside
-      aria-label="Navegação principal"
+      aria-label={mainNavAriaLabel}
       className={cn(
-        'flex h-full flex-col border-r border-border bg-surface',
+        'flex h-full min-h-0 flex-col border-r border-border bg-surface',
         isCompact ? 'w-[68px]' : 'w-64',
         'transition-[width] duration-base ease-out',
       )}
@@ -283,19 +316,26 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
       end={to === ROUTE_PATHS.DASHBOARD}
       onClick={onNavigate}
       className={({ isActive }) =>
-        cn(
-          baseClasses,
-          isActive ? 'bg-brand-gold-50 text-brand-gold-900' : 'text-ink hover:bg-hover',
-        )
+        cn(baseClasses, 'relative', isActive ? 'text-brand-gold-900' : 'text-ink hover:bg-hover')
       }
     >
       {({ isActive }) => (
         <>
+          {isActive && (
+            <motion.span
+              layoutId="sidebar-active-pill"
+              className="absolute inset-0 rounded-md bg-brand-gold-50"
+              transition={{ type: 'spring', stiffness: 500, damping: 34, mass: 0.9 }}
+            />
+          )}
           <Icon
-            className={cn('h-4 w-4 shrink-0', isActive ? 'text-brand-gold-700' : 'text-ink-soft')}
+            className={cn(
+              'relative h-4 w-4 shrink-0',
+              isActive ? 'text-brand-gold-700' : 'text-ink-soft',
+            )}
             aria-hidden="true"
           />
-          {!compact && <span className="flex-1 truncate">{labelText}</span>}
+          {!compact && <span className="relative flex-1 truncate">{labelText}</span>}
         </>
       )}
     </NavLink>

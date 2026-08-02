@@ -1,0 +1,37 @@
+{
+  "page": {
+    "eyebrow": "Workplace Safety",
+    "title": "ASO — Fitness for Duty by Activity",
+    "description": "Dashboard of employee fitness for high-risk activities (heights, confined spaces, machinery, electricity)."
+  },
+  "error": {
+    "title": "Unable to load the ASO dashboard",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "retry": "Try again",
+    "viewRecord": "View medical record"
+  },
+  "kpis": {
+    "evaluated": "Employees evaluated",
+    "noRestriction": "No restrictions",
+    "someUnfit": "With some unfit rating"
+  },
+  "filters": {
+    "searchPlaceholder": "Search employee…",
+    "onlyUnfit": "Only with unfit ratings"
+  },
+  "empty": {
+    "title": "No employees found",
+    "description": "Adjust the search or filters. Employees appear here once they have at least one risk activity evaluated in a visit."
+  },
+  "table": {
+    "employee": "Employee",
+    "record": "Medical Record"
+  },
+  "fitness": {
+    "notEvaluated": "Not evaluated",
+    "fit": "Fit",
+    "unfit": "Unfit"
+  }
+}

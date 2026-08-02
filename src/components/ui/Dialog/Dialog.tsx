@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/utils/cn';
 
 export const Dialog = DialogPrimitive.Root;
@@ -15,7 +16,7 @@ export const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'z-modal-backdrop fixed inset-0 bg-neutral-900/50 backdrop-blur-sm',
+      'fixed inset-0 z-modal-backdrop bg-neutral-900/50 backdrop-blur-sm',
       'data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in',
       className,
     )}
@@ -27,29 +28,32 @@ DialogOverlay.displayName = 'DialogOverlay';
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...rest }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        'z-modal fixed left-1/2 top-1/2 max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto',
-        '-translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-surface p-6 shadow-lg',
-        'data-[state=closed]:animate-fade-out data-[state=open]:animate-scale-in',
-        className,
-      )}
-      {...rest}
-    >
-      {children}
-      <DialogPrimitive.Close
-        className="absolute right-4 top-4 rounded-md p-1 text-ink-soft hover:bg-hover hover:text-ink focus:outline-none focus-visible:shadow-focus"
-        aria-label="Fechar"
+>(({ className, children, ...rest }, ref) => {
+  const { t } = useTranslation('common');
+  return (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cn(
+          'fixed left-1/2 top-1/2 z-modal max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto',
+          '-translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-surface p-6 shadow-lg',
+          'data-[state=closed]:animate-scale-out data-[state=open]:animate-scale-in',
+          className,
+        )}
+        {...rest}
       >
-        <X className="h-4 w-4" />
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-));
+        {children}
+        <DialogPrimitive.Close
+          className="absolute right-4 top-4 rounded-md p-1 text-ink-soft hover:bg-hover hover:text-ink focus:outline-none focus-visible:shadow-focus"
+          aria-label={t('actions.close')}
+        >
+          <X className="h-4 w-4" />
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  );
+});
 DialogContent.displayName = 'DialogContent';
 
 export function DialogHeader({ className, ...rest }: React.HTMLAttributes<HTMLDivElement>) {

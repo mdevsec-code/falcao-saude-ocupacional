@@ -1,0 +1,13 @@
+{
+  "generic": {
+    "title": "出现问题",
+    "description": "无法完成该操作，请稍后重试。"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "无法加载所请求的页面。"
+  },
+  "network": "网络故障，请检查您的网络连接。",
+  "unauthorized": "您没有权限执行此操作。",
+  "sessionExpired": "会话已过期，请重新登录以继续。"
+}

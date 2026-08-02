@@ -1,0 +1,193 @@
+{
+  "validation": {
+    "descriptionRequired": "Describe the deviation in more detail"
+  },
+  "page": {
+    "eyebrow": "Management",
+    "title": "Workplace Safety",
+    "description": "Safety deviation log and monthly accident indicators."
+  },
+  "tabs": {
+    "desvios": "Deviations",
+    "indicadores": "Accident Indicators"
+  },
+  "desvios": {
+    "actions": {
+      "new": "New deviation",
+      "retry": "Try again"
+    },
+    "error": {
+      "title": "Unable to load deviations",
+      "description": "Please try again shortly."
+    },
+    "kpi": {
+      "total": "Total deviations",
+      "pending": "Pending",
+      "inProgress": "In progress",
+      "completed": "Completed"
+    },
+    "dialog": {
+      "createTitle": "New deviation",
+      "editTitle": "Edit deviation",
+      "createDescription": "Register a new safety deviation identified on site.",
+      "editDescription": "Update this deviation.",
+      "fields": {
+        "date": "Date",
+        "location": "Location",
+        "classification": "Classification",
+        "description": "Deviation description",
+        "descriptionPlaceholder": "Describe what was observed",
+        "foreman": "Foreman",
+        "foremanPlaceholder": "Foreman's name",
+        "responsibleTechnician": "Responsible technician",
+        "responsibleTechnicianPlaceholder": "Safety technician's name",
+        "optional": "Optional",
+        "action": "Action taken",
+        "actionPlaceholder": "Describe the corrective action (optional)",
+        "status": "Status"
+      },
+      "cancel": "Cancel",
+      "submitCreate": "Register deviation",
+      "submitEdit": "Save changes"
+    },
+    "table": {
+      "date": "Date",
+      "location": "Location",
+      "classification": "Classification",
+      "description": "Description",
+      "status": "Status",
+      "foreman": "Foreman",
+      "responsibleTechnician": "Responsible technician",
+      "action": "Action taken",
+      "actions": "Actions",
+      "searchPlaceholder": "Search the table…",
+      "exportExcel": "Export Excel",
+      "exportTitle": "Safety Deviation Log",
+      "generatedAt": "Generated at",
+      "total": "Total",
+      "editAria": "Edit deviation",
+      "deleteAria": "Remove deviation",
+      "prevPageAria": "Previous page",
+      "nextPageAria": "Next page",
+      "showingRange": "Showing {{start}}–{{end}} of {{total}} deviations",
+      "pageOf": "Page {{current}} of {{total}}"
+    },
+    "toast": {
+      "exportSuccess": "Export completed.",
+      "exportError": "Unable to export the spreadsheet.",
+      "createSuccess": "Deviation registered.",
+      "createError": "Unable to register the deviation.",
+      "updateSuccess": "Deviation updated.",
+      "updateError": "Unable to update the deviation.",
+      "deleteSuccess": "Deviation removed.",
+      "deleteError": "Unable to remove the deviation."
+    },
+    "empty": {
+      "title": "No deviations found",
+      "description": "Adjust the filters or register a new deviation."
+    },
+    "filters": {
+      "title": "Filters",
+      "all": "All",
+      "search": { "label": "Search", "placeholder": "Description, foreman or technician…" },
+      "location": { "label": "Location" },
+      "classification": { "label": "Classification" },
+      "status": { "label": "Status" },
+      "chipLocation": "Location: {{value}}",
+      "chipClassification": "Classification: {{value}}",
+      "chipStatus": "Status: {{value}}",
+      "chipSearch": "Search: \"{{value}}\"",
+      "removeChipAria": "Remove filter {{label}}",
+      "clearAll": "Clear all"
+    },
+    "deleteDialog": {
+      "title": "Remove deviation?",
+      "description": "The deviation recorded on <strong>{{date}}</strong> will be permanently removed. This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  },
+  "indicadores": {
+    "actions": {
+      "new": "New entry",
+      "retry": "Try again"
+    },
+    "error": {
+      "title": "Unable to load indicators",
+      "description": "Please try again shortly."
+    },
+    "kpi": {
+      "totalAccidents": "Accidents this year",
+      "frequencyRate": "Frequency Rate (year)",
+      "severityRate": "Severity Rate (year)",
+      "daysLost": "Days lost (year)"
+    },
+    "yearFilter": {
+      "label": "Year"
+    },
+    "chartTitle": "Monthly rate trend",
+    "chart": {
+      "frequencyRate": "Frequency Rate",
+      "severityRate": "Severity Rate"
+    },
+    "dialog": {
+      "createTitle": "New monthly entry",
+      "editTitle": "Edit monthly entry",
+      "createDescription": "Fill in the month's data to calculate the indicators automatically (NBR 14280).",
+      "editDescription": "Update this month's data.",
+      "fields": {
+        "month": "Month",
+        "year": "Year",
+        "employees": "Total employees in the period",
+        "employeesHint": "Used to calculate man-hours worked (× 220h/month)",
+        "accidentsWithLeave": "Accidents with time off",
+        "accidentsWithoutLeave": "Accidents without time off",
+        "daysLostAccidents": "Days lost to accidents",
+        "daysDebited": "Debited days",
+        "daysDebitedHint": "Per the NBR 14280 table"
+      },
+      "cancel": "Cancel",
+      "submitCreate": "Save entry",
+      "submitEdit": "Save changes"
+    },
+    "table": {
+      "period": "Period",
+      "year": "Year",
+      "month": "Month",
+      "employees": "Employees",
+      "accidentsWithLeave": "Accidents w/ time off",
+      "accidentsWithoutLeave": "Accidents w/o time off",
+      "totalAccidents": "Total accidents",
+      "totalDaysLost": "Days lost",
+      "frequencyRate": "Frequency Rate",
+      "severityRate": "Severity Rate",
+      "relativeIndex": "Relative Index",
+      "actions": "Actions",
+      "exportExcel": "Export Excel",
+      "exportTitle": "Monthly Accident Indicators",
+      "generatedAt": "Generated at",
+      "editAria": "Edit entry",
+      "deleteAria": "Remove entry"
+    },
+    "toast": {
+      "exportSuccess": "Export completed.",
+      "exportError": "Unable to export the spreadsheet.",
+      "createSuccess": "Entry saved.",
+      "createError": "Unable to save the entry.",
+      "updateSuccess": "Entry updated.",
+      "updateError": "Unable to update the entry.",
+      "deleteSuccess": "Entry removed.",
+      "deleteError": "Unable to remove the entry."
+    },
+    "empty": {
+      "title": "No indicators entered for this year",
+      "description": "Add the first month's entry to see the chart and rates."
+    },
+    "deleteDialog": {
+      "title": "Remove entry?",
+      "description": "The entry for <strong>{{period}}</strong> will be permanently removed. This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Remove"
+    }
+  }
+}

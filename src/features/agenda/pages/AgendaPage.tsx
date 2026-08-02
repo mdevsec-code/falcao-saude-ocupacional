@@ -19,8 +19,8 @@ import {
   addMonths,
   formatWeekRangeLabel,
   getWeekDays,
-  MONTH_LABEL_FMT,
-  DAY_LABEL_FMT,
+  formatMonthLabel,
+  formatDayLabel,
 } from '../lib/calendar';
 import { fromFormInput } from '../types';
 import type { AgendaFilters, AgendaView, AppointmentFormInput, AppointmentRecord } from '../types';
@@ -33,7 +33,7 @@ import { AppointmentDialog } from '../components/AppointmentDialog';
 import { DeleteConfirmDialog } from '../components/DeleteConfirmDialog';
 
 export function AgendaPage() {
-  const { t } = useTranslation('agenda');
+  const { t, i18n } = useTranslation('agenda');
   const { data: allRecords, isLoading, isError, refetch } = useAppointments();
   const records = allRecords ?? [];
   const examTypes = useActiveExamNames();
@@ -51,11 +51,15 @@ export function AgendaPage() {
   const updateMutation = useUpdateAppointment();
   const deleteMutation = useDeleteAppointment();
 
+  // `i18n.language` força recomputar o label (nomes de mês/dia) ao trocar
+  // idioma — o eslint não enxerga essa dependência porque ela é lida
+  // dentro de `formatMonthLabel`/`formatDayLabel`, não neste callback.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const label = useMemo(() => {
-    if (view === 'month') return MONTH_LABEL_FMT.format(anchor);
+    if (view === 'month') return formatMonthLabel(anchor);
     if (view === 'week') return formatWeekRangeLabel(getWeekDays(anchor));
-    return DAY_LABEL_FMT.format(anchor);
-  }, [view, anchor]);
+    return formatDayLabel(anchor);
+  }, [view, anchor, i18n.language]);
 
   function handlePrev() {
     if (view === 'month') setAnchor((d) => addMonths(d, -1));
@@ -140,7 +144,7 @@ export function AgendaPage() {
             description={t('agenda:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('agenda:actions.retry')}
               </Button>
             }
           />

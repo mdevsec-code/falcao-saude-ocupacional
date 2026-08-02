@@ -10,7 +10,7 @@ import { Switch } from '@/components/ui/Switch';
 import { Badge } from '@/components/ui/Badge';
 import { env } from '@/config/env';
 import { brand } from '@/config/brand';
-import { localeLabels } from '@/constants/i18n';
+import { LOCALES, localeLabels, type Locale } from '@/constants/i18n';
 
 const APP_VERSION = '0.2.0';
 
@@ -21,16 +21,19 @@ interface NotificationPrefs {
 }
 
 export function SettingsPage() {
-  const { t } = useTranslation('settings');
+  const { t, i18n } = useTranslation('settings');
   const [prefs, setPrefs] = useState<NotificationPrefs>({
     newAppointments: true,
     pendingAtestados: true,
     examReminders: false,
   });
 
+  const current = (i18n.resolvedLanguage ?? i18n.language) as Locale;
+  const currentLocale: Locale = LOCALES.includes(current) ? current : 'pt-BR';
+
   function handleToggle(key: keyof NotificationPrefs) {
     setPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
-    toast.info('Ambiente de demonstração: preferências não são persistidas.');
+    toast.info(t('settings:toast.prefsNotPersisted'));
   }
 
   return (
@@ -46,33 +49,37 @@ export function SettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Info className="h-4 w-4 text-brand-gold-700" />
-              Informações do sistema
+              {t('settings:system.title')}
             </CardTitle>
-            <CardDescription>Ambiente e versão em execução.</CardDescription>
+            <CardDescription>{t('settings:system.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Aplicação</span>
+              <span className="text-ink-soft">{t('settings:system.application')}</span>
               <span className="text-ink">{brand.name}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Versão</span>
+              <span className="text-ink-soft">{t('settings:system.version')}</span>
               <span className="font-mono text-ink">v{APP_VERSION}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Ambiente</span>
+              <span className="text-ink-soft">{t('settings:system.environment')}</span>
               <Badge variant={import.meta.env.PROD ? 'success' : 'warning'} size="sm">
-                {import.meta.env.PROD ? 'Produção' : 'Desenvolvimento'}
+                {import.meta.env.PROD
+                  ? t('settings:system.production')
+                  : t('settings:system.development')}
               </Badge>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Fonte de dados</span>
+              <span className="text-ink-soft">{t('settings:system.dataSource')}</span>
               <Badge variant={env.VITE_ENABLE_MSW ? 'warning' : 'success'} size="sm">
-                {env.VITE_ENABLE_MSW ? 'Mock (MSW)' : 'API real'}
+                {env.VITE_ENABLE_MSW
+                  ? t('settings:system.mockSource')
+                  : t('settings:system.realApiSource')}
               </Badge>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">API</span>
+              <span className="text-ink-soft">{t('settings:system.api')}</span>
               <span className="truncate font-mono text-xs text-ink-soft">{env.VITE_API_URL}</span>
             </div>
           </CardContent>
@@ -82,17 +89,17 @@ export function SettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Globe className="h-4 w-4 text-brand-gold-700" />
-              Localização
+              {t('settings:localization.title')}
             </CardTitle>
-            <CardDescription>Idioma e formato padrão da plataforma.</CardDescription>
+            <CardDescription>{t('settings:localization.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Idioma padrão</span>
-              <span className="text-ink">{localeLabels[env.VITE_DEFAULT_LOCALE as 'pt-BR']}</span>
+              <span className="text-ink-soft">{t('settings:localization.currentLanguage')}</span>
+              <span className="text-ink">{localeLabels[currentLocale]}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-ink-soft">Fuso horário</span>
+              <span className="text-ink-soft">{t('settings:localization.timezone')}</span>
               <span className="text-ink">America/Bahia (UTC-3)</span>
             </div>
           </CardContent>
@@ -102,13 +109,15 @@ export function SettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Bell className="h-4 w-4 text-brand-gold-700" />
-              Notificações
+              {t('settings:notifications.title')}
             </CardTitle>
-            <CardDescription>Alertas enviados para administradores e recepção.</CardDescription>
+            <CardDescription>{t('settings:notifications.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-ink">Novos agendamentos</span>
+              <span className="text-sm text-ink">
+                {t('settings:notifications.newAppointments')}
+              </span>
               <Switch
                 checked={prefs.newAppointments}
                 onCheckedChange={() => handleToggle('newAppointments')}
@@ -116,7 +125,9 @@ export function SettingsPage() {
             </div>
             <Separator />
             <div className="flex items-center justify-between">
-              <span className="text-sm text-ink">Atestados pendentes de lançamento</span>
+              <span className="text-sm text-ink">
+                {t('settings:notifications.pendingAtestados')}
+              </span>
               <Switch
                 checked={prefs.pendingAtestados}
                 onCheckedChange={() => handleToggle('pendingAtestados')}
@@ -124,7 +135,7 @@ export function SettingsPage() {
             </div>
             <Separator />
             <div className="flex items-center justify-between">
-              <span className="text-sm text-ink">Lembretes de exame periódico (NR-7)</span>
+              <span className="text-sm text-ink">{t('settings:notifications.examReminders')}</span>
               <Switch
                 checked={prefs.examReminders}
                 onCheckedChange={() => handleToggle('examReminders')}

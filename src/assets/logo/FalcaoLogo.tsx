@@ -56,9 +56,7 @@ export function FalcaoLogo({
 
   return (
     <span
-      className={['inline-flex items-center justify-center', bgClassName]
-        .filter(Boolean)
-        .join(' ')}
+      className={['inline-flex items-center justify-center', bgClassName].filter(Boolean).join(' ')}
     >
       <img
         src={isWordmark ? logoWordmark : logoMark}

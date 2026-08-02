@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { useTranslation } from 'react-i18next';
 import type { CompetenciaGroup } from '../types';
 
 interface EvolutionChartsProps {
@@ -18,6 +19,7 @@ const AXIS_TICK = { fill: 'rgb(var(--color-text-secondary))', fontSize: 12 };
 const GRID_STROKE = 'rgb(var(--color-border))';
 
 export function EvolutionCharts({ groups }: EvolutionChartsProps) {
+  const { t } = useTranslation('atestados');
   const data = useMemo(
     () =>
       groups.map((g) => ({
@@ -32,18 +34,33 @@ export function EvolutionCharts({ groups }: EvolutionChartsProps) {
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <div>
         <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
-          Nº de Atestados
+          {t('atestados:chartLabels.evolution.certificatesAxis')}
         </p>
         <ResponsiveContainer width="100%" height={220}>
           <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-            <XAxis dataKey="competencia" tick={AXIS_TICK} axisLine={{ stroke: GRID_STROKE }} tickLine={false} />
-            <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} width={36} />
-            <Tooltip content={<AtestadosTooltip unit="atestado(s)" />} />
+            <XAxis
+              dataKey="competencia"
+              tick={AXIS_TICK}
+              axisLine={{ stroke: GRID_STROKE }}
+              tickLine={false}
+            />
+            <YAxis
+              tick={AXIS_TICK}
+              axisLine={false}
+              tickLine={false}
+              allowDecimals={false}
+              width={36}
+            />
+            <Tooltip
+              content={
+                <AtestadosTooltip unit={t('atestados:chartLabels.evolution.certificatesUnit')} />
+              }
+            />
             <Line
               type="monotone"
               dataKey="atestados"
-              name="Nº de Atestados"
+              name={t('atestados:chartLabels.evolution.certificatesAxis')}
               stroke="var(--atestados-series-1)"
               strokeWidth={2}
               dot={{ r: 4, fill: 'var(--atestados-series-1)', strokeWidth: 0 }}
@@ -55,18 +72,31 @@ export function EvolutionCharts({ groups }: EvolutionChartsProps) {
 
       <div>
         <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
-          Dias Afastados
+          {t('atestados:chartLabels.evolution.daysAxis')}
         </p>
         <ResponsiveContainer width="100%" height={220}>
           <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke={GRID_STROKE} />
-            <XAxis dataKey="competencia" tick={AXIS_TICK} axisLine={{ stroke: GRID_STROKE }} tickLine={false} />
-            <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} width={36} />
-            <Tooltip content={<AtestadosTooltip unit="dia(s)" />} />
+            <XAxis
+              dataKey="competencia"
+              tick={AXIS_TICK}
+              axisLine={{ stroke: GRID_STROKE }}
+              tickLine={false}
+            />
+            <YAxis
+              tick={AXIS_TICK}
+              axisLine={false}
+              tickLine={false}
+              allowDecimals={false}
+              width={36}
+            />
+            <Tooltip
+              content={<AtestadosTooltip unit={t('atestados:chartLabels.evolution.daysUnit')} />}
+            />
             <Line
               type="monotone"
               dataKey="dias"
-              name="Dias Afastados"
+              name={t('atestados:chartLabels.evolution.daysAxis')}
               stroke="var(--atestados-series-2)"
               strokeWidth={2}
               dot={{ r: 4, fill: 'var(--atestados-series-2)', strokeWidth: 0 }}

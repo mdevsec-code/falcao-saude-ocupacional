@@ -1,3 +1,5 @@
+import { createTranslatedLabels } from '@/utils/i18nLabels';
+
 /**
  * Atividades/riscos ocupacionais avaliados no ASO — específicos de uma
  * construtora/engenharia (NRs aplicáveis ao canteiro de obras). Cada
@@ -18,23 +20,13 @@ export type DutyType = (typeof DUTY_TYPES)[keyof typeof DUTY_TYPES];
 
 export const ALL_DUTY_TYPES: DutyType[] = Object.values(DUTY_TYPES);
 
-export const DUTY_TYPE_LABELS: Record<DutyType, string> = {
-  [DUTY_TYPES.ALTURA]: 'Trabalho em Altura (NR-35)',
-  [DUTY_TYPES.ESPACO_CONFINADO]: 'Espaço Confinado (NR-33)',
-  [DUTY_TYPES.MAQUINAS_PESADAS]: 'Máquinas e Equipamentos Pesados (NR-12)',
-  [DUTY_TYPES.ELETRICIDADE]: 'Eletricidade (NR-10)',
-  [DUTY_TYPES.LEVANTAMENTO_PESO]: 'Levantamento de Peso / Esforço Físico',
-  [DUTY_TYPES.RUIDO]: 'Exposição a Ruído',
-};
+/** Rótulos traduzidos (`enums:duties.*`) — acompanham o idioma ativo. */
+export const DUTY_TYPE_LABELS: Record<DutyType, string> =
+  createTranslatedLabels<DutyType>('duties');
 
-export const DUTY_TYPE_SHORT_LABELS: Record<DutyType, string> = {
-  [DUTY_TYPES.ALTURA]: 'Altura',
-  [DUTY_TYPES.ESPACO_CONFINADO]: 'Esp. Confinado',
-  [DUTY_TYPES.MAQUINAS_PESADAS]: 'Máquinas',
-  [DUTY_TYPES.ELETRICIDADE]: 'Eletricidade',
-  [DUTY_TYPES.LEVANTAMENTO_PESO]: 'Peso/Esforço',
-  [DUTY_TYPES.RUIDO]: 'Ruído',
-};
+/** Versão curta (`enums:dutiesShort.*`) — usada em colunas/badges estreitos. */
+export const DUTY_TYPE_SHORT_LABELS: Record<DutyType, string> =
+  createTranslatedLabels<DutyType>('dutiesShort');
 
 /** Sugestão de atividades relevantes por função — usado para pré-marcar o formulário. */
 export const ROLE_DEFAULT_DUTIES: Record<string, DutyType[]> = {

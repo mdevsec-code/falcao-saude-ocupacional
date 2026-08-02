@@ -1,0 +1,69 @@
+{
+  "validation": {
+    "codeFormat": "Use ICD-10 format, e.g.: M54.5",
+    "descriptionRequired": "Enter the description"
+  },
+  "page": {
+    "eyebrow": "Clinical",
+    "title": "CID — International Classification of Diseases",
+    "description": "Reference of the CID-10 codes most relevant to occupational health in construction and engineering.",
+    "footnote": "Curated selection, not exhaustive — does not replace the official CID-10 table (WHO/DATASUS)."
+  },
+  "search": {
+    "placeholder": "Search by code or description…"
+  },
+  "filter": {
+    "allCategories": "All categories"
+  },
+  "actions": {
+    "new": "New ICD code"
+  },
+  "table": {
+    "code": "Code",
+    "description": "Description",
+    "category": "Category",
+    "actions": "Actions",
+    "copyAria": "Copy code {{code}}",
+    "editAria": "Edit ICD code",
+    "deleteAria": "Remove ICD code"
+  },
+  "results": {
+    "count_one": "{{count}} code found",
+    "count_other": "{{count}} codes found"
+  },
+  "dialog": {
+    "createTitle": "New ICD code",
+    "editTitle": "Edit ICD code",
+    "createDescription": "Register an additional ICD code, complementing the curated catalog.",
+    "editDescription": "Update this ICD code.",
+    "fields": {
+      "code": "Code",
+      "codePlaceholder": "E.g.: M54.5",
+      "description": "Description",
+      "descriptionPlaceholder": "Description of the condition",
+      "category": "Category"
+    },
+    "cancel": "Cancel",
+    "submitCreate": "Register code",
+    "submitEdit": "Save changes"
+  },
+  "deleteDialog": {
+    "title": "Remove ICD code?",
+    "description": "Code <strong>{{code}}</strong> will be permanently removed. This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Remove"
+  },
+  "toast": {
+    "copySuccess": "Code {{code}} copied.",
+    "createSuccess": "ICD code registered.",
+    "createError": "Unable to register the code.",
+    "updateSuccess": "ICD code updated.",
+    "updateError": "Unable to update the code.",
+    "deleteSuccess": "ICD code removed.",
+    "deleteError": "Unable to remove the code."
+  },
+  "empty": {
+    "title": "No codes found",
+    "description": "Adjust the search or category."
+  }
+}

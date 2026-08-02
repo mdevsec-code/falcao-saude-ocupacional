@@ -1,0 +1,68 @@
+{
+  "validation": {
+    "codeFormat": "请使用 CID-10 格式，例如：M54.5",
+    "descriptionRequired": "请输入描述"
+  },
+  "page": {
+    "eyebrow": "临床",
+    "title": "CID — 国际疾病分类",
+    "description": "针对建筑与工程行业职业健康最相关的 CID-10 编码参考。",
+    "footnote": "本清单为精选内容，并非完整列表，不能替代 CID-10 官方表（世界卫生组织/DATASUS）。"
+  },
+  "search": {
+    "placeholder": "按编码或描述搜索…"
+  },
+  "filter": {
+    "allCategories": "所有类别"
+  },
+  "actions": {
+    "new": "新增编码"
+  },
+  "table": {
+    "code": "编码",
+    "description": "描述",
+    "category": "类别",
+    "actions": "操作",
+    "copyAria": "复制编码 {{code}}",
+    "editAria": "编辑编码",
+    "deleteAria": "删除编码"
+  },
+  "results": {
+    "count_other": "找到 {{count}} 个编码"
+  },
+  "dialog": {
+    "createTitle": "新增 CID 编码",
+    "editTitle": "编辑 CID 编码",
+    "createDescription": "登记补充的 CID 编码，作为精选目录的补充。",
+    "editDescription": "更新该 CID 编码的信息。",
+    "fields": {
+      "code": "编码",
+      "codePlaceholder": "例如：M54.5",
+      "description": "描述",
+      "descriptionPlaceholder": "该病症的描述",
+      "category": "类别"
+    },
+    "cancel": "取消",
+    "submitCreate": "登记编码",
+    "submitEdit": "保存更改"
+  },
+  "deleteDialog": {
+    "title": "删除该编码？",
+    "description": "编码 <strong>{{code}}</strong> 将被永久删除。此操作无法撤销。",
+    "cancel": "取消",
+    "confirm": "删除"
+  },
+  "toast": {
+    "copySuccess": "编码 {{code}} 已复制。",
+    "createSuccess": "编码已登记。",
+    "createError": "无法登记编码。",
+    "updateSuccess": "编码已更新。",
+    "updateError": "无法更新编码。",
+    "deleteSuccess": "编码已删除。",
+    "deleteError": "无法删除编码。"
+  },
+  "empty": {
+    "title": "未找到相关编码",
+    "description": "请调整搜索条件或类别。"
+  }
+}

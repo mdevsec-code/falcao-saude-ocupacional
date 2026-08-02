@@ -1,3 +1,5 @@
+import { createTranslatedLabels } from '@/utils/i18nLabels';
+
 /**
  * Perfis de acesso da plataforma Falcão Saúde Ocupacional.
  */
@@ -12,13 +14,7 @@ export const ROLES = {
 
 export type Role = (typeof ROLES)[keyof typeof ROLES];
 
-export const ROLE_LABELS: Record<Role, string> = {
-  ADMIN: 'Administrador',
-  MEDICO: 'Médico',
-  ENFERMEIRO: 'Enfermeiro',
-  TECNICO_SEGURANCA: 'Técnico de Segurança',
-  RH: 'Recursos Humanos',
-  RECEPCAO: 'Recepção',
-};
+/** Rótulos traduzidos (`enums:roles.*`) — acompanham o idioma ativo. */
+export const ROLE_LABELS: Record<Role, string> = createTranslatedLabels<Role>('roles');
 
 export const ALL_ROLES: Role[] = Object.values(ROLES);

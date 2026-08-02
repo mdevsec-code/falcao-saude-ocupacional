@@ -130,6 +130,10 @@ const config: Config = {
           from: { transform: 'scale(0.96)', opacity: '0' },
           to: { transform: 'scale(1)', opacity: '1' },
         },
+        'scale-out': {
+          from: { transform: 'scale(1)', opacity: '1' },
+          to: { transform: 'scale(0.96)', opacity: '0' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -142,6 +146,18 @@ const config: Config = {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
+        'glow-pulse': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.55' },
+        },
+        drift: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '50%': { transform: 'translate(-2%, -3%) scale(1.04)' },
+        },
+        'drift-reverse': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '50%': { transform: 'translate(3%, 2%) scale(1.06)' },
+        },
       },
       animation: {
         'fade-in': 'fade-in var(--duration-base) var(--ease-out)',
@@ -151,9 +167,13 @@ const config: Config = {
         'slide-in-left': 'slide-in-left var(--duration-base) var(--ease-out)',
         'slide-out-left': 'slide-out-left var(--duration-base) var(--ease-out)',
         'scale-in': 'scale-in var(--duration-base) var(--ease-out)',
+        'scale-out': 'scale-out var(--duration-fast) var(--ease-in-out)',
         'accordion-down': 'accordion-down var(--duration-base) var(--ease-out)',
         'accordion-up': 'accordion-up var(--duration-base) var(--ease-out)',
         shimmer: 'shimmer 1.6s linear infinite',
+        'glow-pulse': 'glow-pulse 6s var(--ease-in-out) infinite',
+        drift: 'drift 14s var(--ease-in-out) infinite',
+        'drift-reverse': 'drift-reverse 18s var(--ease-in-out) infinite',
       },
     },
   },

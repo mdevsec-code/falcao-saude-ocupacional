@@ -54,35 +54,35 @@ const ACTION_BADGE_VARIANT: Record<AuditLogRecord['action'], BadgeVariant> = {
   delete: 'danger',
 };
 
-function buildColumns(): readonly ExportColumn<AuditLogRecord>[] {
+function buildColumns(t: (key: string) => string): readonly ExportColumn<AuditLogRecord>[] {
   return [
     {
       key: 'timestamp',
-      header: 'Data/hora',
+      header: t('audit:table.columns.timestamp'),
       width: 20,
       format: (v) => formatDateTime(v as string) ?? '—',
     },
-    { key: 'actorName', header: 'Usuário', width: 24 },
+    { key: 'actorName', header: t('audit:table.columns.actor'), width: 24 },
     {
       key: 'actorRole',
-      header: 'Perfil',
+      header: t('audit:table.columns.role'),
       width: 20,
       format: (v) => (v ? (ROLE_LABELS[v as Role] ?? String(v)) : '—'),
     },
     {
       key: 'action',
-      header: 'Ação',
+      header: t('audit:table.columns.action'),
       width: 18,
       format: (v) => AUDIT_ACTION_LABELS[v as AuditLogRecord['action']] ?? String(v),
     },
     {
       key: 'entityType',
-      header: 'Área',
+      header: t('audit:table.columns.entity'),
       width: 16,
       format: (v) => AUDIT_ENTITY_LABELS[v as AuditLogRecord['entityType']] ?? String(v),
     },
-    { key: 'entityLabel', header: 'Registro', width: 28 },
-    { key: 'detail', header: 'Detalhe', width: 24 },
+    { key: 'entityLabel', header: t('audit:table.columns.record'), width: 28 },
+    { key: 'detail', header: t('audit:table.columns.detail'), width: 24 },
   ];
 }
 
@@ -94,7 +94,7 @@ export function AuditPage() {
   const [search, setSearch] = useState('');
   const [action, setAction] = useState<string>(ALL_VALUE);
   const [entityType, setEntityType] = useState<string>(ALL_VALUE);
-  const columns = useMemo(() => buildColumns(), []);
+  const columns = useMemo(() => buildColumns(t), [t]);
 
   const kpis = useMemo(() => {
     const today = new Date().toISOString().slice(0, 10);
@@ -125,21 +125,21 @@ export function AuditPage() {
 
   const documentBase = useMemo(
     () => ({
-      title: 'Trilha de auditoria',
-      subtitle: `${brand.legalName} · ${filtered.length} registro${filtered.length === 1 ? '' : 's'}`,
+      title: t('audit:export.title'),
+      subtitle: t('audit:export.subtitle', { brand: brand.legalName, count: filtered.length }),
       rows: filtered,
       columns,
       fileName,
     }),
-    [filtered, columns, fileName],
+    [filtered, columns, fileName, t],
   );
 
   function handleExportPdf() {
     try {
       exportToPdf(documentBase);
-      toast.success('PDF gerado com sucesso.');
+      toast.success(t('audit:toast.pdfSuccess'));
     } catch (err) {
-      toast.error('Não foi possível gerar o PDF.');
+      toast.error(t('audit:toast.pdfError'));
       console.error(err);
     }
   }
@@ -147,9 +147,9 @@ export function AuditPage() {
   async function handleExportExcel() {
     try {
       await exportToExcel(documentBase);
-      toast.success('Planilha gerada com sucesso.');
+      toast.success(t('audit:toast.excelSuccess'));
     } catch (err) {
-      toast.error('Não foi possível gerar a planilha.');
+      toast.error(t('audit:toast.excelError'));
       console.error(err);
     }
   }
@@ -169,7 +169,7 @@ export function AuditPage() {
               onClick={handleExportPdf}
               disabled={filtered.length === 0}
             >
-              PDF
+              {t('audit:actions.exportPdf')}
             </Button>
             <Button
               variant="outline"
@@ -178,7 +178,7 @@ export function AuditPage() {
               onClick={() => void handleExportExcel()}
               disabled={filtered.length === 0}
             >
-              Excel
+              {t('audit:actions.exportExcel')}
             </Button>
           </div>
         }
@@ -199,7 +199,7 @@ export function AuditPage() {
             description={t('audit:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('common:actions.retry')}
               </Button>
             }
           />
@@ -209,22 +209,22 @@ export function AuditPage() {
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <StatTile
-                label="Eventos registrados"
+                label={t('audit:kpi.total')}
                 value={kpis.total}
                 icon={<ScrollText className="h-4 w-4" />}
               />
               <StatTile
-                label="Eventos hoje"
+                label={t('audit:kpi.today')}
                 value={kpis.hoje}
                 icon={<History className="h-4 w-4" />}
               />
               <StatTile
-                label="Falhas de login"
+                label={t('audit:kpi.loginFailed')}
                 value={kpis.loginFailed}
                 icon={<LogIn className="h-4 w-4" />}
               />
               <StatTile
-                label="Acessos a dados de pacientes"
+                label={t('audit:kpi.patientAccess')}
                 value={kpis.dadosPacientes}
                 icon={<ShieldAlert className="h-4 w-4" />}
               />
@@ -235,17 +235,17 @@ export function AuditPage() {
             <div className="flex flex-wrap items-center gap-3">
               <Input
                 className="max-w-xs"
-                placeholder="Buscar por usuário ou registro…"
+                placeholder={t('audit:filters.searchPlaceholder')}
                 leftIcon={<Search className="h-4 w-4" />}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
               <Select value={action} onValueChange={setAction}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Ação" />
+                  <SelectValue placeholder={t('audit:filters.actionPlaceholder')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={ALL_VALUE}>Todas as ações</SelectItem>
+                  <SelectItem value={ALL_VALUE}>{t('audit:filters.allActions')}</SelectItem>
                   {ALL_AUDIT_ACTIONS.map((a) => (
                     <SelectItem key={a} value={a}>
                       {AUDIT_ACTION_LABELS[a]}
@@ -255,10 +255,10 @@ export function AuditPage() {
               </Select>
               <Select value={entityType} onValueChange={setEntityType}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Área" />
+                  <SelectValue placeholder={t('audit:filters.entityPlaceholder')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={ALL_VALUE}>Todas as áreas</SelectItem>
+                  <SelectItem value={ALL_VALUE}>{t('audit:filters.allEntities')}</SelectItem>
                   {ALL_AUDIT_ENTITY_TYPES.map((e) => (
                     <SelectItem key={e} value={e}>
                       {AUDIT_ENTITY_LABELS[e]}
@@ -270,8 +270,8 @@ export function AuditPage() {
 
             {filtered.length === 0 ? (
               <EmptyState
-                title="Nenhum evento encontrado"
-                description="Ajuste a busca ou os filtros."
+                title={t('audit:empty.title')}
+                description={t('audit:empty.description')}
               />
             ) : (
               <div className="overflow-x-auto rounded-md border border-border">
@@ -279,19 +279,19 @@ export function AuditPage() {
                   <thead className="bg-brand-gold-50/60 text-ink">
                     <tr>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Data/hora
+                        {t('audit:table.columns.timestamp')}
                       </th>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Usuário
+                        {t('audit:table.columns.actor')}
                       </th>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Ação
+                        {t('audit:table.columns.action')}
                       </th>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Área
+                        {t('audit:table.columns.entity')}
                       </th>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Registro
+                        {t('audit:table.columns.record')}
                       </th>
                     </tr>
                   </thead>
@@ -320,9 +320,7 @@ export function AuditPage() {
                         </td>
                         <td className="px-3 py-2 text-ink">
                           {row.entityLabel ?? '—'}
-                          {row.detail && (
-                            <p className="text-xs text-ink-soft">{row.detail}</p>
-                          )}
+                          {row.detail && <p className="text-xs text-ink-soft">{row.detail}</p>}
                         </td>
                       </tr>
                     ))}
@@ -330,8 +328,7 @@ export function AuditPage() {
                 </table>
                 {filtered.length > 200 && (
                   <p className="border-t border-border px-3 py-2 text-xs text-ink-soft">
-                    Exibindo os 200 eventos mais recentes de {filtered.length}. Exporte para PDF ou
-                    Excel para ver a lista completa.
+                    {t('audit:table.truncatedNote', { shown: 200, total: filtered.length })}
                   </p>
                 )}
               </div>

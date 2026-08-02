@@ -17,6 +17,8 @@ export const PERMISSIONS = {
   USERS_MANAGE: 'users:manage',
   SETTINGS_MANAGE: 'settings:manage',
   AUDIT_READ: 'audit:read',
+  DEVIATION_READ: 'deviation:read',
+  DEVIATION_WRITE: 'deviation:write',
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -52,6 +54,8 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.ASO_READ,
     PERMISSIONS.EXAM_READ,
     PERMISSIONS.REPORT_READ,
+    PERMISSIONS.DEVIATION_READ,
+    PERMISSIONS.DEVIATION_WRITE,
   ],
 
   [ROLES.RH]: [

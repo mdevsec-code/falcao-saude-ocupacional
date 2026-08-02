@@ -52,26 +52,26 @@ const STATUS_LABELS: Record<ReportRecord['status'], string> = {
   ...APPOINTMENT_CONCLUSION_LABELS,
 };
 
-function buildColumns(): readonly ExportColumn<ReportRecord>[] {
+function buildColumns(t: (key: string) => string): readonly ExportColumn<ReportRecord>[] {
   return [
     {
       key: 'date',
-      header: 'Data',
+      header: t('reports:columns.date'),
       width: 14,
       format: (v: unknown) => formatDate(v as string) ?? '—',
     },
-    { key: 'patient', header: 'Paciente', width: 28 },
-    { key: 'company', header: 'Empresa', width: 22 },
-    { key: 'sector', header: 'Setor', width: 18 },
-    { key: 'exam', header: 'Exame', width: 22 },
+    { key: 'patient', header: t('reports:columns.patient'), width: 28 },
+    { key: 'company', header: t('reports:columns.company'), width: 22 },
+    { key: 'sector', header: t('reports:columns.sector'), width: 18 },
+    { key: 'exam', header: t('reports:columns.exam'), width: 22 },
     {
       key: 'status',
-      header: 'Status',
+      header: t('reports:columns.status'),
       width: 18,
       format: (v: unknown) => STATUS_LABELS[v as ReportRecord['status']] ?? String(v),
     },
-    { key: 'professional', header: 'Profissional', width: 22 },
-    { key: 'notes', header: 'Observações', width: 32 },
+    { key: 'professional', header: t('reports:columns.professional'), width: 22 },
+    { key: 'notes', header: t('reports:columns.notes'), width: 32 },
   ];
 }
 
@@ -80,16 +80,14 @@ export function ReportsPage() {
   const kinds = useReportKinds();
   const [filters, setFilters] = useState<ReportFilters>({ kind: 'agendamentos' });
   const rows = useReportRows(filters);
-  const columns = useMemo(() => buildColumns(), []);
+  const columns = useMemo(() => buildColumns(t), [t]);
 
   const companies = useMemo(
     () => Array.from(new Set(REPORT_FIXTURES.map((r) => r.company))).sort(),
     [],
   );
 
-  const subtitle = `${reportKindLabel(filters.kind)} · ${rows.length} registro${
-    rows.length === 1 ? '' : 's'
-  }`;
+  const subtitle = t('subtitle', { kind: reportKindLabel(t, filters.kind), count: rows.length });
 
   const baseFileName = useMemo(() => {
     const stamp = new Date().toISOString().slice(0, 10);
@@ -98,16 +96,16 @@ export function ReportsPage() {
 
   const documentBase = useMemo(
     () => ({
-      title: `${t('title')} — ${reportKindLabel(filters.kind)}`,
-      subtitle: `${brand.legalName} · ${reportDateLabel(filters.kind)}`,
+      title: `${t('title')} — ${reportKindLabel(t, filters.kind)}`,
+      subtitle: `${brand.legalName} · ${reportDateLabel(t, filters.kind)}`,
       rows,
       columns,
       fileName: baseFileName,
       meta: {
-        ...(filters.from ? { De: formatDate(filters.from) ?? filters.from } : {}),
-        ...(filters.to ? { Até: formatDate(filters.to) ?? filters.to } : {}),
-        ...(filters.company ? { Empresa: filters.company } : {}),
-        'Gerado em': formatDateTime(new Date()) ?? '',
+        ...(filters.from ? { [t('meta.from')]: formatDate(filters.from) ?? filters.from } : {}),
+        ...(filters.to ? { [t('meta.to')]: formatDate(filters.to) ?? filters.to } : {}),
+        ...(filters.company ? { [t('meta.company')]: filters.company } : {}),
+        [t('meta.generatedAt')]: formatDateTime(new Date()) ?? '',
       },
     }),
     [t, filters, rows, columns, baseFileName],
@@ -137,13 +135,16 @@ export function ReportsPage() {
     const contactPhone = '11999990000'; // placeholder — virá do filtro/empresa
     const message = [
       `*${t('title')}*`,
-      reportKindLabel(filters.kind),
-      `Período: ${filters.from ? formatDate(filters.from) : 'início'} a ${
-        filters.to ? formatDate(filters.to) : 'hoje'
-      }`,
-      rows.length > 0 ? `Total de registros: ${rows.length}` : 'Nenhum registro no período.',
+      reportKindLabel(t, filters.kind),
+      t('whatsapp.period', {
+        from: filters.from ? formatDate(filters.from) : t('whatsapp.periodStart'),
+        to: filters.to ? formatDate(filters.to) : t('whatsapp.periodEnd'),
+      }),
+      rows.length > 0
+        ? t('whatsapp.totalRecords', { count: rows.length })
+        : t('whatsapp.noRecords'),
     ].join('\n');
-    const url = buildWhatsappUrl({ phone: contactPhone, name: 'Equipe' }, message);
+    const url = buildWhatsappUrl({ phone: contactPhone, name: t('whatsapp.contactName') }, message);
     if (!url) {
       toast.error(t('toast.whatsappInvalid'));
       return;

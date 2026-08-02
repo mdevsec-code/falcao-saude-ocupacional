@@ -1,0 +1,49 @@
+{
+  "welcome": {
+    "eyebrow": "概览",
+    "title": "欢迎使用 Falcão 平台",
+    "description": "Falcão Construções e Engenharia 职业健康中心。",
+    "openAgenda": "打开日程"
+  },
+  "kpis": {
+    "appointmentsToday": "今日就诊",
+    "waiting": "候诊中",
+    "attendances": "接诊",
+    "pending": "待处理事项"
+  },
+  "kpiSection": {
+    "title": "今日指标"
+  },
+  "error": {
+    "message": "无法加载指标。",
+    "retry": "重试"
+  },
+  "quickLinks": {
+    "title": "快捷入口",
+    "agenda": { "label": "日程", "description": "预约日历" },
+    "agendamentos": { "label": "预约", "description": "今日列表" },
+    "pacientes": { "label": "患者", "description": "员工档案登记" },
+    "atendimentos": { "label": "接诊记录", "description": "已完成的接诊" },
+    "prontuarios": { "label": "病历", "description": "按患者查看病历" },
+    "aso": { "label": "ASO", "description": "按岗位的健康适任评估" },
+    "exames": { "label": "检查", "description": "检查目录" },
+    "cid": { "label": "CID", "description": "编码参考" },
+    "atestados": { "label": "病假证明", "description": "分析与指标" },
+    "relatorios": { "label": "报表", "description": "导出与筛选" },
+    "usuarios": { "label": "用户", "description": "访问账户" },
+    "permissoes": { "label": "权限", "description": "角色权限矩阵" },
+    "configuracoes": { "label": "设置", "description": "系统与通知" }
+  },
+  "agendaCard": {
+    "title": "今日日程",
+    "viewAll": "查看日程",
+    "emptyTitle": "今日无预约",
+    "emptyDescription": "今日日程为空。",
+    "moreAppointments": "还有 {{count}} 个预约 — 查看完整日程"
+  },
+  "summary": {
+    "readyDescription": "平台已就绪，可随时使用。",
+    "activeModules": "已启用模块",
+    "helpText": "需要帮助？请查看侧边栏菜单，或在“用户”中联系管理员。"
+  }
+}

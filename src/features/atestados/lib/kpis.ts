@@ -28,8 +28,14 @@ export function sortCompetenciasChronologically(
       const ia = MONTH_ORDER_HINT.indexOf(a);
       const ib = MONTH_ORDER_HINT.indexOf(b);
       if (ia !== -1 && ib !== -1) return ia - ib;
-      const da = groups[a]!.map((r) => r.inicioAtestado).filter(Boolean).sort()[0] ?? '';
-      const db = groups[b]!.map((r) => r.inicioAtestado).filter(Boolean).sort()[0] ?? '';
+      const da =
+        groups[a]!.map((r) => r.inicioAtestado)
+          .filter(Boolean)
+          .sort()[0] ?? '';
+      const db =
+        groups[b]!.map((r) => r.inicioAtestado)
+          .filter(Boolean)
+          .sort()[0] ?? '';
       return da.localeCompare(db);
     })
     .map((key) => ({ key, records: groups[key]! }));
@@ -46,8 +52,7 @@ export function computeAtestadoKpis(records: readonly AtestadoRecord[]): Atestad
     if (r.setor) bySetor[r.setor] = (bySetor[r.setor] ?? 0) + 1;
   });
   const setorTopEntry = (Object.entries(bySetor).sort((a, b) => b[1] - a[1])[0] ?? null) as
-    | [string, number]
-    | null;
+    [string, number] | null;
 
   // Um único dígito de ano trocado na origem (ex.: 2026 -> 2028 ou 2006) ainda
   // passa como data "válida", mas gera um SLA de centenas/milhares de dias que
@@ -55,7 +60,9 @@ export function computeAtestadoKpis(records: readonly AtestadoRecord[]): Atestad
   const slaValues = records
     .map((r) => r.slaLancamentoDias)
     .filter((v): v is number => v !== null && v !== undefined && v >= 0 && v <= 180);
-  const mediaSla = slaValues.length ? slaValues.reduce((s, v) => s + v, 0) / slaValues.length : null;
+  const mediaSla = slaValues.length
+    ? slaValues.reduce((s, v) => s + v, 0) / slaValues.length
+    : null;
 
   const porColaborador: Record<string, number> = {};
   records.forEach((r) => {

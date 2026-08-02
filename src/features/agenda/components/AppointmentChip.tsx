@@ -1,8 +1,7 @@
 import { cn } from '@/utils/cn';
 import { STATUS_CHIP_CLASSES } from '../lib/status';
+import { formatTime } from '@/utils/format';
 import type { AppointmentRecord } from '../types';
-
-const TIME_FMT = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
 interface AppointmentChipProps {
   record: AppointmentRecord;
@@ -11,7 +10,7 @@ interface AppointmentChipProps {
 }
 
 export function AppointmentChip({ record, onClick, className }: AppointmentChipProps) {
-  const time = TIME_FMT.format(new Date(record.startsAt));
+  const time = formatTime(record.startsAt);
 
   return (
     <button

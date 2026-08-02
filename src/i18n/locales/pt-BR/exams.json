@@ -1,4 +1,7 @@
 {
+  "validation": {
+    "nameRequired": "Informe o nome do exame"
+  },
   "page": {
     "eyebrow": "Clínico",
     "title": "Tipos de Exame",
@@ -7,5 +10,65 @@
   "error": {
     "title": "Não foi possível carregar os tipos de exame",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "new": "Novo tipo de exame",
+    "retry": "Tentar novamente"
+  },
+  "dialog": {
+    "createTitle": "Novo tipo de exame",
+    "editTitle": "Editar tipo de exame",
+    "createDescription": "Cadastre um novo tipo de exame no catálogo.",
+    "editDescription": "Atualize os dados deste tipo de exame.",
+    "fields": {
+      "name": { "label": "Nome", "placeholder": "Ex.: ASO Periódico" },
+      "category": { "label": "Categoria" },
+      "duration": { "label": "Duração padrão (min)" },
+      "periodicity": {
+        "label": "Periodicidade (meses)",
+        "placeholder": "Deixe em branco se não for periódico",
+        "hint": "Ex.: 12 para exames anuais (NR-7). Deixe vazio para admissional/demissional."
+      },
+      "description": {
+        "label": "Descrição",
+        "placeholder": "Detalhes sobre quando este exame é solicitado (opcional)"
+      },
+      "active": "Ativo (disponível para seleção em Agenda e Atendimentos)"
+    },
+    "cancel": "Cancelar",
+    "submitCreate": "Criar tipo de exame",
+    "submitEdit": "Salvar alterações"
+  },
+  "table": {
+    "name": "Nome",
+    "category": "Categoria",
+    "duration": "Duração",
+    "durationValue": "{{count}} min",
+    "periodicity": "Periodicidade",
+    "periodicityValue": "A cada {{count}} meses",
+    "status": "Status",
+    "actions": "Ações",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "editAria": "Editar tipo de exame",
+    "deleteAria": "Remover tipo de exame"
+  },
+  "empty": {
+    "title": "Nenhum tipo de exame cadastrado",
+    "description": "Crie o primeiro tipo de exame."
+  },
+  "deleteDialog": {
+    "title": "Remover tipo de exame?",
+    "description": "<strong>{{name}}</strong> será removido do catálogo. Atendimentos e agendamentos já registrados com esse exame não são afetados.",
+    "cancel": "Cancelar",
+    "confirm": "Remover"
+  },
+  "toast": {
+    "createSuccess": "Tipo de exame criado.",
+    "createError": "Não foi possível criar o tipo de exame.",
+    "updateSuccess": "Tipo de exame atualizado.",
+    "updateError": "Não foi possível atualizar o tipo de exame.",
+    "deleteSuccess": "Tipo de exame removido.",
+    "deleteError": "Não foi possível remover o tipo de exame."
   }
 }

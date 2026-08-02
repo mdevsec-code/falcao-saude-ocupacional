@@ -93,24 +93,24 @@ export function WhatsappReturnButton({
           <DialogTitle>{t('whatsappReturn.label')}</DialogTitle>
           <DialogDescription>
             {effectiveName
-              ? `Confirme o telefone de ${effectiveName} para abrir a conversa no WhatsApp.`
-              : 'Informe o telefone para abrir a conversa no WhatsApp.'}
+              ? t('appointments:whatsappReturn.dialog.confirmWithName', { name: effectiveName })
+              : t('appointments:whatsappReturn.dialog.confirmNoName')}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-3">
           <div>
-            <Label htmlFor="wp-name">Nome do paciente (opcional)</Label>
+            <Label htmlFor="wp-name">{t('appointments:whatsappReturn.dialog.nameLabel')}</Label>
             <Input
               id="wp-name"
               className="mt-1 w-full"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ex.: Maria Silva"
+              placeholder={t('appointments:whatsappReturn.dialog.namePlaceholder')}
             />
           </div>
           <div>
-            <Label htmlFor="wp-phone">Telefone (com DDD)</Label>
+            <Label htmlFor="wp-phone">{t('appointments:whatsappReturn.dialog.phoneLabel')}</Label>
             <Input
               id="wp-phone"
               className="mt-1 w-full"
@@ -123,13 +123,15 @@ export function WhatsappReturnButton({
             {phone && !normalizeBrazilPhone(phone) && (
               <p className="mt-1 inline-flex items-center gap-1 text-xs text-danger">
                 <AlertCircle className="h-3 w-3" aria-hidden="true" />
-                Telefone inválido
+                {t('appointments:whatsappReturn.dialog.phoneInvalid')}
               </p>
             )}
             {phone && normalizeBrazilPhone(phone) && (
               <p className="mt-1 inline-flex items-center gap-1 text-xs text-success">
                 <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
-                Telefone válido ({normalizeBrazilPhone(phone)})
+                {t('appointments:whatsappReturn.dialog.phoneValid', {
+                  phone: normalizeBrazilPhone(phone),
+                })}
               </p>
             )}
           </div>
@@ -137,14 +139,14 @@ export function WhatsappReturnButton({
 
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancelar
+            {t('appointments:whatsappReturn.dialog.cancel')}
           </Button>
           <Button
             onClick={() => launch(phone, name)}
             disabled={!normalizeBrazilPhone(phone)}
             leftIcon={<MessageCircle className="h-4 w-4" />}
           >
-            Abrir WhatsApp
+            {t('appointments:whatsappReturn.dialog.open')}
           </Button>
         </DialogFooter>
       </DialogContent>

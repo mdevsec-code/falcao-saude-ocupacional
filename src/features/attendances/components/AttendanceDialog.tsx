@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -22,7 +23,12 @@ import {
   SelectValue,
 } from '@/components/ui/Select';
 import { APPOINTMENT_CONCLUSION, APPOINTMENT_CONCLUSION_LABELS } from '@/constants/status';
-import { ALL_DUTY_TYPES, DUTY_TYPE_LABELS, ROLE_DEFAULT_DUTIES, type DutyType } from '@/constants/duties';
+import {
+  ALL_DUTY_TYPES,
+  DUTY_TYPE_LABELS,
+  ROLE_DEFAULT_DUTIES,
+  type DutyType,
+} from '@/constants/duties';
 import type { PatientRecord } from '@/features/patients/types';
 
 import {
@@ -95,6 +101,7 @@ export function AttendanceDialog({
   onSubmit,
   isSubmitting,
 }: AttendanceDialogProps) {
+  const { t } = useTranslation(['attendances', 'common']);
   const {
     register,
     control,
@@ -111,7 +118,9 @@ export function AttendanceDialog({
 
   useEffect(() => {
     if (!open) return;
-    reset(editingRecord ? toFormInput(editingRecord) : emptyValues(undefined, undefined, examTypes[0]));
+    reset(
+      editingRecord ? toFormInput(editingRecord) : emptyValues(undefined, undefined, examTypes[0]),
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, editingRecord, reset]);
 
@@ -130,24 +139,28 @@ export function AttendanceDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>{editingRecord ? 'Editar atendimento' : 'Novo atendimento'}</DialogTitle>
+          <DialogTitle>
+            {editingRecord
+              ? t('attendances:dialog.editTitle')
+              : t('attendances:dialog.createTitle')}
+          </DialogTitle>
           <DialogDescription>
             {editingRecord
-              ? 'Atualize os dados do atendimento.'
-              : 'Registre um atendimento clínico realizado.'}
+              ? t('attendances:dialog.editDescription')
+              : t('attendances:dialog.createDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={submit} noValidate className="max-h-[75vh] space-y-4 overflow-y-auto pr-1">
           <div>
-            <Label htmlFor="att-patient">Paciente</Label>
+            <Label htmlFor="att-patient">{t('attendances:dialog.fields.patient')}</Label>
             <Controller
               control={control}
               name="patientId"
               render={({ field }) => (
                 <Select value={field.value} onValueChange={handlePatientChange}>
                   <SelectTrigger id="att-patient" className="mt-1 w-full">
-                    <SelectValue placeholder="Selecione o paciente" />
+                    <SelectValue placeholder={t('attendances:dialog.fields.patientPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
                     {patients.map((p) => (
@@ -159,12 +172,14 @@ export function AttendanceDialog({
                 </Select>
               )}
             />
-            {errors.patientId && <p className="mt-1 text-xs text-danger">{errors.patientId.message}</p>}
+            {errors.patientId && (
+              <p className="mt-1 text-xs text-danger">{errors.patientId.message}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label htmlFor="att-exam">Tipo de exame</Label>
+              <Label htmlFor="att-exam">{t('attendances:dialog.fields.examType')}</Label>
               <Controller
                 control={control}
                 name="examType"
@@ -186,7 +201,7 @@ export function AttendanceDialog({
             </div>
 
             <div>
-              <Label htmlFor="att-doctor">Médico</Label>
+              <Label htmlFor="att-doctor">{t('attendances:dialog.fields.doctor')}</Label>
               <Controller
                 control={control}
                 name="doctor"
@@ -212,13 +227,13 @@ export function AttendanceDialog({
             <Input
               {...register('attendanceDate')}
               type="date"
-              label="Data do atendimento"
+              label={t('attendances:dialog.fields.attendanceDate')}
               error={errors.attendanceDate?.message}
               required
             />
 
             <div>
-              <Label htmlFor="att-conclusion">Conclusão</Label>
+              <Label htmlFor="att-conclusion">{t('attendances:dialog.fields.conclusion')}</Label>
               <Controller
                 control={control}
                 name="conclusion"
@@ -241,9 +256,9 @@ export function AttendanceDialog({
           </div>
 
           <div>
-            <Label>Aptidão por atividade de risco</Label>
+            <Label>{t('attendances:dialog.fields.dutyFitness')}</Label>
             <p className="mt-0.5 text-xs text-ink-soft">
-              Avalie a aptidão do colaborador para as atividades relevantes à sua função.
+              {t('attendances:dialog.fields.dutyFitnessHint')}
             </p>
             <div className="mt-2 space-y-1.5 rounded-md border border-border p-2">
               {ALL_DUTY_TYPES.map((duty) => (
@@ -262,9 +277,13 @@ export function AttendanceDialog({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="not_assessed">Não avaliado</SelectItem>
-                      <SelectItem value="fit">Apto</SelectItem>
-                      <SelectItem value="unfit">Inapto</SelectItem>
+                      <SelectItem value="not_assessed">
+                        {t('attendances:dialog.dutyStatus.notAssessed')}
+                      </SelectItem>
+                      <SelectItem value="fit">{t('attendances:dialog.dutyStatus.fit')}</SelectItem>
+                      <SelectItem value="unfit">
+                        {t('attendances:dialog.dutyStatus.unfit')}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -275,8 +294,8 @@ export function AttendanceDialog({
           {conclusion === APPOINTMENT_CONCLUSION.APTO_COM_RESTRICAO && (
             <Textarea
               {...register('restrictionNotes')}
-              label="Restrições"
-              placeholder="Descreva a restrição aplicada"
+              label={t('attendances:dialog.fields.restrictionNotes')}
+              placeholder={t('attendances:dialog.fields.restrictionNotesPlaceholder')}
               error={errors.restrictionNotes?.message}
               rows={2}
             />
@@ -284,18 +303,20 @@ export function AttendanceDialog({
 
           <Textarea
             {...register('notes')}
-            label="Observações"
-            placeholder="Detalhes adicionais (opcional)"
+            label={t('attendances:dialog.fields.notes')}
+            placeholder={t('attendances:dialog.fields.notesPlaceholder')}
             error={errors.notes?.message}
             rows={2}
           />
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t('common:actions.cancel')}
             </Button>
             <Button type="submit" variant="primary" isLoading={isSubmitting}>
-              {editingRecord ? 'Salvar alterações' : 'Registrar atendimento'}
+              {editingRecord
+                ? t('attendances:dialog.actions.saveEdit')
+                : t('attendances:dialog.actions.saveCreate')}
             </Button>
           </DialogFooter>
         </form>

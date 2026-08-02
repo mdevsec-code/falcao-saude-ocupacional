@@ -7,5 +7,25 @@
   "error": {
     "title": "Não foi possível carregar os prontuários",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "retry": "Tentar novamente"
+  },
+  "search": {
+    "placeholder": "Buscar paciente…"
+  },
+  "list": {
+    "empty": "Nenhum paciente encontrado."
+  },
+  "detail": {
+    "selectTitle": "Selecione um paciente",
+    "selectDescription": "Escolha um paciente na lista ao lado para ver o prontuário.",
+    "admission": "Admissão: {{date}}",
+    "attendanceCount": "{{count}} atendimento(s)",
+    "historyTitle": "Histórico de atendimentos"
+  },
+  "timeline": {
+    "emptyTitle": "Nenhum atendimento registrado",
+    "emptyDescription": "Este paciente ainda não possui histórico de atendimentos."
   }
 }

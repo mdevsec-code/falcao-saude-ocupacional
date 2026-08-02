@@ -7,5 +7,49 @@
   "error": {
     "title": "Não foi possível carregar a trilha de auditoria",
     "description": "Tente novamente em instantes."
+  },
+  "kpi": {
+    "total": "Eventos registrados",
+    "today": "Eventos hoje",
+    "loginFailed": "Falhas de login",
+    "patientAccess": "Acessos a dados de pacientes"
+  },
+  "actions": {
+    "exportPdf": "PDF",
+    "exportExcel": "Excel"
+  },
+  "toast": {
+    "pdfSuccess": "PDF gerado com sucesso.",
+    "pdfError": "Não foi possível gerar o PDF.",
+    "excelSuccess": "Planilha gerada com sucesso.",
+    "excelError": "Não foi possível exportar a planilha."
+  },
+  "filters": {
+    "searchPlaceholder": "Buscar por usuário ou registro…",
+    "actionPlaceholder": "Ação",
+    "allActions": "Todas as ações",
+    "entityPlaceholder": "Área",
+    "allEntities": "Todas as áreas"
+  },
+  "table": {
+    "columns": {
+      "timestamp": "Data/hora",
+      "actor": "Usuário",
+      "role": "Perfil",
+      "action": "Ação",
+      "entity": "Área",
+      "record": "Registro",
+      "detail": "Detalhe"
+    },
+    "truncatedNote": "Exibindo os {{shown}} eventos mais recentes de {{total}}. Exporte para PDF ou Excel para ver a lista completa."
+  },
+  "empty": {
+    "title": "Nenhum evento encontrado",
+    "description": "Ajuste a busca ou os filtros."
+  },
+  "export": {
+    "title": "Trilha de auditoria",
+    "subtitle_one": "{{brand}} · {{count}} registro",
+    "subtitle_other": "{{brand}} · {{count}} registros"
   }
 }

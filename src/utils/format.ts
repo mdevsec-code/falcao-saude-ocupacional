@@ -1,6 +1,10 @@
+import { getIntlLocale } from './locale';
+
 /**
- * Utilitários de formatação. Todos os formatadores são puros, sem
- * efeitos colaterais, e respeitam o locale `pt-BR`.
+ * Utilitários de formatação. Datas/números seguem o idioma ativo da UI
+ * (`getIntlLocale()`) — reconstroem o `Intl.*` a cada chamada em vez de
+ * cachear uma instância fixa em `pt-BR`, para acompanhar a troca de idioma
+ * pelo `LanguageSwitcher` sem precisar recarregar a página.
  */
 
 /**
@@ -27,29 +31,33 @@ export function formatDate(value: Date | string | null | undefined): string | nu
   if (!value) return null;
   const d = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(d.getTime())) return null;
-  return new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(d);
+  return new Intl.DateTimeFormat(getIntlLocale(), { dateStyle: 'short' }).format(d);
 }
 
-const DATE_FMT = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' });
-const DATETIME_FMT = new Intl.DateTimeFormat('pt-BR', {
-  dateStyle: 'short',
-  timeStyle: 'short',
-});
-const CURRENCY_FMT = new Intl.NumberFormat('pt-BR', {
-  style: 'currency',
-  currency: 'BRL',
-});
+export function formatTime(value: Date | string | null | undefined): string | null {
+  if (!value) return null;
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return null;
+  return new Intl.DateTimeFormat(getIntlLocale(), { hour: '2-digit', minute: '2-digit' }).format(d);
+}
 
 export function formatDateTime(value: Date | string | null | undefined): string | null {
   if (!value) return null;
   const d = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(d.getTime())) return null;
-  return DATETIME_FMT.format(d);
+  return new Intl.DateTimeFormat(getIntlLocale(), {
+    dateStyle: 'short',
+    timeStyle: 'short',
+  }).format(d);
 }
 
+/** Moeda sempre em Reais (BRL) — a operação é no Brasil — mas o agrupamento
+ * de dígitos/posição do símbolo seguem o idioma ativo da UI. */
 export function formatCurrencyBRL(value: number | null | undefined): string {
   if (value === null || value === undefined || Number.isNaN(value)) return '—';
-  return CURRENCY_FMT.format(value);
+  return new Intl.NumberFormat(getIntlLocale(), { style: 'currency', currency: 'BRL' }).format(
+    value,
+  );
 }
 
 /** Máscara de CPF: `000.000.000-00`. Remove caracteres não-numéricos antes. */
@@ -91,7 +99,7 @@ export function relativeTime(value: Date | string | null | undefined): string {
   if (Number.isNaN(d.getTime())) return '';
   const diffMs = Date.now() - d.getTime();
   const diffSec = Math.floor(diffMs / 1000);
-  const rtf = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(getIntlLocale(), { numeric: 'auto' });
   if (diffSec < 60) return rtf.format(-diffSec, 'second');
   const diffMin = Math.floor(diffSec / 60);
   if (diffMin < 60) return rtf.format(-diffMin, 'minute');
@@ -99,7 +107,7 @@ export function relativeTime(value: Date | string | null | undefined): string {
   if (diffH < 24) return rtf.format(-diffH, 'hour');
   const diffD = Math.floor(diffH / 24);
   if (diffD < 7) return rtf.format(-diffD, 'day');
-  return DATE_FMT.format(d);
+  return formatDate(d) ?? '';
 }
 
 /** Trunca string longa com reticências. */

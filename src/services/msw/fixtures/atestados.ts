@@ -1,5 +1,3 @@
-import raw from './atestados.json';
-
 export interface AtestadoRecord {
   id: number;
   ponto: string | null;
@@ -27,5 +25,12 @@ export interface AtestadosMeta {
   colunas: string[];
 }
 
-export const ATESTADOS_META: AtestadosMeta = raw.meta;
-export const ATESTADOS_FIXTURE: AtestadoRecord[] = raw.registros;
+/** Sem atestados pré-cadastrados — os lançamentos começam após o lançamento do sistema. */
+export const ATESTADOS_META: AtestadosMeta = {
+  geradoEm: new Date().toISOString(),
+  totalRegistros: 0,
+  fonteArquivo: '',
+  colunas: [],
+};
+
+export const ATESTADOS_FIXTURE: AtestadoRecord[] = [];

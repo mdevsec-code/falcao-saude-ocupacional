@@ -1,3 +1,4 @@
+import { getIntlLocale } from '@/utils/locale';
 import type { AppointmentRecord } from '../types';
 
 /** Primeiras/últimas horas exibidas nas grades de semana/dia. */
@@ -128,18 +129,26 @@ export function hasConflict(
   });
 }
 
-export const MONTH_LABEL_FMT = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' });
-export const WEEKDAY_SHORT_FMT = new Intl.DateTimeFormat('pt-BR', { weekday: 'short' });
-export const DAY_LABEL_FMT = new Intl.DateTimeFormat('pt-BR', {
-  weekday: 'long',
-  day: '2-digit',
-  month: 'long',
-});
+export function formatMonthLabel(date: Date): string {
+  return new Intl.DateTimeFormat(getIntlLocale(), { month: 'long', year: 'numeric' }).format(date);
+}
+
+export function formatWeekdayShort(date: Date): string {
+  return new Intl.DateTimeFormat(getIntlLocale(), { weekday: 'short' }).format(date);
+}
+
+export function formatDayLabel(date: Date): string {
+  return new Intl.DateTimeFormat(getIntlLocale(), {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+  }).format(date);
+}
 
 export function formatWeekRangeLabel(days: readonly Date[]): string {
   const first = days[0];
   const last = days[days.length - 1];
   if (!first || !last) return '';
-  const fmt = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short' });
+  const fmt = new Intl.DateTimeFormat(getIntlLocale(), { day: '2-digit', month: 'short' });
   return `${fmt.format(first)} – ${fmt.format(last)}`;
 }

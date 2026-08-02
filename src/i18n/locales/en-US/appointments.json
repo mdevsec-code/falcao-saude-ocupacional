@@ -1,0 +1,33 @@
+{
+  "eyebrow": "Front Desk",
+  "title": "Appointments",
+  "description": "View today's schedule and send WhatsApp follow-up reminders straight from the list.",
+  "today": {
+    "title": "Today's schedule",
+    "subtitle": "{{count}} appointment(s) · {{brand}}"
+  },
+  "empty": {
+    "title": "No appointments today",
+    "description": "Today's schedule is clear."
+  },
+  "whatsappReturn": {
+    "label": "WhatsApp follow-up",
+    "message": "Hello! This is the Occupational Health team at {company}. We're reaching out to schedule your follow-up for {exam}. Could you confirm the best date and time for you?",
+    "dialog": {
+      "confirmWithName": "Confirm {{name}}'s phone number to open the WhatsApp conversation.",
+      "confirmNoName": "Enter the phone number to open the WhatsApp conversation.",
+      "nameLabel": "Patient name (optional)",
+      "namePlaceholder": "e.g. Maria Silva",
+      "phoneLabel": "Phone (with area code)",
+      "phoneInvalid": "Invalid phone number",
+      "phoneValid": "Valid phone number ({{phone}})",
+      "cancel": "Cancel",
+      "open": "Open WhatsApp"
+    },
+    "toast": {
+      "sent": "WhatsApp conversation opened",
+      "invalid": "Invalid WhatsApp number for this patient",
+      "missing": "Patient has no phone number on file"
+    }
+  }
+}

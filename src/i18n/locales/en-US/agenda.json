@@ -1,0 +1,77 @@
+{
+  "validation": {
+    "patientNameRequired": "Enter the patient's full name"
+  },
+  "page": {
+    "eyebrow": "Front Desk",
+    "title": "Schedule",
+    "description": "Calendar of occupational appointments and exams."
+  },
+  "error": {
+    "title": "Unable to load the schedule",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "retry": "Try again",
+    "today": "Today",
+    "prevPeriod": "Previous period",
+    "nextPeriod": "Next period",
+    "newAppointment": "New appointment",
+    "editAppointment": "Edit appointment",
+    "removeAppointment": "Remove appointment",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "saveChanges": "Save changes",
+    "createAppointment": "Create appointment"
+  },
+  "view": {
+    "month": "Month",
+    "week": "Week",
+    "day": "Day"
+  },
+  "filters": {
+    "doctor": "Physician",
+    "examType": "Exam type",
+    "status": "Status",
+    "all": "All"
+  },
+  "empty": {
+    "dayTitle": "No appointments on this day",
+    "dayDescription": "Use the “New appointment” button to create a slot.",
+    "week": "No appointments"
+  },
+  "card": {
+    "more": "+{{count}} more"
+  },
+  "unit": {
+    "minutes": "{{count}} min"
+  },
+  "dialog": {
+    "newTitle": "New appointment",
+    "editTitle": "Edit appointment",
+    "newDescription": "Fill in the details to schedule a new appointment.",
+    "editDescription": "Update the appointment details.",
+    "deleteTitle": "Remove appointment?",
+    "deleteDescription": "The appointment for <1>{{name}}</1> will be permanently removed. This action cannot be undone."
+  },
+  "form": {
+    "patient": "Patient",
+    "patientPlaceholder": "Full name",
+    "phone": "Phone (WhatsApp)",
+    "phoneHint": "Optional — used for WhatsApp follow-up",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "notes": "Notes",
+    "notesPlaceholder": "Additional details (optional)",
+    "conflictWarning": "This physician already has an appointment at this time. Adjust the date/time or choose another professional."
+  },
+  "toast": {
+    "createSuccess": "Appointment created.",
+    "createError": "Unable to create the appointment.",
+    "updateSuccess": "Appointment updated.",
+    "updateError": "Unable to update the appointment.",
+    "deleteSuccess": "Appointment removed.",
+    "deleteError": "Unable to remove the appointment."
+  }
+}

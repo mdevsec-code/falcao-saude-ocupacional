@@ -1,0 +1,121 @@
+{
+  "app": {
+    "name": "Falcão Saúde Ocupacional",
+    "shortName": "Falcão"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Back",
+    "close": "Close",
+    "open": "Open",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "add": "Add",
+    "create": "Create",
+    "update": "Update",
+    "submit": "Submit",
+    "view": "View",
+    "more": "More",
+    "backToHome": "Back to home"
+  },
+  "states": {
+    "empty": "Nothing here yet",
+    "loading": "Loading…",
+    "error": "Something went wrong"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "agenda": "Schedule",
+    "appointments": "Appointments",
+    "patients": "Patients",
+    "attendances": "Visits",
+    "records": "Medical Records",
+    "cid": "CID",
+    "exams": "Exams",
+    "aso": "ASO",
+    "reports": "Reports",
+    "atestados": "Certificates",
+    "vacation": "Vacation",
+    "safety": "Workplace Safety",
+    "users": "Users",
+    "permissions": "Permissions",
+    "settings": "Settings",
+    "profile": "Profile",
+    "audit": "Audit",
+    "underConstruction": "Under construction"
+  },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "switchToLight": "Enable light theme",
+    "switchToDark": "Enable dark theme"
+  },
+  "sidebar": {
+    "overview": "Overview",
+    "attendance": "Front Desk",
+    "clinical": "Clinical",
+    "safety": "Workplace Safety",
+    "hr": "Human Resources",
+    "reports": "Reports",
+    "admin": "Administration",
+    "comingSoon": "Coming soon",
+    "mainNavAriaLabel": "Main navigation"
+  },
+  "footer": {
+    "version": "Falcão · v{{version}}"
+  },
+  "branding": {
+    "health": "Occupational Health"
+  },
+  "topbar": {
+    "closeSearch": "Close search",
+    "openMenu": "Open menu",
+    "expandMenu": "Expand menu",
+    "collapseMenu": "Collapse menu",
+    "notifications": "Notifications",
+    "signOut": "Sign out",
+    "viewProfile": "View profile"
+  },
+  "breadcrumb": {
+    "ariaLabel": "Breadcrumb navigation"
+  },
+  "search": {
+    "placeholder": "Search patient or CID…",
+    "ariaLabel": "Global search",
+    "noResults": "No results for \"{{query}}\"."
+  },
+  "languageSwitcher": {
+    "selectLanguage": "Select language"
+  },
+  "placeholder": {
+    "defaultDescription": "We're carefully building this module. New features are on the way.",
+    "comingSoon": {
+      "title": "New feature on the way"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The requested route could not be loaded. Check the address or go back to the home page."
+  },
+  "forbidden": {
+    "title": "Restricted access",
+    "description": "Your access profile doesn't have permission to view this page. Contact an administrator if you need access."
+  },
+  "errorBoundary": {
+    "routeErrorDescription": "The requested route could not be loaded.",
+    "genericDescription": "This page could not be loaded. Try again or go back to the home screen.",
+    "crashTitle": "Application runtime error",
+    "crashDescription": "Something broke while rendering. Stack trace below for diagnosis.",
+    "reload": "Reload page"
+  }
+}

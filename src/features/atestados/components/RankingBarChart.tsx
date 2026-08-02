@@ -38,7 +38,13 @@ export function RankingBarChart({
         />
         {isHorizontalBars ? (
           <>
-            <XAxis type="number" tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} />
+            <XAxis
+              type="number"
+              tick={AXIS_TICK}
+              axisLine={false}
+              tickLine={false}
+              allowDecimals={false}
+            />
             <YAxis
               type="category"
               dataKey="label"
@@ -50,8 +56,19 @@ export function RankingBarChart({
           </>
         ) : (
           <>
-            <XAxis dataKey="label" tick={AXIS_TICK} axisLine={{ stroke: GRID_STROKE }} tickLine={false} />
-            <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} width={36} />
+            <XAxis
+              dataKey="label"
+              tick={AXIS_TICK}
+              axisLine={{ stroke: GRID_STROKE }}
+              tickLine={false}
+            />
+            <YAxis
+              tick={AXIS_TICK}
+              axisLine={false}
+              tickLine={false}
+              allowDecimals={false}
+              width={36}
+            />
           </>
         )}
         <Tooltip

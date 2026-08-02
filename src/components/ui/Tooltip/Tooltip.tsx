@@ -17,8 +17,8 @@ export const TooltipContent = React.forwardRef<
       className={cn(
         'z-tooltip overflow-hidden rounded-md border border-border bg-neutral-900 px-2.5 py-1.5',
         'text-xs font-medium text-white shadow-md',
-        'data-[state=closed]:animate-fade-in data-[state=delayed-open]:animate-fade-in',
-        'data-[state=delayed-open]:[animation-direction:normal] data-[state=closed]:[animation-direction:reverse]',
+        'origin-[var(--radix-tooltip-content-transform-origin)]',
+        'data-[state=closed]:animate-scale-out data-[state=delayed-open]:animate-scale-in',
         className,
       )}
       {...rest}

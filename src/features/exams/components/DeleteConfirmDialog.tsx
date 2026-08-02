@@ -1,3 +1,4 @@
+import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import {
   Dialog,
@@ -22,26 +23,29 @@ export function DeleteConfirmDialog({
   onConfirm,
   isSubmitting,
 }: DeleteConfirmDialogProps) {
+  const { t } = useTranslation('exams');
+
   return (
     <Dialog open={record !== null} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Remover tipo de exame?</DialogTitle>
+          <DialogTitle>{t('exams:deleteDialog.title')}</DialogTitle>
           <DialogDescription>
             {record && (
-              <>
-                <strong className="text-ink">{record.name}</strong> será removido do catálogo.
-                Atendimentos e agendamentos já registrados com esse exame não são afetados.
-              </>
+              <Trans
+                i18nKey="exams:deleteDialog.description"
+                values={{ name: record.name }}
+                components={{ strong: <strong className="text-ink" /> }}
+              />
             )}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            {t('exams:deleteDialog.cancel')}
           </Button>
           <Button variant="danger" onClick={onConfirm} isLoading={isSubmitting}>
-            Remover
+            {t('exams:deleteDialog.confirm')}
           </Button>
         </DialogFooter>
       </DialogContent>

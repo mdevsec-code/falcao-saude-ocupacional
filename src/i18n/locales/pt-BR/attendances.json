@@ -7,5 +7,123 @@
   "error": {
     "title": "Não foi possível carregar os atendimentos",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "new": "Novo atendimento"
+  },
+  "kpi": {
+    "total": "Total de atendimentos",
+    "aptos": "Aptos",
+    "restricao": "Com restrição",
+    "atencao": "Inaptos / Encaminhados"
+  },
+  "dialog": {
+    "createTitle": "Novo atendimento",
+    "editTitle": "Editar atendimento",
+    "createDescription": "Registre um atendimento clínico realizado.",
+    "editDescription": "Atualize os dados do atendimento.",
+    "fields": {
+      "patient": "Paciente",
+      "patientPlaceholder": "Selecione o paciente",
+      "examType": "Tipo de exame",
+      "doctor": "Médico",
+      "attendanceDate": "Data do atendimento",
+      "conclusion": "Conclusão",
+      "dutyFitness": "Aptidão por atividade de risco",
+      "dutyFitnessHint": "Avalie a aptidão do colaborador para as atividades relevantes à sua função.",
+      "restrictionNotes": "Restrições",
+      "restrictionNotesPlaceholder": "Descreva a restrição aplicada",
+      "notes": "Observações",
+      "notesPlaceholder": "Detalhes adicionais (opcional)"
+    },
+    "dutyStatus": {
+      "notAssessed": "Não avaliado",
+      "fit": "Apto",
+      "unfit": "Inapto"
+    },
+    "actions": {
+      "saveCreate": "Registrar atendimento",
+      "saveEdit": "Salvar alterações"
+    }
+  },
+  "delete": {
+    "title": "Remover atendimento?",
+    "descriptionBefore": "O atendimento de ",
+    "descriptionAfter": " será removido permanentemente. Essa ação não pode ser desfeita.",
+    "confirm": "Remover"
+  },
+  "table": {
+    "columns": {
+      "date": "Data",
+      "patient": "Paciente",
+      "exam": "Exame",
+      "doctor": "Médico",
+      "conclusion": "Conclusão",
+      "restrictionNotes": "Restrições",
+      "actions": "Ações"
+    },
+    "search": {
+      "placeholder": "Pesquisar na tabela…"
+    },
+    "actions": {
+      "exportExcel": "Exportar Excel",
+      "downloadAso": "Baixar ASO",
+      "edit": "Editar atendimento",
+      "remove": "Remover atendimento"
+    },
+    "pagination": {
+      "showing": "Mostrando {{from}}–{{to}} de {{total}} atendimentos",
+      "previous": "Página anterior",
+      "next": "Próxima página",
+      "page": "Página {{current}} de {{total}}"
+    }
+  },
+  "export": {
+    "title": "Atendimentos",
+    "generatedAt": "Gerado em",
+    "total": "Total"
+  },
+  "empty": {
+    "title": "Nenhum atendimento encontrado",
+    "description": "Ajuste os filtros ou a busca."
+  },
+  "toast": {
+    "exportSuccess": "Exportação concluída.",
+    "exportError": "Não foi possível exportar a planilha.",
+    "asoSuccess": "ASO gerado.",
+    "asoError": "Não foi possível gerar o ASO.",
+    "createSuccess": "Atendimento registrado.",
+    "createError": "Não foi possível registrar o atendimento.",
+    "updateSuccess": "Atendimento atualizado.",
+    "updateError": "Não foi possível atualizar o atendimento.",
+    "deleteSuccess": "Atendimento removido.",
+    "deleteError": "Não foi possível remover o atendimento."
+  },
+  "filters": {
+    "heading": "Filtros",
+    "fields": {
+      "patient": "Paciente",
+      "doctor": "Médico",
+      "examType": "Tipo de exame",
+      "conclusion": "Conclusão",
+      "periodStart": "Período (início)",
+      "periodEndAria": "Até"
+    },
+    "options": {
+      "all": "Todos",
+      "allFeminine": "Todas"
+    },
+    "chips": {
+      "patient": "Paciente: {{name}}",
+      "doctor": "Médico: {{name}}",
+      "exam": "Exame: {{name}}",
+      "conclusion": "Conclusão: {{name}}",
+      "from": "A partir de {{date}}",
+      "until": "Até {{date}}",
+      "removeAria": "Remover filtro {{label}}"
+    },
+    "actions": {
+      "clearAll": "Limpar tudo"
+    }
   }
 }

@@ -1,10 +1,29 @@
 {
   "eyebrow": "Atendimento",
   "title": "Agendamentos",
-  "description": "Lista de consultas e exames marcados.",
+  "description": "Visualize a agenda do dia e dispare lembretes de retorno por WhatsApp direto da lista.",
+  "today": {
+    "title": "Agenda de hoje",
+    "subtitle": "{{count}} consulta(s) · {{brand}}"
+  },
+  "empty": {
+    "title": "Nenhuma consulta hoje",
+    "description": "A agenda de hoje está livre."
+  },
   "whatsappReturn": {
     "label": "Retorno por WhatsApp",
     "message": "Olá! Aqui é da equipe de Saúde Ocupacional da {company}. Tudo bem? Estamos entrando em contato para agendar seu retorno de {exam}. Você poderia nos confirmar a melhor data e horário?",
+    "dialog": {
+      "confirmWithName": "Confirme o telefone de {{name}} para abrir a conversa no WhatsApp.",
+      "confirmNoName": "Informe o telefone para abrir a conversa no WhatsApp.",
+      "nameLabel": "Nome do paciente (opcional)",
+      "namePlaceholder": "Ex.: Maria Silva",
+      "phoneLabel": "Telefone (com DDD)",
+      "phoneInvalid": "Telefone inválido",
+      "phoneValid": "Telefone válido ({{phone}})",
+      "cancel": "Cancelar",
+      "open": "Abrir WhatsApp"
+    },
     "toast": {
       "sent": "Conversa do WhatsApp aberta",
       "invalid": "Número de WhatsApp inválido para este paciente",

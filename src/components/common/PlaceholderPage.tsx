@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -17,10 +18,13 @@ interface PlaceholderPageProps {
 
 export function PlaceholderPage({
   title,
-  description = 'Estamos preparando este módulo com todo o cuidado. Em breve, novidades por aqui.',
+  description,
   features,
   children,
 }: PlaceholderPageProps): ReactNode {
+  const { t } = useTranslation('common');
+  const resolvedDescription = description ?? t('placeholder.defaultDescription');
+
   // Mantém o título da aba coerente com o módulo
   useEffect(() => {
     document.title = `${title} · Falcão`;
@@ -32,12 +36,12 @@ export function PlaceholderPage({
   return (
     <>
       <PageHeader
-        eyebrow="Em breve"
+        eyebrow={t('sidebar.comingSoon')}
         title={title}
-        description={description}
+        description={resolvedDescription}
         actions={
           <Button asChild variant="outline" leftIcon={<ArrowLeft className="h-4 w-4" />}>
-            <Link to={ROUTE_PATHS.DASHBOARD}>Voltar ao início</Link>
+            <Link to={ROUTE_PATHS.DASHBOARD}>{t('actions.backToHome')}</Link>
           </Button>
         }
       />
@@ -67,7 +71,10 @@ export function PlaceholderPage({
             <ul className="relative grid grid-cols-1 gap-2 text-left text-sm text-ink-soft sm:grid-cols-2">
               {features.map((item) => (
                 <li key={item} className="flex items-center gap-2">
-                  <Sparkles className="h-3.5 w-3.5 shrink-0 text-brand-gold-700" aria-hidden="true" />
+                  <Sparkles
+                    className="h-3.5 w-3.5 shrink-0 text-brand-gold-700"
+                    aria-hidden="true"
+                  />
                   {item}
                 </li>
               ))}

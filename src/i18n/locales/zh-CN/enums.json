@@ -1,0 +1,85 @@
+{
+  "roles": {
+    "ADMIN": "管理员",
+    "MEDICO": "医生",
+    "ENFERMEIRO": "护士",
+    "TECNICO_SEGURANCA": "安全技术员",
+    "RH": "人力资源",
+    "RECEPCAO": "前台"
+  },
+  "appointmentStatus": {
+    "agendado": "已预约",
+    "realizado": "已完成",
+    "cancelado": "已取消",
+    "faltou": "未到诊"
+  },
+  "appointmentConclusion": {
+    "apto": "适任",
+    "apto_restricao": "有限制适任",
+    "inapto": "不适任",
+    "encaminhado": "已转诊"
+  },
+  "patientStatus": {
+    "ativo": "在职",
+    "inativo": "离职",
+    "afastado": "休假中"
+  },
+  "vacationStatus": {
+    "agendado": "已安排",
+    "em_andamento": "进行中",
+    "concluido": "已完成",
+    "cancelado": "已取消"
+  },
+  "auditAction": {
+    "login": "登录",
+    "login_failed": "登录尝试失败",
+    "logout": "登出",
+    "create": "创建",
+    "update": "更新",
+    "delete": "删除"
+  },
+  "auditEntity": {
+    "auth": "身份验证",
+    "patient": "患者",
+    "attendance": "接诊记录",
+    "user": "用户",
+    "exam_type": "检查类型",
+    "vacation": "休假",
+    "deviation": "偏差",
+    "accident_indicator": "事故指标",
+    "cid": "国际疾病分类"
+  },
+  "deviationStatus": {
+    "pendente": "待处理",
+    "em_andamento": "进行中",
+    "concluido": "已完成"
+  },
+  "deviationClassification": {
+    "acessibilidade": "无障碍通道",
+    "organizacao": "整理、整顿与清洁",
+    "comportamental": "行为类",
+    "equipamento": "设备、工具、机械",
+    "epi": "个人防护装备",
+    "ergonomia": "人体工程学",
+    "procedimento": "作业程序",
+    "residuos": "废弃物",
+    "sinalizacao": "标识与隔离",
+    "eletricidade": "电气"
+  },
+  "duties": {
+    "altura": "高处作业（NR-35）",
+    "espaco_confinado": "密闭空间作业（NR-33）",
+    "maquinas_pesadas": "重型机械设备（NR-12）",
+    "eletricidade": "电气作业（NR-10）",
+    "levantamento_peso": "负重/体力劳动",
+    "ruido": "噪音暴露"
+  },
+  "dutiesShort": {
+    "altura": "高处",
+    "espaco_confinado": "密闭空间",
+    "maquinas_pesadas": "机械",
+    "eletricidade": "电气",
+    "levantamento_peso": "负重",
+    "ruido": "噪音"
+  }
+}

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import i18n from '@/i18n';
 import { nonEmptyString } from '@/validators/common';
 import { APPOINTMENT_CONCLUSION, type AppointmentConclusion } from '@/constants/status';
 import { DUTY_TYPES } from '@/constants/duties';
@@ -38,8 +39,14 @@ export const attendanceFormSchema = z.object({
     APPOINTMENT_CONCLUSION.ENCAMINHADO,
   ]),
   attendanceDate: nonEmptyString,
-  restrictionNotes: z.string().max(500, 'Tamanho máximo excedido').optional(),
-  notes: z.string().max(500, 'Tamanho máximo excedido').optional(),
+  restrictionNotes: z
+    .string()
+    .max(500, i18n.t('validation:maxLength', { count: 500 }))
+    .optional(),
+  notes: z
+    .string()
+    .max(500, i18n.t('validation:maxLength', { count: 500 }))
+    .optional(),
   dutyFitness: z.array(z.object({ duty: dutyTypeEnum, fit: z.boolean() })).default([]),
 });
 

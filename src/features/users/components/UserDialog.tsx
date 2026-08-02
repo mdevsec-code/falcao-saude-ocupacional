@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -43,6 +44,7 @@ export function UserDialog({
   onSubmit,
   isSubmitting,
 }: UserDialogProps) {
+  const { t } = useTranslation('users');
   const {
     register,
     control,
@@ -66,19 +68,21 @@ export function UserDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>{editingRecord ? 'Editar usuário' : 'Novo usuário'}</DialogTitle>
+          <DialogTitle>
+            {editingRecord ? t('users:dialog.editTitle') : t('users:dialog.createTitle')}
+          </DialogTitle>
           <DialogDescription>
             {editingRecord
-              ? 'Atualize os dados de acesso do usuário.'
-              : 'Cadastre um novo usuário e defina seu perfil de acesso.'}
+              ? t('users:dialog.editDescription')
+              : t('users:dialog.createDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={submit} noValidate className="space-y-4">
           <Input
             {...register('name')}
-            label="Nome completo"
-            placeholder="Nome do usuário"
+            label={t('users:form.fullName')}
+            placeholder={t('users:form.fullNamePlaceholder')}
             error={errors.name?.message}
             required
           />
@@ -86,15 +90,15 @@ export function UserDialog({
           <Input
             {...register('email')}
             type="email"
-            label="E-mail"
-            placeholder="usuario@falcao.com"
+            label={t('users:form.email')}
+            placeholder={t('users:form.emailPlaceholder')}
             error={errors.email?.message}
             required
           />
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label htmlFor="user-role">Perfil de acesso</Label>
+              <Label htmlFor="user-role">{t('users:form.role')}</Label>
               <Controller
                 control={control}
                 name="role"
@@ -116,7 +120,7 @@ export function UserDialog({
             </div>
 
             <div>
-              <Label htmlFor="user-status">Status</Label>
+              <Label htmlFor="user-status">{t('users:form.status')}</Label>
               <Controller
                 control={control}
                 name="status"
@@ -126,8 +130,8 @@ export function UserDialog({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="active">Ativo</SelectItem>
-                      <SelectItem value="inactive">Inativo</SelectItem>
+                      <SelectItem value="active">{t('users:status.active')}</SelectItem>
+                      <SelectItem value="inactive">{t('users:status.inactive')}</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
@@ -137,10 +141,10 @@ export function UserDialog({
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t('users:actions.cancel')}
             </Button>
             <Button type="submit" variant="primary" isLoading={isSubmitting}>
-              {editingRecord ? 'Salvar alterações' : 'Criar usuário'}
+              {editingRecord ? t('users:actions.saveChanges') : t('users:actions.createUser')}
             </Button>
           </DialogFooter>
         </form>

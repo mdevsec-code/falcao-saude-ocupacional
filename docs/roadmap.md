@@ -14,10 +14,10 @@ Status atual e evolução planejada do projeto. Veja também o
   Tooltip, Separator, Avatar)
 - [x] AppShell (Sidebar + Topbar), ThemeToggle (light/dark)
 - [x] Dashboard de boas-vindas com KPIs placeholder
-- [x] Login mockado com AuthStore Zustand — 8 contas ativas de demonstração cobrindo
-  todos os perfis (admin, médico ×2, enfermeiro, técnico de segurança, RH,
-  recepção ×2; há também 1 conta RH inativa para testar bloqueio de login),
-  todas com senha `admin123`; seletor de "login rápido" na tela de login
+- [x] Login mockado com AuthStore Zustand — base zerada para o lançamento:
+  apenas a conta administrativa inicial (bootstrap), sem seletor de
+  "login rápido"; demais contas são criadas pelo próprio admin em
+  `features/users` depois do lançamento
   (`services/msw/fixtures/users.ts`, `services/msw/handlers/auth.ts`)
 - [x] RBAC constants (`roles.ts`, `permissions.ts`) — hoje com UI própria:
   `features/users` (CRUD de contas, gate `PERMISSIONS.USERS_MANAGE`) e
@@ -60,8 +60,14 @@ Status atual e evolução planejada do projeto. Veja também o
       `DashboardPage` com loading/error states
 
 ### i18n
-- [x] i18next + react-i18next + detector
-- [x] Namespaces: common, auth, dashboard, validation, errors (PT-BR)
+- [x] i18next + react-i18next + detector (persistência via localStorage)
+- [x] 20 namespaces traduzidos em pt-BR, en-US e zh-CN (`src/i18n/locales/`,
+  carregados automaticamente via `import.meta.glob`)
+- [x] `LanguageSwitcher` (`components/layout/LanguageSwitcher`) — troca de
+  idioma em tempo real, presente na tela de login e na Topbar
+- [ ] Rótulos de enums (perfis, atividades de risco, status de agendamento)
+  ainda são strings fixas em pt-BR nos `constants/*.ts` — não passam pelo
+  i18next ainda (próximo passo)
 
 ### UI
 - [x] Radix: Dialog, Tabs, Checkbox, Switch, Spinner, Label, Textarea
@@ -94,16 +100,34 @@ Status atual e evolução planejada do projeto. Veja também o
 
 ---
 
-## 🔜 Etapa 3 — API Real & Auth OAuth2 (v0.3.0)
+## 🚧 Etapa 3 — API Real & Auth OAuth2 (v0.3.0)
 
-> Substitui o MSW por backend real.
+> Substitui o MSW por backend real. Fundação iniciada em `/server`
+> (NestJS + Prisma + PostgreSQL) — build e typecheck passando.
 
-- [ ] Backend Node.js (NestJS) + PostgreSQL + Prisma
-- [ ] OAuth2 / OIDC (Keycloak ou Auth0)
+- [x] Backend Node.js (NestJS) + PostgreSQL + Prisma — schema completo em
+  `server/prisma/schema.prisma`, espelhando os tipos que o frontend já usa
+- [x] Login/logout com JWT + bcrypt, rate limit, auditoria persistida —
+  `server/src/auth/`
+- [x] CRUD de usuários (`server/src/users/`) como módulo de referência para
+  os demais
+- [x] Seed de produção que cria só a conta administrativa inicial
+  (`server/prisma/seed.ts`) — nenhum dado fake é inserido
+- [x] CRUD completo de `patients` (soft delete LGPD), `attendances` (com
+  `dutyFitness` aninhado), `agenda` (com checagem de conflito de horário
+  por médico), `exam-types`; leitura de `atestados` e `audit` — todos
+  gravando na trilha de auditoria via `AuditService`. Build/typecheck do
+  backend passando (`server/README.md` tem a tabela completa de rotas)
+- [ ] Portar a matriz granular `PERMISSIONS`/`ROLE_PERMISSIONS` do
+  frontend para o backend — os guards hoje usam uma lista simplificada de
+  perfis por endpoint (`@Roles(...)`), não as permissões finas do frontend
+- [ ] OAuth2 / OIDC (Keycloak ou Auth0) — hoje é e-mail/senha próprio
 - [ ] Refresh tokens + rotation
-- [ ] `services/http/client.ts` aponta para backend real
-- [ ] MSW mantém-se apenas para testes de integração
+- [ ] Frontend: apontar `services/http/client.ts` para a API real
+  (`VITE_API_URL` + `VITE_ENABLE_MSW=false`) e remover o mock MSW
 - [ ] Documentação OpenAPI/Swagger
+- [ ] Deploy: Railway (lançamento inicial) ou Azure Brasil South
+  (residência de dados) — ver `server/README.md`
 - [ ] Rate limiting (express-rate-limit) e CORS estrito
 - [ ] Sentry SDK (front + back)
 - [ ] Auditoria de acessos (LGPD)

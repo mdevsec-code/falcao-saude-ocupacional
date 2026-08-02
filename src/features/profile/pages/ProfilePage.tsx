@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,27 +18,38 @@ import { Switch } from '@/components/ui/Switch';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { useTheme } from '@/hooks/useTheme';
 import { ROLE_LABELS } from '@/constants/roles';
+import { LOCALES, localeLabels, type Locale } from '@/constants/i18n';
 import { getInitials } from '@/utils/format';
 import { passwordSchema } from '@/validators/common';
 
-const passwordFormSchema = z
-  .object({
-    currentPassword: passwordSchema,
-    newPassword: passwordSchema,
-    confirmPassword: passwordSchema,
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: 'As senhas não coincidem',
-    path: ['confirmPassword'],
-  });
+function buildPasswordFormSchema(passwordMismatchMessage: string) {
+  return z
+    .object({
+      currentPassword: passwordSchema,
+      newPassword: passwordSchema,
+      confirmPassword: passwordSchema,
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: passwordMismatchMessage,
+      path: ['confirmPassword'],
+    });
+}
 
-type PasswordFormInput = z.infer<typeof passwordFormSchema>;
+type PasswordFormInput = z.infer<ReturnType<typeof buildPasswordFormSchema>>;
 
 export function ProfilePage() {
-  const { t } = useTranslation('profile');
+  const { t, i18n } = useTranslation('profile');
   const { user } = useAuth();
   const { theme, toggle } = useTheme();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const current = (i18n.resolvedLanguage ?? i18n.language) as Locale;
+  const currentLocale: Locale = LOCALES.includes(current) ? current : 'pt-BR';
+
+  const passwordFormSchema = useMemo(
+    () => buildPasswordFormSchema(t('profile:security.passwordMismatch')),
+    [t],
+  );
 
   const {
     register,
@@ -56,7 +67,7 @@ export function ProfilePage() {
     await new Promise((resolve) => setTimeout(resolve, 500));
     setIsSubmitting(false);
     reset();
-    toast.info('Ambiente de demonstração: alteração de senha não é persistida.');
+    toast.info(t('profile:toast.passwordNotPersisted'));
   });
 
   return (
@@ -71,7 +82,9 @@ export function ProfilePage() {
         <Card>
           <CardContent className="flex items-center gap-4 pt-4">
             <Avatar className="h-16 w-16">
-              <AvatarFallback className="text-lg">{getInitials(user?.name ?? 'Falcão')}</AvatarFallback>
+              <AvatarFallback className="text-lg">
+                {getInitials(user?.name ?? 'Falcão')}
+              </AvatarFallback>
             </Avatar>
             <div className="min-w-0">
               <p className="truncate font-display text-lg font-semibold text-ink">
@@ -89,8 +102,8 @@ export function ProfilePage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Preferências</CardTitle>
-            <CardDescription>Aparência e idioma da plataforma.</CardDescription>
+            <CardTitle>{t('profile:preferences.title')}</CardTitle>
+            <CardDescription>{t('profile:preferences.description')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
@@ -100,31 +113,35 @@ export function ProfilePage() {
                 ) : (
                   <Sun className="h-4 w-4 text-ink-soft" />
                 )}
-                Tema escuro
+                {t('profile:preferences.darkTheme')}
               </div>
-              <Switch checked={theme === 'dark'} onCheckedChange={toggle} aria-label="Alternar tema" />
+              <Switch
+                checked={theme === 'dark'}
+                onCheckedChange={toggle}
+                aria-label={t('profile:preferences.toggleTheme')}
+              />
             </div>
 
             <Separator />
 
             <div className="flex items-center justify-between">
-              <span className="text-sm text-ink">Idioma</span>
-              <span className="text-sm text-ink-soft">Português (Brasil)</span>
+              <span className="text-sm text-ink">{t('profile:preferences.language')}</span>
+              <span className="text-sm text-ink-soft">{localeLabels[currentLocale]}</span>
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Segurança</CardTitle>
-            <CardDescription>Alterar senha de acesso.</CardDescription>
+            <CardTitle>{t('profile:security.title')}</CardTitle>
+            <CardDescription>{t('profile:security.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={onSubmit} noValidate className="space-y-4">
               <Input
                 {...register('currentPassword')}
                 type="password"
-                label="Senha atual"
+                label={t('profile:security.currentPassword')}
                 leftIcon={<KeyRound className="h-4 w-4" />}
                 error={errors.currentPassword?.message}
                 required
@@ -133,24 +150,24 @@ export function ProfilePage() {
                 <Input
                   {...register('newPassword')}
                   type="password"
-                  label="Nova senha"
+                  label={t('profile:security.newPassword')}
                   error={errors.newPassword?.message}
                   required
                 />
                 <Input
                   {...register('confirmPassword')}
                   type="password"
-                  label="Confirmar nova senha"
+                  label={t('profile:security.confirmPassword')}
                   error={errors.confirmPassword?.message}
                   required
                 />
               </div>
               <div>
                 <Label htmlFor="profile-role" className="sr-only">
-                  Perfil
+                  {t('profile:security.roleLabel')}
                 </Label>
                 <Button type="submit" variant="primary" isLoading={isSubmitting}>
-                  Atualizar senha
+                  {t('profile:security.updateButton')}
                 </Button>
               </div>
             </form>

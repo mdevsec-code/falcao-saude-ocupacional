@@ -1,0 +1,27 @@
+{
+  "page": {
+    "eyebrow": "Account",
+    "title": "Profile",
+    "description": "Your access information and preferences."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "description": "Appearance and platform language.",
+    "darkTheme": "Dark theme",
+    "toggleTheme": "Toggle theme",
+    "language": "Language"
+  },
+  "security": {
+    "title": "Security",
+    "description": "Change your access password.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "updateButton": "Update password",
+    "roleLabel": "Profile",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "toast": {
+    "passwordNotPersisted": "Password changes are not yet persisted in this version."
+  }
+}

@@ -1,11 +1,14 @@
 import { lazy, Suspense, type ReactNode } from 'react';
-import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom';
+import { createBrowserRouter, type RouteObject } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AppShell } from '@/components/layout/AppShell';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { LoadingState } from '@/components/feedback/LoadingState';
 import { PlaceholderPage } from '@/components/common/PlaceholderPage';
 import { NotFoundPage } from '@/components/error/NotFoundPage';
 import { RequireAuth } from '@/features/auth/components/RequireAuth';
+import { RequirePermission } from '@/features/auth/components/RequirePermission';
+import { PERMISSIONS } from '@/constants/permissions';
 import { RootBoundary } from './RootBoundary';
 
 const LoginPage = lazy(() =>
@@ -42,6 +45,14 @@ const AttendancesPage = lazy(() =>
   import('@/features/attendances/pages/AttendancesPage').then((m) => ({
     default: m.AttendancesPage,
   })),
+);
+
+const FeriasPage = lazy(() =>
+  import('@/features/ferias/pages/FeriasPage').then((m) => ({ default: m.FeriasPage })),
+);
+
+const SegurancaPage = lazy(() =>
+  import('@/features/seguranca/pages/SegurancaPage').then((m) => ({ default: m.SegurancaPage })),
 );
 
 const RecordsPage = lazy(() =>
@@ -86,6 +97,21 @@ const withSuspense = (element: ReactNode) => (
   <Suspense fallback={<LoadingState />}>{element}</Suspense>
 );
 
+/**
+ * Rotas com link condicional na Sidebar (via `requires: Permission`) também
+ * precisam de guarda no roteador — senão um usuário autenticado sem a
+ * permissão consegue acessar a página só digitando a URL diretamente.
+ */
+const withPermission = (
+  permission: (typeof PERMISSIONS)[keyof typeof PERMISSIONS],
+  element: ReactNode,
+) => <RequirePermission permission={permission}>{withSuspense(element)}</RequirePermission>;
+
+function ComingSoonPlaceholder(): ReactNode {
+  const { t } = useTranslation('common');
+  return <PlaceholderPage title={t('placeholder.comingSoon.title')} />;
+}
+
 const protectedRoutes: RouteObject[] = [
   { path: ROUTE_PATHS.AGENDA, element: withSuspense(<AgendaPage />) },
   { path: ROUTE_PATHS.AGENDAMENTOS, element: withSuspense(<AppointmentsPage />) },
@@ -97,11 +123,31 @@ const protectedRoutes: RouteObject[] = [
   { path: ROUTE_PATHS.ASO, element: withSuspense(<AsoPage />) },
   { path: ROUTE_PATHS.RELATORIOS, element: withSuspense(<ReportsPage />) },
   { path: ROUTE_PATHS.ATESTADOS, element: withSuspense(<AtestadosPage />) },
-  { path: ROUTE_PATHS.USUARIOS, element: withSuspense(<UsersPage />) },
-  { path: ROUTE_PATHS.PERMISSOES, element: withSuspense(<PermissionsPage />) },
-  { path: ROUTE_PATHS.CONFIGURACOES, element: withSuspense(<SettingsPage />) },
+  {
+    path: ROUTE_PATHS.FERIAS,
+    element: withPermission(PERMISSIONS.EMPLOYEE_READ, <FeriasPage />),
+  },
+  {
+    path: ROUTE_PATHS.SEGURANCA,
+    element: withPermission(PERMISSIONS.DEVIATION_READ, <SegurancaPage />),
+  },
+  {
+    path: ROUTE_PATHS.USUARIOS,
+    element: withPermission(PERMISSIONS.USERS_MANAGE, <UsersPage />),
+  },
+  {
+    path: ROUTE_PATHS.PERMISSOES,
+    element: withPermission(PERMISSIONS.USERS_MANAGE, <PermissionsPage />),
+  },
+  {
+    path: ROUTE_PATHS.CONFIGURACOES,
+    element: withPermission(PERMISSIONS.SETTINGS_MANAGE, <SettingsPage />),
+  },
   { path: ROUTE_PATHS.PERFIL, element: withSuspense(<ProfilePage />) },
-  { path: ROUTE_PATHS.AUDITORIA, element: withSuspense(<AuditPage />) },
+  {
+    path: ROUTE_PATHS.AUDITORIA,
+    element: withPermission(PERMISSIONS.AUDIT_READ, <AuditPage />),
+  },
 ];
 
 const routes: RouteObject[] = [
@@ -122,11 +168,18 @@ const routes: RouteObject[] = [
   },
   {
     path: ROUTE_PATHS.PLACEHOLDER,
-    element: <AppShell />,
-    children: [{ index: true, element: <PlaceholderPage title="Novidade a caminho" /> }],
+    element: (
+      <RequireAuth>
+        <AppShell />
+      </RequireAuth>
+    ),
+    children: [{ index: true, element: <ComingSoonPlaceholder /> }],
   },
   { path: ROUTE_PATHS.NOT_FOUND, element: <NotFoundPage /> },
-  { path: '*', element: <Navigate to={ROUTE_PATHS.DASHBOARD} replace /> },
+  // URLs desconhecidas mostram a página 404 de verdade, em vez de mandar
+  // silenciosamente para o Dashboard (o usuário precisa saber que a rota
+  // não existe, não achar que clicou em algo errado).
+  { path: '*', element: <NotFoundPage /> },
 ];
 
 export const router = createBrowserRouter(routes);

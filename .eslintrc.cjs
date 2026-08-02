@@ -19,6 +19,9 @@ module.exports = {
     'legacy/**',
     'public/mockServiceWorker.js',
     'node_modules',
+    // Backend é um projeto Node/NestJS à parte (própria tsconfig, próprias
+    // convenções) — não roda sob este ESLint de frontend/browser.
+    'server/**',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

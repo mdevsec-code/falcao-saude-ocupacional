@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -61,6 +62,7 @@ export function PatientDialog({
   onSubmit,
   isSubmitting,
 }: PatientDialogProps) {
+  const { t } = useTranslation('patients');
   const {
     register,
     control,
@@ -84,19 +86,21 @@ export function PatientDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>{editingRecord ? 'Editar paciente' : 'Novo paciente'}</DialogTitle>
+          <DialogTitle>
+            {editingRecord ? t('patients:dialog.editTitle') : t('patients:dialog.createTitle')}
+          </DialogTitle>
           <DialogDescription>
             {editingRecord
-              ? 'Atualize os dados cadastrais do paciente.'
-              : 'Preencha os dados para cadastrar um novo paciente.'}
+              ? t('patients:dialog.editDescription')
+              : t('patients:dialog.createDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={submit} noValidate className="max-h-[70vh] space-y-4 overflow-y-auto pr-1">
           <Input
             {...register('name')}
-            label="Nome completo"
-            placeholder="Nome do paciente"
+            label={t('patients:dialog.fields.name.label')}
+            placeholder={t('patients:dialog.fields.name.placeholder')}
             error={errors.name?.message}
             required
           />
@@ -104,15 +108,15 @@ export function PatientDialog({
           <div className="grid grid-cols-2 gap-3">
             <Input
               {...register('cpf')}
-              label="CPF"
-              placeholder="000.000.000-00"
+              label={t('patients:dialog.fields.cpf.label')}
+              placeholder={t('patients:dialog.fields.cpf.placeholder')}
               error={errors.cpf?.message}
               required
             />
             <Input
               {...register('birthDate')}
               type="date"
-              label="Data de nascimento"
+              label={t('patients:dialog.fields.birthDate.label')}
               error={errors.birthDate?.message}
               required
             />
@@ -121,24 +125,24 @@ export function PatientDialog({
           <div className="grid grid-cols-2 gap-3">
             <Input
               {...register('phone')}
-              label="Telefone"
-              placeholder="11987654321"
+              label={t('patients:dialog.fields.phone.label')}
+              placeholder={t('patients:dialog.fields.phone.placeholder')}
               error={errors.phone?.message}
-              hint="Opcional"
+              hint={t('patients:dialog.fields.optional')}
             />
             <Input
               {...register('email')}
               type="email"
-              label="E-mail"
-              placeholder="paciente@email.com"
+              label={t('patients:dialog.fields.email.label')}
+              placeholder={t('patients:dialog.fields.email.placeholder')}
               error={errors.email?.message}
-              hint="Opcional"
+              hint={t('patients:dialog.fields.optional')}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label htmlFor="patient-sector">Setor</Label>
+              <Label htmlFor="patient-sector">{t('patients:dialog.fields.sector.label')}</Label>
               <Controller
                 control={control}
                 name="sector"
@@ -161,8 +165,8 @@ export function PatientDialog({
 
             <Input
               {...register('role')}
-              label="Função/Cargo"
-              placeholder="Ex.: Pedreiro"
+              label={t('patients:dialog.fields.role.label')}
+              placeholder={t('patients:dialog.fields.role.placeholder')}
               error={errors.role?.message}
               required
             />
@@ -172,13 +176,13 @@ export function PatientDialog({
             <Input
               {...register('admissionDate')}
               type="date"
-              label="Data de admissão"
+              label={t('patients:dialog.fields.admissionDate.label')}
               error={errors.admissionDate?.message}
               required
             />
 
             <div>
-              <Label htmlFor="patient-status">Status</Label>
+              <Label htmlFor="patient-status">{t('patients:dialog.fields.status.label')}</Label>
               <Controller
                 control={control}
                 name="status"
@@ -202,18 +206,18 @@ export function PatientDialog({
 
           <Textarea
             {...register('notes')}
-            label="Observações"
-            placeholder="Detalhes adicionais (opcional)"
+            label={t('patients:dialog.fields.notes.label')}
+            placeholder={t('patients:dialog.fields.notes.placeholder')}
             error={errors.notes?.message}
             rows={2}
           />
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t('patients:dialog.cancel')}
             </Button>
             <Button type="submit" variant="primary" isLoading={isSubmitting}>
-              {editingRecord ? 'Salvar alterações' : 'Cadastrar paciente'}
+              {editingRecord ? t('patients:dialog.submitEdit') : t('patients:dialog.submitCreate')}
             </Button>
           </DialogFooter>
         </form>

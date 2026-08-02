@@ -7,5 +7,62 @@
   "error": {
     "title": "Não foi possível carregar os usuários",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "createNew": "Novo usuário",
+    "retry": "Tentar novamente",
+    "cancel": "Cancelar",
+    "saveChanges": "Salvar alterações",
+    "createUser": "Criar usuário",
+    "remove": "Remover"
+  },
+  "dialog": {
+    "editTitle": "Editar usuário",
+    "createTitle": "Novo usuário",
+    "editDescription": "Atualize os dados de acesso do usuário.",
+    "createDescription": "Cadastre um novo usuário e defina seu perfil de acesso."
+  },
+  "form": {
+    "fullName": "Nome completo",
+    "fullNamePlaceholder": "Nome do usuário",
+    "email": "E-mail",
+    "emailPlaceholder": "usuario@falcao.com",
+    "role": "Perfil de acesso",
+    "status": "Status"
+  },
+  "status": {
+    "active": "Ativo",
+    "inactive": "Inativo"
+  },
+  "table": {
+    "columns": {
+      "name": "Nome",
+      "email": "E-mail",
+      "role": "Perfil",
+      "status": "Status",
+      "actions": "Ações"
+    },
+    "searchPlaceholder": "Pesquisar usuário…",
+    "youSuffix": "(você)",
+    "editAria": "Editar usuário",
+    "deleteAria": "Remover usuário",
+    "cannotDeleteSelf": "Você não pode remover seu próprio usuário"
+  },
+  "empty": {
+    "title": "Nenhum usuário encontrado",
+    "description": "Ajuste a busca."
+  },
+  "deleteDialog": {
+    "title": "Remover usuário?",
+    "descriptionBefore": "O acesso de ",
+    "descriptionAfter": " será removido permanentemente. Essa ação não pode ser desfeita."
+  },
+  "toast": {
+    "createSuccess": "Usuário criado.",
+    "createError": "Não foi possível criar o usuário.",
+    "updateSuccess": "Usuário atualizado.",
+    "updateError": "Não foi possível atualizar o usuário.",
+    "deleteSuccess": "Usuário removido.",
+    "deleteError": "Não foi possível remover o usuário."
   }
 }

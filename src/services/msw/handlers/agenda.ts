@@ -4,7 +4,7 @@ import { AGENDA_FIXTURE, type AppointmentRecord } from '../fixtures/agenda';
 /**
  * Store mutável em memória — simula um backend real para CRUD de
  * agendamentos. Reinicia a cada reload da página (sem persistência),
- * o que é aceitável para o propósito de demonstração/dev.
+ * o que é aceitável para o ambiente de desenvolvimento local (pré-backend).
  */
 let store: AppointmentRecord[] = AGENDA_FIXTURE.map((r) => ({ ...r }));
 let nextId = store.length + 1;

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import i18n from '@/i18n';
 import { nonEmptyString, phoneSchema } from '@/validators/common';
 import { APPOINTMENT_STATUS, type AppointmentStatus } from '@/constants/status';
 import type { AppointmentRecord } from '@/services/msw/fixtures/agenda';
@@ -16,12 +17,12 @@ export interface AgendaFilters {
 }
 
 export const appointmentFormSchema = z.object({
-  patientName: nonEmptyString.min(3, 'Informe o nome completo do paciente'),
+  patientName: nonEmptyString.min(3, i18n.t('agenda:validation.patientNameRequired')),
   phone: z
     .string()
     .optional()
     .transform((s) => (s ? s : undefined))
-    .refine((s) => s === undefined || phoneSchema.safeParse(s).success, 'Telefone inválido'),
+    .refine((s) => s === undefined || phoneSchema.safeParse(s).success, i18n.t('validation:phone')),
   examType: nonEmptyString,
   doctor: nonEmptyString,
   status: z.enum([
@@ -32,8 +33,15 @@ export const appointmentFormSchema = z.object({
   ]),
   date: nonEmptyString,
   time: nonEmptyString,
-  durationMin: z.coerce.number().int().min(10, 'Mínimo 10 minutos').max(240, 'Máximo 240 minutos'),
-  notes: z.string().max(500, 'Tamanho máximo excedido').optional(),
+  durationMin: z.coerce
+    .number()
+    .int()
+    .min(10, i18n.t('validation:minDuration', { count: 10 }))
+    .max(240, i18n.t('validation:maxDuration', { count: 240 })),
+  notes: z
+    .string()
+    .max(500, i18n.t('validation:maxLength', { count: 500 }))
+    .optional(),
 });
 
 export type AppointmentFormInput = z.infer<typeof appointmentFormSchema>;

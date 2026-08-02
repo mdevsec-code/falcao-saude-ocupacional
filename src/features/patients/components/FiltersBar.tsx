@@ -1,4 +1,5 @@
 import { Filter, Search, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
@@ -23,25 +24,35 @@ interface FiltersBarProps {
 }
 
 export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
+  const { t } = useTranslation('patients');
   const chips: { key: keyof PatientFilters; label: string }[] = [];
-  if (filters.sector) chips.push({ key: 'sector', label: `Setor: ${filters.sector}` });
-  if (filters.status) chips.push({ key: 'status', label: `Status: ${PATIENT_STATUS_LABELS[filters.status]}` });
-  if (filters.busca) chips.push({ key: 'busca', label: `Busca: "${filters.busca}"` });
+  if (filters.sector)
+    chips.push({
+      key: 'sector',
+      label: t('patients:filters.chipSector', { value: filters.sector }),
+    });
+  if (filters.status)
+    chips.push({
+      key: 'status',
+      label: t('patients:filters.chipStatus', { value: PATIENT_STATUS_LABELS[filters.status] }),
+    });
+  if (filters.busca)
+    chips.push({ key: 'busca', label: t('patients:filters.chipSearch', { value: filters.busca }) });
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Filter className="h-4 w-4 text-ink-soft" aria-hidden="true" />
-        <span className="text-sm font-semibold text-ink">Filtros</span>
+        <span className="text-sm font-semibold text-ink">{t('patients:filters.title')}</span>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div>
-          <Label htmlFor="patients-filter-busca">Busca</Label>
+          <Label htmlFor="patients-filter-busca">{t('patients:filters.search.label')}</Label>
           <Input
             id="patients-filter-busca"
             className="mt-1"
-            placeholder="Nome, CPF ou função…"
+            placeholder={t('patients:filters.search.placeholder')}
             leftIcon={<Search className="h-4 w-4" />}
             value={filters.busca ?? ''}
             onChange={(e) => onChange({ busca: e.target.value || undefined })}
@@ -49,7 +60,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
         </div>
 
         <div>
-          <Label htmlFor="patients-filter-sector">Setor</Label>
+          <Label htmlFor="patients-filter-sector">{t('patients:filters.sector.label')}</Label>
           <Select
             value={filters.sector ?? ALL_VALUE}
             onValueChange={(v) => onChange({ sector: v === ALL_VALUE ? undefined : v })}
@@ -58,7 +69,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Todos</SelectItem>
+              <SelectItem value={ALL_VALUE}>{t('patients:filters.all')}</SelectItem>
               {SECTORS.map((s) => (
                 <SelectItem key={s} value={s}>
                   {s}
@@ -69,7 +80,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
         </div>
 
         <div>
-          <Label htmlFor="patients-filter-status">Status</Label>
+          <Label htmlFor="patients-filter-status">{t('patients:filters.status.label')}</Label>
           <Select
             value={filters.status ?? ALL_VALUE}
             onValueChange={(v) =>
@@ -80,7 +91,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Todos</SelectItem>
+              <SelectItem value={ALL_VALUE}>{t('patients:filters.all')}</SelectItem>
               {Object.values(PATIENT_STATUS).map((status) => (
                 <SelectItem key={status} value={status}>
                   {PATIENT_STATUS_LABELS[status]}
@@ -99,7 +110,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
               <button
                 type="button"
                 onClick={() => onChange({ [chip.key]: undefined })}
-                aria-label={`Remover filtro ${chip.label}`}
+                aria-label={t('patients:filters.removeChipAria', { label: chip.label })}
                 className="rounded-full p-0.5 hover:bg-hover"
               >
                 <X className="h-3 w-3" />
@@ -107,7 +118,7 @@ export function FiltersBar({ filters, onChange, onClearAll }: FiltersBarProps) {
             </Badge>
           ))}
           <Button variant="ghost" size="sm" onClick={onClearAll}>
-            Limpar tudo
+            {t('patients:filters.clearAll')}
           </Button>
         </div>
       )}

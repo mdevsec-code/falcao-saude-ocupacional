@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/components/ui/Button';
 import { Checkbox } from '@/components/ui/Checkbox';
@@ -57,6 +58,7 @@ export function ExamTypeDialog({
   onSubmit,
   isSubmitting,
 }: ExamTypeDialogProps) {
+  const { t } = useTranslation('exams');
   const {
     register,
     control,
@@ -80,26 +82,28 @@ export function ExamTypeDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>{editingRecord ? 'Editar tipo de exame' : 'Novo tipo de exame'}</DialogTitle>
+          <DialogTitle>
+            {editingRecord ? t('exams:dialog.editTitle') : t('exams:dialog.createTitle')}
+          </DialogTitle>
           <DialogDescription>
             {editingRecord
-              ? 'Atualize os dados deste tipo de exame.'
-              : 'Cadastre um novo tipo de exame no catálogo.'}
+              ? t('exams:dialog.editDescription')
+              : t('exams:dialog.createDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={submit} noValidate className="space-y-4">
           <Input
             {...register('name')}
-            label="Nome"
-            placeholder="Ex.: ASO Periódico"
+            label={t('exams:dialog.fields.name.label')}
+            placeholder={t('exams:dialog.fields.name.placeholder')}
             error={errors.name?.message}
             required
           />
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label htmlFor="exam-category">Categoria</Label>
+              <Label htmlFor="exam-category">{t('exams:dialog.fields.category.label')}</Label>
               <Controller
                 control={control}
                 name="category"
@@ -123,7 +127,7 @@ export function ExamTypeDialog({
             <Input
               {...register('defaultDurationMin')}
               type="number"
-              label="Duração padrão (min)"
+              label={t('exams:dialog.fields.duration.label')}
               error={errors.defaultDurationMin?.message}
               required
             />
@@ -132,16 +136,16 @@ export function ExamTypeDialog({
           <Input
             {...register('periodicityMonths')}
             type="number"
-            label="Periodicidade (meses)"
-            placeholder="Deixe em branco se não for periódico"
-            hint="Ex.: 12 para exames anuais (NR-7). Deixe vazio para admissional/demissional."
+            label={t('exams:dialog.fields.periodicity.label')}
+            placeholder={t('exams:dialog.fields.periodicity.placeholder')}
+            hint={t('exams:dialog.fields.periodicity.hint')}
             error={errors.periodicityMonths?.message}
           />
 
           <Textarea
             {...register('description')}
-            label="Descrição"
-            placeholder="Detalhes sobre quando este exame é solicitado (opcional)"
+            label={t('exams:dialog.fields.description.label')}
+            placeholder={t('exams:dialog.fields.description.placeholder')}
             error={errors.description?.message}
             rows={2}
           />
@@ -153,7 +157,7 @@ export function ExamTypeDialog({
               <div className="flex items-center gap-2">
                 <Checkbox id="exam-active" checked={field.value} onCheckedChange={field.onChange} />
                 <label htmlFor="exam-active" className="text-sm text-ink">
-                  Ativo (disponível para seleção em Agenda e Atendimentos)
+                  {t('exams:dialog.fields.active')}
                 </label>
               </div>
             )}
@@ -161,10 +165,10 @@ export function ExamTypeDialog({
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t('exams:dialog.cancel')}
             </Button>
             <Button type="submit" variant="primary" isLoading={isSubmitting}>
-              {editingRecord ? 'Salvar alterações' : 'Criar tipo de exame'}
+              {editingRecord ? t('exams:dialog.submitEdit') : t('exams:dialog.submitCreate')}
             </Button>
           </DialogFooter>
         </form>

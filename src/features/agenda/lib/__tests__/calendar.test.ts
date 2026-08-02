@@ -27,12 +27,8 @@ function makeRecord(overrides: Partial<AppointmentRecord>): AppointmentRecord {
 
 describe('isSameDay', () => {
   it('compara apenas ano/mês/dia, ignorando hora', () => {
-    expect(isSameDay(new Date('2026-07-29T08:00:00'), new Date('2026-07-29T23:00:00'))).toBe(
-      true,
-    );
-    expect(isSameDay(new Date('2026-07-29T08:00:00'), new Date('2026-07-30T08:00:00'))).toBe(
-      false,
-    );
+    expect(isSameDay(new Date('2026-07-29T08:00:00'), new Date('2026-07-29T23:00:00'))).toBe(true);
+    expect(isSameDay(new Date('2026-07-29T08:00:00'), new Date('2026-07-30T08:00:00'))).toBe(false);
   });
 });
 

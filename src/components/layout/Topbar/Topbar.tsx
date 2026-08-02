@@ -6,19 +6,21 @@ import { Bell, ChevronsLeft, ChevronsRight, LogOut, Menu, Search, X } from 'luci
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { GlobalSearch } from './GlobalSearch';
 import { useUIStore } from '@/store/uiStore';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useAuth } from '@/features/auth/hooks/useAuth';
-import { ROUTE_PATHS } from '@/constants/routes';
+import { ROUTE_PATHS, ROUTE_NAV_KEYS } from '@/constants/routes';
 import { getInitials } from '@/utils/format';
 import { cn } from '@/utils/cn';
 
 function useBreadcrumb() {
   const { pathname } = useLocation();
   const { t } = useTranslation('common');
-  const label = t(`nav.${pathname.replace(/^\//, '') || 'dashboard'}` as never, '');
-  return [{ label: label || pathname, href: pathname }];
+  const navKey = ROUTE_NAV_KEYS[pathname as keyof typeof ROUTE_NAV_KEYS];
+  const label = navKey ? t(`nav.${navKey}` as never) : pathname;
+  return [{ label, href: pathname }];
 }
 
 export function Topbar(): ReactNode {
@@ -39,7 +41,7 @@ export function Topbar(): ReactNode {
 
   if (!isDesktop && mobileSearchOpen) {
     return (
-      <header className="z-sticky sticky top-0 flex items-center gap-2 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md">
+      <header className="sticky top-0 z-sticky flex items-center gap-2 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md">
         <div className="flex-1">
           <GlobalSearch focusOnMount />
         </div>
@@ -47,7 +49,7 @@ export function Topbar(): ReactNode {
           variant="ghost"
           size="icon"
           onClick={() => setMobileSearchOpen(false)}
-          aria-label="Fechar busca"
+          aria-label={t('topbar.closeSearch')}
         >
           <X className="h-4 w-4" />
         </Button>
@@ -58,7 +60,7 @@ export function Topbar(): ReactNode {
   return (
     <header
       className={cn(
-        'z-sticky sticky top-0 flex items-center gap-3 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md sm:px-6',
+        'sticky top-0 z-sticky flex items-center gap-3 border-b border-border bg-surface/80 px-4 py-3 backdrop-blur-md sm:px-6',
       )}
     >
       {isDesktop ? (
@@ -66,17 +68,22 @@ export function Topbar(): ReactNode {
           variant="ghost"
           size="icon"
           onClick={toggle}
-          aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
+          aria-label={collapsed ? t('topbar.expandMenu') : t('topbar.collapseMenu')}
         >
           {collapsed ? <ChevronsRight className="h-4 w-4" /> : <ChevronsLeft className="h-4 w-4" />}
         </Button>
       ) : (
-        <Button variant="ghost" size="icon" onClick={toggleMobileNav} aria-label="Abrir menu">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleMobileNav}
+          aria-label={t('topbar.openMenu')}
+        >
           <Menu className="h-4 w-4" />
         </Button>
       )}
 
-      <nav aria-label="Trilha de navegação" className="hidden min-w-0 sm:block">
+      <nav aria-label={t('breadcrumb.ariaLabel')} className="hidden min-w-0 sm:block">
         <ol className="flex items-center gap-1.5 text-sm text-ink-soft">
           <li>
             <Link to="/" className="hover:text-ink">
@@ -108,14 +115,16 @@ export function Topbar(): ReactNode {
           size="icon"
           className="lg:hidden"
           onClick={() => setMobileSearchOpen(true)}
-          aria-label="Buscar"
+          aria-label={t('actions.search')}
         >
           <Search className="h-4 w-4" />
         </Button>
 
-        <Button variant="ghost" size="icon" aria-label="Notificações">
+        <Button variant="ghost" size="icon" aria-label={t('topbar.notifications')}>
           <Bell className="h-4 w-4" />
         </Button>
+
+        <LanguageSwitcher />
 
         <ThemeToggle />
 
@@ -125,13 +134,13 @@ export function Topbar(): ReactNode {
             size="sm"
             onClick={() => void handleSignOut()}
             leftIcon={<LogOut className="h-4 w-4" />}
-            aria-label="Sair"
+            aria-label={t('topbar.signOut')}
           >
-            <span className="hidden sm:inline">Sair</span>
+            <span className="hidden sm:inline">{t('topbar.signOut')}</span>
           </Button>
         )}
 
-        <Link to={ROUTE_PATHS.PERFIL} aria-label="Ver perfil" className="ml-1">
+        <Link to={ROUTE_PATHS.PERFIL} aria-label={t('topbar.viewProfile')} className="ml-1">
           <Avatar>
             <AvatarFallback>{getInitials(user?.name ?? 'Falcão')}</AvatarFallback>
           </Avatar>

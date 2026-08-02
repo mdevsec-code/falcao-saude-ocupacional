@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import i18n from '@/i18n';
 import { nonEmptyString } from '@/validators/common';
 import type { ExamCategory, ExamTypeRecord } from '@/services/msw/fixtures/exams';
 
@@ -21,7 +22,7 @@ export interface ExamTypeFilters {
 }
 
 export const examTypeFormSchema = z.object({
-  name: nonEmptyString.min(3, 'Informe o nome do exame'),
+  name: nonEmptyString.min(3, i18n.t('exams:validation.nameRequired')),
   category: z.enum([
     'Admissional',
     'Periódico',
@@ -30,10 +31,17 @@ export const examTypeFormSchema = z.object({
     'Retorno ao Trabalho',
     'Complementar',
   ]),
-  defaultDurationMin: z.coerce.number().int().min(5, 'Mínimo 5 minutos').max(240, 'Máximo 240 minutos'),
+  defaultDurationMin: z.coerce
+    .number()
+    .int()
+    .min(5, i18n.t('validation:minDuration', { count: 5 }))
+    .max(240, i18n.t('validation:maxDuration', { count: 240 })),
   periodicityMonths: z.coerce.number().int().min(1).max(60).optional(),
   active: z.boolean(),
-  description: z.string().max(500, 'Tamanho máximo excedido').optional(),
+  description: z
+    .string()
+    .max(500, i18n.t('validation:maxLength', { count: 500 }))
+    .optional(),
 });
 
 export type ExamTypeFormInput = z.infer<typeof examTypeFormSchema>;

@@ -1,0 +1,129 @@
+{
+  "page": {
+    "eyebrow": "接诊",
+    "title": "接诊记录",
+    "description": "记录已完成的就诊及各患者的临床结论。"
+  },
+  "error": {
+    "title": "无法加载接诊记录",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "new": "新建接诊记录"
+  },
+  "kpi": {
+    "total": "接诊记录总数",
+    "aptos": "适任",
+    "restricao": "有限制适任",
+    "atencao": "不适任 / 已转诊"
+  },
+  "dialog": {
+    "createTitle": "新建接诊记录",
+    "editTitle": "编辑接诊记录",
+    "createDescription": "登记一次已完成的临床接诊。",
+    "editDescription": "更新该接诊记录的信息。",
+    "fields": {
+      "patient": "患者",
+      "patientPlaceholder": "选择患者",
+      "examType": "检查类型",
+      "doctor": "医生",
+      "attendanceDate": "接诊日期",
+      "conclusion": "结论",
+      "dutyFitness": "各风险作业的适任情况",
+      "dutyFitnessHint": "评估员工对其岗位相关作业的适任情况。",
+      "restrictionNotes": "限制说明",
+      "restrictionNotesPlaceholder": "描述所适用的限制",
+      "notes": "备注",
+      "notesPlaceholder": "补充信息（可选）"
+    },
+    "dutyStatus": {
+      "notAssessed": "未评估",
+      "fit": "适任",
+      "unfit": "不适任"
+    },
+    "actions": {
+      "saveCreate": "登记接诊记录",
+      "saveEdit": "保存修改"
+    }
+  },
+  "delete": {
+    "title": "删除该接诊记录？",
+    "descriptionBefore": "患者 ",
+    "descriptionAfter": " 的接诊记录将被永久删除。此操作无法撤销。",
+    "confirm": "删除"
+  },
+  "table": {
+    "columns": {
+      "date": "日期",
+      "patient": "患者",
+      "exam": "检查",
+      "doctor": "医生",
+      "conclusion": "结论",
+      "restrictionNotes": "限制说明",
+      "actions": "操作"
+    },
+    "search": {
+      "placeholder": "在表格中搜索…"
+    },
+    "actions": {
+      "exportExcel": "导出 Excel",
+      "downloadAso": "下载 ASO",
+      "edit": "编辑接诊记录",
+      "remove": "删除接诊记录"
+    },
+    "pagination": {
+      "showing": "显示第 {{from}}–{{to}} 条，共 {{total}} 条接诊记录",
+      "previous": "上一页",
+      "next": "下一页",
+      "page": "第 {{current}} / {{total}} 页"
+    }
+  },
+  "export": {
+    "title": "接诊记录",
+    "generatedAt": "生成于",
+    "total": "总计"
+  },
+  "empty": {
+    "title": "未找到接诊记录",
+    "description": "请调整筛选条件或搜索内容。"
+  },
+  "toast": {
+    "exportSuccess": "导出完成。",
+    "exportError": "无法导出电子表格。",
+    "asoSuccess": "ASO 已生成。",
+    "asoError": "无法生成 ASO。",
+    "createSuccess": "接诊记录已创建。",
+    "createError": "无法创建接诊记录。",
+    "updateSuccess": "接诊记录已更新。",
+    "updateError": "无法更新接诊记录。",
+    "deleteSuccess": "接诊记录已删除。",
+    "deleteError": "无法删除接诊记录。"
+  },
+  "filters": {
+    "heading": "筛选条件",
+    "fields": {
+      "patient": "患者",
+      "doctor": "医生",
+      "examType": "检查类型",
+      "conclusion": "结论",
+      "periodStart": "时间范围（起）",
+      "periodEndAria": "至"
+    },
+    "options": {
+      "all": "全部",
+      "allFeminine": "全部"
+    },
+    "chips": {
+      "patient": "患者：{{name}}",
+      "doctor": "医生：{{name}}",
+      "exam": "检查：{{name}}",
+      "conclusion": "结论：{{name}}",
+      "from": "起始于 {{date}}",
+      "until": "截止于 {{date}}",
+      "removeAria": "移除筛选条件 {{label}}"
+    },
+    "actions": {
+      "clearAll": "清除全部"
+    }
+  }
+}

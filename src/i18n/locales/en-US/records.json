@@ -1,0 +1,31 @@
+{
+  "page": {
+    "eyebrow": "Front Desk",
+    "title": "Medical Records",
+    "description": "Consolidated history of visits per patient."
+  },
+  "error": {
+    "title": "Unable to load the medical records",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "retry": "Try again"
+  },
+  "search": {
+    "placeholder": "Search patient…"
+  },
+  "list": {
+    "empty": "No patients found."
+  },
+  "detail": {
+    "selectTitle": "Select a patient",
+    "selectDescription": "Choose a patient from the list to view their medical record.",
+    "admission": "Admitted: {{date}}",
+    "attendanceCount": "{{count}} visit(s)",
+    "historyTitle": "Visit history"
+  },
+  "timeline": {
+    "emptyTitle": "No visits recorded",
+    "emptyDescription": "This patient does not have a visit history yet."
+  }
+}

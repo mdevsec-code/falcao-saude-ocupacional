@@ -1,0 +1,36 @@
+{
+  "page": {
+    "eyebrow": "管理",
+    "title": "设置",
+    "description": "系统信息、本地化与通知设置。"
+  },
+  "system": {
+    "title": "系统信息",
+    "description": "当前运行的环境与版本。",
+    "application": "应用",
+    "version": "版本",
+    "environment": "环境",
+    "production": "生产环境",
+    "development": "开发环境",
+    "dataSource": "数据源",
+    "mockSource": "模拟数据（MSW）",
+    "realApiSource": "真实 API",
+    "api": "API"
+  },
+  "localization": {
+    "title": "本地化",
+    "description": "平台的默认语言与格式。",
+    "currentLanguage": "当前语言",
+    "timezone": "时区"
+  },
+  "notifications": {
+    "title": "通知",
+    "description": "发送给管理员和前台的提醒。",
+    "newAppointments": "新预约",
+    "pendingAtestados": "待录入的医嘱证明",
+    "examReminders": "定期体检提醒（NR-7）"
+  },
+  "toast": {
+    "prefsNotPersisted": "此版本尚未支持保存偏好设置。"
+  }
+}

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { AtestadoRecord, CompetenciaGroup } from '../types';
 import { topN } from '../lib/kpis';
 
@@ -17,6 +18,7 @@ function backgroundFor(value: number, max: number): string | undefined {
 }
 
 export function HeatmapTable({ records, competenciaGroups }: HeatmapTableProps) {
+  const { t } = useTranslation('atestados');
   const { setores, competencias, matrix, max } = useMemo(() => {
     const setoresTop = topN(records, 'setor', 8).map(([s]) => s);
     const comps = competenciaGroups.map((c) => c.key);
@@ -28,7 +30,7 @@ export function HeatmapTable({ records, competenciaGroups }: HeatmapTableProps) 
   }, [records, competenciaGroups]);
 
   if (setores.length === 0 || competencias.length === 0) {
-    return <p className="text-sm text-ink-soft">Sem dados suficientes para o mapa de calor.</p>;
+    return <p className="text-sm text-ink-soft">{t('atestados:heatmap.empty')}</p>;
   }
 
   return (
@@ -37,7 +39,7 @@ export function HeatmapTable({ records, competenciaGroups }: HeatmapTableProps) 
         <thead>
           <tr>
             <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-ink-soft">
-              Setor
+              {t('atestados:heatmap.setorHeader')}
             </th>
             {competencias.map((c) => (
               <th

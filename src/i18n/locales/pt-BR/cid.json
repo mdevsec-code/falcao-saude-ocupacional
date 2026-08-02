@@ -1,8 +1,69 @@
 {
+  "validation": {
+    "codeFormat": "Use o formato CID-10, ex.: M54.5",
+    "descriptionRequired": "Informe a descrição"
+  },
   "page": {
     "eyebrow": "Clínico",
     "title": "CID — Classificação Internacional de Doenças",
     "description": "Referência de códigos CID-10 mais relevantes para saúde ocupacional em construção civil e engenharia.",
     "footnote": "Recorte curado, não exaustivo — não substitui a tabela oficial da CID-10 (OMS/DATASUS)."
+  },
+  "search": {
+    "placeholder": "Buscar por código ou descrição…"
+  },
+  "filter": {
+    "allCategories": "Todas as categorias"
+  },
+  "actions": {
+    "new": "Novo CID"
+  },
+  "table": {
+    "code": "Código",
+    "description": "Descrição",
+    "category": "Categoria",
+    "actions": "Ações",
+    "copyAria": "Copiar código {{code}}",
+    "editAria": "Editar código CID",
+    "deleteAria": "Remover código CID"
+  },
+  "results": {
+    "count_one": "{{count}} código encontrado",
+    "count_other": "{{count}} códigos encontrados"
+  },
+  "dialog": {
+    "createTitle": "Novo código CID",
+    "editTitle": "Editar código CID",
+    "createDescription": "Cadastre um código CID adicional, complementando o catálogo curado.",
+    "editDescription": "Atualize os dados deste código CID.",
+    "fields": {
+      "code": "Código",
+      "codePlaceholder": "Ex.: M54.5",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descrição da condição",
+      "category": "Categoria"
+    },
+    "cancel": "Cancelar",
+    "submitCreate": "Cadastrar código",
+    "submitEdit": "Salvar alterações"
+  },
+  "deleteDialog": {
+    "title": "Remover código CID?",
+    "description": "O código <strong>{{code}}</strong> será removido permanentemente. Essa ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Remover"
+  },
+  "toast": {
+    "copySuccess": "Código {{code}} copiado.",
+    "createSuccess": "Código CID cadastrado.",
+    "createError": "Não foi possível cadastrar o código.",
+    "updateSuccess": "Código CID atualizado.",
+    "updateError": "Não foi possível atualizar o código.",
+    "deleteSuccess": "Código CID removido.",
+    "deleteError": "Não foi possível remover o código."
+  },
+  "empty": {
+    "title": "Nenhum código encontrado",
+    "description": "Ajuste a busca ou a categoria."
   }
 }

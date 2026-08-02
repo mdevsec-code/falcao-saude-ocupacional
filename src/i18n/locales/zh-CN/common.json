@@ -1,0 +1,121 @@
+{
+  "app": {
+    "name": "Falcão Saúde Ocupacional",
+    "shortName": "Falcão"
+  },
+  "actions": {
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "edit": "编辑",
+    "delete": "删除",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "返回",
+    "close": "关闭",
+    "open": "打开",
+    "search": "搜索",
+    "filter": "筛选",
+    "clear": "清除",
+    "retry": "重试",
+    "loading": "加载中…",
+    "add": "添加",
+    "create": "创建",
+    "update": "更新",
+    "submit": "提交",
+    "view": "查看",
+    "more": "更多",
+    "backToHome": "返回首页"
+  },
+  "states": {
+    "empty": "暂无内容",
+    "loading": "加载中…",
+    "error": "出现问题"
+  },
+  "nav": {
+    "home": "首页",
+    "dashboard": "仪表盘",
+    "agenda": "日程",
+    "appointments": "预约",
+    "patients": "患者",
+    "attendances": "接诊记录",
+    "records": "病历",
+    "cid": "CID",
+    "exams": "检查",
+    "aso": "ASO",
+    "reports": "报表",
+    "atestados": "病假证明",
+    "vacation": "休假",
+    "safety": "职业安全",
+    "users": "用户",
+    "permissions": "权限",
+    "settings": "设置",
+    "profile": "个人资料",
+    "audit": "审计",
+    "underConstruction": "建设中"
+  },
+  "theme": {
+    "light": "浅色主题",
+    "dark": "深色主题",
+    "switchToLight": "切换为浅色主题",
+    "switchToDark": "切换为深色主题"
+  },
+  "sidebar": {
+    "overview": "概览",
+    "attendance": "接诊",
+    "clinical": "临床",
+    "safety": "职业安全",
+    "hr": "人力资源",
+    "reports": "报表",
+    "admin": "管理",
+    "comingSoon": "敬请期待",
+    "mainNavAriaLabel": "主导航"
+  },
+  "footer": {
+    "version": "Falcão · v{{version}}"
+  },
+  "branding": {
+    "health": "职业健康"
+  },
+  "topbar": {
+    "closeSearch": "关闭搜索",
+    "openMenu": "打开菜单",
+    "expandMenu": "展开菜单",
+    "collapseMenu": "收起菜单",
+    "notifications": "通知",
+    "signOut": "退出登录",
+    "viewProfile": "查看个人资料"
+  },
+  "breadcrumb": {
+    "ariaLabel": "面包屑导航"
+  },
+  "search": {
+    "placeholder": "搜索患者或 CID…",
+    "ariaLabel": "全局搜索",
+    "noResults": "未找到与\"{{query}}\"相关的结果。"
+  },
+  "languageSwitcher": {
+    "selectLanguage": "选择语言"
+  },
+  "placeholder": {
+    "defaultDescription": "我们正在精心打造此模块，敬请期待新功能。",
+    "comingSoon": {
+      "title": "新功能即将上线"
+    }
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "无法加载所请求的路由。请检查地址，或返回首页。"
+  },
+  "forbidden": {
+    "title": "访问受限",
+    "description": "您的账户权限无法查看此页面。如需访问权限，请联系管理员。"
+  },
+  "errorBoundary": {
+    "routeErrorDescription": "无法加载所请求的路由。",
+    "genericDescription": "无法加载此页面。请重试，或返回首页。",
+    "crashTitle": "应用运行时错误",
+    "crashDescription": "渲染过程中发生异常。以下为诊断用的堆栈跟踪信息。",
+    "reload": "重新加载页面"
+  }
+}

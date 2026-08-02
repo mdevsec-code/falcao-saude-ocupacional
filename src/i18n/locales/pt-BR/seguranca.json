@@ -1,0 +1,193 @@
+{
+  "validation": {
+    "descriptionRequired": "Descreva o desvio com mais detalhes"
+  },
+  "page": {
+    "eyebrow": "Gestão",
+    "title": "Segurança do Trabalho",
+    "description": "Registro de desvios de segurança e indicadores mensais de acidentes."
+  },
+  "tabs": {
+    "desvios": "Desvios",
+    "indicadores": "Indicadores de Acidentes"
+  },
+  "desvios": {
+    "actions": {
+      "new": "Novo desvio",
+      "retry": "Tentar novamente"
+    },
+    "error": {
+      "title": "Não foi possível carregar os desvios",
+      "description": "Tente novamente em instantes."
+    },
+    "kpi": {
+      "total": "Total de desvios",
+      "pending": "Pendentes",
+      "inProgress": "Em andamento",
+      "completed": "Concluídos"
+    },
+    "dialog": {
+      "createTitle": "Novo desvio",
+      "editTitle": "Editar desvio",
+      "createDescription": "Registre um novo desvio de segurança identificado em campo.",
+      "editDescription": "Atualize os dados deste desvio.",
+      "fields": {
+        "date": "Data",
+        "location": "Local",
+        "classification": "Classificação",
+        "description": "Descrição do desvio",
+        "descriptionPlaceholder": "Descreva o que foi observado",
+        "foreman": "Encarregado",
+        "foremanPlaceholder": "Nome do encarregado",
+        "responsibleTechnician": "Técnico responsável",
+        "responsibleTechnicianPlaceholder": "Nome do técnico de segurança",
+        "optional": "Opcional",
+        "action": "Ação tomada",
+        "actionPlaceholder": "Descreva a ação corretiva (opcional)",
+        "status": "Status"
+      },
+      "cancel": "Cancelar",
+      "submitCreate": "Registrar desvio",
+      "submitEdit": "Salvar alterações"
+    },
+    "table": {
+      "date": "Data",
+      "location": "Local",
+      "classification": "Classificação",
+      "description": "Descrição",
+      "status": "Status",
+      "foreman": "Encarregado",
+      "responsibleTechnician": "Técnico responsável",
+      "action": "Ação tomada",
+      "actions": "Ações",
+      "searchPlaceholder": "Pesquisar na tabela…",
+      "exportExcel": "Exportar Excel",
+      "exportTitle": "Registro de Desvios de Segurança",
+      "generatedAt": "Gerado em",
+      "total": "Total",
+      "editAria": "Editar desvio",
+      "deleteAria": "Remover desvio",
+      "prevPageAria": "Página anterior",
+      "nextPageAria": "Próxima página",
+      "showingRange": "Mostrando {{start}}–{{end}} de {{total}} desvios",
+      "pageOf": "Página {{current}} de {{total}}"
+    },
+    "toast": {
+      "exportSuccess": "Exportação concluída.",
+      "exportError": "Não foi possível exportar a planilha.",
+      "createSuccess": "Desvio registrado.",
+      "createError": "Não foi possível registrar o desvio.",
+      "updateSuccess": "Desvio atualizado.",
+      "updateError": "Não foi possível atualizar o desvio.",
+      "deleteSuccess": "Desvio removido.",
+      "deleteError": "Não foi possível remover o desvio."
+    },
+    "empty": {
+      "title": "Nenhum desvio encontrado",
+      "description": "Ajuste os filtros ou registre um novo desvio."
+    },
+    "filters": {
+      "title": "Filtros",
+      "all": "Todos",
+      "search": { "label": "Busca", "placeholder": "Descrição, encarregado ou técnico…" },
+      "location": { "label": "Local" },
+      "classification": { "label": "Classificação" },
+      "status": { "label": "Status" },
+      "chipLocation": "Local: {{value}}",
+      "chipClassification": "Classificação: {{value}}",
+      "chipStatus": "Status: {{value}}",
+      "chipSearch": "Busca: \"{{value}}\"",
+      "removeChipAria": "Remover filtro {{label}}",
+      "clearAll": "Limpar tudo"
+    },
+    "deleteDialog": {
+      "title": "Remover desvio?",
+      "description": "O desvio registrado em <strong>{{date}}</strong> será removido permanentemente. Essa ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "confirm": "Remover"
+    }
+  },
+  "indicadores": {
+    "actions": {
+      "new": "Novo lançamento",
+      "retry": "Tentar novamente"
+    },
+    "error": {
+      "title": "Não foi possível carregar os indicadores",
+      "description": "Tente novamente em instantes."
+    },
+    "kpi": {
+      "totalAccidents": "Acidentes no ano",
+      "frequencyRate": "Taxa de Frequência (ano)",
+      "severityRate": "Taxa de Gravidade (ano)",
+      "daysLost": "Dias perdidos (ano)"
+    },
+    "yearFilter": {
+      "label": "Ano"
+    },
+    "chartTitle": "Evolução mensal das taxas",
+    "chart": {
+      "frequencyRate": "Taxa de Frequência",
+      "severityRate": "Taxa de Gravidade"
+    },
+    "dialog": {
+      "createTitle": "Novo lançamento mensal",
+      "editTitle": "Editar lançamento mensal",
+      "createDescription": "Preencha os dados do mês para calcular os indicadores automaticamente (NBR 14280).",
+      "editDescription": "Atualize os dados deste mês.",
+      "fields": {
+        "month": "Mês",
+        "year": "Ano",
+        "employees": "Total de empregados no período",
+        "employeesHint": "Usado para calcular as horas-homem trabalhadas (× 220h/mês)",
+        "accidentsWithLeave": "Acidentes com afastamento",
+        "accidentsWithoutLeave": "Acidentes sem afastamento",
+        "daysLostAccidents": "Dias perdidos por acidentes",
+        "daysDebited": "Dias debitados",
+        "daysDebitedHint": "Conforme tabela da NBR 14280"
+      },
+      "cancel": "Cancelar",
+      "submitCreate": "Salvar lançamento",
+      "submitEdit": "Salvar alterações"
+    },
+    "table": {
+      "period": "Período",
+      "year": "Ano",
+      "month": "Mês",
+      "employees": "Empregados",
+      "accidentsWithLeave": "Acidentes c/ afastamento",
+      "accidentsWithoutLeave": "Acidentes s/ afastamento",
+      "totalAccidents": "Total de acidentes",
+      "totalDaysLost": "Dias perdidos",
+      "frequencyRate": "Taxa de Frequência",
+      "severityRate": "Taxa de Gravidade",
+      "relativeIndex": "Índice Relativo",
+      "actions": "Ações",
+      "exportExcel": "Exportar Excel",
+      "exportTitle": "Indicadores Mensais de Acidentes",
+      "generatedAt": "Gerado em",
+      "editAria": "Editar lançamento",
+      "deleteAria": "Remover lançamento"
+    },
+    "toast": {
+      "exportSuccess": "Exportação concluída.",
+      "exportError": "Não foi possível exportar a planilha.",
+      "createSuccess": "Lançamento salvo.",
+      "createError": "Não foi possível salvar o lançamento.",
+      "updateSuccess": "Lançamento atualizado.",
+      "updateError": "Não foi possível atualizar o lançamento.",
+      "deleteSuccess": "Lançamento removido.",
+      "deleteError": "Não foi possível remover o lançamento."
+    },
+    "empty": {
+      "title": "Nenhum indicador lançado neste ano",
+      "description": "Adicione o lançamento do primeiro mês para ver o gráfico e as taxas."
+    },
+    "deleteDialog": {
+      "title": "Remover lançamento?",
+      "description": "O lançamento de <strong>{{period}}</strong> será removido permanentemente. Essa ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "confirm": "Remover"
+    }
+  }
+}

@@ -7,5 +7,91 @@
   "error": {
     "title": "Não foi possível carregar os pacientes",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "new": "Novo paciente",
+    "retry": "Tentar novamente"
+  },
+  "kpi": {
+    "total": "Total de pacientes",
+    "active": "Ativos",
+    "onLeave": "Afastados",
+    "sectors": "Setores"
+  },
+  "dialog": {
+    "createTitle": "Novo paciente",
+    "editTitle": "Editar paciente",
+    "createDescription": "Preencha os dados para cadastrar um novo paciente.",
+    "editDescription": "Atualize os dados cadastrais do paciente.",
+    "fields": {
+      "name": { "label": "Nome completo", "placeholder": "Nome do paciente" },
+      "cpf": { "label": "CPF", "placeholder": "000.000.000-00" },
+      "birthDate": { "label": "Data de nascimento" },
+      "phone": { "label": "Telefone", "placeholder": "11987654321" },
+      "email": { "label": "E-mail", "placeholder": "paciente@email.com" },
+      "sector": { "label": "Setor" },
+      "role": { "label": "Função/Cargo", "placeholder": "Ex.: Pedreiro" },
+      "admissionDate": { "label": "Data de admissão" },
+      "status": { "label": "Status" },
+      "notes": { "label": "Observações", "placeholder": "Detalhes adicionais (opcional)" },
+      "optional": "Opcional"
+    },
+    "cancel": "Cancelar",
+    "submitCreate": "Cadastrar paciente",
+    "submitEdit": "Salvar alterações"
+  },
+  "table": {
+    "name": "Nome",
+    "cpf": "CPF",
+    "role": "Função",
+    "sector": "Setor",
+    "phone": "Telefone",
+    "admission": "Admissão",
+    "status": "Status",
+    "actions": "Ações",
+    "searchPlaceholder": "Pesquisar na tabela…",
+    "exportExcel": "Exportar Excel",
+    "exportTitle": "Cadastro de Pacientes",
+    "generatedAt": "Gerado em",
+    "total": "Total",
+    "viewRecordAria": "Ver prontuário",
+    "editAria": "Editar paciente",
+    "deleteAria": "Remover paciente",
+    "prevPageAria": "Página anterior",
+    "nextPageAria": "Próxima página",
+    "showingRange": "Mostrando {{start}}–{{end}} de {{total}} pacientes",
+    "pageOf": "Página {{current}} de {{total}}"
+  },
+  "toast": {
+    "exportSuccess": "Exportação concluída.",
+    "exportError": "Não foi possível exportar a planilha.",
+    "createSuccess": "Paciente cadastrado.",
+    "createError": "Não foi possível cadastrar o paciente.",
+    "updateSuccess": "Paciente atualizado.",
+    "updateError": "Não foi possível atualizar o paciente.",
+    "deleteSuccess": "Paciente removido.",
+    "deleteError": "Não foi possível remover o paciente."
+  },
+  "empty": {
+    "title": "Nenhum paciente encontrado",
+    "description": "Ajuste os filtros ou a busca."
+  },
+  "filters": {
+    "title": "Filtros",
+    "all": "Todos",
+    "search": { "label": "Busca", "placeholder": "Nome, CPF ou função…" },
+    "sector": { "label": "Setor" },
+    "status": { "label": "Status" },
+    "chipSector": "Setor: {{value}}",
+    "chipStatus": "Status: {{value}}",
+    "chipSearch": "Busca: \"{{value}}\"",
+    "removeChipAria": "Remover filtro {{label}}",
+    "clearAll": "Limpar tudo"
+  },
+  "deleteDialog": {
+    "title": "Remover paciente?",
+    "description": "O cadastro de <strong>{{name}}</strong> será removido permanentemente. Essa ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Remover"
   }
 }
