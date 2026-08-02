@@ -1,9 +1,9 @@
 # Cada linha é uma regra de CODEOWNERS. Última regra válida para um arquivo vence.
 # Documentação: https://docs.github.com/pt/codeowners
 
-*       @falcao-eng/core
-/docs   @falcao-eng/core
-/.github @falcao-eng/core
-/src/store/authStore.ts @falcao-eng/core
-/src/features/auth  @falcao-eng/core
-/src/services/http  @falcao-eng/core
+*       @mdevsec-code
+/docs   @mdevsec-code
+/.github @mdevsec-code
+/src/store/authStore.ts @mdevsec-code
+/src/features/auth  @mdevsec-code
+/src/services/http  @mdevsec-code
