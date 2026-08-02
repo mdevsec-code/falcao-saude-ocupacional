@@ -1,0 +1,85 @@
+{
+  "roles": {
+    "ADMIN": "Administrador",
+    "MEDICO": "Médico",
+    "ENFERMEIRO": "Enfermeiro",
+    "TECNICO_SEGURANCA": "Técnico de Segurança",
+    "RH": "Recursos Humanos",
+    "RECEPCAO": "Recepção"
+  },
+  "appointmentStatus": {
+    "agendado": "Agendado",
+    "realizado": "Realizado",
+    "cancelado": "Cancelado",
+    "faltou": "Faltou"
+  },
+  "appointmentConclusion": {
+    "apto": "Apto",
+    "apto_restricao": "Apto c/ restrição",
+    "inapto": "Inapto",
+    "encaminhado": "Encaminhado"
+  },
+  "patientStatus": {
+    "ativo": "Ativo",
+    "inativo": "Inativo",
+    "afastado": "Afastado"
+  },
+  "vacationStatus": {
+    "agendado": "Agendada",
+    "em_andamento": "Em andamento",
+    "concluido": "Concluída",
+    "cancelado": "Cancelada"
+  },
+  "auditAction": {
+    "login": "Login",
+    "login_failed": "Tentativa de login falhou",
+    "logout": "Logout",
+    "create": "Criação",
+    "update": "Atualização",
+    "delete": "Exclusão"
+  },
+  "auditEntity": {
+    "auth": "Autenticação",
+    "patient": "Paciente",
+    "attendance": "Atendimento",
+    "user": "Usuário",
+    "exam_type": "Tipo de exame",
+    "vacation": "Férias",
+    "deviation": "Desvio",
+    "accident_indicator": "Indicador de acidente",
+    "cid": "CID"
+  },
+  "deviationStatus": {
+    "pendente": "Pendente",
+    "em_andamento": "Em andamento",
+    "concluido": "Concluído"
+  },
+  "deviationClassification": {
+    "acessibilidade": "Acessibilidade, Caminho Seguro",
+    "organizacao": "Arrumação, Organização e Limpeza",
+    "comportamental": "Comportamental",
+    "equipamento": "Equipamento, Ferramenta, Máquina",
+    "epi": "EPIs",
+    "ergonomia": "Ergonomia",
+    "procedimento": "Procedimento",
+    "residuos": "Resíduos",
+    "sinalizacao": "Sinalização e Isolamento",
+    "eletricidade": "Eletricidade"
+  },
+  "duties": {
+    "altura": "Trabalho em Altura (NR-35)",
+    "espaco_confinado": "Espaço Confinado (NR-33)",
+    "maquinas_pesadas": "Máquinas e Equipamentos Pesados (NR-12)",
+    "eletricidade": "Eletricidade (NR-10)",
+    "levantamento_peso": "Levantamento de Peso / Esforço Físico",
+    "ruido": "Exposição a Ruído"
+  },
+  "dutiesShort": {
+    "altura": "Altura",
+    "espaco_confinado": "Esp. Confinado",
+    "maquinas_pesadas": "Máquinas",
+    "eletricidade": "Eletricidade",
+    "levantamento_peso": "Peso/Esforço",
+    "ruido": "Ruído"
+  }
+}

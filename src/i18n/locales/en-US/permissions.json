@@ -1,0 +1,33 @@
+{
+  "page": {
+    "eyebrow": "Administration",
+    "title": "Permissions",
+    "description": "Permission matrix by access role (RBAC).",
+    "footnote": "Permissions are defined by role, not individually per user. To change someone's access, update their role under Users."
+  },
+  "table": {
+    "permissionColumn": "Permission",
+    "allowed": "Allowed",
+    "notAllowed": "Not allowed"
+  },
+  "labels": {
+    "appointmentRead": "View appointments",
+    "appointmentWrite": "Create/edit appointments",
+    "appointmentDelete": "Delete appointments",
+    "patientRead": "View patients",
+    "patientWrite": "Create/edit patients",
+    "employeeRead": "View employees",
+    "employeeWrite": "Create/edit employees",
+    "asoRead": "View ASO",
+    "asoWrite": "Issue ASO",
+    "examRead": "View exams",
+    "examWrite": "Create/edit exams",
+    "reportRead": "View reports",
+    "reportWrite": "Generate reports",
+    "usersManage": "Manage users",
+    "settingsManage": "Manage settings",
+    "auditRead": "View audit trail",
+    "deviationRead": "View safety deviations",
+    "deviationWrite": "Register safety deviations"
+  }
+}

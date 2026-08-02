@@ -1,5 +1,5 @@
 import { http, HttpResponse, delay } from 'msw';
-import { DEMO_USERS, type UserFixture } from '../fixtures/users';
+import { SEED_USERS, type UserFixture } from '../fixtures/users';
 import { AUDIT_ACTIONS, AUDIT_ENTITY_TYPES } from '@/constants/audit';
 import { recordAuditEvent } from './audit';
 import { getLastSessionUser } from './auth';
@@ -8,8 +8,13 @@ import { getLastSessionUser } from './auth';
  * Store mutável em memória — simula um backend real para CRUD de
  * usuários. Reinicia a cada reload da página (sem persistência).
  */
-let store: UserFixture[] = DEMO_USERS.map((r) => ({ ...r }));
+let store: UserFixture[] = SEED_USERS.map((r) => ({ ...r }));
 let nextId = store.length + 1;
+
+/** Usado por `handlers/auth.ts` para autenticar contas criadas depois do seed inicial. */
+export function getUsersStore(): readonly UserFixture[] {
+  return store;
+}
 
 function logUserEvent(
   action: (typeof AUDIT_ACTIONS)['CREATE' | 'UPDATE' | 'DELETE'],

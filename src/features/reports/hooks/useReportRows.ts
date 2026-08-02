@@ -1,23 +1,16 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { REPORT_FIXTURES } from '../fixtures';
 import type { ReportFilters, ReportKind, ReportRecord } from '../types';
 
-const KIND_LABELS: Record<ReportKind, string> = {
-  agendamentos: 'Agendamentos',
-  atendimentos: 'Atendimentos',
-  aso: 'ASO Geral',
-  aso_a_ptos: 'ASO Admissional',
-  aso_periodicos: 'ASO Periódicos',
-};
-
-const DATE_LABELS: Record<ReportKind, string> = {
-  agendamentos: 'Período de agendamento',
-  atendimentos: 'Período de atendimento',
-  aso: 'Período de emissão do ASO',
-  aso_a_ptos: 'Período de admissão',
-  aso_periodicos: 'Período do exame periódico',
-};
+const ALL_KINDS: ReportKind[] = [
+  'agendamentos',
+  'atendimentos',
+  'aso',
+  'aso_a_ptos',
+  'aso_periodicos',
+];
 
 /**
  * Hook que devolve os registros de relatório aplicando filtros simples.
@@ -35,22 +28,19 @@ export function useReportRows(filters: ReportFilters): readonly ReportRecord[] {
 }
 
 export function useReportKinds() {
+  const { t } = useTranslation('reports');
   return useMemo(
-    () =>
-      (Object.keys(KIND_LABELS) as ReportKind[]).map((kind) => ({
-        value: kind,
-        label: KIND_LABELS[kind]!,
-      })),
-    [],
+    () => ALL_KINDS.map((kind) => ({ value: kind, label: t(`reports:kinds.${kind}`) })),
+    [t],
   );
 }
 
-export function reportKindLabel(kind: ReportKind): string {
-  return KIND_LABELS[kind]!;
+export function reportKindLabel(t: (key: string) => string, kind: ReportKind): string {
+  return t(`reports:kinds.${kind}`);
 }
 
-export function reportDateLabel(kind: ReportKind): string {
-  return DATE_LABELS[kind]!;
+export function reportDateLabel(t: (key: string) => string, kind: ReportKind): string {
+  return t(`reports:kindDates.${kind}`);
 }
 
 function matchesKind(_record: ReportRecord): boolean {

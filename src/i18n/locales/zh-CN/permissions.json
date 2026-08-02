@@ -1,0 +1,33 @@
+{
+  "page": {
+    "eyebrow": "管理",
+    "title": "权限",
+    "description": "按访问角色划分的权限矩阵（RBAC）。",
+    "footnote": "权限按角色统一设置，不针对单个用户单独配置。如需调整某人的访问权限，请在“用户”页面修改其角色。"
+  },
+  "table": {
+    "permissionColumn": "权限",
+    "allowed": "允许",
+    "notAllowed": "不允许"
+  },
+  "labels": {
+    "appointmentRead": "查看预约",
+    "appointmentWrite": "创建/编辑预约",
+    "appointmentDelete": "删除预约",
+    "patientRead": "查看患者",
+    "patientWrite": "创建/编辑患者",
+    "employeeRead": "查看员工",
+    "employeeWrite": "创建/编辑员工",
+    "asoRead": "查看 ASO",
+    "asoWrite": "签发 ASO",
+    "examRead": "查看检查",
+    "examWrite": "创建/编辑检查",
+    "reportRead": "查看报表",
+    "reportWrite": "生成报表",
+    "usersManage": "管理用户",
+    "settingsManage": "管理设置",
+    "auditRead": "查看审计记录",
+    "deviationRead": "查看安全偏差",
+    "deviationWrite": "登记安全偏差"
+  }
+}

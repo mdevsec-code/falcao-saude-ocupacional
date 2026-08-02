@@ -8,25 +8,127 @@
     "title": "Filtros",
     "description": "Refine a análise pelo período, setor, função e mais."
   },
+  "filters": {
+    "searchLabel": "Busca",
+    "searchPlaceholder": "Colaborador, função, CID, médico…",
+    "periodStartLabel": "Período (início)",
+    "periodEndAria": "Até",
+    "clearAll": "Limpar tudo",
+    "removeFilterAria": "Remover filtro {{label}}",
+    "chipFrom": "A partir de {{date}}",
+    "chipUntil": "Até {{date}}",
+    "chipSearch": "Busca: \"{{query}}\"",
+    "allOption": "Todos",
+    "fields": {
+      "competencia": "Competência",
+      "setor": "Setor",
+      "funcao": "Função",
+      "liderancaDireta": "Liderança Direta",
+      "localAtendimento": "Local de Atendimento"
+    }
+  },
   "kpis": {
     "total": "Total de Atestados",
     "totalDias": "Total de Dias Afastados",
     "colaboradores": "Colaboradores Afastados",
     "setorTop": "Setor Mais Afetado",
     "sla": "SLA Médio de Lançamento",
-    "recorrencia": "Taxa de Recorrência"
+    "recorrencia": "Taxa de Recorrência",
+    "srHeading": "Indicadores de atestados"
   },
   "charts": {
-    "evolucao": { "title": "Evolução Mensal", "description": "Nº de atestados e dias afastados por competência" },
+    "evolucao": {
+      "title": "Evolução Mensal",
+      "description": "Nº de atestados e dias afastados por competência"
+    },
     "funcao": { "title": "Distribuição por Função", "description": "Top 6 funções + outros" },
     "setor": { "title": "Atestados por Setor", "description": "Onde os afastamentos mais ocorrem" },
     "cid": { "title": "Principais Motivos (CID)", "description": "Por que os atestados acontecem" },
-    "acumulado": { "title": "Dias Afastados Acumulados", "description": "Tendência ao longo do período" },
-    "lideranca": { "title": "Liderança Mais Impactada", "description": "Atestados por gestor direto" },
-    "heatmap": { "title": "Mapa de Calor — Setor x Competência", "description": "Concentração de atestados por mês e setor" },
-    "timeline": { "title": "Lançamentos Recentes", "description": "Linha do tempo dos últimos registros" },
-    "alerts": { "title": "O que precisa de atenção", "description": "Recorrência de atestados e SLA de lançamento" },
-    "table": { "title": "Registros Detalhados", "description": "Todos os atestados do período filtrado" }
+    "acumulado": {
+      "title": "Dias Afastados Acumulados",
+      "description": "Tendência ao longo do período"
+    },
+    "lideranca": {
+      "title": "Liderança Mais Impactada",
+      "description": "Atestados por gestor direto"
+    },
+    "heatmap": {
+      "title": "Mapa de Calor — Setor x Competência",
+      "description": "Concentração de atestados por mês e setor"
+    },
+    "timeline": {
+      "title": "Lançamentos Recentes",
+      "description": "Linha do tempo dos últimos registros"
+    },
+    "alerts": {
+      "title": "O que precisa de atenção",
+      "description": "Recorrência de atestados e SLA de lançamento"
+    },
+    "table": {
+      "title": "Registros Detalhados",
+      "description": "Todos os atestados do período filtrado"
+    }
+  },
+  "chartLabels": {
+    "evolution": {
+      "certificatesAxis": "Nº de Atestados",
+      "daysAxis": "Dias Afastados",
+      "certificatesUnit": "atestado(s)",
+      "daysUnit": "dia(s)"
+    },
+    "accumulated": {
+      "seriesName": "Dias afastados (acumulado)",
+      "tooltipUnit": "dia(s) acumulados"
+    },
+    "ranking": {
+      "setorUnit": "atestado(s)",
+      "cidUnit": "ocorrência(s)",
+      "liderancaUnit": "atestado(s)"
+    },
+    "donut": {
+      "others": "OUTROS"
+    }
+  },
+  "alerts": {
+    "recurrentTitle": "{{count}} colaborador(es) com 3+ atestados no período",
+    "slaTitle": "{{count}} atestado(s) lançado(s) fora do prazo (SLA > 2 dias)",
+    "slaDescription": "Verifique o fluxo de recebimento e lançamento junto às lideranças.",
+    "none": "Nenhum ponto crítico identificado no período filtrado."
+  },
+  "heatmap": {
+    "setorHeader": "Setor",
+    "empty": "Sem dados suficientes para o mapa de calor."
+  },
+  "timeline": {
+    "empty": "Nenhum lançamento no período.",
+    "daysUnit": "dia(s)"
+  },
+  "table": {
+    "columns": {
+      "nome": "Colaborador",
+      "funcao": "Função",
+      "setor": "Setor",
+      "qntDias": "Dias",
+      "cid": "CID",
+      "inicioAtestado": "Início",
+      "terminoAtestado": "Término",
+      "dataLancamento": "Lançamento",
+      "competencia": "Competência",
+      "liderancaDireta": "Liderança"
+    },
+    "searchPlaceholder": "Pesquisar na tabela…",
+    "exportButton": "Exportar Excel",
+    "exportTitle": "Controle de Atestados",
+    "exportMetaGeneratedAt": "Gerado em",
+    "exportMetaTotal": "Total",
+    "exportSuccess": "Exportação concluída.",
+    "exportError": "Não foi possível exportar a planilha.",
+    "emptyTitle": "Nenhum registro encontrado",
+    "emptyDescription": "Ajuste os filtros ou a busca.",
+    "showingRange": "Mostrando {{from}}–{{to}} de {{total}} registros",
+    "pageOfTotal": "Página {{current}} de {{total}}",
+    "prevPageAria": "Página anterior",
+    "nextPageAria": "Próxima página"
   },
   "empty": {
     "title": "Nenhum registro no período filtrado",
@@ -34,6 +136,7 @@
   },
   "error": {
     "title": "Não foi possível carregar os atestados.",
-    "description": "Tente novamente em instantes."
+    "description": "Tente novamente em instantes.",
+    "retry": "Tentar novamente"
   }
 }

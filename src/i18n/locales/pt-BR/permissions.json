@@ -4,5 +4,30 @@
     "title": "Permissões",
     "description": "Matriz de permissões por perfil de acesso (RBAC).",
     "footnote": "Permissões são definidas por perfil, não individualmente por usuário. Para alterar o acesso de alguém, altere seu perfil em Usuários."
+  },
+  "table": {
+    "permissionColumn": "Permissão",
+    "allowed": "Permitido",
+    "notAllowed": "Não permitido"
+  },
+  "labels": {
+    "appointmentRead": "Ver agendamentos",
+    "appointmentWrite": "Criar/editar agendamentos",
+    "appointmentDelete": "Excluir agendamentos",
+    "patientRead": "Ver pacientes",
+    "patientWrite": "Criar/editar pacientes",
+    "employeeRead": "Ver colaboradores",
+    "employeeWrite": "Criar/editar colaboradores",
+    "asoRead": "Ver ASO",
+    "asoWrite": "Emitir ASO",
+    "examRead": "Ver exames",
+    "examWrite": "Criar/editar exames",
+    "reportRead": "Ver relatórios",
+    "reportWrite": "Gerar relatórios",
+    "usersManage": "Gerenciar usuários",
+    "settingsManage": "Gerenciar configurações",
+    "auditRead": "Ver auditoria",
+    "deviationRead": "Ver desvios de segurança",
+    "deviationWrite": "Registrar desvios de segurança"
   }
 }

@@ -1,5 +1,14 @@
 import { useMemo } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+import { useTranslation } from 'react-i18next';
 import { formatDate } from '@/utils/format';
 import type { AtestadoRecord } from '../types';
 
@@ -11,10 +20,12 @@ interface AccumulatedAreaChartProps {
 }
 
 export function AccumulatedAreaChart({ records }: AccumulatedAreaChartProps) {
+  const { t } = useTranslation('atestados');
   const data = useMemo(() => {
     const byDate: Record<string, number> = {};
     records.forEach((r) => {
-      if (r.inicioAtestado) byDate[r.inicioAtestado] = (byDate[r.inicioAtestado] ?? 0) + (r.qntDias ?? 0);
+      if (r.inicioAtestado)
+        byDate[r.inicioAtestado] = (byDate[r.inicioAtestado] ?? 0) + (r.qntDias ?? 0);
     });
     let acc = 0;
     return Object.keys(byDate)
@@ -43,12 +54,20 @@ export function AccumulatedAreaChart({ records }: AccumulatedAreaChartProps) {
           interval="preserveStartEnd"
           minTickGap={24}
         />
-        <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} allowDecimals={false} width={44} />
-        <Tooltip content={<AreaTooltip />} />
+        <YAxis
+          tick={AXIS_TICK}
+          axisLine={false}
+          tickLine={false}
+          allowDecimals={false}
+          width={44}
+        />
+        <Tooltip
+          content={<AreaTooltip unit={t('atestados:chartLabels.accumulated.tooltipUnit')} />}
+        />
         <Area
           type="monotone"
           dataKey="acumulado"
-          name="Dias afastados (acumulado)"
+          name={t('atestados:chartLabels.accumulated.seriesName')}
           stroke="var(--atestados-sequential-500)"
           strokeWidth={2}
           fill="url(#atestadosAreaFill)"
@@ -62,10 +81,12 @@ function AreaTooltip({
   active,
   payload,
   label,
+  unit,
 }: {
   active?: boolean;
   payload?: { value: number }[];
   label?: string;
+  unit: string;
 }) {
   if (!active || !payload?.length) return null;
   return (
@@ -73,7 +94,7 @@ function AreaTooltip({
       <p className="font-semibold text-ink">{label}</p>
       <p className="text-ink-soft">
         <span className="font-semibold text-ink">{payload[0]!.value.toLocaleString('pt-BR')}</span>{' '}
-        dia(s) acumulados
+        {unit}
       </p>
     </div>
   );

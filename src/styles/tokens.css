@@ -115,6 +115,19 @@
   --color-text-secondary: 168 168 158;
   --color-text-muted: 110 110 102;
 
+  /*
+   * A escala "50/100" do dourado serve de fundo suave para chips/badges/
+   * pill ativa da Sidebar; a "700/900" é o texto/ícone que fica por cima.
+   * Sem estas variáveis, os dois lados ficam com o MESMO valor do modo
+   * claro — um bloco creme quase branco com texto marrom quase preto por
+   * cima, ambos ilegíveis/deslocados sobre um fundo escuro. Invertemos a
+   * escala tonal (50/100 escurecem, 700/900 clareiam) mantendo o matiz.
+   */
+  --color-brand-gold-50: 56 45 18;
+  --color-brand-gold-100: 84 66 24;
+  --color-brand-gold-700: 224 172 62;
+  --color-brand-gold-900: 247 197 84;
+
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);

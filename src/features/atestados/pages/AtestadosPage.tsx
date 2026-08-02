@@ -10,7 +10,11 @@ import { Button } from '@/components/ui/Button';
 import '../atestados-charts.css';
 
 import { useAtestados } from '../hooks/useAtestados';
-import { useFilterDefinitions, useAtestadoDateRange, useFilteredAtestados } from '../hooks/useAtestadoFilters';
+import {
+  useFilterDefinitions,
+  useAtestadoDateRange,
+  useFilteredAtestados,
+} from '../hooks/useAtestadoFilters';
 import { useAtestadoKpis, useCompetenciaGroups } from '../hooks/useAtestadoKpis';
 import { topN } from '../lib/kpis';
 import type { AtestadoFilters } from '../types';
@@ -56,7 +60,10 @@ export function AtestadosPage() {
       />
 
       <div className="space-y-8 px-6 py-8 sm:px-8">
-        <ChartCard title={t('atestados:filtersCard.title')} description={t('atestados:filtersCard.description')}>
+        <ChartCard
+          title={t('atestados:filtersCard.title')}
+          description={t('atestados:filtersCard.description')}
+        >
           <FiltersBar
             definitions={filterDefinitions}
             filters={filters}
@@ -80,14 +87,17 @@ export function AtestadosPage() {
             description={t('atestados:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('atestados:error.retry')}
               </Button>
             }
           />
         )}
 
         {!isLoading && !isError && filteredRecords.length === 0 && (
-          <EmptyState title={t('atestados:empty.title')} description={t('atestados:empty.description')} />
+          <EmptyState
+            title={t('atestados:empty.title')}
+            description={t('atestados:empty.description')}
+          />
         )}
 
         {!isLoading && !isError && filteredRecords.length > 0 && (
@@ -118,7 +128,10 @@ export function AtestadosPage() {
                 title={t('atestados:charts.setor.title')}
                 description={t('atestados:charts.setor.description')}
               >
-                <RankingBarChart data={topN(filteredRecords, 'setor', 10)} valueLabel="atestado(s)" />
+                <RankingBarChart
+                  data={topN(filteredRecords, 'setor', 10)}
+                  valueLabel={t('atestados:chartLabels.ranking.setorUnit')}
+                />
               </ChartCard>
 
               <ChartCard
@@ -127,7 +140,7 @@ export function AtestadosPage() {
               >
                 <RankingBarChart
                   data={topN(filteredRecords, 'cid', 8)}
-                  valueLabel="ocorrência(s)"
+                  valueLabel={t('atestados:chartLabels.ranking.cidUnit')}
                   layout="vertical"
                 />
               </ChartCard>
@@ -147,7 +160,7 @@ export function AtestadosPage() {
               >
                 <RankingBarChart
                   data={topN(filteredRecords, 'liderancaDireta', 8)}
-                  valueLabel="atestado(s)"
+                  valueLabel={t('atestados:chartLabels.ranking.liderancaUnit')}
                   layout="vertical"
                 />
               </ChartCard>

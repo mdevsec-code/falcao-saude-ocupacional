@@ -1,0 +1,74 @@
+{
+  "validation": {
+    "nameRequired": "Enter the exam name"
+  },
+  "page": {
+    "eyebrow": "Clinical",
+    "title": "Exam Types",
+    "description": "Catalog of exams available for scheduling and visits, with standard duration and frequency."
+  },
+  "error": {
+    "title": "Unable to load the exam types",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "new": "New exam type",
+    "retry": "Try again"
+  },
+  "dialog": {
+    "createTitle": "New exam type",
+    "editTitle": "Edit exam type",
+    "createDescription": "Register a new exam type in the catalog.",
+    "editDescription": "Update this exam type's details.",
+    "fields": {
+      "name": { "label": "Name", "placeholder": "e.g., Periodic ASO" },
+      "category": { "label": "Category" },
+      "duration": { "label": "Default duration (min)" },
+      "periodicity": {
+        "label": "Frequency (months)",
+        "placeholder": "Leave blank if not periodic",
+        "hint": "E.g., 12 for annual exams (NR-7). Leave blank for admission/termination exams."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Details on when this exam is requested (optional)"
+      },
+      "active": "Active (available for selection in Schedule and Visits)"
+    },
+    "cancel": "Cancel",
+    "submitCreate": "Create exam type",
+    "submitEdit": "Save changes"
+  },
+  "table": {
+    "name": "Name",
+    "category": "Category",
+    "duration": "Duration",
+    "durationValue": "{{count}} min",
+    "periodicity": "Frequency",
+    "periodicityValue": "Every {{count}} months",
+    "status": "Status",
+    "actions": "Actions",
+    "active": "Active",
+    "inactive": "Inactive",
+    "editAria": "Edit exam type",
+    "deleteAria": "Remove exam type"
+  },
+  "empty": {
+    "title": "No exam types registered",
+    "description": "Create the first exam type."
+  },
+  "deleteDialog": {
+    "title": "Remove exam type?",
+    "description": "<strong>{{name}}</strong> will be removed from the catalog. Visits and appointments already recorded with this exam are not affected.",
+    "cancel": "Cancel",
+    "confirm": "Remove"
+  },
+  "toast": {
+    "createSuccess": "Exam type created.",
+    "createError": "Unable to create the exam type.",
+    "updateSuccess": "Exam type updated.",
+    "updateError": "Unable to update the exam type.",
+    "deleteSuccess": "Exam type removed.",
+    "deleteError": "Unable to remove the exam type."
+  }
+}

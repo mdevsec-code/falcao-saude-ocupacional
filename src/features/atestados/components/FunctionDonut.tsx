@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { useTranslation } from 'react-i18next';
 import type { AtestadoRecord } from '../types';
 import { topN } from '../lib/kpis';
 
@@ -18,13 +19,14 @@ interface FunctionDonutProps {
 }
 
 export function FunctionDonut({ records }: FunctionDonutProps) {
+  const { t } = useTranslation('atestados');
   const data = useMemo(() => {
     const top = topN(records, 'funcao', 6);
     const outros = records.length - top.reduce((s, [, count]) => s + count, 0);
     const rows = top.map(([name, value]) => ({ name, value }));
-    if (outros > 0) rows.push({ name: 'OUTROS', value: outros });
+    if (outros > 0) rows.push({ name: t('atestados:chartLabels.donut.others'), value: outros });
     return rows;
-  }, [records]);
+  }, [records, t]);
 
   const total = data.reduce((s, d) => s + d.value, 0);
 

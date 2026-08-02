@@ -24,7 +24,8 @@
     "update": "Atualizar",
     "submit": "Enviar",
     "view": "Visualizar",
-    "more": "Mais"
+    "more": "Mais",
+    "backToHome": "Voltar ao início"
   },
   "states": {
     "empty": "Nada por aqui",
@@ -44,6 +45,8 @@
     "aso": "ASO",
     "reports": "Relatórios",
     "atestados": "Atestados",
+    "vacation": "Férias",
+    "safety": "Segurança do Trabalho",
     "users": "Usuários",
     "permissions": "Permissões",
     "settings": "Configurações",
@@ -61,13 +64,58 @@
     "overview": "Visão geral",
     "attendance": "Atendimento",
     "clinical": "Clínico",
-    "management": "Gestão",
-    "comingSoon": "Em breve"
+    "safety": "Segurança do Trabalho",
+    "hr": "Recursos Humanos",
+    "reports": "Relatórios",
+    "admin": "Administração",
+    "comingSoon": "Em breve",
+    "mainNavAriaLabel": "Navegação principal"
   },
   "footer": {
     "version": "Falcão · v{{version}}"
   },
   "branding": {
     "health": "Saúde Ocupacional"
+  },
+  "topbar": {
+    "closeSearch": "Fechar busca",
+    "openMenu": "Abrir menu",
+    "expandMenu": "Expandir menu",
+    "collapseMenu": "Recolher menu",
+    "notifications": "Notificações",
+    "signOut": "Sair",
+    "viewProfile": "Ver perfil"
+  },
+  "breadcrumb": {
+    "ariaLabel": "Trilha de navegação"
+  },
+  "search": {
+    "placeholder": "Buscar paciente ou CID…",
+    "ariaLabel": "Busca global",
+    "noResults": "Nenhum resultado para \"{{query}}\"."
+  },
+  "languageSwitcher": {
+    "selectLanguage": "Selecionar idioma"
+  },
+  "placeholder": {
+    "defaultDescription": "Estamos preparando este módulo com todo o cuidado. Em breve, novidades por aqui.",
+    "comingSoon": {
+      "title": "Novidade a caminho"
+    }
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A rota solicitada não pôde ser carregada. Verifique o endereço ou volte para a página inicial."
+  },
+  "forbidden": {
+    "title": "Acesso restrito",
+    "description": "Seu perfil de acesso não tem permissão para ver esta página. Fale com um administrador se precisar de acesso."
+  },
+  "errorBoundary": {
+    "routeErrorDescription": "A rota solicitada não pôde ser carregada.",
+    "genericDescription": "Não foi possível carregar essa página. Tente novamente ou volte para a tela inicial.",
+    "crashTitle": "Erro de runtime na aplicação",
+    "crashDescription": "Algo explodiu durante a renderização. Stacktrace abaixo para diagnóstico.",
+    "reload": "Recarregar página"
   }
 }

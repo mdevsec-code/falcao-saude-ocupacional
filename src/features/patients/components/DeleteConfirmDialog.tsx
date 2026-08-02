@@ -1,3 +1,4 @@
+import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import {
   Dialog,
@@ -22,26 +23,29 @@ export function DeleteConfirmDialog({
   onConfirm,
   isSubmitting,
 }: DeleteConfirmDialogProps) {
+  const { t } = useTranslation('patients');
+
   return (
     <Dialog open={record !== null} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Remover paciente?</DialogTitle>
+          <DialogTitle>{t('patients:deleteDialog.title')}</DialogTitle>
           <DialogDescription>
             {record && (
-              <>
-                O cadastro de <strong className="text-ink">{record.name}</strong> será removido
-                permanentemente. Essa ação não pode ser desfeita.
-              </>
+              <Trans
+                i18nKey="patients:deleteDialog.description"
+                values={{ name: record.name }}
+                components={{ strong: <strong className="text-ink" /> }}
+              />
             )}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            {t('patients:deleteDialog.cancel')}
           </Button>
           <Button variant="danger" onClick={onConfirm} isLoading={isSubmitting}>
-            Remover
+            {t('patients:deleteDialog.confirm')}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import i18n from '@/i18n';
 import { emailSchema, nonEmptyString } from '@/validators/common';
 import { ROLES } from '@/constants/roles';
 import type { UserFixture, UserStatus } from '@/services/msw/fixtures/users';
@@ -13,7 +14,7 @@ export interface UserFilters {
 }
 
 export const userFormSchema = z.object({
-  name: nonEmptyString.min(3, 'Informe o nome completo'),
+  name: nonEmptyString.min(3, i18n.t('validation:nameRequired')),
   email: emailSchema,
   role: z.enum([
     ROLES.ADMIN,

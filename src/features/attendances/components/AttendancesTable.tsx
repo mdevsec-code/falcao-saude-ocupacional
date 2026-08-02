@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ArrowDown,
   ArrowUp,
@@ -18,6 +19,7 @@ import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/feedback/EmptyState';
 import { formatDate } from '@/utils/format';
+import { getIntlLocale } from '@/utils/locale';
 import { exportToExcel } from '@/utils/exports/excel';
 import { generateAsoPdf } from '@/utils/exports/aso';
 import type { ExportColumn } from '@/utils/exports/types';
@@ -25,14 +27,6 @@ import { APPOINTMENT_CONCLUSION_LABELS } from '@/constants/status';
 import type { PatientRecord } from '@/features/patients/types';
 import { CONCLUSION_BADGE_VARIANT } from '../lib/status';
 import type { AttendanceRecord } from '../types';
-
-const COLUMNS: { key: keyof AttendanceRecord; label: string }[] = [
-  { key: 'attendanceDate', label: 'Data' },
-  { key: 'patientName', label: 'Paciente' },
-  { key: 'examType', label: 'Exame' },
-  { key: 'doctor', label: 'Médico' },
-  { key: 'conclusion', label: 'Conclusão' },
-];
 
 const PAGE_SIZE = 10;
 
@@ -44,26 +38,44 @@ interface AttendancesTableProps {
 }
 
 export function AttendancesTable({ records, patients, onEdit, onDelete }: AttendancesTableProps) {
+  const { t } = useTranslation(['attendances', 'common']);
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<keyof AttendanceRecord>('attendanceDate');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const [page, setPage] = useState(1);
 
+  const COLUMNS: { key: keyof AttendanceRecord; label: string }[] = useMemo(
+    () => [
+      { key: 'attendanceDate', label: t('attendances:table.columns.date') },
+      { key: 'patientName', label: t('attendances:table.columns.patient') },
+      { key: 'examType', label: t('attendances:table.columns.exam') },
+      { key: 'doctor', label: t('attendances:table.columns.doctor') },
+      { key: 'conclusion', label: t('attendances:table.columns.conclusion') },
+    ],
+    [t],
+  );
+
   const filteredSorted = useMemo(() => {
     let rows = [...records];
     if (search) {
       const q = search.toLowerCase();
-      rows = rows.filter((r) => COLUMNS.some((c) => String(r[c.key] ?? '').toLowerCase().includes(q)));
+      rows = rows.filter((r) =>
+        COLUMNS.some((c) =>
+          String(r[c.key] ?? '')
+            .toLowerCase()
+            .includes(q),
+        ),
+      );
     }
     rows.sort((a, b) => {
       const va = a[sortKey] ?? '';
       const vb = b[sortKey] ?? '';
       return sortDir === 'asc'
-        ? String(va).localeCompare(String(vb), 'pt-BR')
-        : String(vb).localeCompare(String(va), 'pt-BR');
+        ? String(va).localeCompare(String(vb), getIntlLocale())
+        : String(vb).localeCompare(String(va), getIntlLocale());
     });
     return rows;
-  }, [records, search, sortKey, sortDir]);
+  }, [records, search, sortKey, sortDir, COLUMNS]);
 
   const totalPages = Math.max(1, Math.ceil(filteredSorted.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -82,27 +94,39 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
   async function handleExport() {
     try {
       const columns: ExportColumn<AttendanceRecord>[] = [
-        { key: 'attendanceDate', header: 'Data', format: (v) => formatDate(v as string) ?? '—' },
-        { key: 'patientName', header: 'Paciente' },
-        { key: 'examType', header: 'Exame' },
-        { key: 'doctor', header: 'Médico' },
+        {
+          key: 'attendanceDate',
+          header: t('attendances:table.columns.date'),
+          format: (v) => formatDate(v as string) ?? '—',
+        },
+        { key: 'patientName', header: t('attendances:table.columns.patient') },
+        { key: 'examType', header: t('attendances:table.columns.exam') },
+        { key: 'doctor', header: t('attendances:table.columns.doctor') },
         {
           key: 'conclusion',
-          header: 'Conclusão',
-          format: (v) => APPOINTMENT_CONCLUSION_LABELS[v as keyof typeof APPOINTMENT_CONCLUSION_LABELS],
+          header: t('attendances:table.columns.conclusion'),
+          format: (v) =>
+            APPOINTMENT_CONCLUSION_LABELS[v as keyof typeof APPOINTMENT_CONCLUSION_LABELS],
         },
-        { key: 'restrictionNotes', header: 'Restrições', format: (v) => (v as string | null) ?? '—' },
+        {
+          key: 'restrictionNotes',
+          header: t('attendances:table.columns.restrictionNotes'),
+          format: (v) => (v as string | null) ?? '—',
+        },
       ];
       await exportToExcel({
-        title: 'Atendimentos',
+        title: t('attendances:export.title'),
         rows: filteredSorted,
         columns,
         fileName: `atendimentos_export_${new Date().toISOString().slice(0, 10)}`,
-        meta: { 'Gerado em': new Date().toLocaleString('pt-BR'), Total: filteredSorted.length },
+        meta: {
+          [t('attendances:export.generatedAt')]: new Date().toLocaleString('pt-BR'),
+          [t('attendances:export.total')]: filteredSorted.length,
+        },
       });
-      toast.success('Exportação concluída.');
+      toast.success(t('attendances:toast.exportSuccess'));
     } catch (err) {
-      toast.error('Não foi possível exportar a planilha.');
+      toast.error(t('attendances:toast.exportError'));
       console.error(err);
     }
   }
@@ -122,9 +146,9 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
         restrictionNotes: record.restrictionNotes,
         dutyFitness: record.dutyFitness,
       });
-      toast.success('ASO gerado.');
+      toast.success(t('attendances:toast.asoSuccess'));
     } catch (err) {
-      toast.error('Não foi possível gerar o ASO.');
+      toast.error(t('attendances:toast.asoError'));
       console.error(err);
     }
   }
@@ -134,7 +158,7 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Input
           className="max-w-xs"
-          placeholder="Pesquisar na tabela…"
+          placeholder={t('attendances:table.search.placeholder')}
           leftIcon={<Search className="h-4 w-4" />}
           value={search}
           onChange={(e) => {
@@ -148,12 +172,15 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
           disabled={filteredSorted.length === 0}
           onClick={() => void handleExport()}
         >
-          Exportar Excel
+          {t('attendances:table.actions.exportExcel')}
         </Button>
       </div>
 
       {filteredSorted.length === 0 ? (
-        <EmptyState title="Nenhum atendimento encontrado" description="Ajuste os filtros ou a busca." />
+        <EmptyState
+          title={t('attendances:empty.title')}
+          description={t('attendances:empty.description')}
+        />
       ) : (
         <>
           <div className="overflow-x-auto rounded-md border border-border">
@@ -184,13 +211,17 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
                     </th>
                   ))}
                   <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                    Ações
+                    {t('attendances:table.columns.actions')}
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border bg-surface">
-                {pageRows.map((row) => (
-                  <tr key={row.id} className="hover:bg-hover">
+                {pageRows.map((row, idx) => (
+                  <tr
+                    key={row.id}
+                    className="animate-slide-up hover:bg-hover"
+                    style={{ animationDelay: `${idx * 25}ms`, animationFillMode: 'backwards' }}
+                  >
                     <td className="px-3 py-2 text-ink">{formatDate(row.attendanceDate) ?? '—'}</td>
                     <td className="px-3 py-2 font-medium text-ink">{row.patientName}</td>
                     <td className="px-3 py-2 text-ink">{row.examType}</td>
@@ -206,7 +237,7 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8"
-                          aria-label="Baixar ASO"
+                          aria-label={t('attendances:table.actions.downloadAso')}
                           onClick={() => handleDownloadAso(row)}
                         >
                           <FileDown className="h-4 w-4" />
@@ -215,7 +246,7 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8"
-                          aria-label="Editar atendimento"
+                          aria-label={t('attendances:table.actions.edit')}
                           onClick={() => onEdit(row)}
                         >
                           <Pencil className="h-4 w-4" />
@@ -224,7 +255,7 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8 text-danger hover:text-danger"
-                          aria-label="Remover atendimento"
+                          aria-label={t('attendances:table.actions.remove')}
                           onClick={() => onDelete(row)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -239,8 +270,11 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
 
           <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-ink-soft">
             <span>
-              Mostrando {start + 1}–{Math.min(start + PAGE_SIZE, filteredSorted.length)} de{' '}
-              {filteredSorted.length} atendimentos
+              {t('attendances:table.pagination.showing', {
+                from: start + 1,
+                to: Math.min(start + PAGE_SIZE, filteredSorted.length),
+                total: filteredSorted.length,
+              })}
             </span>
             <div className="flex items-center gap-2">
               <Button
@@ -248,19 +282,22 @@ export function AttendancesTable({ records, patients, onEdit, onDelete }: Attend
                 size="sm"
                 disabled={currentPage === 1}
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
-                aria-label="Página anterior"
+                aria-label={t('attendances:table.pagination.previous')}
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               <span>
-                Página {currentPage} de {totalPages}
+                {t('attendances:table.pagination.page', {
+                  current: currentPage,
+                  total: totalPages,
+                })}
               </span>
               <Button
                 variant="outline"
                 size="sm"
                 disabled={currentPage === totalPages}
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                aria-label="Próxima página"
+                aria-label={t('attendances:table.pagination.next')}
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>

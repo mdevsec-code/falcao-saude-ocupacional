@@ -7,5 +7,31 @@
   "error": {
     "title": "Não foi possível carregar o painel de ASO",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "retry": "Tentar novamente",
+    "viewRecord": "Ver prontuário"
+  },
+  "kpis": {
+    "evaluated": "Colaboradores avaliados",
+    "noRestriction": "Sem restrição",
+    "someUnfit": "Com alguma inaptidão"
+  },
+  "filters": {
+    "searchPlaceholder": "Buscar colaborador…",
+    "onlyUnfit": "Somente com inaptidão"
+  },
+  "empty": {
+    "title": "Nenhum colaborador encontrado",
+    "description": "Ajuste a busca ou os filtros. Colaboradores aparecem aqui após terem ao menos uma atividade de risco avaliada em um atendimento."
+  },
+  "table": {
+    "employee": "Colaborador",
+    "record": "Prontuário"
+  },
+  "fitness": {
+    "notEvaluated": "Não avaliado",
+    "fit": "Apto",
+    "unfit": "Inapto"
   }
 }

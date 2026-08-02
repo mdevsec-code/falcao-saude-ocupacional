@@ -1,0 +1,97 @@
+{
+  "page": {
+    "eyebrow": "Front Desk",
+    "title": "Patients",
+    "description": "Registry of employees seen by Occupational Health."
+  },
+  "error": {
+    "title": "Unable to load the patients",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "new": "New patient",
+    "retry": "Try again"
+  },
+  "kpi": {
+    "total": "Total patients",
+    "active": "Active",
+    "onLeave": "On leave",
+    "sectors": "Departments"
+  },
+  "dialog": {
+    "createTitle": "New patient",
+    "editTitle": "Edit patient",
+    "createDescription": "Fill in the details to register a new patient.",
+    "editDescription": "Update the patient's registration details.",
+    "fields": {
+      "name": { "label": "Full name", "placeholder": "Patient's name" },
+      "cpf": { "label": "CPF", "placeholder": "000.000.000-00" },
+      "birthDate": { "label": "Date of birth" },
+      "phone": { "label": "Phone", "placeholder": "11987654321" },
+      "email": { "label": "Email", "placeholder": "patient@email.com" },
+      "sector": { "label": "Department" },
+      "role": { "label": "Role", "placeholder": "e.g., Bricklayer" },
+      "admissionDate": { "label": "Admission date" },
+      "status": { "label": "Status" },
+      "notes": { "label": "Notes", "placeholder": "Additional details (optional)" },
+      "optional": "Optional"
+    },
+    "cancel": "Cancel",
+    "submitCreate": "Register patient",
+    "submitEdit": "Save changes"
+  },
+  "table": {
+    "name": "Name",
+    "cpf": "CPF",
+    "role": "Role",
+    "sector": "Department",
+    "phone": "Phone",
+    "admission": "Admission",
+    "status": "Status",
+    "actions": "Actions",
+    "searchPlaceholder": "Search the table…",
+    "exportExcel": "Export Excel",
+    "exportTitle": "Patient Registry",
+    "generatedAt": "Generated on",
+    "total": "Total",
+    "viewRecordAria": "View record",
+    "editAria": "Edit patient",
+    "deleteAria": "Remove patient",
+    "prevPageAria": "Previous page",
+    "nextPageAria": "Next page",
+    "showingRange": "Showing {{start}}–{{end}} of {{total}} patients",
+    "pageOf": "Page {{current}} of {{total}}"
+  },
+  "toast": {
+    "exportSuccess": "Export completed.",
+    "exportError": "Unable to export the spreadsheet.",
+    "createSuccess": "Patient registered.",
+    "createError": "Unable to register the patient.",
+    "updateSuccess": "Patient updated.",
+    "updateError": "Unable to update the patient.",
+    "deleteSuccess": "Patient removed.",
+    "deleteError": "Unable to remove the patient."
+  },
+  "empty": {
+    "title": "No patients found",
+    "description": "Adjust the filters or search."
+  },
+  "filters": {
+    "title": "Filters",
+    "all": "All",
+    "search": { "label": "Search", "placeholder": "Name, CPF or role…" },
+    "sector": { "label": "Department" },
+    "status": { "label": "Status" },
+    "chipSector": "Department: {{value}}",
+    "chipStatus": "Status: {{value}}",
+    "chipSearch": "Search: \"{{value}}\"",
+    "removeChipAria": "Remove filter {{label}}",
+    "clearAll": "Clear all"
+  },
+  "deleteDialog": {
+    "title": "Remove patient?",
+    "description": "<strong>{{name}}</strong>'s record will be permanently removed. This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Remove"
+  }
+}

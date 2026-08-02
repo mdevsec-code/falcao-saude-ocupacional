@@ -1,4 +1,7 @@
 {
+  "validation": {
+    "patientNameRequired": "Informe o nome completo do paciente"
+  },
   "page": {
     "eyebrow": "Atendimento",
     "title": "Agenda",
@@ -7,5 +10,68 @@
   "error": {
     "title": "Não foi possível carregar a agenda",
     "description": "Tente novamente em instantes."
+  },
+  "actions": {
+    "retry": "Tentar novamente",
+    "today": "Hoje",
+    "prevPeriod": "Período anterior",
+    "nextPeriod": "Próximo período",
+    "newAppointment": "Novo agendamento",
+    "editAppointment": "Editar agendamento",
+    "removeAppointment": "Remover agendamento",
+    "cancel": "Cancelar",
+    "remove": "Remover",
+    "saveChanges": "Salvar alterações",
+    "createAppointment": "Criar agendamento"
+  },
+  "view": {
+    "month": "Mês",
+    "week": "Semana",
+    "day": "Dia"
+  },
+  "filters": {
+    "doctor": "Médico",
+    "examType": "Tipo de exame",
+    "status": "Status",
+    "all": "Todos"
+  },
+  "empty": {
+    "dayTitle": "Nenhum agendamento neste dia",
+    "dayDescription": "Use o botão “Novo agendamento” para criar um horário.",
+    "week": "Sem agendamentos"
+  },
+  "card": {
+    "more": "+{{count}} mais"
+  },
+  "unit": {
+    "minutes": "{{count}} min"
+  },
+  "dialog": {
+    "newTitle": "Novo agendamento",
+    "editTitle": "Editar agendamento",
+    "newDescription": "Preencha os dados para agendar uma nova consulta.",
+    "editDescription": "Atualize os dados da consulta.",
+    "deleteTitle": "Remover agendamento?",
+    "deleteDescription": "A consulta de <1>{{name}}</1> será removida permanentemente. Essa ação não pode ser desfeita."
+  },
+  "form": {
+    "patient": "Paciente",
+    "patientPlaceholder": "Nome completo",
+    "phone": "Telefone (WhatsApp)",
+    "phoneHint": "Opcional — usado para retorno via WhatsApp",
+    "date": "Data",
+    "time": "Horário",
+    "duration": "Duração",
+    "notes": "Observações",
+    "notesPlaceholder": "Detalhes adicionais (opcional)",
+    "conflictWarning": "Este médico já tem um agendamento nesse horário. Ajuste a data/hora ou escolha outro profissional."
+  },
+  "toast": {
+    "createSuccess": "Agendamento criado.",
+    "createError": "Não foi possível criar o agendamento.",
+    "updateSuccess": "Agendamento atualizado.",
+    "updateError": "Não foi possível atualizar o agendamento.",
+    "deleteSuccess": "Agendamento removido.",
+    "deleteError": "Não foi possível remover o agendamento."
   }
 }

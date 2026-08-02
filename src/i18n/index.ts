@@ -1,55 +1,40 @@
-import i18n from 'i18next';
+import i18n, { type Resource, type ResourceLanguage } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import { env } from '@/config/env';
-import { DEFAULT_LOCALE, NAMESPACES } from '@/constants/i18n';
+import { DEFAULT_LOCALE, LOCALES, NAMESPACES } from '@/constants/i18n';
 
-import common from './locales/pt-BR/common.json';
-import auth from './locales/pt-BR/auth.json';
-import dashboard from './locales/pt-BR/dashboard.json';
-import validation from './locales/pt-BR/validation.json';
-import errors from './locales/pt-BR/errors.json';
-import reports from './locales/pt-BR/reports.json';
-import appointments from './locales/pt-BR/appointments.json';
-import atestados from './locales/pt-BR/atestados.json';
-import agenda from './locales/pt-BR/agenda.json';
-import patients from './locales/pt-BR/patients.json';
-import attendances from './locales/pt-BR/attendances.json';
-import records from './locales/pt-BR/records.json';
-import aso from './locales/pt-BR/aso.json';
-import users from './locales/pt-BR/users.json';
-import permissions from './locales/pt-BR/permissions.json';
-import exams from './locales/pt-BR/exams.json';
-import cid from './locales/pt-BR/cid.json';
-import profile from './locales/pt-BR/profile.json';
-import settings from './locales/pt-BR/settings.json';
-import audit from './locales/pt-BR/audit.json';
+/**
+ * Carrega todos os arquivos de tradução automaticamente — evita uma lista
+ * manual de imports por locale/namespace (hoje 3 locales × 20 namespaces).
+ * Para adicionar um locale novo: criar a pasta `locales/<locale>/` com os
+ * mesmos arquivos `.json` de `locales/pt-BR/` e registrar em `LOCALES`.
+ */
+const modules = import.meta.glob<{ default: ResourceLanguage }>('./locales/*/*.json', {
+  eager: true,
+});
 
-const resources = {
-  'pt-BR': {
-    common,
-    auth,
-    dashboard,
-    validation,
-    errors,
-    reports,
-    appointments,
-    atestados,
-    agenda,
-    patients,
-    attendances,
-    records,
-    aso,
-    users,
-    permissions,
-    exams,
-    cid,
-    profile,
-    settings,
-    audit,
-  },
-} as const;
+const resources: Resource = {};
+
+for (const [path, mod] of Object.entries(modules)) {
+  const match = /\.\/locales\/([^/]+)\/([^/]+)\.json$/.exec(path);
+  if (!match) continue;
+  const locale = match[1] as string;
+  const namespace = match[2] as string;
+  resources[locale] ??= {};
+  (resources[locale] as ResourceLanguage)[namespace] = mod.default;
+}
+
+/**
+ * Mantém `<html lang>` sincronizado com o idioma ativo — sem isso, leitores
+ * de tela e o tradutor do navegador continuam tratando a página como
+ * `pt-BR` mesmo depois de trocar para inglês/mandarim pelo `LanguageSwitcher`.
+ */
+function syncDocumentLang(lng: string): void {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = lng;
+  }
+}
 
 void i18n
   .use(LanguageDetector)
@@ -57,12 +42,16 @@ void i18n
   .init({
     resources,
     fallbackLng: DEFAULT_LOCALE,
-    lng: env.VITE_DEFAULT_LOCALE,
+    supportedLngs: LOCALES as unknown as string[],
     ns: NAMESPACES as unknown as string[],
     defaultNS: 'common',
     interpolation: { escapeValue: false },
     detection: { order: ['localStorage', 'navigator'], caches: ['localStorage'] },
     react: { useSuspense: false },
-  });
+  })
+  .then(() => syncDocumentLang(i18n.resolvedLanguage ?? i18n.language))
+  .catch(() => syncDocumentLang(DEFAULT_LOCALE));
+
+i18n.on('languageChanged', syncDocumentLang);
 
 export default i18n;

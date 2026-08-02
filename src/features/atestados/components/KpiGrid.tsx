@@ -23,14 +23,22 @@ interface KpiGridProps {
 export function KpiGrid({ kpis }: KpiGridProps) {
   const { t } = useTranslation('atestados');
 
-  const tiles: { label: string; value: string; icon: LucideIcon; delta?: { value: string; direction: 'up' | 'down' | 'flat' } }[] = [
+  const tiles: {
+    label: string;
+    value: string;
+    icon: LucideIcon;
+    delta?: { value: string; direction: 'up' | 'down' | 'flat' };
+  }[] = [
     {
       label: t('atestados:kpis.total'),
       value: kpis.total.toLocaleString('pt-BR'),
       icon: FileHeart,
       delta:
         kpis.variation !== null
-          ? { value: `${Math.abs(kpis.variation).toFixed(1)}%`, direction: directionOf(kpis.variation) }
+          ? {
+              value: `${Math.abs(kpis.variation).toFixed(1)}%`,
+              direction: directionOf(kpis.variation),
+            }
           : undefined,
     },
     {
@@ -66,7 +74,7 @@ export function KpiGrid({ kpis }: KpiGridProps) {
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
     >
       <h2 id="atestados-kpi-title" className="sr-only">
-        Indicadores de atestados
+        {t('atestados:kpis.srHeading')}
       </h2>
       {tiles.map((tile) => (
         <StatTile

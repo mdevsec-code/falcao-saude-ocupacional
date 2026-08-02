@@ -1,0 +1,309 @@
+// Falcão Saúde Ocupacional — schema real (Etapa 3).
+// Modela exatamente as entidades já usadas pelo frontend (ver `src/services/msw/fixtures`
+// no projeto do frontend), para que a migração do mock para a API real não exija
+// remodelar as telas. Projeto é single-tenant (uma única empresa, a própria Falcão) —
+// não existe entidade "Company"/"Empresa".
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEDICO
+  ENFERMEIRO
+  TECNICO_SEGURANCA
+  RH
+  RECEPCAO
+}
+
+enum UserStatus {
+  active
+  inactive
+}
+
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  // Normalizado para minúsculas na aplicação antes de gravar/consultar
+  // (evita depender da extensão `citext` do Postgres).
+  email        String     @unique
+  passwordHash String
+  role         Role
+  status       UserStatus @default(active)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+enum PatientStatus {
+  ATIVO
+  AFASTADO
+  INATIVO
+}
+
+model Patient {
+  id            String        @id @default(uuid())
+  name          String
+  cpf           String        @unique
+  birthDate     DateTime      @db.Date
+  phone         String?
+  email         String?
+  sector        String
+  role          String
+  admissionDate DateTime      @db.Date
+  status        PatientStatus @default(ATIVO)
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime? // soft delete (LGPD) — nunca apagar fisicamente um paciente
+  attendances   Attendance[]
+
+  @@index([cpf])
+  @@map("patients")
+}
+
+enum AppointmentStatus {
+  agendado
+  realizado
+  cancelado
+  faltou
+}
+
+model Appointment {
+  id          String            @id @default(uuid())
+  patientName String
+  phone       String?
+  examType    String
+  doctor      String
+  status      AppointmentStatus @default(agendado)
+  startsAt    DateTime
+  durationMin Int               @default(30)
+  notes       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([startsAt])
+  @@index([doctor, startsAt])
+  @@map("appointments")
+}
+
+enum AppointmentConclusion {
+  APTO
+  APTO_COM_RESTRICAO
+  INAPTO
+  ENCAMINHADO
+}
+
+model Attendance {
+  id               String                @id @default(uuid())
+  patient          Patient               @relation(fields: [patientId], references: [id])
+  patientId        String
+  examType         String
+  doctor           String
+  conclusion       AppointmentConclusion
+  attendanceDate   DateTime              @db.Date
+  restrictionNotes String?
+  notes            String?
+  dutyFitness      DutyFitness[]
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+
+  @@index([patientId])
+  @@map("attendances")
+}
+
+/// Aptidão por atividade de risco (NR-35 altura, NR-33 espaço confinado, etc).
+model DutyFitness {
+  id           String     @id @default(uuid())
+  attendance   Attendance @relation(fields: [attendanceId], references: [id], onDelete: Cascade)
+  attendanceId String
+  duty         String
+  fit          Boolean
+
+  @@index([attendanceId])
+  @@map("duty_fitness")
+}
+
+model ExamType {
+  id                 String   @id @default(uuid())
+  name               String
+  category           String
+  defaultDurationMin Int
+  periodicityMonths  Int?
+  active             Boolean  @default(true)
+  description        String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("exam_types")
+}
+
+/// Atestados/afastamentos — importado historicamente de planilha; segue o mesmo layout.
+model Atestado {
+  id                Int       @id @default(autoincrement())
+  ponto             String?
+  nome              String
+  funcao            String?
+  setor             String?
+  qntDias           Int?
+  cid               String?
+  inicioAtestado    DateTime? @db.Date
+  terminoAtestado   DateTime? @db.Date
+  dataLancamento    DateTime? @db.Date
+  competencia       String?
+  liderancaDireta   String?
+  observacao        String?
+  medico            String?
+  crmCro            String?
+  localAtendimento  String?
+  slaLancamentoDias Int?
+
+  @@map("atestados")
+}
+
+enum AuditAction {
+  login
+  login_failed
+  logout
+  create
+  update
+  delete
+}
+
+enum AuditEntityType {
+  auth
+  patient
+  attendance
+  user
+  exam_type
+  vacation
+  deviation
+  accident_indicator
+  cid
+}
+
+/// Trilha de auditoria LGPD — nunca é apagada nem editada, só inserida.
+model AuditLog {
+  id          String          @id @default(uuid())
+  timestamp   DateTime        @default(now())
+  actor       User?           @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorId     String?
+  actorName   String
+  actorRole   Role?
+  action      AuditAction
+  entityType  AuditEntityType
+  entityId    String?
+  entityLabel String?
+  detail      String?
+  ip          String?
+
+  @@index([actorId, timestamp])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}
+
+// ============================================================
+// Etapa 3+ — módulos adicionados após o schema inicial: Férias,
+// Segurança do Trabalho (desvios + indicadores de acidente) e
+// cadastro manual de códigos CID. Espelham exatamente os tipos
+// já consumidos pelo frontend (ver `src/services/msw/fixtures/`
+// `ferias.ts`, `desvios.ts`, `indicadores.ts`, `cid.ts`).
+// ============================================================
+
+enum VacationStatus {
+  agendado
+  em_andamento
+  concluido
+  cancelado
+}
+
+model Vacation {
+  id          String         @id @default(uuid())
+  patientName String
+  sector      String
+  role        String
+  startDate   DateTime       @db.Date
+  endDate     DateTime       @db.Date
+  days        Int
+  status      VacationStatus @default(agendado)
+  notes       String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("vacations")
+}
+
+enum DeviationStatus {
+  pendente
+  em_andamento
+  concluido
+}
+
+enum DeviationClassification {
+  acessibilidade
+  organizacao
+  comportamental
+  equipamento
+  epi
+  ergonomia
+  procedimento
+  residuos
+  sinalizacao
+  eletricidade
+}
+
+model Deviation {
+  id                    String                   @id @default(uuid())
+  date                  DateTime                 @db.Date
+  location              String
+  classification        DeviationClassification
+  description           String
+  foreman               String?
+  responsibleTechnician String?
+  action                String?
+  status                DeviationStatus          @default(pendente)
+  createdAt             DateTime                 @default(now())
+  updatedAt             DateTime                 @updatedAt
+
+  @@map("deviations")
+}
+
+/// Lançamento mensal de indicadores de acidentes (NBR 14280). As taxas de
+/// frequência/gravidade/índice relativo são calculadas em runtime a partir
+/// destes campos — não são persistidas.
+model AccidentIndicator {
+  id                    String   @id @default(uuid())
+  year                  Int
+  month                 Int
+  employees             Int
+  accidentsWithLeave    Int      @default(0)
+  accidentsWithoutLeave Int      @default(0)
+  daysLostAccidents     Int      @default(0)
+  daysDebited           Int      @default(0)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@unique([year, month])
+  @@map("accident_indicators")
+}
+
+/// Códigos CID cadastrados manualmente, complementando o catálogo curado
+/// que permanece estático no frontend (`constants/cid.ts`).
+model CidCustomEntry {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  description String
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("cid_custom_entries")
+}

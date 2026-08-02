@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { Link, useRouteError, isRouteErrorResponse } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { EmptyState } from '@/components/feedback/EmptyState';
 import { Button } from '@/components/ui/Button';
 import { AlertTriangle } from 'lucide-react';
@@ -17,18 +18,19 @@ interface RootBoundaryProps {
  * de qual árvore renderizar é tomada pelo `if` abaixo, não por `children`.
  */
 export function RootBoundary({ children }: RootBoundaryProps) {
+  const { t } = useTranslation('common');
   const error = useRouteError();
 
   if (!error) return <>{children}</>;
 
   const title = isRouteErrorResponse(error)
-    ? `${error.status} — ${error.statusText || 'Página não encontrada'}`
-    : 'Algo deu errado';
+    ? `${error.status} — ${error.statusText || t('notFound.title')}`
+    : t('states.error');
   const description = isRouteErrorResponse(error)
-    ? 'A rota solicitada não pôde ser carregada.'
+    ? t('errorBoundary.routeErrorDescription')
     : error instanceof Error
       ? error.message
-      : 'Não foi possível carregar essa página. Tente novamente ou volte para a tela inicial.';
+      : t('errorBoundary.genericDescription');
 
   return (
     <div className="flex h-full min-h-screen items-center justify-center bg-bg p-6">
@@ -39,7 +41,7 @@ export function RootBoundary({ children }: RootBoundaryProps) {
         action={
           <Button asChild variant="primary">
             <Link to="/" replace>
-              Voltar ao início
+              {t('actions.backToHome')}
             </Link>
           </Button>
         }

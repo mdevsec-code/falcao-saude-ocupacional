@@ -1,33 +1,13 @@
 export interface DashboardKpi {
   id: 'appointmentsToday' | 'waiting' | 'attendances' | 'pending';
-  label: string;
   value: number;
   trend: { direction: 'up' | 'down' | 'flat'; value: string };
 }
 
+/** Sem histórico pré-cadastrado — os indicadores começam zerados após o lançamento. */
 export const DASHBOARD_KPIS: DashboardKpi[] = [
-  {
-    id: 'appointmentsToday',
-    label: 'Consultas hoje',
-    value: 12,
-    trend: { direction: 'up', value: '+2' },
-  },
-  {
-    id: 'waiting',
-    label: 'Aguardando',
-    value: 3,
-    trend: { direction: 'flat', value: '0' },
-  },
-  {
-    id: 'attendances',
-    label: 'Atendimentos',
-    value: 8,
-    trend: { direction: 'up', value: '+18%' },
-  },
-  {
-    id: 'pending',
-    label: 'Pendências',
-    value: 2,
-    trend: { direction: 'down', value: '-1' },
-  },
+  { id: 'appointmentsToday', value: 0, trend: { direction: 'flat', value: '0' } },
+  { id: 'waiting', value: 0, trend: { direction: 'flat', value: '0' } },
+  { id: 'attendances', value: 0, trend: { direction: 'flat', value: '0' } },
+  { id: 'pending', value: 0, trend: { direction: 'flat', value: '0' } },
 ];

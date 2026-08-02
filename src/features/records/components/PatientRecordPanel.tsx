@@ -1,4 +1,5 @@
 import { Briefcase, Calendar, IdCard, Phone } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
@@ -18,19 +19,21 @@ interface PatientRecordPanelProps {
 }
 
 export function PatientRecordPanel({ patient, attendances }: PatientRecordPanelProps) {
+  const { t } = useTranslation('records');
+
   if (!patient) {
     return (
       <div className="flex h-full items-center justify-center rounded-md border border-dashed border-border">
         <EmptyState
-          title="Selecione um paciente"
-          description="Escolha um paciente na lista ao lado para ver o prontuário."
+          title={t('records:detail.selectTitle')}
+          description={t('records:detail.selectDescription')}
         />
       </div>
     );
   }
 
   return (
-    <div className="h-full space-y-6 overflow-y-auto rounded-md border border-border bg-surface p-5 scrollbar-thin">
+    <div className="scrollbar-thin h-full space-y-6 overflow-y-auto rounded-md border border-border bg-surface p-5">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <Avatar className="h-12 w-12">
@@ -59,18 +62,20 @@ export function PatientRecordPanel({ patient, attendances }: PatientRecordPanelP
         </div>
         <div className="flex items-center gap-2 text-ink-soft">
           <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          <span>Admissão: {formatDate(patient.admissionDate) ?? '—'}</span>
+          <span>
+            {t('records:detail.admission', { date: formatDate(patient.admissionDate) ?? '—' })}
+          </span>
         </div>
         <div className="flex items-center gap-2 text-ink-soft">
           <Briefcase className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-          <span>{attendances.length} atendimento(s)</span>
+          <span>{t('records:detail.attendanceCount', { count: attendances.length })}</span>
         </div>
       </div>
 
       <Separator />
 
       <div>
-        <h3 className="mb-3 text-sm font-semibold text-ink">Histórico de atendimentos</h3>
+        <h3 className="mb-3 text-sm font-semibold text-ink">{t('records:detail.historyTitle')}</h3>
         <AttendanceTimeline records={attendances} />
       </div>
     </div>

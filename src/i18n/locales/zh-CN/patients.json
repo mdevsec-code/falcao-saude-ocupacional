@@ -1,0 +1,97 @@
+{
+  "page": {
+    "eyebrow": "接诊",
+    "title": "患者",
+    "description": "职业健康服务所接诊员工的档案登记。"
+  },
+  "error": {
+    "title": "无法加载患者信息",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "new": "新增患者",
+    "retry": "重试"
+  },
+  "kpi": {
+    "total": "患者总数",
+    "active": "在职",
+    "onLeave": "休假中",
+    "sectors": "部门数"
+  },
+  "dialog": {
+    "createTitle": "新增患者",
+    "editTitle": "编辑患者",
+    "createDescription": "填写信息以登记一名新患者。",
+    "editDescription": "更新该患者的登记信息。",
+    "fields": {
+      "name": { "label": "姓名", "placeholder": "患者姓名" },
+      "cpf": { "label": "CPF", "placeholder": "000.000.000-00" },
+      "birthDate": { "label": "出生日期" },
+      "phone": { "label": "电话", "placeholder": "11987654321" },
+      "email": { "label": "电子邮箱", "placeholder": "paciente@email.com" },
+      "sector": { "label": "部门" },
+      "role": { "label": "职位", "placeholder": "例如：泥瓦工" },
+      "admissionDate": { "label": "入职日期" },
+      "status": { "label": "状态" },
+      "notes": { "label": "备注", "placeholder": "补充信息（可选）" },
+      "optional": "可选"
+    },
+    "cancel": "取消",
+    "submitCreate": "登记患者",
+    "submitEdit": "保存更改"
+  },
+  "table": {
+    "name": "姓名",
+    "cpf": "CPF",
+    "role": "职位",
+    "sector": "部门",
+    "phone": "电话",
+    "admission": "入职日期",
+    "status": "状态",
+    "actions": "操作",
+    "searchPlaceholder": "在表格中搜索…",
+    "exportExcel": "导出 Excel",
+    "exportTitle": "患者档案登记",
+    "generatedAt": "生成时间",
+    "total": "总计",
+    "viewRecordAria": "查看病历",
+    "editAria": "编辑患者",
+    "deleteAria": "删除患者",
+    "prevPageAria": "上一页",
+    "nextPageAria": "下一页",
+    "showingRange": "显示第 {{start}}–{{end}} 条，共 {{total}} 名患者",
+    "pageOf": "第 {{current}} / {{total}} 页"
+  },
+  "toast": {
+    "exportSuccess": "导出完成。",
+    "exportError": "无法导出电子表格。",
+    "createSuccess": "患者已登记。",
+    "createError": "无法登记患者。",
+    "updateSuccess": "患者信息已更新。",
+    "updateError": "无法更新患者信息。",
+    "deleteSuccess": "患者已删除。",
+    "deleteError": "无法删除患者。"
+  },
+  "empty": {
+    "title": "未找到患者",
+    "description": "请调整筛选条件或搜索内容。"
+  },
+  "filters": {
+    "title": "筛选",
+    "all": "全部",
+    "search": { "label": "搜索", "placeholder": "姓名、CPF 或职位…" },
+    "sector": { "label": "部门" },
+    "status": { "label": "状态" },
+    "chipSector": "部门：{{value}}",
+    "chipStatus": "状态：{{value}}",
+    "chipSearch": "搜索：“{{value}}”",
+    "removeChipAria": "移除筛选条件 {{label}}",
+    "clearAll": "清除全部"
+  },
+  "deleteDialog": {
+    "title": "删除该患者？",
+    "description": "<strong>{{name}}</strong> 的档案将被永久删除。此操作无法撤销。",
+    "cancel": "取消",
+    "confirm": "删除"
+  }
+}

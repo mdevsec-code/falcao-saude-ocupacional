@@ -8,5 +8,8 @@
   "cpf": "CPF deve ter 11 dígitos",
   "cnpj": "CNPJ deve ter 14 dígitos",
   "phone": "Telefone inválido",
-  "date": "Data inválida"
+  "date": "Data inválida",
+  "nameRequired": "Informe o nome completo",
+  "minDuration": "Mínimo de {{count}} minutos",
+  "maxDuration": "Máximo de {{count}} minutos"
 }

@@ -1,0 +1,37 @@
+{
+  "page": {
+    "eyebrow": "职业安全",
+    "title": "ASO — 按作业活动划分的适任情况",
+    "description": "员工从事高风险作业（高处作业、密闭空间、机械、电气）适任情况面板。"
+  },
+  "error": {
+    "title": "无法加载 ASO 面板",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "retry": "重试",
+    "viewRecord": "查看病历"
+  },
+  "kpis": {
+    "evaluated": "已评估员工",
+    "noRestriction": "无限制",
+    "someUnfit": "存在不适任项"
+  },
+  "filters": {
+    "searchPlaceholder": "搜索员工…",
+    "onlyUnfit": "仅显示存在不适任项"
+  },
+  "empty": {
+    "title": "未找到员工",
+    "description": "请调整搜索或筛选条件。员工在某次接诊中至少评估过一项风险作业后才会显示在此处。"
+  },
+  "table": {
+    "employee": "员工",
+    "record": "病历"
+  },
+  "fitness": {
+    "notEvaluated": "未评估",
+    "fit": "适任",
+    "unfit": "不适任"
+  }
+}

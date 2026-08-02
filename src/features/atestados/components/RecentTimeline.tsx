@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { formatDate } from '@/utils/format';
 import type { AtestadoRecord } from '../types';
 
@@ -8,6 +9,7 @@ interface RecentTimelineProps {
 }
 
 export function RecentTimeline({ records, limit = 8 }: RecentTimelineProps) {
+  const { t } = useTranslation('atestados');
   const recent = useMemo(
     () =>
       [...records]
@@ -18,7 +20,7 @@ export function RecentTimeline({ records, limit = 8 }: RecentTimelineProps) {
   );
 
   if (recent.length === 0) {
-    return <p className="text-sm text-ink-soft">Nenhum lançamento no período.</p>;
+    return <p className="text-sm text-ink-soft">{t('atestados:timeline.empty')}</p>;
   }
 
   return (
@@ -34,7 +36,8 @@ export function RecentTimeline({ records, limit = 8 }: RecentTimelineProps) {
               {r.nome} — {r.setor ?? '—'}
             </p>
             <p className="text-xs text-ink-soft">
-              {formatDate(r.dataLancamento) ?? '—'} · {r.qntDias ?? 0} dia(s) · CID {r.cid ?? '—'}
+              {formatDate(r.dataLancamento) ?? '—'} · {r.qntDias ?? 0}{' '}
+              {t('atestados:timeline.daysUnit')} · CID {r.cid ?? '—'}
             </p>
           </div>
         </li>

@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import i18n from '@/i18n';
 import {
   formatCNPJ,
   formatCPF,
@@ -12,6 +13,17 @@ import {
 } from '../format';
 
 describe('format utils', () => {
+  // Os formatadores seguem o idioma ativo (getIntlLocale()); fixamos pt-BR
+  // aqui para as asserções ficarem determinísticas, independente do locale
+  // que o navegador/jsdom do ambiente de teste reporta.
+  const originalLanguage = i18n.language;
+  beforeAll(async () => {
+    await i18n.changeLanguage('pt-BR');
+  });
+  afterAll(async () => {
+    await i18n.changeLanguage(originalLanguage);
+  });
+
   describe('getInitials', () => {
     it('extrai até 2 iniciais', () => {
       expect(getInitials('Maria Silva Santos')).toBe('MS');
@@ -36,6 +48,18 @@ describe('format utils', () => {
       expect(formatDate(null)).toBeNull();
       expect(formatDate(undefined)).toBeNull();
       expect(formatDate('not-a-date')).toBeNull();
+    });
+
+    it('acompanha o idioma ativo (não fica preso em pt-BR)', async () => {
+      await i18n.changeLanguage('en-US');
+      try {
+        const formatted = formatDate('2026-01-15T00:00:00Z');
+        // en-US usa M/D/YY, não dd/mm/yyyy — provando que o formatador lê o
+        // locale atual em vez de uma instância de Intl.DateTimeFormat fixa.
+        expect(formatted).not.toMatch(/^\d{2}\/\d{2}\/\d{4}$/);
+      } finally {
+        await i18n.changeLanguage('pt-BR');
+      }
     });
   });
 

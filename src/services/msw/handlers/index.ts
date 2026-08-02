@@ -7,6 +7,10 @@ import { attendancesHandlers } from './attendances';
 import { usersHandlers } from './users';
 import { examsHandlers } from './exams';
 import { auditHandlers } from './audit';
+import { feriasHandlers } from './ferias';
+import { desviosHandlers } from './desvios';
+import { indicadoresHandlers } from './indicadores';
+import { cidHandlers } from './cid';
 
 export const handlers = [
   ...authHandlers,
@@ -18,4 +22,8 @@ export const handlers = [
   ...usersHandlers,
   ...examsHandlers,
   ...auditHandlers,
+  ...feriasHandlers,
+  ...desviosHandlers,
+  ...indicadoresHandlers,
+  ...cidHandlers,
 ];

@@ -10,5 +10,40 @@
     "waiting": "Aguardando",
     "attendances": "Atendimentos",
     "pending": "Pendências"
+  },
+  "kpiSection": {
+    "title": "Indicadores do dia"
+  },
+  "error": {
+    "message": "Não foi possível carregar os indicadores.",
+    "retry": "Tentar novamente"
+  },
+  "quickLinks": {
+    "title": "Acesso rápido",
+    "agenda": { "label": "Agenda", "description": "Calendário de consultas" },
+    "agendamentos": { "label": "Agendamentos", "description": "Lista do dia" },
+    "pacientes": { "label": "Pacientes", "description": "Cadastro de colaboradores" },
+    "atendimentos": { "label": "Atendimentos", "description": "Consultas realizadas" },
+    "prontuarios": { "label": "Prontuários", "description": "Histórico por paciente" },
+    "aso": { "label": "ASO", "description": "Aptidão por atividade" },
+    "exames": { "label": "Exames", "description": "Catálogo de exames" },
+    "cid": { "label": "CID", "description": "Referência de códigos" },
+    "atestados": { "label": "Atestados", "description": "Análise e indicadores" },
+    "relatorios": { "label": "Relatórios", "description": "Exportação e filtros" },
+    "usuarios": { "label": "Usuários", "description": "Contas de acesso" },
+    "permissoes": { "label": "Permissões", "description": "Matriz por perfil" },
+    "configuracoes": { "label": "Configurações", "description": "Sistema e notificações" }
+  },
+  "agendaCard": {
+    "title": "Agenda de hoje",
+    "viewAll": "Ver agenda",
+    "emptyTitle": "Nenhuma consulta hoje",
+    "emptyDescription": "A agenda de hoje está livre.",
+    "moreAppointments": "+{{count}} consulta(s) — veja a agenda completa"
+  },
+  "summary": {
+    "readyDescription": "Plataforma pronta para uso.",
+    "activeModules": "Módulos ativos",
+    "helpText": "Precisa de ajuda? Consulte o menu lateral ou fale com um administrador em Usuários."
   }
 }

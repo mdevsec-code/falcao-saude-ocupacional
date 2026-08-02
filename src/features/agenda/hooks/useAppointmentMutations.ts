@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import i18n from '@/i18n';
 import { agendaApi } from '../services/agenda.api';
 import { agendaKeys } from './useAppointments';
 import type { AppointmentRecord } from '../types';
@@ -11,10 +12,10 @@ export function useCreateAppointment() {
     mutationFn: (input: Omit<AppointmentRecord, 'id'>) => agendaApi.create(input),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: agendaKeys.all });
-      toast.success('Agendamento criado.');
+      toast.success(i18n.t('agenda:toast.createSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível criar o agendamento.');
+      toast.error(error.message || i18n.t('agenda:toast.createError'));
     },
   });
 }
@@ -26,10 +27,10 @@ export function useUpdateAppointment() {
       agendaApi.update(id, patch),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: agendaKeys.all });
-      toast.success('Agendamento atualizado.');
+      toast.success(i18n.t('agenda:toast.updateSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível atualizar o agendamento.');
+      toast.error(error.message || i18n.t('agenda:toast.updateError'));
     },
   });
 }
@@ -40,10 +41,10 @@ export function useDeleteAppointment() {
     mutationFn: (id: string) => agendaApi.remove(id),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: agendaKeys.all });
-      toast.success('Agendamento removido.');
+      toast.success(i18n.t('agenda:toast.deleteSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível remover o agendamento.');
+      toast.error(error.message || i18n.t('agenda:toast.deleteError'));
     },
   });
 }

@@ -1,0 +1,77 @@
+{
+  "validation": {
+    "patientNameRequired": "请输入患者全名"
+  },
+  "page": {
+    "eyebrow": "接诊",
+    "title": "日程",
+    "description": "职业健康就诊与检查日历。"
+  },
+  "error": {
+    "title": "无法加载日程",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "retry": "重试",
+    "today": "今天",
+    "prevPeriod": "上一时段",
+    "nextPeriod": "下一时段",
+    "newAppointment": "新建预约",
+    "editAppointment": "编辑预约",
+    "removeAppointment": "删除预约",
+    "cancel": "取消",
+    "remove": "删除",
+    "saveChanges": "保存更改",
+    "createAppointment": "创建预约"
+  },
+  "view": {
+    "month": "月",
+    "week": "周",
+    "day": "日"
+  },
+  "filters": {
+    "doctor": "医生",
+    "examType": "检查类型",
+    "status": "状态",
+    "all": "全部"
+  },
+  "empty": {
+    "dayTitle": "当天没有预约",
+    "dayDescription": "点击“新建预约”按钮创建一个时段。",
+    "week": "没有预约"
+  },
+  "card": {
+    "more": "还有 {{count}} 项"
+  },
+  "unit": {
+    "minutes": "{{count}} 分钟"
+  },
+  "dialog": {
+    "newTitle": "新建预约",
+    "editTitle": "编辑预约",
+    "newDescription": "填写信息以创建新的预约。",
+    "editDescription": "更新预约信息。",
+    "deleteTitle": "删除该预约？",
+    "deleteDescription": "<1>{{name}}</1> 的预约将被永久删除。此操作无法撤销。"
+  },
+  "form": {
+    "patient": "患者",
+    "patientPlaceholder": "全名",
+    "phone": "电话（WhatsApp）",
+    "phoneHint": "可选 — 用于 WhatsApp 复诊提醒",
+    "date": "日期",
+    "time": "时间",
+    "duration": "时长",
+    "notes": "备注",
+    "notesPlaceholder": "附加信息（可选）",
+    "conflictWarning": "该医生在此时段已有预约。请调整日期/时间或选择其他医生。"
+  },
+  "toast": {
+    "createSuccess": "预约已创建。",
+    "createError": "无法创建预约。",
+    "updateSuccess": "预约已更新。",
+    "updateError": "无法更新预约。",
+    "deleteSuccess": "预约已删除。",
+    "deleteError": "无法删除预约。"
+  }
+}

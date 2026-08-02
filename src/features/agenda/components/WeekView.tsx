@@ -1,5 +1,6 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/utils/cn';
-import { getWeekDays, isSameDay, recordsOnDay, WEEKDAY_SHORT_FMT } from '../lib/calendar';
+import { getWeekDays, isSameDay, recordsOnDay, formatWeekdayShort } from '../lib/calendar';
 import { AppointmentChip } from './AppointmentChip';
 import type { AppointmentRecord } from '../types';
 
@@ -11,6 +12,7 @@ interface WeekViewProps {
 }
 
 export function WeekView({ weekAnchor, records, onSelectDay, onEditAppointment }: WeekViewProps) {
+  const { t } = useTranslation('agenda');
   const days = getWeekDays(weekAnchor);
   const today = new Date();
 
@@ -34,7 +36,7 @@ export function WeekView({ weekAnchor, records, onSelectDay, onEditAppointment }
               className="flex items-center justify-between rounded px-1 py-0.5 text-left hover:bg-hover"
             >
               <span className="text-2xs font-semibold uppercase tracking-wide text-ink-soft">
-                {WEEKDAY_SHORT_FMT.format(day)}
+                {formatWeekdayShort(day)}
               </span>
               <span
                 className={cn(
@@ -48,7 +50,7 @@ export function WeekView({ weekAnchor, records, onSelectDay, onEditAppointment }
 
             <div className="flex flex-1 flex-col gap-1">
               {dayRecords.length === 0 && (
-                <p className="pt-2 text-center text-2xs text-muted">Sem agendamentos</p>
+                <p className="pt-2 text-center text-2xs text-muted">{t('agenda:empty.week')}</p>
               )}
               {dayRecords.map((record) => (
                 <AppointmentChip key={record.id} record={record} onClick={onEditAppointment} />

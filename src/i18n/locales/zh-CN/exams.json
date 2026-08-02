@@ -1,0 +1,74 @@
+{
+  "validation": {
+    "nameRequired": "请输入检查项目名称"
+  },
+  "page": {
+    "eyebrow": "临床",
+    "title": "检查类型",
+    "description": "可用于预约和接诊的检查目录，含标准时长与周期。"
+  },
+  "error": {
+    "title": "无法加载检查类型",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "new": "新建检查类型",
+    "retry": "重试"
+  },
+  "dialog": {
+    "createTitle": "新建检查类型",
+    "editTitle": "编辑检查类型",
+    "createDescription": "在目录中登记一个新的检查类型。",
+    "editDescription": "更新此检查类型的信息。",
+    "fields": {
+      "name": { "label": "名称", "placeholder": "例如：定期 ASO" },
+      "category": { "label": "类别" },
+      "duration": { "label": "标准时长（分钟）" },
+      "periodicity": {
+        "label": "周期（月）",
+        "placeholder": "非周期性检查可留空",
+        "hint": "例如：年度检查（NR-7）填 12。入职/离职检查请留空。"
+      },
+      "description": {
+        "label": "描述",
+        "placeholder": "说明何时申请此检查（可选）"
+      },
+      "active": "启用（可在日程和接诊中选择）"
+    },
+    "cancel": "取消",
+    "submitCreate": "创建检查类型",
+    "submitEdit": "保存更改"
+  },
+  "table": {
+    "name": "名称",
+    "category": "类别",
+    "duration": "时长",
+    "durationValue": "{{count}} 分钟",
+    "periodicity": "周期",
+    "periodicityValue": "每 {{count}} 个月",
+    "status": "状态",
+    "actions": "操作",
+    "active": "启用",
+    "inactive": "停用",
+    "editAria": "编辑检查类型",
+    "deleteAria": "删除检查类型"
+  },
+  "empty": {
+    "title": "暂无已登记的检查类型",
+    "description": "创建第一个检查类型。"
+  },
+  "deleteDialog": {
+    "title": "删除该检查类型？",
+    "description": "<strong>{{name}}</strong> 将从目录中移除。已登记使用该检查的接诊和预约记录不受影响。",
+    "cancel": "取消",
+    "confirm": "删除"
+  },
+  "toast": {
+    "createSuccess": "检查类型已创建。",
+    "createError": "无法创建检查类型。",
+    "updateSuccess": "检查类型已更新。",
+    "updateError": "无法更新检查类型。",
+    "deleteSuccess": "检查类型已删除。",
+    "deleteError": "无法删除检查类型。"
+  }
+}

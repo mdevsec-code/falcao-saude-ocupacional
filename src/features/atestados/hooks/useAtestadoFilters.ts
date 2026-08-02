@@ -1,5 +1,10 @@
 import { useMemo } from 'react';
-import { applyAtestadoFilters, dateRange, PRIMARY_FILTER_FIELDS, uniqueSorted } from '../lib/filters';
+import {
+  applyAtestadoFilters,
+  dateRange,
+  PRIMARY_FILTER_FIELDS,
+  uniqueSorted,
+} from '../lib/filters';
 import type { AtestadoFilters, AtestadoRecord } from '../types';
 
 export interface FilterDefinition {
@@ -25,6 +30,8 @@ export function useFilterDefinitions(records: readonly AtestadoRecord[]): Filter
   );
 }
 
-export function useAtestadoDateRange(records: readonly AtestadoRecord[]): [string | null, string | null] {
+export function useAtestadoDateRange(
+  records: readonly AtestadoRecord[],
+): [string | null, string | null] {
   return useMemo(() => dateRange(records, 'inicioAtestado'), [records]);
 }

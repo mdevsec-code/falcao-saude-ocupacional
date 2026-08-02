@@ -1,0 +1,95 @@
+{
+  "validation": {
+    "dateRangeInvalid": "The end date must be on or after the start date"
+  },
+  "page": {
+    "eyebrow": "Human Resources",
+    "title": "Vacation",
+    "description": "Track employee vacation periods."
+  },
+  "error": {
+    "title": "Unable to load vacation periods",
+    "description": "Please try again shortly."
+  },
+  "actions": {
+    "new": "New vacation",
+    "retry": "Try again"
+  },
+  "kpi": {
+    "total": "Total periods",
+    "scheduled": "Scheduled",
+    "ongoing": "Ongoing",
+    "completed": "Completed"
+  },
+  "dialog": {
+    "createTitle": "New vacation",
+    "editTitle": "Edit vacation",
+    "createDescription": "Register a new vacation period.",
+    "editDescription": "Update this vacation period.",
+    "fields": {
+      "patientName": { "label": "Employee", "placeholder": "Full name" },
+      "sector": { "label": "Sector" },
+      "role": { "label": "Role", "placeholder": "E.g.: Bricklayer" },
+      "startDate": { "label": "Start" },
+      "endDate": { "label": "End" },
+      "status": { "label": "Status" },
+      "notes": { "label": "Notes", "placeholder": "Additional details (optional)" }
+    },
+    "cancel": "Cancel",
+    "submitCreate": "Register vacation",
+    "submitEdit": "Save changes"
+  },
+  "table": {
+    "patientName": "Employee",
+    "sector": "Sector",
+    "role": "Role",
+    "startDate": "Start",
+    "endDate": "End",
+    "days": "Days",
+    "status": "Status",
+    "actions": "Actions",
+    "searchPlaceholder": "Search the table…",
+    "exportExcel": "Export Excel",
+    "exportTitle": "Vacation Tracker",
+    "generatedAt": "Generated at",
+    "total": "Total",
+    "editAria": "Edit vacation",
+    "deleteAria": "Remove vacation",
+    "prevPageAria": "Previous page",
+    "nextPageAria": "Next page",
+    "showingRange": "Showing {{start}}–{{end}} of {{total}} periods",
+    "pageOf": "Page {{current}} of {{total}}"
+  },
+  "toast": {
+    "exportSuccess": "Export completed.",
+    "exportError": "Unable to export the spreadsheet.",
+    "createSuccess": "Vacation registered.",
+    "createError": "Unable to register the vacation.",
+    "updateSuccess": "Vacation updated.",
+    "updateError": "Unable to update the vacation.",
+    "deleteSuccess": "Vacation removed.",
+    "deleteError": "Unable to remove the vacation."
+  },
+  "empty": {
+    "title": "No vacation periods found",
+    "description": "Adjust the filters or the search."
+  },
+  "filters": {
+    "title": "Filters",
+    "all": "All",
+    "search": { "label": "Search", "placeholder": "Name or role…" },
+    "sector": { "label": "Sector" },
+    "status": { "label": "Status" },
+    "chipSector": "Sector: {{value}}",
+    "chipStatus": "Status: {{value}}",
+    "chipSearch": "Search: \"{{value}}\"",
+    "removeChipAria": "Remove filter {{label}}",
+    "clearAll": "Clear all"
+  },
+  "deleteDialog": {
+    "title": "Remove vacation?",
+    "description": "The vacation period for <strong>{{name}}</strong> will be permanently removed. This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Remove"
+  }
+}

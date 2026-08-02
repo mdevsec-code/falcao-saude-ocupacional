@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AlertTriangle } from 'lucide-react';
@@ -78,6 +79,7 @@ export function AppointmentDialog({
   onSubmit,
   isSubmitting,
 }: AppointmentDialogProps) {
+  const { t } = useTranslation('agenda');
   const {
     register,
     control,
@@ -119,34 +121,34 @@ export function AppointmentDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>{editingRecord ? 'Editar agendamento' : 'Novo agendamento'}</DialogTitle>
+          <DialogTitle>
+            {editingRecord ? t('agenda:dialog.editTitle') : t('agenda:dialog.newTitle')}
+          </DialogTitle>
           <DialogDescription>
-            {editingRecord
-              ? 'Atualize os dados da consulta.'
-              : 'Preencha os dados para agendar uma nova consulta.'}
+            {editingRecord ? t('agenda:dialog.editDescription') : t('agenda:dialog.newDescription')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={submit} noValidate className="space-y-4">
           <Input
             {...register('patientName')}
-            label="Paciente"
-            placeholder="Nome completo"
+            label={t('agenda:form.patient')}
+            placeholder={t('agenda:form.patientPlaceholder')}
             error={errors.patientName?.message}
             required
           />
 
           <Input
             {...register('phone')}
-            label="Telefone (WhatsApp)"
+            label={t('agenda:form.phone')}
             placeholder="11987654321"
             error={errors.phone?.message}
-            hint="Opcional — usado para retorno via WhatsApp"
+            hint={t('agenda:form.phoneHint')}
           />
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <Label htmlFor="apt-exam">Tipo de exame</Label>
+              <Label htmlFor="apt-exam">{t('agenda:filters.examType')}</Label>
               <Controller
                 control={control}
                 name="examType"
@@ -168,7 +170,7 @@ export function AppointmentDialog({
             </div>
 
             <div>
-              <Label htmlFor="apt-doctor">Médico</Label>
+              <Label htmlFor="apt-doctor">{t('agenda:filters.doctor')}</Label>
               <Controller
                 control={control}
                 name="doctor"
@@ -194,7 +196,7 @@ export function AppointmentDialog({
             <Input
               {...register('date')}
               type="date"
-              label="Data"
+              label={t('agenda:form.date')}
               error={errors.date?.message}
               className="col-span-2 sm:col-span-1"
               required
@@ -202,25 +204,28 @@ export function AppointmentDialog({
             <Input
               {...register('time')}
               type="time"
-              label="Horário"
+              label={t('agenda:form.time')}
               error={errors.time?.message}
               className="col-span-2 sm:col-span-1"
               required
             />
             <div className="col-span-2 sm:col-span-1">
-              <Label htmlFor="apt-duration">Duração</Label>
+              <Label htmlFor="apt-duration">{t('agenda:form.duration')}</Label>
               <Controller
                 control={control}
                 name="durationMin"
                 render={({ field }) => (
-                  <Select value={String(field.value)} onValueChange={(v) => field.onChange(Number(v))}>
+                  <Select
+                    value={String(field.value)}
+                    onValueChange={(v) => field.onChange(Number(v))}
+                  >
                     <SelectTrigger id="apt-duration" className="mt-1 w-full">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       {DURATIONS.map((d) => (
                         <SelectItem key={d} value={String(d)}>
-                          {d} min
+                          {t('agenda:unit.minutes', { count: d })}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -229,7 +234,7 @@ export function AppointmentDialog({
               />
             </div>
             <div className="col-span-2 sm:col-span-1">
-              <Label htmlFor="apt-status">Status</Label>
+              <Label htmlFor="apt-status">{t('agenda:filters.status')}</Label>
               <Controller
                 control={control}
                 name="status"
@@ -257,25 +262,26 @@ export function AppointmentDialog({
               className="flex items-start gap-2 rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger"
             >
               <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              Este médico já tem um agendamento nesse horário. Ajuste a data/hora ou escolha outro
-              profissional.
+              {t('agenda:form.conflictWarning')}
             </p>
           )}
 
           <Textarea
             {...register('notes')}
-            label="Observações"
-            placeholder="Detalhes adicionais (opcional)"
+            label={t('agenda:form.notes')}
+            placeholder={t('agenda:form.notesPlaceholder')}
             error={errors.notes?.message}
             rows={2}
           />
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              {t('agenda:actions.cancel')}
             </Button>
             <Button type="submit" variant="primary" isLoading={isSubmitting} disabled={conflict}>
-              {editingRecord ? 'Salvar alterações' : 'Criar agendamento'}
+              {editingRecord
+                ? t('agenda:actions.saveChanges')
+                : t('agenda:actions.createAppointment')}
             </Button>
           </DialogFooter>
         </form>

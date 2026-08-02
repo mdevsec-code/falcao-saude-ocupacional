@@ -1,0 +1,33 @@
+{
+  "eyebrow": "接诊",
+  "title": "预约",
+  "description": "查看当天日程，并直接从列表中发送 WhatsApp 复诊提醒。",
+  "today": {
+    "title": "今日日程",
+    "subtitle": "{{count}} 项预约 · {{brand}}"
+  },
+  "empty": {
+    "title": "今天没有预约",
+    "description": "今天的日程是空的。"
+  },
+  "whatsappReturn": {
+    "label": "WhatsApp 复诊提醒",
+    "message": "您好！我们是 {company} 职业健康团队。您好吗？我们联系您是为了安排您的{exam}复诊。请问您方便确认一下合适的日期和时间吗？",
+    "dialog": {
+      "confirmWithName": "请确认 {{name}} 的电话号码以打开 WhatsApp 对话。",
+      "confirmNoName": "请输入电话号码以打开 WhatsApp 对话。",
+      "nameLabel": "患者姓名（可选）",
+      "namePlaceholder": "例如：Maria Silva",
+      "phoneLabel": "电话（含区号）",
+      "phoneInvalid": "电话号码无效",
+      "phoneValid": "电话号码有效（{{phone}}）",
+      "cancel": "取消",
+      "open": "打开 WhatsApp"
+    },
+    "toast": {
+      "sent": "WhatsApp 对话已打开",
+      "invalid": "该患者的 WhatsApp 号码无效",
+      "missing": "该患者未登记电话号码"
+    }
+  }
+}

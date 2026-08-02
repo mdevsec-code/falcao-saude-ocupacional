@@ -1,0 +1,15 @@
+{
+  "required": "Required field",
+  "email": "Invalid email",
+  "minLength": "Minimum of {{count}} characters",
+  "maxLength": "Maximum of {{count}} characters",
+  "minPassword": "Password must be at least 8 characters",
+  "maxPassword": "Password must be at most 72 characters",
+  "cpf": "CPF must have 11 digits",
+  "cnpj": "CNPJ must have 14 digits",
+  "phone": "Invalid phone number",
+  "date": "Invalid date",
+  "nameRequired": "Enter the full name",
+  "minDuration": "Minimum {{count}} minutes",
+  "maxDuration": "Maximum {{count}} minutes"
+}

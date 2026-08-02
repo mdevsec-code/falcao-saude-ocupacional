@@ -1,12 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import { Pencil, Trash2, Stethoscope, User } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/feedback/EmptyState';
-import { DAY_LABEL_FMT, recordsOnDay } from '../lib/calendar';
+import { formatDayLabel, recordsOnDay } from '../lib/calendar';
 import { STATUS_BADGE_VARIANT, APPOINTMENT_STATUS_LABELS } from '../lib/status';
+import { formatTime } from '@/utils/format';
 import type { AppointmentRecord } from '../types';
-
-const TIME_FMT = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
 interface DayViewProps {
   dayAnchor: Date;
@@ -15,17 +15,23 @@ interface DayViewProps {
   onDeleteAppointment: (record: AppointmentRecord) => void;
 }
 
-export function DayView({ dayAnchor, records, onEditAppointment, onDeleteAppointment }: DayViewProps) {
+export function DayView({
+  dayAnchor,
+  records,
+  onEditAppointment,
+  onDeleteAppointment,
+}: DayViewProps) {
+  const { t } = useTranslation('agenda');
   const dayRecords = recordsOnDay(records, dayAnchor);
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-semibold capitalize text-ink">{DAY_LABEL_FMT.format(dayAnchor)}</h3>
+      <h3 className="text-sm font-semibold capitalize text-ink">{formatDayLabel(dayAnchor)}</h3>
 
       {dayRecords.length === 0 ? (
         <EmptyState
-          title="Nenhum agendamento neste dia"
-          description="Use o botão “Novo agendamento” para criar um horário."
+          title={t('agenda:empty.dayTitle')}
+          description={t('agenda:empty.dayDescription')}
         />
       ) : (
         <div className="space-y-2">
@@ -36,7 +42,7 @@ export function DayView({ dayAnchor, records, onEditAppointment, onDeleteAppoint
             >
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-md bg-brand-gold-50 text-2xs font-semibold text-brand-gold-700">
-                  {TIME_FMT.format(new Date(record.startsAt))}
+                  {formatTime(record.startsAt)}
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-ink">{record.patientName}</p>
@@ -49,7 +55,7 @@ export function DayView({ dayAnchor, records, onEditAppointment, onDeleteAppoint
                       <User className="h-3 w-3" aria-hidden="true" />
                       {record.doctor}
                     </span>
-                    <span>· {record.durationMin} min</span>
+                    <span>· {t('agenda:unit.minutes', { count: record.durationMin })}</span>
                   </p>
                 </div>
               </div>
@@ -62,7 +68,7 @@ export function DayView({ dayAnchor, records, onEditAppointment, onDeleteAppoint
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8"
-                  aria-label="Editar agendamento"
+                  aria-label={t('agenda:actions.editAppointment')}
                   onClick={() => onEditAppointment(record)}
                 >
                   <Pencil className="h-4 w-4" />
@@ -71,7 +77,7 @@ export function DayView({ dayAnchor, records, onEditAppointment, onDeleteAppoint
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8 text-danger hover:text-danger"
-                  aria-label="Remover agendamento"
+                  aria-label={t('agenda:actions.removeAppointment')}
                   onClick={() => onDeleteAppointment(record)}
                 >
                   <Trash2 className="h-4 w-4" />

@@ -28,7 +28,7 @@ import { AttendanceDialog } from '../components/AttendanceDialog';
 import { DeleteConfirmDialog } from '../components/DeleteConfirmDialog';
 
 export function AttendancesPage() {
-  const { t } = useTranslation('attendances');
+  const { t } = useTranslation(['attendances', 'common']);
   const { data: allRecords, isLoading, isError, refetch } = useAttendances();
   const { data: allPatients } = usePatients();
   const records = useMemo(() => allRecords ?? [], [allRecords]);
@@ -106,7 +106,7 @@ export function AttendancesPage() {
         description={t('attendances:page.description')}
         actions={
           <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={handleCreate}>
-            Novo atendimento
+            {t('attendances:actions.new')}
           </Button>
         }
       />
@@ -126,7 +126,7 @@ export function AttendancesPage() {
             description={t('attendances:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('common:actions.retry')}
               </Button>
             }
           />
@@ -136,18 +136,22 @@ export function AttendancesPage() {
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <StatTile
-                label="Total de atendimentos"
+                label={t('attendances:kpi.total')}
                 value={kpis.total}
                 icon={<ClipboardCheck className="h-4 w-4" />}
               />
-              <StatTile label="Aptos" value={kpis.aptos} icon={<CircleCheck className="h-4 w-4" />} />
               <StatTile
-                label="Com restrição"
+                label={t('attendances:kpi.aptos')}
+                value={kpis.aptos}
+                icon={<CircleCheck className="h-4 w-4" />}
+              />
+              <StatTile
+                label={t('attendances:kpi.restricao')}
                 value={kpis.restricao}
                 icon={<ShieldAlert className="h-4 w-4" />}
               />
               <StatTile
-                label="Inaptos / Encaminhados"
+                label={t('attendances:kpi.atencao')}
                 value={kpis.atencao}
                 icon={<TriangleAlert className="h-4 w-4" />}
               />

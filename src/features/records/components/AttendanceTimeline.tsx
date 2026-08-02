@@ -1,4 +1,5 @@
 import { Stethoscope, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/feedback/EmptyState';
@@ -12,11 +13,13 @@ interface AttendanceTimelineProps {
 }
 
 export function AttendanceTimeline({ records }: AttendanceTimelineProps) {
+  const { t } = useTranslation('records');
+
   if (records.length === 0) {
     return (
       <EmptyState
-        title="Nenhum atendimento registrado"
-        description="Este paciente ainda não possui histórico de atendimentos."
+        title={t('records:timeline.emptyTitle')}
+        description={t('records:timeline.emptyDescription')}
       />
     );
   }
@@ -32,7 +35,9 @@ export function AttendanceTimeline({ records }: AttendanceTimelineProps) {
             className="absolute -left-[25px] top-1 h-2.5 w-2.5 rounded-full border-2 border-surface bg-brand-gold-500"
           />
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-ink">{formatDate(record.attendanceDate) ?? '—'}</p>
+            <p className="text-sm font-semibold text-ink">
+              {formatDate(record.attendanceDate) ?? '—'}
+            </p>
             <Badge variant={CONCLUSION_BADGE_VARIANT[record.conclusion]} size="sm">
               {APPOINTMENT_CONCLUSION_LABELS[record.conclusion]}
             </Badge>

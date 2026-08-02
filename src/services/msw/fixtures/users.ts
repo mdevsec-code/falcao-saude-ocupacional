@@ -12,6 +12,13 @@ export interface UserFixture {
   companyId?: string;
 }
 
+/**
+ * Conta administrativa inicial (bootstrap). Não é uma conta de demonstração —
+ * é o único acesso que existe até que o próprio administrador cadastre o
+ * restante da equipe pela tela de Usuários, já no ambiente real.
+ * Senha de desenvolvimento local em `services/msw/handlers/auth.ts`
+ * (`SEED_PASSWORD`) — trocar por credenciais reais antes do lançamento.
+ */
 export const ADMIN_USER: UserFixture = {
   id: 'u-admin-001',
   name: 'Administrador Falcão',
@@ -20,44 +27,5 @@ export const ADMIN_USER: UserFixture = {
   status: 'active',
 };
 
-export const DEMO_USERS: UserFixture[] = [
-  ADMIN_USER,
-  { id: 'u-medico-001', name: 'Dra. Helena Costa', email: 'helena@falcao.com', role: ROLES.MEDICO, status: 'active' },
-  { id: 'u-medico-002', name: 'Dr. Ricardo Nunes', email: 'ricardo@falcao.com', role: ROLES.MEDICO, status: 'active' },
-  {
-    id: 'u-enf-001',
-    name: 'Simone Cavalcanti',
-    email: 'simone@falcao.com',
-    role: ROLES.ENFERMEIRO,
-    status: 'active',
-  },
-  {
-    id: 'u-seg-001',
-    name: 'Paulo Henrique Lima',
-    email: 'paulo@falcao.com',
-    role: ROLES.TECNICO_SEGURANCA,
-    status: 'active',
-  },
-  { id: 'u-rh-001', name: 'Roberto Almeida', email: 'roberto@falcao.com', role: ROLES.RH, status: 'active' },
-  {
-    id: 'u-rh-002',
-    name: 'Fernanda Ribeiro',
-    email: 'fernanda.rh@falcao.com',
-    role: ROLES.RH,
-    status: 'inactive',
-  },
-  {
-    id: 'u-rec-001',
-    name: 'Juliana Martins',
-    email: 'juliana@falcao.com',
-    role: ROLES.RECEPCAO,
-    status: 'active',
-  },
-  {
-    id: 'u-rec-002',
-    name: 'Camila Duarte',
-    email: 'camila@falcao.com',
-    role: ROLES.RECEPCAO,
-    status: 'active',
-  },
-];
+/** Base de usuários — começa com apenas a conta administrativa inicial. */
+export const SEED_USERS: UserFixture[] = [ADMIN_USER];

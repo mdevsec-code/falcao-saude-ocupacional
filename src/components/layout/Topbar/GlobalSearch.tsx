@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Search, Stethoscope, User } from 'lucide-react';
 
 import { Input } from '@/components/ui/Input';
@@ -18,6 +19,7 @@ interface GlobalSearchProps {
 }
 
 export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
+  const { t } = useTranslation('common');
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -77,9 +79,9 @@ export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
         onKeyDown={(e) => {
           if (e.key === 'Escape') reset();
         }}
-        placeholder="Buscar paciente ou CID…"
+        placeholder={t('search.placeholder')}
         leftIcon={<Search className="h-4 w-4" />}
-        aria-label="Busca global"
+        aria-label={t('search.ariaLabel')}
         autoComplete="off"
       />
 
@@ -87,14 +89,14 @@ export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
         <div className="absolute left-0 right-0 top-full z-dropdown mt-1 max-h-80 overflow-y-auto rounded-md border border-border bg-surface shadow-lg">
           {!hasResults && (
             <p className="px-3 py-3 text-sm text-ink-soft">
-              Nenhum resultado para &ldquo;{debouncedQuery}&rdquo;.
+              {t('search.noResults', { query: debouncedQuery })}
             </p>
           )}
 
           {patientResults.length > 0 && (
             <div className="border-b border-border p-1 last:border-b-0">
               <p className="px-2 py-1 text-2xs font-semibold uppercase tracking-wide text-ink-soft">
-                Pacientes
+                {t('nav.patients')}
               </p>
               {patientResults.map((p) => (
                 <button
@@ -106,7 +108,9 @@ export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
                 >
                   <User className="h-3.5 w-3.5 shrink-0 text-ink-soft" aria-hidden="true" />
                   <span className="min-w-0 flex-1 truncate text-ink">{p.name}</span>
-                  <span className="shrink-0 font-mono text-xs text-ink-soft">{formatCPF(p.cpf)}</span>
+                  <span className="shrink-0 font-mono text-xs text-ink-soft">
+                    {formatCPF(p.cpf)}
+                  </span>
                 </button>
               ))}
             </div>
@@ -126,7 +130,9 @@ export function GlobalSearch({ focusOnMount }: GlobalSearchProps = {}) {
                   className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-hover"
                 >
                   <Stethoscope className="h-3.5 w-3.5 shrink-0 text-ink-soft" aria-hidden="true" />
-                  <span className="shrink-0 font-mono text-xs font-semibold text-ink">{c.code}</span>
+                  <span className="shrink-0 font-mono text-xs font-semibold text-ink">
+                    {c.code}
+                  </span>
                   <span className="min-w-0 flex-1 truncate text-ink-soft">{c.description}</span>
                 </button>
               ))}

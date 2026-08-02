@@ -142,12 +142,17 @@ npm run coverage      # Vitest com v8 coverage
 npm run validate      # typecheck + lint + format:check + test + build
 ```
 
-### Credenciais de demo (MSW)
+### Acesso local (desenvolvimento)
 
-| Email              | Senha      | Perfil        |
-| ------------------ | ---------- | ------------- |
-| `admin@falcao.com` | `admin123` | Administrador |
+O ambiente roda sem backend real (MSW mocka a API). Existe apenas uma conta
+administrativa inicial — crie o restante da equipe pela tela de Usuários
+depois de entrar:
 
+| Email              | Senha         | Perfil        |
+| ------------------ | ------------- | ------------- |
+| `admin@falcao.com` | `changeme123` | Administrador |
+
+> Credencial válida **apenas neste mock local** — não existe em produção.
 > Após `npm install && npm run msw:init && npm run dev`, abra `/login` e entre
 > com as credenciais acima. O MSW intercepta todas as requisições em dev.
 

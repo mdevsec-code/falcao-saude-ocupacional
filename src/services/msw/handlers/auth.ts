@@ -1,15 +1,16 @@
 import { http, HttpResponse, delay } from 'msw';
-import { ADMIN_USER, DEMO_USERS, type UserFixture } from '../fixtures/users';
+import { ADMIN_USER, type UserFixture } from '../fixtures/users';
 import { AUDIT_ACTIONS, AUDIT_ENTITY_TYPES } from '@/constants/audit';
 import { recordAuditEvent } from './audit';
+import { getUsersStore } from './users';
 
 /**
- * Ambiente de demonstração: todas as contas em `DEMO_USERS` compartilham
- * a mesma senha, para permitir testar RBAC logando com perfis diferentes
- * (médico, enfermeiro, RH, recepção, técnico de segurança) sem precisar
- * memorizar uma senha por conta.
+ * Senha compartilhada por todas as contas — válida apenas neste mock local
+ * (MSW), nunca em produção. Existe só para permitir testar o app sem um
+ * backend real ainda; será substituída por autenticação de verdade
+ * (hash + provider real) na Etapa 3.
  */
-const DEMO_PASSWORD = 'admin123';
+const SEED_PASSWORD = 'changeme123';
 
 interface LoginRequestBody {
   email?: string;
@@ -47,9 +48,9 @@ export const authHandlers = [
     const email = (body.email ?? '').trim().toLowerCase();
     const password = body.password ?? '';
 
-    const user = DEMO_USERS.find((u) => u.email.toLowerCase() === email);
+    const user = getUsersStore().find((u) => u.email.toLowerCase() === email);
 
-    if (!user || password !== DEMO_PASSWORD || user.status === 'inactive') {
+    if (!user || password !== SEED_PASSWORD || user.status === 'inactive') {
       recordAuditEvent({
         actorId: user?.id ?? 'desconhecido',
         actorName: user?.name ?? email,

@@ -1,0 +1,55 @@
+{
+  "page": {
+    "eyebrow": "Compliance",
+    "title": "Audit Trail",
+    "description": "Access and change trail for LGPD compliance — who viewed or edited each record, and when."
+  },
+  "error": {
+    "title": "Unable to load the audit trail",
+    "description": "Please try again shortly."
+  },
+  "kpi": {
+    "total": "Logged events",
+    "today": "Events today",
+    "loginFailed": "Failed logins",
+    "patientAccess": "Patient data accesses"
+  },
+  "actions": {
+    "exportPdf": "PDF",
+    "exportExcel": "Excel"
+  },
+  "toast": {
+    "pdfSuccess": "PDF generated successfully.",
+    "pdfError": "Unable to generate the PDF.",
+    "excelSuccess": "Spreadsheet generated successfully.",
+    "excelError": "Unable to export the spreadsheet."
+  },
+  "filters": {
+    "searchPlaceholder": "Search by user or record…",
+    "actionPlaceholder": "Action",
+    "allActions": "All actions",
+    "entityPlaceholder": "Area",
+    "allEntities": "All areas"
+  },
+  "table": {
+    "columns": {
+      "timestamp": "Date/time",
+      "actor": "User",
+      "role": "Role",
+      "action": "Action",
+      "entity": "Area",
+      "record": "Record",
+      "detail": "Detail"
+    },
+    "truncatedNote": "Showing the {{shown}} most recent events out of {{total}}. Export to PDF or Excel to see the full list."
+  },
+  "empty": {
+    "title": "No events found",
+    "description": "Adjust the search or the filters."
+  },
+  "export": {
+    "title": "Audit Trail",
+    "subtitle_one": "{{brand}} · {{count}} record",
+    "subtitle_other": "{{brand}} · {{count}} records"
+  }
+}

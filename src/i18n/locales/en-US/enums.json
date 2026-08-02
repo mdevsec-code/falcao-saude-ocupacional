@@ -1,0 +1,85 @@
+{
+  "roles": {
+    "ADMIN": "Administrator",
+    "MEDICO": "Physician",
+    "ENFERMEIRO": "Nurse",
+    "TECNICO_SEGURANCA": "Safety Technician",
+    "RH": "HR",
+    "RECEPCAO": "Reception"
+  },
+  "appointmentStatus": {
+    "agendado": "Scheduled",
+    "realizado": "Completed",
+    "cancelado": "Cancelled",
+    "faltou": "No-show"
+  },
+  "appointmentConclusion": {
+    "apto": "Fit",
+    "apto_restricao": "Fit w/ restriction",
+    "inapto": "Unfit",
+    "encaminhado": "Referred"
+  },
+  "patientStatus": {
+    "ativo": "Active",
+    "inativo": "Inactive",
+    "afastado": "On leave"
+  },
+  "vacationStatus": {
+    "agendado": "Scheduled",
+    "em_andamento": "Ongoing",
+    "concluido": "Completed",
+    "cancelado": "Cancelled"
+  },
+  "auditAction": {
+    "login": "Login",
+    "login_failed": "Failed login attempt",
+    "logout": "Logout",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "auditEntity": {
+    "auth": "Authentication",
+    "patient": "Patient",
+    "attendance": "Visit",
+    "user": "User",
+    "exam_type": "Exam type",
+    "vacation": "Vacation",
+    "deviation": "Deviation",
+    "accident_indicator": "Accident indicator",
+    "cid": "ICD"
+  },
+  "deviationStatus": {
+    "pendente": "Pending",
+    "em_andamento": "In progress",
+    "concluido": "Completed"
+  },
+  "deviationClassification": {
+    "acessibilidade": "Accessibility, Safe Path",
+    "organizacao": "Housekeeping, Organization & Cleanliness",
+    "comportamental": "Behavioral",
+    "equipamento": "Equipment, Tool, Machinery",
+    "epi": "PPE",
+    "ergonomia": "Ergonomics",
+    "procedimento": "Procedure",
+    "residuos": "Waste",
+    "sinalizacao": "Signage & Isolation",
+    "eletricidade": "Electrical"
+  },
+  "duties": {
+    "altura": "Work at Height (NR-35)",
+    "espaco_confinado": "Confined Space (NR-33)",
+    "maquinas_pesadas": "Heavy Machinery & Equipment (NR-12)",
+    "eletricidade": "Electrical Work (NR-10)",
+    "levantamento_peso": "Manual Lifting / Physical Strain",
+    "ruido": "Noise Exposure"
+  },
+  "dutiesShort": {
+    "altura": "Height",
+    "espaco_confinado": "Confined Space",
+    "maquinas_pesadas": "Machinery",
+    "eletricidade": "Electrical",
+    "levantamento_peso": "Lifting/Strain",
+    "ruido": "Noise"
+  }
+}

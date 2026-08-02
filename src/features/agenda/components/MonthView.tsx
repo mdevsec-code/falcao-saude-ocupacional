@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/utils/cn';
-import { getMonthGrid, groupByDay, WEEKDAY_SHORT_FMT } from '../lib/calendar';
+import { getMonthGrid, groupByDay, formatWeekdayShort } from '../lib/calendar';
 import { AppointmentChip } from './AppointmentChip';
 import type { AppointmentRecord } from '../types';
 
-const WEEKDAYS = Array.from({ length: 7 }, (_, i) => {
-  const d = new Date(2026, 6, 5 + i); // domingo 05/jul/2026 → sáb 11/jul/2026
-  return WEEKDAY_SHORT_FMT.format(d);
-});
+function getWeekdayHeaders(): string[] {
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(2026, 6, 5 + i); // domingo 05/jul/2026 → sáb 11/jul/2026
+    return formatWeekdayShort(d);
+  });
+}
 
 const MAX_VISIBLE = 3;
 
@@ -17,14 +20,21 @@ interface MonthViewProps {
   onEditAppointment: (record: AppointmentRecord) => void;
 }
 
-export function MonthView({ monthAnchor, records, onSelectDay, onEditAppointment }: MonthViewProps) {
+export function MonthView({
+  monthAnchor,
+  records,
+  onSelectDay,
+  onEditAppointment,
+}: MonthViewProps) {
+  const { t } = useTranslation('agenda');
   const grid = getMonthGrid(monthAnchor);
   const byDay = groupByDay(records);
+  const weekdays = getWeekdayHeaders();
 
   return (
     <div className="overflow-hidden rounded-md border border-border">
       <div className="grid grid-cols-7 border-b border-border bg-hover/50">
-        {WEEKDAYS.map((day) => (
+        {weekdays.map((day) => (
           <div
             key={day}
             className="px-2 py-2 text-center text-2xs font-semibold uppercase tracking-wide text-ink-soft"
@@ -75,7 +85,7 @@ export function MonthView({ monthAnchor, records, onSelectDay, onEditAppointment
                     onClick={() => onSelectDay(cell.date)}
                     className="text-left text-2xs font-semibold text-brand-gold-700 hover:underline"
                   >
-                    +{overflow} mais
+                    {t('agenda:card.more', { count: overflow })}
                   </button>
                 )}
               </div>

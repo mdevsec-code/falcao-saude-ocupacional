@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import i18n from '@/i18n';
 import { cpfSchema, nonEmptyString, phoneSchema } from '@/validators/common';
 import { PATIENT_STATUS, type PatientStatus } from '@/constants/status';
 import type { PatientRecord } from '@/services/msw/fixtures/patients';
@@ -14,24 +15,30 @@ export interface PatientFilters {
 }
 
 export const patientFormSchema = z.object({
-  name: nonEmptyString.min(3, 'Informe o nome completo'),
+  name: nonEmptyString.min(3, i18n.t('validation:nameRequired')),
   cpf: cpfSchema,
   birthDate: nonEmptyString,
   phone: z
     .string()
     .optional()
     .transform((s) => (s ? s : undefined))
-    .refine((s) => s === undefined || phoneSchema.safeParse(s).success, 'Telefone inválido'),
+    .refine((s) => s === undefined || phoneSchema.safeParse(s).success, i18n.t('validation:phone')),
   email: z
     .string()
     .optional()
     .transform((s) => (s ? s : undefined))
-    .refine((s) => s === undefined || z.string().email().safeParse(s).success, 'E-mail inválido'),
+    .refine(
+      (s) => s === undefined || z.string().email().safeParse(s).success,
+      i18n.t('validation:email'),
+    ),
   sector: nonEmptyString,
   role: nonEmptyString,
   admissionDate: nonEmptyString,
   status: z.enum([PATIENT_STATUS.ATIVO, PATIENT_STATUS.INATIVO, PATIENT_STATUS.AFASTADO]),
-  notes: z.string().max(500, 'Tamanho máximo excedido').optional(),
+  notes: z
+    .string()
+    .max(500, i18n.t('validation:maxLength', { count: 500 }))
+    .optional(),
 });
 
 export type PatientFormInput = z.infer<typeof patientFormSchema>;

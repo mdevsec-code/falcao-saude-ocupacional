@@ -99,7 +99,7 @@ export function AsoPage() {
                   void refetchAttendances();
                 }}
               >
-                Tentar novamente
+                {t('aso:actions.retry')}
               </Button>
             }
           />
@@ -109,17 +109,17 @@ export function AsoPage() {
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <StatTile
-                label="Colaboradores avaliados"
+                label={t('aso:kpis.evaluated')}
                 value={kpis.avaliados}
                 icon={<Users className="h-4 w-4" />}
               />
               <StatTile
-                label="Sem restrição"
+                label={t('aso:kpis.noRestriction')}
                 value={kpis.semRestricao}
                 icon={<ShieldCheck className="h-4 w-4" />}
               />
               <StatTile
-                label="Com alguma inaptidão"
+                label={t('aso:kpis.someUnfit')}
                 value={kpis.comInaptidao}
                 icon={<AlertTriangle className="h-4 w-4" />}
               />
@@ -130,7 +130,7 @@ export function AsoPage() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <Input
                 className="max-w-xs"
-                placeholder="Buscar colaborador…"
+                placeholder={t('aso:filters.searchPlaceholder')}
                 leftIcon={<Search className="h-4 w-4" />}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -141,22 +141,19 @@ export function AsoPage() {
                 leftIcon={<AlertTriangle className="h-4 w-4" />}
                 onClick={() => setOnlyUnfit((v) => !v)}
               >
-                Somente com inaptidão
+                {t('aso:filters.onlyUnfit')}
               </Button>
             </div>
 
             {filteredBoard.length === 0 ? (
-              <EmptyState
-                title="Nenhum colaborador encontrado"
-                description="Ajuste a busca ou os filtros. Colaboradores aparecem aqui após terem ao menos uma atividade de risco avaliada em um atendimento."
-              />
+              <EmptyState title={t('aso:empty.title')} description={t('aso:empty.description')} />
             ) : (
               <div className="overflow-x-auto rounded-md border border-border">
                 <table className="w-full text-left text-sm">
                   <thead className="bg-brand-gold-50/60 text-ink">
                     <tr>
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Colaborador
+                        {t('aso:table.employee')}
                       </th>
                       {ALL_DUTY_TYPES.map((duty) => (
                         <th
@@ -167,7 +164,7 @@ export function AsoPage() {
                         </th>
                       ))}
                       <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                        Prontuário
+                        {t('aso:table.record')}
                       </th>
                     </tr>
                   </thead>
@@ -184,7 +181,13 @@ export function AsoPage() {
                           </td>
                         ))}
                         <td className="px-3 py-2">
-                          <Button asChild variant="ghost" size="icon" className="h-8 w-8" aria-label="Ver prontuário">
+                          <Button
+                            asChild
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            aria-label={t('aso:actions.viewRecord')}
+                          >
                             <Link to={`${ROUTE_PATHS.PRONTUARIOS}?patientId=${patient.id}`}>
                               <FileText className="h-4 w-4" />
                             </Link>

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { DEMO_USERS } from '@/services/msw/fixtures/users';
+import { SEED_USERS } from '@/services/msw/fixtures/users';
 import type { AuthSession, User } from '@/types/auth';
 
 export type SignInResult = { ok: true; session: AuthSession } | { ok: false; error: string };
@@ -48,14 +48,14 @@ const dynamicAuthStorage = {
   },
 };
 
-// Ambiente de demonstração: todas as contas em `DEMO_USERS` compartilham
-// a mesma senha (ver também `services/msw/handlers/auth.ts`, que é quem
-// de fato responde no browser — este arquivo só serve de fallback).
+// Senha de desenvolvimento local — ver `services/msw/handlers/auth.ts`
+// (quem de fato responde no browser; este arquivo só serve de fallback
+// para quando o MSW não está disponível, ex.: SSR).
 // TODO(api-real): substituir `signIn` por chamada real via `authApi`.
-const DEMO_PASSWORD = 'admin123';
+const SEED_PASSWORD = 'changeme123';
 
-function findDemoUser(email: string): User | null {
-  const match = DEMO_USERS.find((u) => u.email.toLowerCase() === email && u.status === 'active');
+function findSeedUser(email: string): User | null {
+  const match = SEED_USERS.find((u) => u.email.toLowerCase() === email && u.status === 'active');
   if (!match) return null;
   return { id: match.id, name: match.name, email: match.email, role: match.role };
 }
@@ -79,8 +79,8 @@ export const useAuthStore = create<AuthState>()(
         // Simula latência — quando o MSW estiver habilitado, esta chamada
         // é interceptada e validada pelo handler `POST /api/auth/login`.
         if (typeof window === 'undefined') {
-          const demoUser = findDemoUser(normalizedEmail);
-          if (demoUser && password === DEMO_PASSWORD) {
+          const demoUser = findSeedUser(normalizedEmail);
+          if (demoUser && password === SEED_PASSWORD) {
             const session: AuthSession = {
               user: demoUser,
               token: generateMockToken(),
@@ -107,16 +107,21 @@ export const useAuthStore = create<AuthState>()(
           set({ session });
           return { ok: true, session };
         } catch {
-          // Fallback para as contas de demonstração se MSW não estiver rodando
-          const demoUser = findDemoUser(normalizedEmail);
-          if (demoUser && password === DEMO_PASSWORD) {
-            const session: AuthSession = {
-              user: demoUser,
-              token: generateMockToken(),
-              expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString(),
-            };
-            set({ session });
-            return { ok: true, session };
+          // Fallback de conveniência para desenvolvimento local quando o MSW
+          // não está rodando. NUNCA em build de produção — sem isso, o
+          // deploy aceitaria a senha fixa (`SEED_PASSWORD`) como login válido
+          // até o backend real estar conectado.
+          if (import.meta.env.DEV) {
+            const demoUser = findSeedUser(normalizedEmail);
+            if (demoUser && password === SEED_PASSWORD) {
+              const session: AuthSession = {
+                user: demoUser,
+                token: generateMockToken(),
+                expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString(),
+              };
+              set({ session });
+              return { ok: true, session };
+            }
           }
           return { ok: false, error: 'Não foi possível conectar ao servidor' };
         }

@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Spinner } from '@/components/ui/Spinner';
 import { cn } from '@/utils/cn';
 
@@ -8,11 +9,10 @@ export interface LoadingStateProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export function LoadingState({
-  label = 'Carregando…',
-  className,
-  size = 'md',
-}: LoadingStateProps): ReactNode {
+export function LoadingState({ label, className, size = 'md' }: LoadingStateProps): ReactNode {
+  const { t } = useTranslation('common');
+  const resolvedLabel = label ?? t('states.loading');
+
   return (
     <div
       role="status"
@@ -23,7 +23,7 @@ export function LoadingState({
       )}
     >
       <Spinner size={size} />
-      <p className="text-sm">{label}</p>
+      <p className="text-sm">{resolvedLabel}</p>
     </div>
   );
 }

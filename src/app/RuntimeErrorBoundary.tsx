@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import i18n from '@/i18n';
 
 interface Props {
   children: ReactNode;
@@ -42,10 +43,10 @@ export class RuntimeErrorBoundary extends Component<Props, State> {
         }}
       >
         <h1 style={{ fontSize: 18, marginBottom: 8, color: '#fca5a5' }}>
-          Erro de runtime na aplicação
+          {i18n.t('common:errorBoundary.crashTitle')}
         </h1>
         <p style={{ marginBottom: 16, color: '#cbd5e1' }}>
-          Algo explodiu durante a renderização. Stacktrace abaixo para diagnóstico.
+          {i18n.t('common:errorBoundary.crashDescription')}
         </p>
         <pre
           style={{
@@ -76,7 +77,7 @@ export class RuntimeErrorBoundary extends Component<Props, State> {
             cursor: 'pointer',
           }}
         >
-          Recarregar página
+          {i18n.t('common:errorBoundary.reload')}
         </button>
       </div>
     );

@@ -79,7 +79,7 @@ export function RecordsPage() {
                   void refetchAttendances();
                 }}
               >
-                Tentar novamente
+                {t('records:actions.retry')}
               </Button>
             }
           />
@@ -88,7 +88,11 @@ export function RecordsPage() {
         {!isLoading && !isError && (
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-[320px_1fr] lg:items-start">
             <div className="h-[560px]">
-              <PatientListPanel patients={patients} selectedId={selectedId} onSelect={handleSelect} />
+              <PatientListPanel
+                patients={patients}
+                selectedId={selectedId}
+                onSelect={handleSelect}
+              />
             </div>
             <div className="h-[560px]">
               <PatientRecordPanel patient={selectedPatient} attendances={patientAttendances} />

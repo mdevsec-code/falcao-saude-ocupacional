@@ -1,0 +1,27 @@
+{
+  "page": {
+    "eyebrow": "账户",
+    "title": "个人资料",
+    "description": "您的账户信息与偏好设置。"
+  },
+  "preferences": {
+    "title": "偏好设置",
+    "description": "平台外观与语言设置。",
+    "darkTheme": "深色主题",
+    "toggleTheme": "切换主题",
+    "language": "语言"
+  },
+  "security": {
+    "title": "安全",
+    "description": "修改登录密码。",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认新密码",
+    "updateButton": "更新密码",
+    "roleLabel": "个人资料",
+    "passwordMismatch": "两次输入的密码不一致"
+  },
+  "toast": {
+    "passwordNotPersisted": "此版本尚未支持保存密码修改。"
+  }
+}

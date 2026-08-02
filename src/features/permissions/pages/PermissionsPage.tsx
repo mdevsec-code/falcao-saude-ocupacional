@@ -5,23 +5,26 @@ import { PageHeader } from '@/components/layout/PageHeader';
 import { ALL_ROLES, ROLE_LABELS } from '@/constants/roles';
 import { ALL_PERMISSIONS, ROLE_PERMISSIONS, type Permission } from '@/constants/permissions';
 
-const PERMISSION_LABELS: Record<Permission, string> = {
-  'appointment:read': 'Ver agendamentos',
-  'appointment:write': 'Criar/editar agendamentos',
-  'appointment:delete': 'Excluir agendamentos',
-  'patient:read': 'Ver pacientes',
-  'patient:write': 'Criar/editar pacientes',
-  'employee:read': 'Ver colaboradores',
-  'employee:write': 'Criar/editar colaboradores',
-  'aso:read': 'Ver ASO',
-  'aso:write': 'Emitir ASO',
-  'exam:read': 'Ver exames',
-  'exam:write': 'Criar/editar exames',
-  'report:read': 'Ver relatórios',
-  'report:write': 'Gerar relatórios',
-  'users:manage': 'Gerenciar usuários',
-  'settings:manage': 'Gerenciar configurações',
-  'audit:read': 'Ver auditoria',
+/** Chaves de tradução (`permissions:labels.*`) para cada permissão do RBAC. */
+const PERMISSION_LABEL_KEYS: Record<Permission, string> = {
+  'appointment:read': 'appointmentRead',
+  'appointment:write': 'appointmentWrite',
+  'appointment:delete': 'appointmentDelete',
+  'patient:read': 'patientRead',
+  'patient:write': 'patientWrite',
+  'employee:read': 'employeeRead',
+  'employee:write': 'employeeWrite',
+  'aso:read': 'asoRead',
+  'aso:write': 'asoWrite',
+  'exam:read': 'examRead',
+  'exam:write': 'examWrite',
+  'report:read': 'reportRead',
+  'report:write': 'reportWrite',
+  'users:manage': 'usersManage',
+  'settings:manage': 'settingsManage',
+  'audit:read': 'auditRead',
+  'deviation:read': 'deviationRead',
+  'deviation:write': 'deviationWrite',
 };
 
 export function PermissionsPage() {
@@ -41,7 +44,7 @@ export function PermissionsPage() {
             <thead className="bg-brand-gold-50/60 text-ink">
               <tr>
                 <th className="sticky left-0 bg-brand-gold-50/60 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                  Permissão
+                  {t('permissions:table.permissionColumn')}
                 </th>
                 {ALL_ROLES.map((role) => (
                   <th
@@ -57,7 +60,7 @@ export function PermissionsPage() {
               {ALL_PERMISSIONS.map((permission) => (
                 <tr key={permission} className="hover:bg-hover">
                   <td className="sticky left-0 bg-surface px-3 py-2 font-medium text-ink">
-                    {PERMISSION_LABELS[permission]}
+                    {t(`permissions:labels.${PERMISSION_LABEL_KEYS[permission]}`)}
                   </td>
                   {ALL_ROLES.map((role) => {
                     const granted = ROLE_PERMISSIONS[role].includes(permission);
@@ -66,10 +69,13 @@ export function PermissionsPage() {
                         {granted ? (
                           <Check
                             className="mx-auto h-4 w-4 text-success"
-                            aria-label="Permitido"
+                            aria-label={t('permissions:table.allowed')}
                           />
                         ) : (
-                          <span className="text-muted" aria-label="Não permitido">
+                          <span
+                            className="text-muted"
+                            aria-label={t('permissions:table.notAllowed')}
+                          >
                             —
                           </span>
                         )}
@@ -81,9 +87,7 @@ export function PermissionsPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-xs text-ink-soft">
-          {t('permissions:page.footnote')}
-        </p>
+        <p className="mt-4 text-xs text-ink-soft">{t('permissions:page.footnote')}</p>
       </div>
     </>
   );

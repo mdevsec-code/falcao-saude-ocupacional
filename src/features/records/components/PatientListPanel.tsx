@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/Input';
@@ -17,6 +18,7 @@ interface PatientListPanelProps {
 }
 
 export function PatientListPanel({ patients, selectedId, onSelect }: PatientListPanelProps) {
+  const { t } = useTranslation('records');
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {
@@ -29,16 +31,16 @@ export function PatientListPanel({ patients, selectedId, onSelect }: PatientList
     <div className="flex h-full flex-col rounded-md border border-border bg-surface">
       <div className="border-b border-border p-3">
         <Input
-          placeholder="Buscar paciente…"
+          placeholder={t('records:search.placeholder')}
           leftIcon={<Search className="h-4 w-4" />}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollbar-thin">
+      <div className="scrollbar-thin flex-1 overflow-y-auto">
         {filtered.length === 0 ? (
-          <p className="p-4 text-center text-sm text-ink-soft">Nenhum paciente encontrado.</p>
+          <p className="p-4 text-center text-sm text-ink-soft">{t('records:list.empty')}</p>
         ) : (
           <ul className="divide-y divide-border">
             {filtered.map((patient) => (

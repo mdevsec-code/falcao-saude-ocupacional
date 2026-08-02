@@ -1,0 +1,13 @@
+{
+  "generic": {
+    "title": "Something went wrong",
+    "description": "We couldn't complete the operation. Please try again in a moment."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The requested route couldn't be loaded."
+  },
+  "network": "Network error. Check your connection.",
+  "unauthorized": "You don't have permission to perform this action.",
+  "sessionExpired": "Your session has expired. Please log in again to continue."
+}

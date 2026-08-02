@@ -1,0 +1,15 @@
+{
+  "required": "必填字段",
+  "email": "邮箱格式无效",
+  "minLength": "最少 {{count}} 个字符",
+  "maxLength": "最多 {{count}} 个字符",
+  "minPassword": "密码长度至少为 8 个字符",
+  "maxPassword": "密码长度最多为 72 个字符",
+  "cpf": "CPF 必须为 11 位数字",
+  "cnpj": "CNPJ 必须为 14 位数字",
+  "phone": "电话号码无效",
+  "date": "日期无效",
+  "nameRequired": "请输入全名",
+  "minDuration": "最少 {{count}} 分钟",
+  "maxDuration": "最多 {{count}} 分钟"
+}

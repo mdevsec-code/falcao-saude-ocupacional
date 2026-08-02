@@ -21,8 +21,7 @@ const variantClasses: Record<ButtonVariant, string> = {
     'bg-brand-gold-500 text-white hover:bg-brand-gold-700 active:bg-brand-gold-900 ' +
     'shadow-sm hover:shadow-md focus-visible:shadow-focus',
   secondary:
-    'bg-ink text-bg hover:opacity-90 active:opacity-80 ' +
-    'shadow-sm focus-visible:shadow-focus',
+    'bg-ink text-bg hover:opacity-90 active:opacity-80 ' + 'shadow-sm focus-visible:shadow-focus',
   outline:
     'border border-border bg-surface text-ink hover:bg-hover active:bg-border ' +
     'focus-visible:shadow-focus',

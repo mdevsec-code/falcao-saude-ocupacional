@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import i18n from '@/i18n';
 import { attendancesApi } from '../services/attendances.api';
 import { attendancesKeys } from './useAttendances';
 import type { AttendanceRecord } from '../types';
@@ -11,10 +12,10 @@ export function useCreateAttendance() {
     mutationFn: (input: Omit<AttendanceRecord, 'id'>) => attendancesApi.create(input),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: attendancesKeys.all });
-      toast.success('Atendimento registrado.');
+      toast.success(i18n.t('attendances:toast.createSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível registrar o atendimento.');
+      toast.error(error.message || i18n.t('attendances:toast.createError'));
     },
   });
 }
@@ -26,10 +27,10 @@ export function useUpdateAttendance() {
       attendancesApi.update(id, patch),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: attendancesKeys.all });
-      toast.success('Atendimento atualizado.');
+      toast.success(i18n.t('attendances:toast.updateSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível atualizar o atendimento.');
+      toast.error(error.message || i18n.t('attendances:toast.updateError'));
     },
   });
 }
@@ -40,10 +41,10 @@ export function useDeleteAttendance() {
     mutationFn: (id: string) => attendancesApi.remove(id),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: attendancesKeys.all });
-      toast.success('Atendimento removido.');
+      toast.success(i18n.t('attendances:toast.deleteSuccess'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Não foi possível remover o atendimento.');
+      toast.error(error.message || i18n.t('attendances:toast.deleteError'));
     },
   });
 }

@@ -1,0 +1,68 @@
+{
+  "page": {
+    "eyebrow": "管理",
+    "title": "用户",
+    "description": "系统访问账户及其角色（RBAC）。"
+  },
+  "error": {
+    "title": "无法加载用户信息",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "createNew": "新建用户",
+    "retry": "重试",
+    "cancel": "取消",
+    "saveChanges": "保存修改",
+    "createUser": "创建用户",
+    "remove": "移除"
+  },
+  "dialog": {
+    "editTitle": "编辑用户",
+    "createTitle": "新建用户",
+    "editDescription": "更新该用户的访问信息。",
+    "createDescription": "创建新用户并设置其访问角色。"
+  },
+  "form": {
+    "fullName": "姓名",
+    "fullNamePlaceholder": "用户姓名",
+    "email": "电子邮箱",
+    "emailPlaceholder": "usuario@falcao.com",
+    "role": "访问角色",
+    "status": "状态"
+  },
+  "status": {
+    "active": "启用",
+    "inactive": "停用"
+  },
+  "table": {
+    "columns": {
+      "name": "姓名",
+      "email": "电子邮箱",
+      "role": "角色",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "searchPlaceholder": "搜索用户…",
+    "youSuffix": "（你）",
+    "editAria": "编辑用户",
+    "deleteAria": "移除用户",
+    "cannotDeleteSelf": "您不能移除自己的账户"
+  },
+  "empty": {
+    "title": "未找到任何用户",
+    "description": "请调整搜索条件。"
+  },
+  "deleteDialog": {
+    "title": "移除该用户？",
+    "descriptionBefore": "",
+    "descriptionAfter": " 的访问权限将被永久移除，此操作无法撤销。"
+  },
+  "toast": {
+    "createSuccess": "用户已创建。",
+    "createError": "无法创建用户。",
+    "updateSuccess": "用户已更新。",
+    "updateError": "无法更新用户。",
+    "deleteSuccess": "用户已删除。",
+    "deleteError": "无法删除用户。"
+  }
+}

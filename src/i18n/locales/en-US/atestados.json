@@ -1,0 +1,139 @@
+{
+  "page": {
+    "eyebrow": "Certificate Tracking",
+    "title": "Medical Certificates",
+    "description": "Analysis of medical leave by certificate: volume, days, departments, and recurrence."
+  },
+  "filtersCard": {
+    "title": "Filters",
+    "description": "Refine the analysis by period, department, role, and more."
+  },
+  "filters": {
+    "searchLabel": "Search",
+    "searchPlaceholder": "Employee, role, CID, physician…",
+    "periodStartLabel": "Period (start)",
+    "periodEndAria": "End",
+    "clearAll": "Clear all",
+    "removeFilterAria": "Remove filter {{label}}",
+    "chipFrom": "From {{date}}",
+    "chipUntil": "Until {{date}}",
+    "chipSearch": "Search: \"{{query}}\"",
+    "allOption": "All",
+    "fields": {
+      "competencia": "Month",
+      "setor": "Department",
+      "funcao": "Role",
+      "liderancaDireta": "Direct Manager",
+      "localAtendimento": "Service Location"
+    }
+  },
+  "kpis": {
+    "total": "Total Certificates",
+    "totalDias": "Total Days Off",
+    "colaboradores": "Employees on Leave",
+    "setorTop": "Most Affected Department",
+    "sla": "Average Filing SLA",
+    "recorrencia": "Recurrence Rate",
+    "srHeading": "Certificate indicators"
+  },
+  "charts": {
+    "evolucao": {
+      "title": "Monthly Trend",
+      "description": "Number of certificates and days off by month"
+    },
+    "funcao": { "title": "Distribution by Role", "description": "Top 6 roles + others" },
+    "setor": {
+      "title": "Certificates by Department",
+      "description": "Where leave most often occurs"
+    },
+    "cid": { "title": "Top Reasons (CID)", "description": "Why the certificates occur" },
+    "acumulado": { "title": "Cumulative Days Off", "description": "Trend over the period" },
+    "lideranca": {
+      "title": "Most Impacted Leadership",
+      "description": "Certificates by direct manager"
+    },
+    "heatmap": {
+      "title": "Heat Map — Department x Month",
+      "description": "Concentration of certificates by month and department"
+    },
+    "timeline": { "title": "Recent Entries", "description": "Timeline of the latest records" },
+    "alerts": {
+      "title": "What needs attention",
+      "description": "Certificate recurrence and filing SLA"
+    },
+    "table": {
+      "title": "Detailed Records",
+      "description": "All certificates for the filtered period"
+    }
+  },
+  "chartLabels": {
+    "evolution": {
+      "certificatesAxis": "No. of Certificates",
+      "daysAxis": "Days Off",
+      "certificatesUnit": "certificate(s)",
+      "daysUnit": "day(s)"
+    },
+    "accumulated": {
+      "seriesName": "Days off (cumulative)",
+      "tooltipUnit": "cumulative day(s)"
+    },
+    "ranking": {
+      "setorUnit": "certificate(s)",
+      "cidUnit": "occurrence(s)",
+      "liderancaUnit": "certificate(s)"
+    },
+    "donut": {
+      "others": "OTHERS"
+    }
+  },
+  "alerts": {
+    "recurrentTitle": "{{count}} employee(s) with 3+ certificates in the period",
+    "slaTitle": "{{count}} certificate(s) filed past the deadline (SLA > 2 days)",
+    "slaDescription": "Review the intake and filing workflow with the leadership team.",
+    "none": "No critical points identified in the filtered period."
+  },
+  "heatmap": {
+    "setorHeader": "Department",
+    "empty": "Not enough data for the heat map."
+  },
+  "timeline": {
+    "empty": "No entries in the period.",
+    "daysUnit": "day(s)"
+  },
+  "table": {
+    "columns": {
+      "nome": "Employee",
+      "funcao": "Role",
+      "setor": "Department",
+      "qntDias": "Days",
+      "cid": "CID",
+      "inicioAtestado": "Start",
+      "terminoAtestado": "End",
+      "dataLancamento": "Filed On",
+      "competencia": "Month",
+      "liderancaDireta": "Manager"
+    },
+    "searchPlaceholder": "Search the table…",
+    "exportButton": "Export to Excel",
+    "exportTitle": "Certificate Tracking",
+    "exportMetaGeneratedAt": "Generated on",
+    "exportMetaTotal": "Total",
+    "exportSuccess": "Export completed.",
+    "exportError": "Unable to export the spreadsheet.",
+    "emptyTitle": "No records found",
+    "emptyDescription": "Adjust the filters or the search.",
+    "showingRange": "Showing {{from}}–{{to}} of {{total}} records",
+    "pageOfTotal": "Page {{current}} of {{total}}",
+    "prevPageAria": "Previous page",
+    "nextPageAria": "Next page"
+  },
+  "empty": {
+    "title": "No records in the filtered period",
+    "description": "Adjust the filters to view the indicators."
+  },
+  "error": {
+    "title": "Unable to load the certificates.",
+    "description": "Please try again shortly.",
+    "retry": "Try again"
+  }
+}

@@ -85,7 +85,7 @@ export function PatientsPage() {
         description={t('patients:page.description')}
         actions={
           <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={handleCreate}>
-            Novo paciente
+            {t('patients:actions.new')}
           </Button>
         }
       />
@@ -105,7 +105,7 @@ export function PatientsPage() {
             description={t('patients:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('patients:actions.retry')}
               </Button>
             }
           />
@@ -114,17 +114,41 @@ export function PatientsPage() {
         {!isLoading && !isError && (
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <StatTile label="Total de pacientes" value={kpis.total} icon={<Users className="h-4 w-4" />} />
-              <StatTile label="Ativos" value={kpis.ativos} icon={<UserCheck className="h-4 w-4" />} />
-              <StatTile label="Afastados" value={kpis.afastados} icon={<UserX className="h-4 w-4" />} />
-              <StatTile label="Setores" value={kpis.setores} icon={<Briefcase className="h-4 w-4" />} />
+              <StatTile
+                label={t('patients:kpi.total')}
+                value={kpis.total}
+                icon={<Users className="h-4 w-4" />}
+              />
+              <StatTile
+                label={t('patients:kpi.active')}
+                value={kpis.ativos}
+                icon={<UserCheck className="h-4 w-4" />}
+              />
+              <StatTile
+                label={t('patients:kpi.onLeave')}
+                value={kpis.afastados}
+                icon={<UserX className="h-4 w-4" />}
+              />
+              <StatTile
+                label={t('patients:kpi.sectors')}
+                value={kpis.setores}
+                icon={<Briefcase className="h-4 w-4" />}
+              />
             </div>
 
             <Separator />
 
-            <FiltersBar filters={filters} onChange={handleFilterChange} onClearAll={handleClearAll} />
+            <FiltersBar
+              filters={filters}
+              onChange={handleFilterChange}
+              onClearAll={handleClearAll}
+            />
 
-            <PatientsTable records={filteredRecords} onEdit={handleEdit} onDelete={setDeleteTarget} />
+            <PatientsTable
+              records={filteredRecords}
+              onEdit={handleEdit}
+              onDelete={setDeleteTarget}
+            />
           </>
         )}
       </div>

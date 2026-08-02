@@ -1,0 +1,121 @@
+{
+  "page": {
+    "eyebrow": "病假证明管理",
+    "title": "病假证明",
+    "description": "病假证明缺勤情况分析：数量、天数、部门与复发率。"
+  },
+  "filtersCard": {
+    "title": "筛选条件",
+    "description": "按时间段、部门、职位等条件筛选分析范围。"
+  },
+  "filters": {
+    "searchLabel": "搜索",
+    "searchPlaceholder": "员工、职位、CID、医生……",
+    "periodStartLabel": "时间段（开始）",
+    "periodEndAria": "结束",
+    "clearAll": "清除全部",
+    "removeFilterAria": "移除筛选条件 {{label}}",
+    "chipFrom": "起始于 {{date}}",
+    "chipUntil": "截至 {{date}}",
+    "chipSearch": "搜索：“{{query}}”",
+    "allOption": "全部",
+    "fields": {
+      "competencia": "月份",
+      "setor": "部门",
+      "funcao": "职位",
+      "liderancaDireta": "直属上级",
+      "localAtendimento": "就诊地点"
+    }
+  },
+  "kpis": {
+    "total": "病假证明总数",
+    "totalDias": "缺勤总天数",
+    "colaboradores": "缺勤员工数",
+    "setorTop": "受影响最大的部门",
+    "sla": "平均登记时效（SLA）",
+    "recorrencia": "复发率",
+    "srHeading": "病假证明指标"
+  },
+  "charts": {
+    "evolucao": { "title": "月度趋势", "description": "各月份病假证明数量与缺勤天数" },
+    "funcao": { "title": "按职位分布", "description": "前 6 大职位 + 其他" },
+    "setor": { "title": "按部门统计的病假证明", "description": "缺勤最集中的部门" },
+    "cid": { "title": "主要原因（CID）", "description": "病假证明产生的原因" },
+    "acumulado": { "title": "累计缺勤天数", "description": "期间内的变化趋势" },
+    "lideranca": { "title": "受影响最大的管理者", "description": "按直属上级统计的病假证明" },
+    "heatmap": { "title": "热力图 — 部门 x 月份", "description": "各部门各月份病假证明集中度" },
+    "timeline": { "title": "最近登记记录", "description": "最新记录时间线" },
+    "alerts": { "title": "需要关注的事项", "description": "病假证明复发情况与登记时效（SLA）" },
+    "table": { "title": "详细记录", "description": "所筛选期间内的全部病假证明" }
+  },
+  "chartLabels": {
+    "evolution": {
+      "certificatesAxis": "病假证明数量",
+      "daysAxis": "缺勤天数",
+      "certificatesUnit": "份",
+      "daysUnit": "天"
+    },
+    "accumulated": {
+      "seriesName": "累计缺勤天数",
+      "tooltipUnit": "累计天"
+    },
+    "ranking": {
+      "setorUnit": "份",
+      "cidUnit": "次",
+      "liderancaUnit": "份"
+    },
+    "donut": {
+      "others": "其他"
+    }
+  },
+  "alerts": {
+    "recurrentTitle": "{{count}} 名员工在本期间内有 3 次及以上病假证明",
+    "slaTitle": "{{count}} 份病假证明登记超时（SLA > 2 天）",
+    "slaDescription": "请与管理层核查接收与登记流程。",
+    "none": "所筛选期间内未发现重点关注事项。"
+  },
+  "heatmap": {
+    "setorHeader": "部门",
+    "empty": "数据不足，无法生成热力图。"
+  },
+  "timeline": {
+    "empty": "该期间内无登记记录。",
+    "daysUnit": "天"
+  },
+  "table": {
+    "columns": {
+      "nome": "员工",
+      "funcao": "职位",
+      "setor": "部门",
+      "qntDias": "天数",
+      "cid": "CID",
+      "inicioAtestado": "开始",
+      "terminoAtestado": "结束",
+      "dataLancamento": "登记日期",
+      "competencia": "月份",
+      "liderancaDireta": "上级"
+    },
+    "searchPlaceholder": "在表格中搜索……",
+    "exportButton": "导出 Excel",
+    "exportTitle": "病假证明管理",
+    "exportMetaGeneratedAt": "生成时间",
+    "exportMetaTotal": "总计",
+    "exportSuccess": "导出完成。",
+    "exportError": "无法导出表格。",
+    "emptyTitle": "未找到记录",
+    "emptyDescription": "请调整筛选条件或搜索内容。",
+    "showingRange": "显示第 {{from}}–{{to}} 条，共 {{total}} 条记录",
+    "pageOfTotal": "第 {{current}} / {{total}} 页",
+    "prevPageAria": "上一页",
+    "nextPageAria": "下一页"
+  },
+  "empty": {
+    "title": "所筛选期间内无记录",
+    "description": "请调整筛选条件以查看指标。"
+  },
+  "error": {
+    "title": "无法加载病假证明。",
+    "description": "请稍后重试。",
+    "retry": "重试"
+  }
+}

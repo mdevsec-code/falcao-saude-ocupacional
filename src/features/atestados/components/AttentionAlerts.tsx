@@ -1,5 +1,6 @@
 import { useMemo, type ReactNode } from 'react';
 import { AlertTriangle, Clock, CircleCheck, type LucideIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/utils/cn';
 import type { AtestadoRecord } from '../types';
 
@@ -14,6 +15,7 @@ const TONE_CLASSES = {
 } as const;
 
 export function AttentionAlerts({ records }: AttentionAlertsProps) {
+  const { t } = useTranslation('atestados');
   const { recorrentesGraves, slaAtrasado } = useMemo(() => {
     const porColaborador: Record<string, number> = {};
     records.forEach((r) => {
@@ -23,7 +25,10 @@ export function AttentionAlerts({ records }: AttentionAlertsProps) {
       .filter(([, count]) => count >= 3)
       .sort((a, b) => b[1] - a[1]);
     const atrasado = records.filter(
-      (r) => r.slaLancamentoDias !== null && r.slaLancamentoDias !== undefined && r.slaLancamentoDias > 2,
+      (r) =>
+        r.slaLancamentoDias !== null &&
+        r.slaLancamentoDias !== undefined &&
+        r.slaLancamentoDias > 2,
     ).length;
     return { recorrentesGraves: graves, slaAtrasado: atrasado };
   }, [records]);
@@ -33,7 +38,11 @@ export function AttentionAlerts({ records }: AttentionAlertsProps) {
   return (
     <div className="space-y-3">
       {recorrentesGraves.length > 0 && (
-        <AlertRow tone="warning" icon={AlertTriangle} title={`${recorrentesGraves.length} colaborador(es) com 3+ atestados no período`}>
+        <AlertRow
+          tone="warning"
+          icon={AlertTriangle}
+          title={t('atestados:alerts.recurrentTitle', { count: recorrentesGraves.length })}
+        >
           {recorrentesGraves
             .slice(0, 5)
             .map(([nome, count]) => `${nome} (${count})`)
@@ -42,12 +51,16 @@ export function AttentionAlerts({ records }: AttentionAlertsProps) {
         </AlertRow>
       )}
       {slaAtrasado > 0 && (
-        <AlertRow tone="danger" icon={Clock} title={`${slaAtrasado} atestado(s) lançado(s) fora do prazo (SLA > 2 dias)`}>
-          Verifique o fluxo de recebimento e lançamento junto às lideranças.
+        <AlertRow
+          tone="danger"
+          icon={Clock}
+          title={t('atestados:alerts.slaTitle', { count: slaAtrasado })}
+        >
+          {t('atestados:alerts.slaDescription')}
         </AlertRow>
       )}
       {!hasAlerts && (
-        <AlertRow tone="success" icon={CircleCheck} title="Nenhum ponto crítico identificado no período filtrado." />
+        <AlertRow tone="success" icon={CircleCheck} title={t('atestados:alerts.none')} />
       )}
     </div>
   );

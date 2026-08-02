@@ -1,0 +1,95 @@
+{
+  "validation": {
+    "dateRangeInvalid": "结束日期必须晚于或等于开始日期"
+  },
+  "page": {
+    "eyebrow": "人力资源",
+    "title": "休假",
+    "description": "管理员工的休假期间。"
+  },
+  "error": {
+    "title": "无法加载休假记录",
+    "description": "请稍后重试。"
+  },
+  "actions": {
+    "new": "新增休假",
+    "retry": "重试"
+  },
+  "kpi": {
+    "total": "总期数",
+    "scheduled": "已安排",
+    "ongoing": "进行中",
+    "completed": "已完成"
+  },
+  "dialog": {
+    "createTitle": "新增休假",
+    "editTitle": "编辑休假",
+    "createDescription": "登记一个新的休假期间。",
+    "editDescription": "更新该休假期间的信息。",
+    "fields": {
+      "patientName": { "label": "员工", "placeholder": "全名" },
+      "sector": { "label": "部门" },
+      "role": { "label": "职位", "placeholder": "例如：泥瓦工" },
+      "startDate": { "label": "开始日期" },
+      "endDate": { "label": "结束日期" },
+      "status": { "label": "状态" },
+      "notes": { "label": "备注", "placeholder": "附加信息（可选）" }
+    },
+    "cancel": "取消",
+    "submitCreate": "登记休假",
+    "submitEdit": "保存更改"
+  },
+  "table": {
+    "patientName": "员工",
+    "sector": "部门",
+    "role": "职位",
+    "startDate": "开始日期",
+    "endDate": "结束日期",
+    "days": "天数",
+    "status": "状态",
+    "actions": "操作",
+    "searchPlaceholder": "搜索表格…",
+    "exportExcel": "导出 Excel",
+    "exportTitle": "休假管理",
+    "generatedAt": "生成时间",
+    "total": "总计",
+    "editAria": "编辑休假",
+    "deleteAria": "删除休假",
+    "prevPageAria": "上一页",
+    "nextPageAria": "下一页",
+    "showingRange": "显示第 {{start}}–{{end}} 条，共 {{total}} 条记录",
+    "pageOf": "第 {{current}} / {{total}} 页"
+  },
+  "toast": {
+    "exportSuccess": "导出完成。",
+    "exportError": "无法导出电子表格。",
+    "createSuccess": "休假已登记。",
+    "createError": "无法登记休假。",
+    "updateSuccess": "休假已更新。",
+    "updateError": "无法更新休假。",
+    "deleteSuccess": "休假已删除。",
+    "deleteError": "无法删除休假。"
+  },
+  "empty": {
+    "title": "未找到休假记录",
+    "description": "请调整筛选条件或搜索内容。"
+  },
+  "filters": {
+    "title": "筛选条件",
+    "all": "全部",
+    "search": { "label": "搜索", "placeholder": "姓名或职位…" },
+    "sector": { "label": "部门" },
+    "status": { "label": "状态" },
+    "chipSector": "部门：{{value}}",
+    "chipStatus": "状态：{{value}}",
+    "chipSearch": "搜索：“{{value}}”",
+    "removeChipAria": "移除筛选 {{label}}",
+    "clearAll": "清除全部"
+  },
+  "deleteDialog": {
+    "title": "删除该休假记录？",
+    "description": "<strong>{{name}}</strong> 的休假期间将被永久删除。此操作无法撤销。",
+    "cancel": "取消",
+    "confirm": "删除"
+  }
+}

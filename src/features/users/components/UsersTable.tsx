@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowUp, ArrowUpDown, Pencil, Search, Trash2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
@@ -6,14 +7,10 @@ import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/feedback/EmptyState';
 import { ROLE_LABELS } from '@/constants/roles';
+import { getIntlLocale } from '@/utils/locale';
 import type { UserRecord } from '../types';
 
-const COLUMNS: { key: keyof UserRecord; label: string }[] = [
-  { key: 'name', label: 'Nome' },
-  { key: 'email', label: 'E-mail' },
-  { key: 'role', label: 'Perfil' },
-  { key: 'status', label: 'Status' },
-];
+const COLUMN_KEYS: (keyof UserRecord)[] = ['name', 'email', 'role', 'status'];
 
 interface UsersTableProps {
   records: readonly UserRecord[];
@@ -23,25 +20,37 @@ interface UsersTableProps {
 }
 
 export function UsersTable({ records, currentUserId, onEdit, onDelete }: UsersTableProps) {
+  const { t } = useTranslation('users');
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<keyof UserRecord>('name');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
+
+  const COLUMNS = useMemo(
+    () => COLUMN_KEYS.map((key) => ({ key, label: t(`users:table.columns.${key}`) })),
+    [t],
+  );
 
   const filteredSorted = useMemo(() => {
     let rows = [...records];
     if (search) {
       const q = search.toLowerCase();
-      rows = rows.filter((r) => COLUMNS.some((c) => String(r[c.key] ?? '').toLowerCase().includes(q)));
+      rows = rows.filter((r) =>
+        COLUMNS.some((c) =>
+          String(r[c.key] ?? '')
+            .toLowerCase()
+            .includes(q),
+        ),
+      );
     }
     rows.sort((a, b) => {
       const va = a[sortKey] ?? '';
       const vb = b[sortKey] ?? '';
       return sortDir === 'asc'
-        ? String(va).localeCompare(String(vb), 'pt-BR')
-        : String(vb).localeCompare(String(va), 'pt-BR');
+        ? String(va).localeCompare(String(vb), getIntlLocale())
+        : String(vb).localeCompare(String(va), getIntlLocale());
     });
     return rows;
-  }, [records, search, sortKey, sortDir]);
+  }, [records, search, sortKey, sortDir, COLUMNS]);
 
   function handleSort(key: keyof UserRecord) {
     if (sortKey === key) {
@@ -56,14 +65,14 @@ export function UsersTable({ records, currentUserId, onEdit, onDelete }: UsersTa
     <div className="space-y-4">
       <Input
         className="max-w-xs"
-        placeholder="Pesquisar usuário…"
+        placeholder={t('users:table.searchPlaceholder')}
         leftIcon={<Search className="h-4 w-4" />}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
       {filteredSorted.length === 0 ? (
-        <EmptyState title="Nenhum usuário encontrado" description="Ajuste a busca." />
+        <EmptyState title={t('users:empty.title')} description={t('users:empty.description')} />
       ) : (
         <div className="overflow-x-auto rounded-md border border-border">
           <table className="w-full text-left text-sm">
@@ -93,26 +102,34 @@ export function UsersTable({ records, currentUserId, onEdit, onDelete }: UsersTa
                   </th>
                 ))}
                 <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                  Ações
+                  {t('users:table.columns.actions')}
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border bg-surface">
-              {filteredSorted.map((row) => {
+              {filteredSorted.map((row, idx) => {
                 const isSelf = row.id === currentUserId;
                 return (
-                  <tr key={row.id} className="hover:bg-hover">
+                  <tr
+                    key={row.id}
+                    className="animate-slide-up hover:bg-hover"
+                    style={{ animationDelay: `${idx * 25}ms`, animationFillMode: 'backwards' }}
+                  >
                     <td className="px-3 py-2 font-medium text-ink">
                       {row.name}
                       {isSelf && (
-                        <span className="ml-2 text-2xs font-normal text-ink-soft">(você)</span>
+                        <span className="ml-2 text-2xs font-normal text-ink-soft">
+                          {t('users:table.youSuffix')}
+                        </span>
                       )}
                     </td>
                     <td className="px-3 py-2 text-ink">{row.email}</td>
                     <td className="px-3 py-2 text-ink">{ROLE_LABELS[row.role]}</td>
                     <td className="px-3 py-2">
                       <Badge variant={row.status === 'active' ? 'success' : 'neutral'} size="sm">
-                        {row.status === 'active' ? 'Ativo' : 'Inativo'}
+                        {row.status === 'active'
+                          ? t('users:status.active')
+                          : t('users:status.inactive')}
                       </Badge>
                     </td>
                     <td className="px-3 py-2">
@@ -121,7 +138,7 @@ export function UsersTable({ records, currentUserId, onEdit, onDelete }: UsersTa
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8"
-                          aria-label="Editar usuário"
+                          aria-label={t('users:table.editAria')}
                           onClick={() => onEdit(row)}
                         >
                           <Pencil className="h-4 w-4" />
@@ -130,9 +147,9 @@ export function UsersTable({ records, currentUserId, onEdit, onDelete }: UsersTa
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8 text-danger hover:text-danger disabled:text-ink-soft"
-                          aria-label="Remover usuário"
+                          aria-label={t('users:table.deleteAria')}
                           disabled={isSelf}
-                          title={isSelf ? 'Você não pode remover seu próprio usuário' : undefined}
+                          title={isSelf ? t('users:table.cannotDeleteSelf') : undefined}
                           onClick={() => onDelete(row)}
                         >
                           <Trash2 className="h-4 w-4" />

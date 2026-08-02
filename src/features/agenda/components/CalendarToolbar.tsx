@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight, Plus, CalendarDays } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Label } from '@/components/ui/Label';
@@ -14,12 +15,6 @@ import { APPOINTMENT_STATUS, APPOINTMENT_STATUS_LABELS } from '@/constants/statu
 import type { AgendaFilters, AgendaView } from '../types';
 
 const ALL_VALUE = '__all';
-
-const VIEW_LABELS: Record<AgendaView, string> = {
-  month: 'Mês',
-  week: 'Semana',
-  day: 'Dia',
-};
 
 interface CalendarToolbarProps {
   view: AgendaView;
@@ -46,19 +41,27 @@ export function CalendarToolbar({
   onCreate,
   examTypes,
 }: CalendarToolbarProps) {
+  const { t } = useTranslation('agenda');
+
+  const VIEW_LABELS: Record<AgendaView, string> = {
+    month: t('agenda:view.month'),
+    week: t('agenda:view.week'),
+    day: t('agenda:view.day'),
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={onToday}>
-            Hoje
+            {t('agenda:actions.today')}
           </Button>
           <div className="flex items-center gap-1">
             <Button
               variant="ghost"
               size="icon"
               onClick={onPrev}
-              aria-label="Período anterior"
+              aria-label={t('agenda:actions.prevPeriod')}
               className="h-8 w-8"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -67,7 +70,7 @@ export function CalendarToolbar({
               variant="ghost"
               size="icon"
               onClick={onNext}
-              aria-label="Próximo período"
+              aria-label={t('agenda:actions.nextPeriod')}
               className="h-8 w-8"
             >
               <ChevronRight className="h-4 w-4" />
@@ -97,15 +100,20 @@ export function CalendarToolbar({
             ))}
           </div>
 
-          <Button variant="primary" size="sm" leftIcon={<Plus className="h-4 w-4" />} onClick={onCreate}>
-            Novo agendamento
+          <Button
+            variant="primary"
+            size="sm"
+            leftIcon={<Plus className="h-4 w-4" />}
+            onClick={onCreate}
+          >
+            {t('agenda:actions.newAppointment')}
           </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div>
-          <Label htmlFor="agenda-filter-doctor">Médico</Label>
+          <Label htmlFor="agenda-filter-doctor">{t('agenda:filters.doctor')}</Label>
           <Select
             value={filters.doctor ?? ALL_VALUE}
             onValueChange={(v) => onFiltersChange({ doctor: v === ALL_VALUE ? undefined : v })}
@@ -114,7 +122,7 @@ export function CalendarToolbar({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Todos</SelectItem>
+              <SelectItem value={ALL_VALUE}>{t('agenda:filters.all')}</SelectItem>
               {DOCTORS.map((doc) => (
                 <SelectItem key={doc} value={doc}>
                   {doc}
@@ -125,7 +133,7 @@ export function CalendarToolbar({
         </div>
 
         <div>
-          <Label htmlFor="agenda-filter-exam">Tipo de exame</Label>
+          <Label htmlFor="agenda-filter-exam">{t('agenda:filters.examType')}</Label>
           <Select
             value={filters.examType ?? ALL_VALUE}
             onValueChange={(v) => onFiltersChange({ examType: v === ALL_VALUE ? undefined : v })}
@@ -134,7 +142,7 @@ export function CalendarToolbar({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Todos</SelectItem>
+              <SelectItem value={ALL_VALUE}>{t('agenda:filters.all')}</SelectItem>
               {examTypes.map((exam) => (
                 <SelectItem key={exam} value={exam}>
                   {exam}
@@ -145,7 +153,7 @@ export function CalendarToolbar({
         </div>
 
         <div>
-          <Label htmlFor="agenda-filter-status">Status</Label>
+          <Label htmlFor="agenda-filter-status">{t('agenda:filters.status')}</Label>
           <Select
             value={filters.status ?? ALL_VALUE}
             onValueChange={(v) =>
@@ -158,7 +166,7 @@ export function CalendarToolbar({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={ALL_VALUE}>Todos</SelectItem>
+              <SelectItem value={ALL_VALUE}>{t('agenda:filters.all')}</SelectItem>
               {Object.values(APPOINTMENT_STATUS).map((status) => (
                 <SelectItem key={status} value={status}>
                   {APPOINTMENT_STATUS_LABELS[status]}

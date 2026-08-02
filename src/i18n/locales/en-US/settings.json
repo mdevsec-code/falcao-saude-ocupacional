@@ -1,0 +1,36 @@
+{
+  "page": {
+    "eyebrow": "Administration",
+    "title": "Settings",
+    "description": "System information, localization, and notifications."
+  },
+  "system": {
+    "title": "System information",
+    "description": "Environment and version currently running.",
+    "application": "Application",
+    "version": "Version",
+    "environment": "Environment",
+    "production": "Production",
+    "development": "Development",
+    "dataSource": "Data source",
+    "mockSource": "Mock (MSW)",
+    "realApiSource": "Live API",
+    "api": "API"
+  },
+  "localization": {
+    "title": "Localization",
+    "description": "Default language and format for the platform.",
+    "currentLanguage": "Current language",
+    "timezone": "Time zone"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Alerts sent to administrators and front desk staff.",
+    "newAppointments": "New appointments",
+    "pendingAtestados": "Certificates pending entry",
+    "examReminders": "Periodic exam reminders (NR-7)"
+  },
+  "toast": {
+    "prefsNotPersisted": "Preferences are not yet persisted in this version."
+  }
+}

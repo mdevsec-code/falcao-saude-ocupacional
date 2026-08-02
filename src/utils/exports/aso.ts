@@ -133,7 +133,9 @@ export function generateAsoPdf(input: AsoInput): jsPDF {
       doc.setTextColor(40, 40, 40);
       doc.text(DUTY_TYPE_LABELS[entry.duty], margin + 8, rowY);
 
-      const fitRgb = entry.fit ? CONCLUSION_RGB[APPOINTMENT_CONCLUSION.APTO] : CONCLUSION_RGB[APPOINTMENT_CONCLUSION.INAPTO];
+      const fitRgb = entry.fit
+        ? CONCLUSION_RGB[APPOINTMENT_CONCLUSION.APTO]
+        : CONCLUSION_RGB[APPOINTMENT_CONCLUSION.INAPTO];
       doc.setFont('helvetica', 'bold');
       doc.setTextColor(fitRgb[0], fitRgb[1], fitRgb[2]);
       doc.text(entry.fit ? 'APTO' : 'INAPTO', margin + contentWidth - 50, rowY);

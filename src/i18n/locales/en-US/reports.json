@@ -1,0 +1,75 @@
+{
+  "eyebrow": "Export",
+  "title": "Reports",
+  "description": "Generate operational reports, export to PDF or Excel, and send the summary via WhatsApp to the responsible team.",
+  "subtitle": "{{kind}} · {{count}} record(s)",
+  "filters": {
+    "title": "Filters",
+    "description": "Refine the set of records before exporting.",
+    "kind": "Report type",
+    "from": "From",
+    "to": "To",
+    "company": "Company",
+    "allCompanies": "All companies"
+  },
+  "actions": {
+    "title": "Export",
+    "pdf": "Download PDF",
+    "excel": "Download Excel",
+    "whatsapp": "Send via WhatsApp"
+  },
+  "preview": {
+    "title": "Preview",
+    "description": "These are the records that will be exported. The columns reflect what appears in the PDF and Excel files.",
+    "empty": {
+      "title": "No records found",
+      "description": "Adjust the filters to view the data."
+    }
+  },
+  "columns": {
+    "date": "Date",
+    "patient": "Patient",
+    "company": "Company",
+    "sector": "Sector",
+    "exam": "Exam",
+    "status": "Status",
+    "professional": "Professional",
+    "notes": "Notes"
+  },
+  "meta": {
+    "from": "From",
+    "to": "To",
+    "company": "Company",
+    "generatedAt": "Generated at"
+  },
+  "whatsapp": {
+    "period": "Period: {{from}} to {{to}}",
+    "periodStart": "start",
+    "periodEnd": "today",
+    "totalRecords": "Total records: {{count}}",
+    "noRecords": "No records in this period.",
+    "contactName": "Team"
+  },
+  "toast": {
+    "pdfSuccess": "PDF generated successfully",
+    "pdfError": "Failed to generate PDF",
+    "excelSuccess": "Spreadsheet generated successfully",
+    "excelError": "Failed to generate spreadsheet",
+    "whatsappSent": "Opening WhatsApp conversation",
+    "whatsappInvalid": "Invalid WhatsApp number"
+  },
+  "kinds": {
+    "agendamentos": "Appointments",
+    "atendimentos": "Visits",
+    "aso": "General ASO",
+    "aso_a_ptos": "Admission ASO",
+    "aso_periodicos": "Periodic ASO"
+  },
+  "kindDates": {
+    "agendamentos": "Scheduling period",
+    "atendimentos": "Visit period",
+    "aso": "ASO issuance period",
+    "aso_a_ptos": "Admission period",
+    "aso_periodicos": "Periodic exam period"
+  }
+}

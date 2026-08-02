@@ -1,0 +1,25 @@
+version: '3.9'
+
+# Ambiente de desenvolvimento local: sobe só o Postgres. A API roda direto
+# com `npm run start:dev` (fora do container) para hot-reload mais rápido.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: falcao-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: falcao
+      POSTGRES_PASSWORD: falcao
+      POSTGRES_DB: falcao
+    ports:
+      - '5432:5432'
+    volumes:
+      - falcao_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U falcao']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  falcao_db_data:

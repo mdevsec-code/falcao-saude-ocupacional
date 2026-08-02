@@ -65,7 +65,7 @@ export function UsersPage() {
         description={t('users:page.description')}
         actions={
           <Button variant="primary" leftIcon={<Plus className="h-4 w-4" />} onClick={handleCreate}>
-            Novo usuário
+            {t('users:actions.createNew')}
           </Button>
         }
       />
@@ -85,7 +85,7 @@ export function UsersPage() {
             description={t('users:error.description')}
             action={
               <Button variant="outline" onClick={() => void refetch()}>
-                Tentar novamente
+                {t('users:actions.retry')}
               </Button>
             }
           />

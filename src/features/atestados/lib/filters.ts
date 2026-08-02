@@ -8,7 +8,10 @@ export const PRIMARY_FILTER_FIELDS = [
   { key: 'localAtendimento', label: 'Local de Atendimento' },
 ] as const satisfies readonly { key: keyof AtestadoFilters; label: string }[];
 
-export function uniqueSorted(records: readonly AtestadoRecord[], key: keyof AtestadoRecord): string[] {
+export function uniqueSorted(
+  records: readonly AtestadoRecord[],
+  key: keyof AtestadoRecord,
+): string[] {
   const set = new Set<string>();
   records.forEach((r) => {
     const value = r[key];
@@ -38,7 +41,8 @@ export function applyAtestadoFilters(
       const val = filters[f.key];
       if (val && rec[f.key] !== val) return false;
     }
-    if (filters.dataInicio && rec.inicioAtestado && rec.inicioAtestado < filters.dataInicio) return false;
+    if (filters.dataInicio && rec.inicioAtestado && rec.inicioAtestado < filters.dataInicio)
+      return false;
     if (filters.dataFim && rec.inicioAtestado && rec.inicioAtestado > filters.dataFim) return false;
 
     if (filters.busca) {
