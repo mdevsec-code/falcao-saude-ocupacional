@@ -188,6 +188,7 @@ enum AuditEntityType {
   deviation
   accident_indicator
   cid
+  atestado
 }
 
 /// Trilha de auditoria LGPD — nunca é apagada nem editada, só inserida.

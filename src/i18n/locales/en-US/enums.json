@@ -47,7 +47,8 @@
     "vacation": "Vacation",
     "deviation": "Deviation",
     "accident_indicator": "Accident indicator",
-    "cid": "ICD"
+    "cid": "ICD",
+    "atestado": "Certificate"
   },
   "deviationStatus": {
     "pendente": "Pending",

@@ -28,6 +28,7 @@
     "settingsManage": "Manage settings",
     "auditRead": "View audit trail",
     "deviationRead": "View safety deviations",
-    "deviationWrite": "Register safety deviations"
+    "deviationWrite": "Register safety deviations",
+    "atestadoWrite": "Create/edit certificates"
   }
 }

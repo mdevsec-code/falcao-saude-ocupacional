@@ -47,7 +47,8 @@
     "vacation": "休假",
     "deviation": "偏差",
     "accident_indicator": "事故指标",
-    "cid": "国际疾病分类"
+    "cid": "国际疾病分类",
+    "atestado": "病假证明"
   },
   "deviationStatus": {
     "pendente": "待处理",

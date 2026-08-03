@@ -4,6 +4,50 @@
     "title": "Medical Certificates",
     "description": "Analysis of medical leave by certificate: volume, days, departments, and recurrence."
   },
+  "actions": {
+    "new": "New certificate"
+  },
+  "dialog": {
+    "createTitle": "New certificate",
+    "createDescription": "Log a new medical certificate received from the employee.",
+    "editTitle": "Edit certificate",
+    "editDescription": "Update this certificate's details.",
+    "cancel": "Cancel",
+    "submitCreate": "Save",
+    "submitEdit": "Save changes",
+    "fields": {
+      "nome": { "label": "Employee", "placeholder": "Full name" },
+      "ponto": { "label": "Badge no.", "placeholder": "e.g. 00123" },
+      "setor": { "label": "Department" },
+      "funcao": { "label": "Role", "placeholder": "e.g. Mason" },
+      "inicioAtestado": { "label": "Certificate start" },
+      "terminoAtestado": { "label": "Certificate end" },
+      "dataLancamento": { "label": "Filing date" },
+      "cid": { "label": "ICD code", "placeholder": "e.g. M54" },
+      "liderancaDireta": { "label": "Direct manager", "placeholder": "Manager/foreman name" },
+      "medico": { "label": "Physician", "placeholder": "Physician's name" },
+      "crmCro": { "label": "License no.", "placeholder": "e.g. CRM 12345" },
+      "localAtendimento": { "label": "Care location", "placeholder": "e.g. Municipal Hospital" },
+      "observacao": { "label": "Notes", "placeholder": "Additional details (optional)" }
+    }
+  },
+  "validation": {
+    "dateRangeInvalid": "The certificate end date must be on or after the start date."
+  },
+  "toast": {
+    "createSuccess": "Certificate logged successfully.",
+    "createError": "Unable to log the certificate.",
+    "updateSuccess": "Certificate updated successfully.",
+    "updateError": "Unable to update the certificate.",
+    "deleteSuccess": "Certificate deleted successfully.",
+    "deleteError": "Unable to delete the certificate."
+  },
+  "deleteDialog": {
+    "title": "Delete certificate",
+    "description": "Are you sure you want to delete the certificate for <strong>{{name}}</strong>? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
   "filtersCard": {
     "title": "Filters",
     "description": "Refine the analysis by period, department, role, and more."
@@ -125,7 +169,10 @@
     "showingRange": "Showing {{from}}–{{to}} of {{total}} records",
     "pageOfTotal": "Page {{current}} of {{total}}",
     "prevPageAria": "Previous page",
-    "nextPageAria": "Next page"
+    "nextPageAria": "Next page",
+    "actions": "Actions",
+    "editAria": "Edit certificate",
+    "deleteAria": "Delete certificate"
   },
   "empty": {
     "title": "No records in the filtered period",

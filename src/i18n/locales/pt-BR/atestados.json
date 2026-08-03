@@ -4,6 +4,56 @@
     "title": "Atestados Médicos",
     "description": "Análise de afastamentos por atestado médico: volume, dias, setores e recorrência."
   },
+  "actions": {
+    "new": "Novo atestado"
+  },
+  "dialog": {
+    "createTitle": "Novo atestado",
+    "createDescription": "Registre um novo atestado médico recebido do colaborador.",
+    "editTitle": "Editar atestado",
+    "editDescription": "Atualize os dados deste atestado.",
+    "cancel": "Cancelar",
+    "submitCreate": "Registrar",
+    "submitEdit": "Salvar alterações",
+    "fields": {
+      "nome": { "label": "Colaborador", "placeholder": "Nome completo" },
+      "ponto": { "label": "Ponto", "placeholder": "Ex.: 00123" },
+      "setor": { "label": "Setor" },
+      "funcao": { "label": "Função", "placeholder": "Ex.: Pedreiro" },
+      "inicioAtestado": { "label": "Início do atestado" },
+      "terminoAtestado": { "label": "Término do atestado" },
+      "dataLancamento": { "label": "Data de lançamento" },
+      "cid": { "label": "CID", "placeholder": "Ex.: M54" },
+      "liderancaDireta": {
+        "label": "Liderança direta",
+        "placeholder": "Nome do gestor/encarregado"
+      },
+      "medico": { "label": "Médico", "placeholder": "Nome do médico" },
+      "crmCro": { "label": "CRM/CRO", "placeholder": "Ex.: CRM 12345" },
+      "localAtendimento": {
+        "label": "Local de atendimento",
+        "placeholder": "Ex.: Hospital Municipal"
+      },
+      "observacao": { "label": "Observação", "placeholder": "Detalhes adicionais (opcional)" }
+    }
+  },
+  "validation": {
+    "dateRangeInvalid": "O término do atestado deve ser igual ou depois do início."
+  },
+  "toast": {
+    "createSuccess": "Atestado registrado com sucesso.",
+    "createError": "Não foi possível registrar o atestado.",
+    "updateSuccess": "Atestado atualizado com sucesso.",
+    "updateError": "Não foi possível atualizar o atestado.",
+    "deleteSuccess": "Atestado excluído com sucesso.",
+    "deleteError": "Não foi possível excluir o atestado."
+  },
+  "deleteDialog": {
+    "title": "Excluir atestado",
+    "description": "Tem certeza que deseja excluir o atestado de <strong>{{name}}</strong>? Essa ação não pode ser desfeita.",
+    "cancel": "Cancelar",
+    "confirm": "Excluir"
+  },
   "filtersCard": {
     "title": "Filtros",
     "description": "Refine a análise pelo período, setor, função e mais."
@@ -128,7 +178,10 @@
     "showingRange": "Mostrando {{from}}–{{to}} de {{total}} registros",
     "pageOfTotal": "Página {{current}} de {{total}}",
     "prevPageAria": "Página anterior",
-    "nextPageAria": "Próxima página"
+    "nextPageAria": "Próxima página",
+    "actions": "Ações",
+    "editAria": "Editar atestado",
+    "deleteAria": "Excluir atestado"
   },
   "empty": {
     "title": "Nenhum registro no período filtrado",

@@ -47,7 +47,8 @@
     "vacation": "Férias",
     "deviation": "Desvio",
     "accident_indicator": "Indicador de acidente",
-    "cid": "CID"
+    "cid": "CID",
+    "atestado": "Atestado"
   },
   "deviationStatus": {
     "pendente": "Pendente",

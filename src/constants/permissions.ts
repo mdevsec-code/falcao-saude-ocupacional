@@ -19,6 +19,7 @@ export const PERMISSIONS = {
   AUDIT_READ: 'audit:read',
   DEVIATION_READ: 'deviation:read',
   DEVIATION_WRITE: 'deviation:write',
+  ATESTADO_WRITE: 'atestado:write',
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -64,6 +65,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.EMPLOYEE_READ,
     PERMISSIONS.EMPLOYEE_WRITE,
     PERMISSIONS.REPORT_READ,
+    PERMISSIONS.ATESTADO_WRITE,
   ],
 
   [ROLES.RECEPCAO]: [
@@ -72,6 +74,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.PATIENT_READ,
     PERMISSIONS.PATIENT_WRITE,
     PERMISSIONS.EMPLOYEE_READ,
+    PERMISSIONS.ATESTADO_WRITE,
   ],
 };
 

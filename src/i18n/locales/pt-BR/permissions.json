@@ -28,6 +28,7 @@
     "settingsManage": "Gerenciar configurações",
     "auditRead": "Ver auditoria",
     "deviationRead": "Ver desvios de segurança",
-    "deviationWrite": "Registrar desvios de segurança"
+    "deviationWrite": "Registrar desvios de segurança",
+    "atestadoWrite": "Criar/editar atestados"
   }
 }

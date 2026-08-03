@@ -4,6 +4,50 @@
     "title": "病假证明",
     "description": "病假证明缺勤情况分析：数量、天数、部门与复发率。"
   },
+  "actions": {
+    "new": "新增病假证明"
+  },
+  "dialog": {
+    "createTitle": "新增病假证明",
+    "createDescription": "登记员工提交的新病假证明。",
+    "editTitle": "编辑病假证明",
+    "editDescription": "更新此病假证明的信息。",
+    "cancel": "取消",
+    "submitCreate": "登记",
+    "submitEdit": "保存更改",
+    "fields": {
+      "nome": { "label": "员工", "placeholder": "姓名" },
+      "ponto": { "label": "工号", "placeholder": "例如：00123" },
+      "setor": { "label": "部门" },
+      "funcao": { "label": "职位", "placeholder": "例如：泥瓦工" },
+      "inicioAtestado": { "label": "证明开始日期" },
+      "terminoAtestado": { "label": "证明结束日期" },
+      "dataLancamento": { "label": "登记日期" },
+      "cid": { "label": "CID 编码", "placeholder": "例如：M54" },
+      "liderancaDireta": { "label": "直属上级", "placeholder": "上级/工头姓名" },
+      "medico": { "label": "医生", "placeholder": "医生姓名" },
+      "crmCro": { "label": "执业编号", "placeholder": "例如：CRM 12345" },
+      "localAtendimento": { "label": "就诊地点", "placeholder": "例如：市立医院" },
+      "observacao": { "label": "备注", "placeholder": "补充信息（可选）" }
+    }
+  },
+  "validation": {
+    "dateRangeInvalid": "结束日期必须等于或晚于开始日期。"
+  },
+  "toast": {
+    "createSuccess": "病假证明登记成功。",
+    "createError": "无法登记该病假证明。",
+    "updateSuccess": "病假证明更新成功。",
+    "updateError": "无法更新该病假证明。",
+    "deleteSuccess": "病假证明已删除。",
+    "deleteError": "无法删除该病假证明。"
+  },
+  "deleteDialog": {
+    "title": "删除病假证明",
+    "description": "确定要删除 <strong>{{name}}</strong> 的病假证明吗？此操作无法撤销。",
+    "cancel": "取消",
+    "confirm": "删除"
+  },
   "filtersCard": {
     "title": "筛选条件",
     "description": "按时间段、部门、职位等条件筛选分析范围。"
@@ -107,7 +151,10 @@
     "showingRange": "显示第 {{from}}–{{to}} 条，共 {{total}} 条记录",
     "pageOfTotal": "第 {{current}} / {{total}} 页",
     "prevPageAria": "上一页",
-    "nextPageAria": "下一页"
+    "nextPageAria": "下一页",
+    "actions": "操作",
+    "editAria": "编辑病假证明",
+    "deleteAria": "删除病假证明"
   },
   "empty": {
     "title": "所筛选期间内无记录",
