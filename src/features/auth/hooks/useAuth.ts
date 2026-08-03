@@ -13,6 +13,10 @@ export interface UseAuthReturn {
     password: string,
     rememberMe?: boolean,
   ) => Promise<{ ok: true } | { ok: false; error: string }>;
+  completeSsoLogin: (
+    token: string,
+    expiresAt: string,
+  ) => Promise<{ ok: true } | { ok: false; error: string }>;
   signOut: () => Promise<void>;
   hasRole: (role: Role | Role[]) => boolean;
   can: (permission: Permission) => boolean;
@@ -22,6 +26,7 @@ export function useAuth(): UseAuthReturn {
   const session = useAuthSession();
   const user = useCurrentUser();
   const signInFn = useAuthStore((s: AuthState) => s.signIn);
+  const completeSsoLoginFn = useAuthStore((s: AuthState) => s.completeSsoLogin);
   const signOutFn = useAuthStore((s: AuthState) => s.signOut);
 
   const isAuthenticated = session !== null;
@@ -33,6 +38,15 @@ export function useAuth(): UseAuthReturn {
       return { ok: false as const, error: result.error };
     },
     [signInFn],
+  );
+
+  const completeSsoLogin = useCallback(
+    async (token: string, expiresAt: string) => {
+      const result = await completeSsoLoginFn(token, expiresAt);
+      if (result.ok) return { ok: true as const };
+      return { ok: false as const, error: result.error };
+    },
+    [completeSsoLoginFn],
   );
 
   const signOut = useCallback(async () => {
@@ -55,5 +69,5 @@ export function useAuth(): UseAuthReturn {
     [user],
   );
 
-  return { session, user, isAuthenticated, signIn, signOut, hasRole, can };
+  return { session, user, isAuthenticated, signIn, completeSsoLogin, signOut, hasRole, can };
 }

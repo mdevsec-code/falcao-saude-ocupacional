@@ -64,6 +64,8 @@ Já está configurado via [`vercel.json`](../vercel.json).
    - `VITE_API_URL`
    - `VITE_ENABLE_MSW=false`
    - `VITE_DEFAULT_LOCALE=pt-BR`
+   - `VITE_ENABLE_MICROSOFT_SSO=true` (opcional — só depois de configurar o
+     Azure AD, ver `server/README.md`)
 
 ### Deploy manual
 
@@ -120,6 +122,7 @@ disponíveis **no momento do build** (não no runtime).
 |---|---|---|
 | `VITE_API_URL` | `http://localhost:5173/api` | URL base da API |
 | `VITE_ENABLE_MSW` | `false` | Habilita mock em dev (não usar em prod) |
+| `VITE_ENABLE_MICROSOFT_SSO` | `false` | Mostra o botão "Entrar com Microsoft" (requer Azure AD configurado no backend) |
 | `VITE_DEFAULT_LOCALE` | `pt-BR` | Locale inicial |
 | `VITE_APP_NAME` | `Falcão Saúde Ocupacional` | `<title>` e meta |
 | `VITE_SENTRY_DSN` | — | DSN do Sentry (opcional) |

@@ -15,6 +15,12 @@ const LoginPage = lazy(() =>
   import('@/features/auth/pages/LoginPage').then((m) => ({ default: m.LoginPage })),
 );
 
+const MicrosoftCallbackPage = lazy(() =>
+  import('@/features/auth/pages/MicrosoftCallbackPage').then((m) => ({
+    default: m.MicrosoftCallbackPage,
+  })),
+);
+
 const DashboardPage = lazy(() =>
   import('@/features/dashboard/pages/DashboardPage').then((m) => ({ default: m.DashboardPage })),
 );
@@ -154,6 +160,11 @@ const routes: RouteObject[] = [
   {
     path: ROUTE_PATHS.LOGIN,
     element: withSuspense(<LoginPage />),
+    errorElement: <RootBoundary />,
+  },
+  {
+    path: ROUTE_PATHS.AUTH_CALLBACK,
+    element: withSuspense(<MicrosoftCallbackPage />),
     errorElement: <RootBoundary />,
   },
   {
