@@ -104,15 +104,21 @@ granularidade for necessária, o próximo passo é portar `PERMISSIONS`/
 ### Opção rápida (lançamento inicial): Railway
 
 1. Crie um projeto no [Railway](https://railway.app), adicione um serviço
-   Postgres (um clique) e um serviço a partir deste repositório
-   (`server/` como root do serviço).
-2. Configure as variáveis de ambiente do serviço (`DATABASE_URL` já vem
-   pronta do serviço Postgres do Railway; adicione `JWT_SECRET`,
-   `CORS_ORIGIN`, etc.).
-3. Build command: `npm install && npx prisma migrate deploy && npm run build`.
-   Start command: `npm run start:prod`.
-4. Rode o seed uma única vez (Railway shell ou local apontando pro
-   `DATABASE_URL` de produção): `SEED_ADMIN_EMAIL=... SEED_ADMIN_PASSWORD=... npm run seed`.
+   Postgres (um clique) e um serviço "Deploy from GitHub repo" a partir
+   deste repositório, com **Root Directory = `server`** (Settings do
+   serviço). Railway detecta o `Dockerfile` deste diretório automaticamente
+   — não precisa configurar build/start command manualmente.
+2. Configure as variáveis de ambiente do serviço: `DATABASE_URL` (referencie
+   a variável do serviço Postgres via `${{Postgres.DATABASE_URL}}`),
+   `JWT_SECRET` (gere com `openssl rand -base64 48`), `CORS_ORIGIN` (domínio
+   do frontend na Vercel, ex.: `https://falcao-saude.vercel.app`).
+3. O próprio `CMD` do `Dockerfile` roda `prisma db push` antes de subir o
+   servidor — sincroniza o schema no banco automaticamente a cada deploy
+   (ainda não há histórico de migrations neste projeto; `db push` é o
+   caminho recomendado pela Prisma até a primeira migration ser gerada).
+4. Depois do primeiro deploy, rode o seed uma única vez (aba "Shell" do
+   serviço no Railway, ou local apontando para o `DATABASE_URL` de
+   produção): `SEED_ADMIN_EMAIL=... SEED_ADMIN_PASSWORD=... npm run seed`.
 
 Custo aproximado: US$5–20/mês para o volume desta aplicação. Bom para
 validar o lançamento rápido.

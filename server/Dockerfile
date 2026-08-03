@@ -18,4 +18,6 @@ RUN npx prisma generate
 COPY --from=build /app/dist ./dist
 
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+# Sincroniza o schema com o banco antes de subir (sem histórico de migrations
+# ainda — ver server/README.md). Idempotente: seguro em todo restart.
+CMD ["sh", "-c", "npx prisma db push --skip-generate && node dist/main.js"]
