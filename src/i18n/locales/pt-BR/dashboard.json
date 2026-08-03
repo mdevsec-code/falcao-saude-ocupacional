@@ -29,7 +29,10 @@
     "exames": { "label": "Exames", "description": "Catálogo de exames" },
     "cid": { "label": "CID", "description": "Referência de códigos" },
     "atestados": { "label": "Atestados", "description": "Análise e indicadores" },
+    "seguranca": { "label": "Segurança do Trabalho", "description": "Desvios e indicadores" },
+    "ferias": { "label": "Férias", "description": "Controle de períodos" },
     "relatorios": { "label": "Relatórios", "description": "Exportação e filtros" },
+    "auditoria": { "label": "Auditoria", "description": "Trilha de eventos (LGPD)" },
     "usuarios": { "label": "Usuários", "description": "Contas de acesso" },
     "permissoes": { "label": "Permissões", "description": "Matriz por perfil" },
     "configuracoes": { "label": "Configurações", "description": "Sistema e notificações" }

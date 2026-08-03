@@ -29,7 +29,10 @@
     "exames": { "label": "检查", "description": "检查目录" },
     "cid": { "label": "CID", "description": "编码参考" },
     "atestados": { "label": "病假证明", "description": "分析与指标" },
+    "seguranca": { "label": "劳动安全", "description": "偏差与事故指标" },
+    "ferias": { "label": "休假", "description": "假期管理" },
     "relatorios": { "label": "报表", "description": "导出与筛选" },
+    "auditoria": { "label": "审计", "description": "事件日志（LGPD）" },
     "usuarios": { "label": "用户", "description": "访问账户" },
     "permissoes": { "label": "权限", "description": "角色权限矩阵" },
     "configuracoes": { "label": "设置", "description": "系统与通知" }

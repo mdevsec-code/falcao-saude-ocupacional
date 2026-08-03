@@ -15,6 +15,12 @@ const MONTH_ORDER_HINT = [
   'DEZEMBRO',
 ];
 
+/** Nome do mês em maiúsculo (ex.: "AGOSTO") a partir de uma data `YYYY-MM-DD`. */
+export function competenciaFromDate(dateStr: string): string {
+  const [, month] = dateStr.split('-').map(Number);
+  return MONTH_ORDER_HINT[(month ?? 1) - 1] ?? MONTH_ORDER_HINT[0]!;
+}
+
 export function sortCompetenciasChronologically(
   records: readonly AtestadoRecord[],
 ): CompetenciaGroup[] {

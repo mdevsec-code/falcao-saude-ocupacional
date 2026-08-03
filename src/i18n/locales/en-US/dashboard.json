@@ -29,7 +29,10 @@
     "exames": { "label": "Exams", "description": "Exam catalog" },
     "cid": { "label": "CID", "description": "Code reference" },
     "atestados": { "label": "Certificates", "description": "Analysis and metrics" },
+    "seguranca": { "label": "Workplace Safety", "description": "Deviations and metrics" },
+    "ferias": { "label": "Vacation", "description": "Time-off tracking" },
     "relatorios": { "label": "Reports", "description": "Export and filters" },
+    "auditoria": { "label": "Audit Trail", "description": "Event log (LGPD)" },
     "usuarios": { "label": "Users", "description": "Access accounts" },
     "permissoes": { "label": "Permissions", "description": "Role matrix" },
     "configuracoes": { "label": "Settings", "description": "System and notifications" }

@@ -30,6 +30,7 @@ export const AUDIT_ENTITY_TYPES = {
   DEVIATION: 'deviation',
   ACCIDENT_INDICATOR: 'accident_indicator',
   CID: 'cid',
+  ATESTADO: 'atestado',
 } as const;
 
 export type AuditEntityType = (typeof AUDIT_ENTITY_TYPES)[keyof typeof AUDIT_ENTITY_TYPES];

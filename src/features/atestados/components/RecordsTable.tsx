@@ -6,7 +6,9 @@ import {
   ChevronLeft,
   ChevronRight,
   FileSpreadsheet,
+  Pencil,
   Search,
+  Trash2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
@@ -43,9 +45,12 @@ const PAGE_SIZE = 10;
 
 interface RecordsTableProps {
   records: readonly AtestadoRecord[];
+  canWrite?: boolean;
+  onEdit?: (record: AtestadoRecord) => void;
+  onDelete?: (record: AtestadoRecord) => void;
 }
 
-export function RecordsTable({ records }: RecordsTableProps) {
+export function RecordsTable({ records, canWrite, onEdit, onDelete }: RecordsTableProps) {
   const { t } = useTranslation('atestados');
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState<keyof AtestadoRecord>('dataLancamento');
@@ -179,6 +184,11 @@ export function RecordsTable({ records }: RecordsTableProps) {
                       </button>
                     </th>
                   ))}
+                  {canWrite && (
+                    <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                      {t('atestados:table.actions')}
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="divide-y divide-border bg-surface">
@@ -219,6 +229,28 @@ export function RecordsTable({ records }: RecordsTableProps) {
                         </td>
                       );
                     })}
+                    {canWrite && (
+                      <td className="px-3 py-2">
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => onEdit?.(row)}
+                            aria-label={t('atestados:table.editAria')}
+                            className="rounded-md p-1.5 text-ink-soft hover:bg-hover hover:text-ink"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => onDelete?.(row)}
+                            aria-label={t('atestados:table.deleteAria')}
+                            className="rounded-md p-1.5 text-ink-soft hover:bg-danger/10 hover:text-danger"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>

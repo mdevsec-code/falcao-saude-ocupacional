@@ -63,7 +63,10 @@ vez do mock.
 | POST   | `/exam-types`      | Bearer, ADMIN/ENFERMEIRO                 | Cria tipo de exame                                              |
 | PATCH  | `/exam-types/:id`  | Bearer, ADMIN/ENFERMEIRO                 | Atualiza tipo de exame                                          |
 | DELETE | `/exam-types/:id`  | Bearer, ADMIN                            | Remove tipo de exame                                            |
-| GET    | `/atestados`       | Bearer                                   | Lista atestados (somente leitura)                               |
+| GET    | `/atestados`       | Bearer                                   | Lista atestados                                                 |
+| POST   | `/atestados`       | Bearer, ADMIN/RH/RECEPCAO                | Registra atestado                                               |
+| PATCH  | `/atestados/:id`   | Bearer, ADMIN/RH/RECEPCAO                | Atualiza atestado                                               |
+| DELETE | `/atestados/:id`   | Bearer, ADMIN/RH/RECEPCAO                | Remove atestado                                                 |
 | GET    | `/audit`           | Bearer, ADMIN                            | Trilha de auditoria (últimos 500 eventos)                       |
 | GET    | `/health`          | —                                        | Healthcheck (app + banco)                                       |
 | GET    | `/ferias`          | Bearer                                   | Lista períodos de férias                                        |
