@@ -13,6 +13,10 @@ const envSchema = z.object({
     .enum(['true', 'false'])
     .default('false')
     .transform((v) => v === 'true'),
+  VITE_ENABLE_MICROSOFT_SSO: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((v) => v === 'true'),
   VITE_DEFAULT_LOCALE: z.string().min(2).max(10).default('pt-BR'),
   VITE_APP_NAME: z.string().min(1).default('Falcão Saúde Ocupacional'),
   VITE_SENTRY_DSN: z.string().url().optional(),

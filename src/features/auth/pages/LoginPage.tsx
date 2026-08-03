@@ -16,12 +16,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { FalcaoLogo } from '@/assets/logo/FalcaoLogo';
 import falcaoMark from '@/assets/logo/falcao-mark.png';
 import { brand } from '@/config/brand';
+import { env } from '@/config/env';
 import { useAuth } from '../hooks/useAuth';
 import { loginSchema, type LoginInput } from '../types';
 import { ROUTE_PATHS } from '@/constants/routes';
 
 interface LocationState {
   from?: string;
+}
+
+/** Ícone oficial de 4 quadrados da Microsoft, usado no botão "Entrar com Microsoft". */
+function MicrosoftIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="1" y="1" width="6.5" height="6.5" fill="#F25022" />
+      <rect x="8.5" y="1" width="6.5" height="6.5" fill="#7FBA00" />
+      <rect x="1" y="8.5" width="6.5" height="6.5" fill="#00A4EF" />
+      <rect x="8.5" y="8.5" width="6.5" height="6.5" fill="#FFB900" />
+    </svg>
+  );
 }
 
 export function LoginPage(): ReactNode {
@@ -64,6 +77,18 @@ export function LoginPage(): ReactNode {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- redirectTo é estável durante o ciclo de vida da tela de login
   }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('error') === 'sso_failed') {
+      toast.error(t('auth:login.sso.failed'));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- roda só na montagem, lendo a query string atual
+  }, []);
+
+  function handleMicrosoftSignIn() {
+    window.location.href = `${env.VITE_API_URL}/auth/microsoft`;
+  }
 
   async function attemptSignIn(email: string, password: string, rememberMe: boolean) {
     setCredentialsError(null);
@@ -325,6 +350,37 @@ export function LoginPage(): ReactNode {
                   </Button>
                 </div>
               </form>
+
+              {env.VITE_ENABLE_MICROSOFT_SSO && (
+                <>
+                  <div
+                    className="mt-5 flex animate-slide-up items-center gap-3"
+                    style={{ animationDelay: '250ms', animationFillMode: 'backwards' }}
+                  >
+                    <span className="h-px flex-1 bg-border" />
+                    <span className="text-2xs uppercase tracking-wider text-ink-soft">
+                      {t('auth:login.sso.divider')}
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+
+                  <div
+                    className="mt-4 animate-slide-up"
+                    style={{ animationDelay: '280ms', animationFillMode: 'backwards' }}
+                  >
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="lg"
+                      fullWidth
+                      onClick={handleMicrosoftSignIn}
+                      leftIcon={<MicrosoftIcon />}
+                    >
+                      {t('auth:login.sso.button')}
+                    </Button>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>

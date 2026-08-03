@@ -9,6 +9,7 @@ export interface AuthState {
   session: AuthSession | null;
   isAuthenticated: () => boolean;
   signIn: (email: string, password: string, rememberMe?: boolean) => Promise<SignInResult>;
+  completeSsoLogin: (token: string, expiresAt: string) => Promise<SignInResult>;
   signOut: () => Promise<void>;
 }
 
@@ -124,6 +125,24 @@ export const useAuthStore = create<AuthState>()(
             }
           }
           return { ok: false, error: 'Não foi possível conectar ao servidor' };
+        }
+      },
+
+      completeSsoLogin: async (token: string, expiresAt: string) => {
+        setRememberFlag(true);
+        try {
+          const res = await fetch('/api/auth/me', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!res.ok) {
+            return { ok: false, error: 'Não foi possível concluir o login com a Microsoft.' };
+          }
+          const user = (await res.json()) as User;
+          const session: AuthSession = { user, token, expiresAt };
+          set({ session });
+          return { ok: true, session };
+        } catch {
+          return { ok: false, error: 'Não foi possível conectar ao servidor.' };
         }
       },
 

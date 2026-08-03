@@ -6,6 +6,7 @@
 export const ROUTE_PATHS = {
   ROOT: '/',
   LOGIN: '/login',
+  AUTH_CALLBACK: '/auth/callback',
   DASHBOARD: '/',
   AGENDA: '/agenda',
   AGENDAMENTOS: '/agendamentos',

@@ -1,4 +1,15 @@
-import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Query,
+  Redirect,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Throttle } from '@nestjs/throttler';
 import type { Request } from 'express';
 import { AuthService, type SessionResponse } from './auth.service';
@@ -8,7 +19,15 @@ import type { AuthenticatedRequest } from './jwt.strategy';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly config: ConfigService,
+  ) {}
+
+  private frontendUrl(path: string): string {
+    const base = this.config.get<string>('FRONTEND_URL') ?? '';
+    return `${base}${path}`;
+  }
 
   @Post('login')
   @HttpCode(200)
@@ -29,5 +48,32 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   me(@Req() req: AuthenticatedRequest) {
     return req.user;
+  }
+
+  @Get('microsoft')
+  @Redirect()
+  loginWithMicrosoft(): { url: string } {
+    return { url: this.authService.getMicrosoftAuthorizeUrl() };
+  }
+
+  @Get('microsoft/callback')
+  @Redirect()
+  async microsoftCallback(
+    @Query('code') code: string | undefined,
+    @Query('state') state: string | undefined,
+    @Query('error_description') errorDescription: string | undefined,
+    @Req() req: Request,
+  ): Promise<{ url: string }> {
+    if (errorDescription || !code || !state) {
+      return { url: this.frontendUrl('/login?error=sso_failed') };
+    }
+
+    try {
+      const session = await this.authService.handleMicrosoftCallback(code, state, req.ip);
+      const params = new URLSearchParams({ token: session.token, expiresAt: session.expiresAt });
+      return { url: this.frontendUrl(`/auth/callback#${params.toString()}`) };
+    } catch {
+      return { url: this.frontendUrl('/login?error=sso_failed') };
+    }
   }
 }
