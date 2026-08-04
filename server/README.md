@@ -103,7 +103,57 @@ granularidade for necessária, o próximo passo é portar `PERMISSIONS`/
 
 ## Deploy
 
-### Opção rápida (lançamento inicial): Railway
+### Opção gratuita (teste/demonstração antes da aprovação de pagamento): Render + Neon
+
+Zero custo, sem cartão de crédito. Bom para validar com a diretoria antes de
+migrar para uma opção paga (Railway ou Azure, abaixo). Duas contas
+separadas: **Neon** para o Postgres, **Render** para a API.
+
+1. **Banco (Neon)**: crie uma conta grátis em [neon.tech](https://neon.tech)
+   → **New Project** (região mais próxima, ex.: `sa-east-1` se disponível).
+   Neon já cria o banco `neondb` e mostra a **connection string** pronta na
+   tela do projeto (formato
+   `postgresql://usuario:senha@ep-algo.sa-east-1.aws.neon.tech/neondb?sslmode=require`).
+   Copie essa string — diferente do Railway, ela é **pública** (funciona de
+   qualquer lugar, sem distinção interna/externa), então não tem o problema
+   de hostname `.internal` que tivemos com o Railway.
+2. **API (Render)**: no [Render](https://render.com), **New** →
+   **Blueprint** → conecte este repositório. O Render lê o `render.yaml` da
+   raiz automaticamente e já propõe o serviço `falcao-api` (plano free,
+   builda o `server/Dockerfile`).
+3. Ao criar, o Render pede para preencher as variáveis marcadas como
+   "secret" no blueprint:
+   - `DATABASE_URL`: cole a connection string do Neon (passo 1).
+   - `JWT_SECRET`: deixe em branco — o Render gera um valor aleatório
+     sozinho (`generateValue: true` no blueprint).
+   - `CORS_ORIGIN`: preencha depois de criar o projeto na Vercel (passo
+     seguinte do fluxo de deploy do frontend), ex.:
+     `https://falcao-saude.vercel.app`. Pode deixar em branco por enquanto
+     e editar depois em Settings → Environment do serviço no Render.
+   - `FRONTEND_URL`, `SEED_ADMIN_*`, `AZURE_AD_*`: opcionais, só necessários
+     se for usar login com Microsoft — pode deixar em branco por ora.
+4. O `CMD` do `Dockerfile` já roda `prisma db push` antes de subir o
+   servidor, então o schema é sincronizado automaticamente no primeiro
+   deploy — não precisa rodar migration manualmente.
+5. Depois do primeiro deploy, rode o seed **local**, apontando para o Neon
+   (não precisa de Shell remoto, já que a connection string do Neon
+   funciona da sua máquina):
+   ```
+   set DATABASE_URL=postgresql://usuario:senha@ep-algo.sa-east-1.aws.neon.tech/neondb?sslmode=require
+   set SEED_ADMIN_EMAIL=admin@falcao.com
+   set SEED_ADMIN_PASSWORD=umaSenhaForteAqui123
+   npm run seed
+   ```
+
+**Limitações do plano free do Render**: o serviço "dorme" após ~15 min sem
+receber requisições e demora uns 30–50s para acordar na primeira chamada
+seguinte — perceptível na demonstração se ninguém acessar por um tempo, mas
+sem impacto nos dados. Sem esse problema no Neon (o Postgres free não
+dorme). Quando o pagamento for aprovado, migrar para o Railway (opção
+abaixo) é só trocar `DATABASE_URL` e reapontar o `VITE_API_URL` do
+frontend — nenhuma mudança de código.
+
+### Opção paga (após aprovação): Railway
 
 1. Crie um projeto no [Railway](https://railway.app), adicione um serviço
    Postgres (um clique) e um serviço "Deploy from GitHub repo" a partir
@@ -119,11 +169,14 @@ granularidade for necessária, o próximo passo é portar `PERMISSIONS`/
    (ainda não há histórico de migrations neste projeto; `db push` é o
    caminho recomendado pela Prisma até a primeira migration ser gerada).
 4. Depois do primeiro deploy, rode o seed uma única vez (aba "Shell" do
-   serviço no Railway, ou local apontando para o `DATABASE_URL` de
-   produção): `SEED_ADMIN_EMAIL=... SEED_ADMIN_PASSWORD=... npm run seed`.
+   serviço no Railway, ou local apontando para a connection string
+   **pública** do Postgres — Settings → Networking/TCP Proxy do serviço
+   Postgres, ou variável `DATABASE_PUBLIC_URL` se existir):
+   `SEED_ADMIN_EMAIL=... SEED_ADMIN_PASSWORD=... npm run seed`.
 
 Custo aproximado: US$5–20/mês para o volume desta aplicação. Bom para
-validar o lançamento rápido.
+depois que o lançamento for aprovado e precisar rodar sem o serviço
+dormindo.
 
 ### Login único com Microsoft (SSO / Azure AD) — opcional
 
