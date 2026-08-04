@@ -5,7 +5,12 @@
 // não existe entidade "Company"/"Empresa".
 
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  // "binary" roda o motor do Prisma como processo separado em vez de
+  // carregar um .dll.node dentro do Node — evita um bug comum no Windows
+  // onde antivírus/Defender corrompem o carregamento da lib nativa
+  // ("... is not a valid Win32 application").
+  engineType = "binary"
 }
 
 datasource db {
