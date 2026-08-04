@@ -87,6 +87,7 @@ vez do mock.
 | POST   | `/cid`                     | Bearer                                   | Cadastra código CID (complementa o catálogo curado do frontend)     |
 | PATCH  | `/cid/:id`                 | Bearer                                   | Atualiza código CID cadastrado manualmente                          |
 | DELETE | `/cid/:id`                 | Bearer                                   | Remove código CID cadastrado manualmente                            |
+| GET    | `/dashboard/kpis`          | Bearer                                   | KPIs do início (consultas hoje, aguardando, atendimentos, pendências) |
 
 Todas as mutações (`patients`, `attendances`, `agenda`, `exam-types`,
 `users`) gravam um evento em `AuditLog` via `AuditService.record()` — mesmo
