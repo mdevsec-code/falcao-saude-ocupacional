@@ -17,6 +17,7 @@ import { FeriasModule } from './ferias/ferias.module';
 import { DesviosModule } from './desvios/desvios.module';
 import { IndicadoresModule } from './indicadores/indicadores.module';
 import { CidModule } from './cid/cid.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CidModule } from './cid/cid.module';
     DesviosModule,
     IndicadoresModule,
     CidModule,
+    DashboardModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
