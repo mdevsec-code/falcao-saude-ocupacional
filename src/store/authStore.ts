@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { env } from '@/config/env';
 import { SEED_USERS } from '@/services/msw/fixtures/users';
 import type { AuthSession, User } from '@/types/auth';
 
@@ -95,7 +96,7 @@ export const useAuthStore = create<AuthState>()(
 
         // No browser, valida contra o endpoint mockado
         try {
-          const res = await fetch('/api/auth/login', {
+          const res = await fetch(`${env.VITE_API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: normalizedEmail, password }),
@@ -131,7 +132,7 @@ export const useAuthStore = create<AuthState>()(
       completeSsoLogin: async (token: string, expiresAt: string) => {
         setRememberFlag(true);
         try {
-          const res = await fetch('/api/auth/me', {
+          const res = await fetch(`${env.VITE_API_URL}/auth/me`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (!res.ok) {
@@ -149,7 +150,7 @@ export const useAuthStore = create<AuthState>()(
       signOut: async () => {
         if (typeof window !== 'undefined') {
           try {
-            await fetch('/api/auth/logout', { method: 'POST' });
+            await fetch(`${env.VITE_API_URL}/auth/logout`, { method: 'POST' });
           } catch {
             // ignora — sempre removemos a sessão local
           }
