@@ -1,5 +1,9 @@
 # Deployment
 
+Este documento cobre o **frontend** (SPA estático). Para o deploy da API
+(`server/`) e do banco Postgres — incluindo a opção gratuita para testes
+(Render + Neon) e a opção paga (Railway) — ver `server/README.md`.
+
 A plataforma pode ser implantada de **4 formas oficiais**: Docker, Vercel,
 Netlify e Azure Static Web Apps. Todas produzem um **SPA estático** servido
 por CDN.

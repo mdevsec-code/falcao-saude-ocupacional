@@ -1,0 +1,37 @@
+# Blueprint do Render para a API (server/) — plano gratuito para testes.
+# Uso: Render Dashboard → New → Blueprint → conectar este repositório.
+# O banco NÃO é gerenciado pelo Render — use um Postgres externo gratuito
+# (recomendado: Neon, https://neon.tech) e cole a connection string na
+# variável DATABASE_URL abaixo. Ver server/README.md para o passo a passo.
+services:
+  - type: web
+    name: falcao-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: SEED_ADMIN_EMAIL
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
+      - key: AZURE_AD_TENANT_ID
+        sync: false
+      - key: AZURE_AD_CLIENT_ID
+        sync: false
+      - key: AZURE_AD_CLIENT_SECRET
+        sync: false
+      - key: AZURE_AD_REDIRECT_URI
+        sync: false
