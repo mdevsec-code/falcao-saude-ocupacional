@@ -19,7 +19,7 @@ export class IndicadoresController {
   }
 
   @Post()
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   create(
     @Body() dto: CreateAccidentIndicatorDto,
     @Req() req: AuthenticatedRequest,
@@ -28,7 +28,7 @@ export class IndicadoresController {
   }
 
   @Patch(':id')
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   update(
     @Param('id') id: string,
     @Body() dto: UpdateAccidentIndicatorDto,
@@ -38,7 +38,7 @@ export class IndicadoresController {
   }
 
   @Delete(':id')
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   remove(@Param('id') id: string, @Req() req: AuthenticatedRequest): Promise<void> {
     return this.indicadoresService.remove(id, req.user);
   }

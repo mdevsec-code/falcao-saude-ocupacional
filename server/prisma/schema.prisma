@@ -25,6 +25,7 @@ enum Role {
   TECNICO_SEGURANCA
   RH
   RECEPCAO
+  GESTOR_SSO
 }
 
 enum UserStatus {

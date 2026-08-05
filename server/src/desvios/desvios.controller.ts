@@ -19,13 +19,13 @@ export class DesviosController {
   }
 
   @Post()
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   create(@Body() dto: CreateDeviationDto, @Req() req: AuthenticatedRequest): Promise<Deviation> {
     return this.desviosService.create(dto, req.user);
   }
 
   @Patch(':id')
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   update(
     @Param('id') id: string,
     @Body() dto: UpdateDeviationDto,
@@ -35,7 +35,7 @@ export class DesviosController {
   }
 
   @Delete(':id')
-  @Roles('ADMIN', 'TECNICO_SEGURANCA')
+  @Roles('ADMIN', 'TECNICO_SEGURANCA', 'GESTOR_SSO')
   remove(@Param('id') id: string, @Req() req: AuthenticatedRequest): Promise<void> {
     return this.desviosService.remove(id, req.user);
   }

@@ -26,6 +26,7 @@ export const userFormSchema = z.object({
     ROLES.TECNICO_SEGURANCA,
     ROLES.RH,
     ROLES.RECEPCAO,
+    ROLES.GESTOR_SSO,
   ]),
   status: z.enum(['active', 'inactive']),
   password: z.string().optional(),

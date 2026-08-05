@@ -5,7 +5,8 @@
     "ENFERMEIRO": "Enfermeiro",
     "TECNICO_SEGURANCA": "Técnico de Segurança",
     "RH": "Recursos Humanos",
-    "RECEPCAO": "Recepção"
+    "RECEPCAO": "Recepção",
+    "GESTOR_SSO": "Gestor SSO"
   },
   "appointmentStatus": {
     "agendado": "Agendado",
