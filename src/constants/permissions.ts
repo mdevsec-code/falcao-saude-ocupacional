@@ -76,6 +76,19 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.EMPLOYEE_READ,
     PERMISSIONS.ATESTADO_WRITE,
   ],
+
+  // Gestor de SSO: visão completa dos módulos clínicos (sem editar) +
+  // gestão do módulo Segurança do Trabalho (seu domínio direto).
+  [ROLES.GESTOR_SSO]: [
+    PERMISSIONS.APPOINTMENT_READ,
+    PERMISSIONS.PATIENT_READ,
+    PERMISSIONS.EMPLOYEE_READ,
+    PERMISSIONS.ASO_READ,
+    PERMISSIONS.EXAM_READ,
+    PERMISSIONS.REPORT_READ,
+    PERMISSIONS.DEVIATION_READ,
+    PERMISSIONS.DEVIATION_WRITE,
+  ],
 };
 
 export function hasPermission(role: Role, permission: Permission): boolean {

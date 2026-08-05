@@ -5,7 +5,8 @@
     "ENFERMEIRO": "护士",
     "TECNICO_SEGURANCA": "安全技术员",
     "RH": "人力资源",
-    "RECEPCAO": "前台"
+    "RECEPCAO": "前台",
+    "GESTOR_SSO": "职业健康安全经理"
   },
   "appointmentStatus": {
     "agendado": "已预约",

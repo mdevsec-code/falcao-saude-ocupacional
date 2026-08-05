@@ -5,7 +5,8 @@
     "ENFERMEIRO": "Nurse",
     "TECNICO_SEGURANCA": "Safety Technician",
     "RH": "HR",
-    "RECEPCAO": "Reception"
+    "RECEPCAO": "Reception",
+    "GESTOR_SSO": "SSO Manager"
   },
   "appointmentStatus": {
     "agendado": "Scheduled",

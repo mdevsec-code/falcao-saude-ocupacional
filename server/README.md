@@ -76,13 +76,13 @@ vez do mock.
 | PATCH  | `/ferias/:id`              | Bearer, ADMIN/RH                         | Atualiza período de férias                                          |
 | DELETE | `/ferias/:id`              | Bearer, ADMIN/RH                         | Remove período de férias                                            |
 | GET    | `/desvios`                 | Bearer                                   | Lista desvios de segurança                                          |
-| POST   | `/desvios`                 | Bearer, ADMIN/TECNICO_SEGURANCA          | Cria desvio de segurança                                            |
-| PATCH  | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA          | Atualiza desvio de segurança                                        |
-| DELETE | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA          | Remove desvio de segurança                                          |
+| POST   | `/desvios`                 | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Cria desvio de segurança                                            |
+| PATCH  | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Atualiza desvio de segurança                                        |
+| DELETE | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Remove desvio de segurança                                          |
 | GET    | `/indicadores`             | Bearer                                   | Lista indicadores mensais de acidentes                              |
-| POST   | `/indicadores`             | Bearer, ADMIN/TECNICO_SEGURANCA          | Cria lançamento mensal (único por ano+mês)                          |
-| PATCH  | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA          | Atualiza lançamento mensal                                          |
-| DELETE | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA          | Remove lançamento mensal                                            |
+| POST   | `/indicadores`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Cria lançamento mensal (único por ano+mês)                          |
+| PATCH  | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Atualiza lançamento mensal                                          |
+| DELETE | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Remove lançamento mensal                                            |
 | GET    | `/cid`                     | Bearer                                   | Lista códigos CID cadastrados manualmente                           |
 | POST   | `/cid`                     | Bearer                                   | Cadastra código CID (complementa o catálogo curado do frontend)     |
 | PATCH  | `/cid/:id`                 | Bearer                                   | Atualiza código CID cadastrado manualmente                          |

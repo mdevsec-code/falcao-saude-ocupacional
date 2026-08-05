@@ -10,6 +10,7 @@ export const ROLES = {
   TECNICO_SEGURANCA: 'TECNICO_SEGURANCA',
   RH: 'RH',
   RECEPCAO: 'RECEPCAO',
+  GESTOR_SSO: 'GESTOR_SSO',
 } as const;
 
 export type Role = (typeof ROLES)[keyof typeof ROLES];
