@@ -28,7 +28,12 @@
     "email": "Email",
     "emailPlaceholder": "user@falcao.com",
     "role": "Access role",
-    "status": "Status"
+    "status": "Status",
+    "password": "Initial password",
+    "passwordPlaceholder": "At least 12 characters"
+  },
+  "validation": {
+    "passwordMinLength": "Password must be at least {{count}} characters"
   },
   "status": {
     "active": "Active",

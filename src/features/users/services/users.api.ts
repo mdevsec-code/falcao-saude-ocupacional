@@ -1,5 +1,5 @@
 import { httpClient } from '@/services/http/client';
-import type { UserRecord } from '../types';
+import type { CreateUserPayload, UserRecord } from '../types';
 
 export const usersApi = {
   async getAll(): Promise<UserRecord[]> {
@@ -7,7 +7,7 @@ export const usersApi = {
     return data;
   },
 
-  async create(input: Omit<UserRecord, 'id'>): Promise<UserRecord> {
+  async create(input: CreateUserPayload): Promise<UserRecord> {
     const { data } = await httpClient.post<UserRecord>('/users', input);
     return data;
   },

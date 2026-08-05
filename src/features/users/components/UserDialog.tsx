@@ -23,10 +23,10 @@ import {
 } from '@/components/ui/Select';
 import { ALL_ROLES, ROLE_LABELS, ROLES } from '@/constants/roles';
 
-import { toFormInput, userFormSchema, type UserFormInput, type UserRecord } from '../types';
+import { buildUserFormSchema, toFormInput, type UserFormInput, type UserRecord } from '../types';
 
 function emptyValues(): UserFormInput {
-  return { name: '', email: '', role: ROLES.RECEPCAO, status: 'active' };
+  return { name: '', email: '', role: ROLES.RECEPCAO, status: 'active', password: '' };
 }
 
 interface UserDialogProps {
@@ -45,6 +45,7 @@ export function UserDialog({
   isSubmitting,
 }: UserDialogProps) {
   const { t } = useTranslation('users');
+  const isCreate = !editingRecord;
   const {
     register,
     control,
@@ -52,7 +53,7 @@ export function UserDialog({
     reset,
     formState: { errors },
   } = useForm<UserFormInput>({
-    resolver: zodResolver(userFormSchema),
+    resolver: zodResolver(buildUserFormSchema(isCreate)),
     mode: 'onTouched',
     defaultValues: emptyValues(),
   });
@@ -95,6 +96,17 @@ export function UserDialog({
             error={errors.email?.message}
             required
           />
+
+          {isCreate && (
+            <Input
+              {...register('password')}
+              type="password"
+              label={t('users:form.password')}
+              placeholder={t('users:form.passwordPlaceholder')}
+              error={errors.password?.message}
+              required
+            />
+          )}
 
           <div className="grid grid-cols-2 gap-3">
             <div>

@@ -28,7 +28,12 @@
     "email": "电子邮箱",
     "emailPlaceholder": "usuario@falcao.com",
     "role": "访问角色",
-    "status": "状态"
+    "status": "状态",
+    "password": "初始密码",
+    "passwordPlaceholder": "至少 12 个字符"
+  },
+  "validation": {
+    "passwordMinLength": "密码至少需要 {{count}} 个字符"
   },
   "status": {
     "active": "启用",

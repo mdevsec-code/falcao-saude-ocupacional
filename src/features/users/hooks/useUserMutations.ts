@@ -4,12 +4,12 @@ import { toast } from 'sonner';
 import i18n from '@/i18n';
 import { usersApi } from '../services/users.api';
 import { usersKeys } from './useUsers';
-import type { UserRecord } from '../types';
+import type { CreateUserPayload, UserRecord } from '../types';
 
 export function useCreateUser() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: Omit<UserRecord, 'id'>) => usersApi.create(input),
+    mutationFn: (input: CreateUserPayload) => usersApi.create(input),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: usersKeys.all });
       toast.success(i18n.t('users:toast.createSuccess'));

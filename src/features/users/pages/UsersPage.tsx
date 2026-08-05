@@ -10,7 +10,7 @@ import { useAuth } from '@/features/auth/hooks/useAuth';
 
 import { useUsers } from '../hooks/useUsers';
 import { useCreateUser, useDeleteUser, useUpdateUser } from '../hooks/useUserMutations';
-import { fromFormInput } from '../types';
+import { fromCreateFormInput, fromUpdateFormInput } from '../types';
 import type { UserFormInput, UserRecord } from '../types';
 
 import { UsersTable } from '../components/UsersTable';
@@ -44,11 +44,13 @@ export function UsersPage() {
   function handleSubmit(input: UserFormInput) {
     if (editingRecord) {
       updateMutation.mutate(
-        { id: editingRecord.id, patch: fromFormInput(input) },
+        { id: editingRecord.id, patch: fromUpdateFormInput(input) },
         { onSuccess: () => setDialogOpen(false) },
       );
     } else {
-      createMutation.mutate(fromFormInput(input), { onSuccess: () => setDialogOpen(false) });
+      createMutation.mutate(fromCreateFormInput(input), {
+        onSuccess: () => setDialogOpen(false),
+      });
     }
   }
 
@@ -102,6 +104,7 @@ export function UsersPage() {
       </div>
 
       <UserDialog
+        key={editingRecord?.id ?? 'create'}
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         editingRecord={editingRecord}

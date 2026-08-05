@@ -28,7 +28,12 @@
     "email": "E-mail",
     "emailPlaceholder": "usuario@falcao.com",
     "role": "Perfil de acesso",
-    "status": "Status"
+    "status": "Status",
+    "password": "Senha inicial",
+    "passwordPlaceholder": "Mínimo de 12 caracteres"
+  },
+  "validation": {
+    "passwordMinLength": "A senha deve ter no mínimo {{count}} caracteres"
   },
   "status": {
     "active": "Ativo",
