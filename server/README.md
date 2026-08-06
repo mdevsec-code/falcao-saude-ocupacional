@@ -38,56 +38,56 @@ vez do mock.
 
 ## Endpoints disponíveis hoje
 
-| Método | Rota                       | Auth                                     | Descrição                                                           |
-| ------ | -------------------------- | ---------------------------------------- | ------------------------------------------------------------------- |
-| POST   | `/auth/login`              | —                                        | Login (rate-limited: 5/min por IP)                                  |
-| POST   | `/auth/logout`             | Bearer                                   | Logout (grava auditoria)                                            |
-| GET    | `/auth/me`                 | Bearer                                   | Usuário autenticado                                                 |
-| GET    | `/auth/microsoft`          | —                                        | Redireciona para o login da Microsoft (SSO, opcional)               |
-| GET    | `/auth/microsoft/callback` | —                                        | Callback do SSO — troca `code` por sessão e redireciona ao frontend |
-| GET    | `/users`                   | Bearer, ADMIN                            | Lista usuários                                                      |
-| POST   | `/users`                   | Bearer, ADMIN                            | Cria usuário                                                        |
-| PATCH  | `/users/:id`               | Bearer, ADMIN                            | Atualiza usuário                                                    |
-| DELETE | `/users/:id`               | Bearer, ADMIN                            | Remove usuário                                                      |
-| GET    | `/patients`                | Bearer                                   | Lista pacientes ativos (soft-deleted ocultos)                       |
-| POST   | `/patients`                | Bearer, ADMIN/MEDICO/RECEPCAO            | Cria paciente (CPF único)                                           |
-| PATCH  | `/patients/:id`            | Bearer, ADMIN/MEDICO/RECEPCAO            | Atualiza paciente                                                   |
-| DELETE | `/patients/:id`            | Bearer, ADMIN/MEDICO/RECEPCAO            | Soft delete (LGPD — `deletedAt`)                                    |
-| GET    | `/attendances`             | Bearer                                   | Lista atendimentos + `dutyFitness`                                  |
-| POST   | `/attendances`             | Bearer, ADMIN/MEDICO/ENFERMEIRO          | Cria atendimento (com `dutyFitness` aninhado)                       |
-| PATCH  | `/attendances/:id`         | Bearer, ADMIN/MEDICO/ENFERMEIRO          | Atualiza atendimento                                                |
-| DELETE | `/attendances/:id`         | Bearer, ADMIN/MEDICO                     | Remove atendimento                                                  |
-| GET    | `/agenda`                  | Bearer                                   | Lista agendamentos                                                  |
-| POST   | `/agenda`                  | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO | Cria agendamento (bloqueia conflito de horário do mesmo médico)     |
-| PATCH  | `/agenda/:id`              | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO | Atualiza agendamento (revalida conflito)                            |
-| DELETE | `/agenda/:id`              | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO | Remove agendamento                                                  |
-| GET    | `/exam-types`              | Bearer                                   | Lista catálogo de exames                                            |
-| POST   | `/exam-types`              | Bearer, ADMIN/ENFERMEIRO                 | Cria tipo de exame                                                  |
-| PATCH  | `/exam-types/:id`          | Bearer, ADMIN/ENFERMEIRO                 | Atualiza tipo de exame                                              |
-| DELETE | `/exam-types/:id`          | Bearer, ADMIN                            | Remove tipo de exame                                                |
-| GET    | `/atestados`               | Bearer                                   | Lista atestados                                                     |
-| POST   | `/atestados`               | Bearer, ADMIN/RH/RECEPCAO                | Registra atestado                                                   |
-| PATCH  | `/atestados/:id`           | Bearer, ADMIN/RH/RECEPCAO                | Atualiza atestado                                                   |
-| DELETE | `/atestados/:id`           | Bearer, ADMIN/RH/RECEPCAO                | Remove atestado                                                     |
-| GET    | `/audit`                   | Bearer, ADMIN                            | Trilha de auditoria (últimos 500 eventos)                           |
-| GET    | `/health`                  | —                                        | Healthcheck (app + banco)                                           |
-| GET    | `/ferias`                  | Bearer                                   | Lista períodos de férias                                            |
-| POST   | `/ferias`                  | Bearer, ADMIN/RH                         | Cria período de férias                                              |
-| PATCH  | `/ferias/:id`              | Bearer, ADMIN/RH                         | Atualiza período de férias                                          |
-| DELETE | `/ferias/:id`              | Bearer, ADMIN/RH                         | Remove período de férias                                            |
-| GET    | `/desvios`                 | Bearer                                   | Lista desvios de segurança                                          |
-| POST   | `/desvios`                 | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Cria desvio de segurança                                            |
-| PATCH  | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Atualiza desvio de segurança                                        |
-| DELETE | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Remove desvio de segurança                                          |
-| GET    | `/indicadores`             | Bearer                                   | Lista indicadores mensais de acidentes                              |
-| POST   | `/indicadores`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Cria lançamento mensal (único por ano+mês)                          |
-| PATCH  | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Atualiza lançamento mensal                                          |
-| DELETE | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO   | Remove lançamento mensal                                            |
-| GET    | `/cid`                     | Bearer                                   | Lista códigos CID cadastrados manualmente                           |
-| POST   | `/cid`                     | Bearer                                   | Cadastra código CID (complementa o catálogo curado do frontend)     |
-| PATCH  | `/cid/:id`                 | Bearer                                   | Atualiza código CID cadastrado manualmente                          |
-| DELETE | `/cid/:id`                 | Bearer                                   | Remove código CID cadastrado manualmente                            |
-| GET    | `/dashboard/kpis`          | Bearer                                   | KPIs do início (consultas hoje, aguardando, atendimentos, pendências) |
+| Método | Rota                       | Auth                                       | Descrição                                                             |
+| ------ | -------------------------- | ------------------------------------------ | --------------------------------------------------------------------- |
+| POST   | `/auth/login`              | —                                          | Login (rate-limited: 5/min por IP)                                    |
+| POST   | `/auth/logout`             | Bearer                                     | Logout (grava auditoria)                                              |
+| GET    | `/auth/me`                 | Bearer                                     | Usuário autenticado                                                   |
+| GET    | `/auth/microsoft`          | —                                          | Redireciona para o login da Microsoft (SSO, opcional)                 |
+| GET    | `/auth/microsoft/callback` | —                                          | Callback do SSO — troca `code` por sessão e redireciona ao frontend   |
+| GET    | `/users`                   | Bearer, ADMIN                              | Lista usuários                                                        |
+| POST   | `/users`                   | Bearer, ADMIN                              | Cria usuário                                                          |
+| PATCH  | `/users/:id`               | Bearer, ADMIN                              | Atualiza usuário                                                      |
+| DELETE | `/users/:id`               | Bearer, ADMIN                              | Remove usuário                                                        |
+| GET    | `/patients`                | Bearer                                     | Lista pacientes ativos (soft-deleted ocultos)                         |
+| POST   | `/patients`                | Bearer, ADMIN/MEDICO/RECEPCAO              | Cria paciente (CPF único)                                             |
+| PATCH  | `/patients/:id`            | Bearer, ADMIN/MEDICO/RECEPCAO              | Atualiza paciente                                                     |
+| DELETE | `/patients/:id`            | Bearer, ADMIN/MEDICO/RECEPCAO              | Soft delete (LGPD — `deletedAt`)                                      |
+| GET    | `/attendances`             | Bearer                                     | Lista atendimentos + `dutyFitness`                                    |
+| POST   | `/attendances`             | Bearer, ADMIN/MEDICO/ENFERMEIRO            | Cria atendimento (com `dutyFitness` aninhado)                         |
+| PATCH  | `/attendances/:id`         | Bearer, ADMIN/MEDICO/ENFERMEIRO            | Atualiza atendimento                                                  |
+| DELETE | `/attendances/:id`         | Bearer, ADMIN/MEDICO                       | Remove atendimento                                                    |
+| GET    | `/agenda`                  | Bearer                                     | Lista agendamentos                                                    |
+| POST   | `/agenda`                  | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO   | Cria agendamento (bloqueia conflito de horário do mesmo médico)       |
+| PATCH  | `/agenda/:id`              | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO   | Atualiza agendamento (revalida conflito)                              |
+| DELETE | `/agenda/:id`              | Bearer, ADMIN/MEDICO/ENFERMEIRO/RECEPCAO   | Remove agendamento                                                    |
+| GET    | `/exam-types`              | Bearer                                     | Lista catálogo de exames                                              |
+| POST   | `/exam-types`              | Bearer, ADMIN/ENFERMEIRO                   | Cria tipo de exame                                                    |
+| PATCH  | `/exam-types/:id`          | Bearer, ADMIN/ENFERMEIRO                   | Atualiza tipo de exame                                                |
+| DELETE | `/exam-types/:id`          | Bearer, ADMIN                              | Remove tipo de exame                                                  |
+| GET    | `/atestados`               | Bearer                                     | Lista atestados                                                       |
+| POST   | `/atestados`               | Bearer, ADMIN/RH/RECEPCAO                  | Registra atestado                                                     |
+| PATCH  | `/atestados/:id`           | Bearer, ADMIN/RH/RECEPCAO                  | Atualiza atestado                                                     |
+| DELETE | `/atestados/:id`           | Bearer, ADMIN/RH/RECEPCAO                  | Remove atestado                                                       |
+| GET    | `/audit`                   | Bearer, ADMIN                              | Trilha de auditoria (últimos 500 eventos)                             |
+| GET    | `/health`                  | —                                          | Healthcheck (app + banco)                                             |
+| GET    | `/ferias`                  | Bearer                                     | Lista períodos de férias                                              |
+| POST   | `/ferias`                  | Bearer, ADMIN/RH                           | Cria período de férias                                                |
+| PATCH  | `/ferias/:id`              | Bearer, ADMIN/RH                           | Atualiza período de férias                                            |
+| DELETE | `/ferias/:id`              | Bearer, ADMIN/RH                           | Remove período de férias                                              |
+| GET    | `/desvios`                 | Bearer                                     | Lista desvios de segurança                                            |
+| POST   | `/desvios`                 | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Cria desvio de segurança                                              |
+| PATCH  | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Atualiza desvio de segurança                                          |
+| DELETE | `/desvios/:id`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Remove desvio de segurança                                            |
+| GET    | `/indicadores`             | Bearer                                     | Lista indicadores mensais de acidentes                                |
+| POST   | `/indicadores`             | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Cria lançamento mensal (único por ano+mês)                            |
+| PATCH  | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Atualiza lançamento mensal                                            |
+| DELETE | `/indicadores/:id`         | Bearer, ADMIN/TECNICO_SEGURANCA/GESTOR_SSO | Remove lançamento mensal                                              |
+| GET    | `/cid`                     | Bearer                                     | Lista códigos CID cadastrados manualmente                             |
+| POST   | `/cid`                     | Bearer                                     | Cadastra código CID (complementa o catálogo curado do frontend)       |
+| PATCH  | `/cid/:id`                 | Bearer                                     | Atualiza código CID cadastrado manualmente                            |
+| DELETE | `/cid/:id`                 | Bearer                                     | Remove código CID cadastrado manualmente                              |
+| GET    | `/dashboard/kpis`          | Bearer                                     | KPIs do início (consultas hoje, aguardando, atendimentos, pendências) |
 
 Todas as mutações (`patients`, `attendances`, `agenda`, `exam-types`,
 `users`) gravam um evento em `AuditLog` via `AuditService.record()` — mesmo
