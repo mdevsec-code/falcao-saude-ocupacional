@@ -14,6 +14,7 @@ export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
   @Get()
+  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'RECEPCAO', 'GESTOR_SSO')
   findAll(): Promise<Patient[]> {
     return this.patientsService.findAll();
   }

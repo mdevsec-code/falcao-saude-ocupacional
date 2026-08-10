@@ -25,6 +25,7 @@ export class AtestadosController {
   constructor(private readonly atestadosService: AtestadosService) {}
 
   @Get()
+  @Roles('ADMIN', 'RH', 'RECEPCAO')
   findAll(): Promise<Atestado[]> {
     return this.atestadosService.findAll();
   }

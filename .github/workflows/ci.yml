@@ -102,3 +102,28 @@ jobs:
           name: dist
           path: dist
           retention-days: 7
+
+  backend:
+    name: Backend (server/)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Gerar Prisma Client
+        run: npx prisma generate
+      - name: ESLint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build
+        run: npm run build

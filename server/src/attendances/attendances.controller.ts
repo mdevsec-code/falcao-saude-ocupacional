@@ -13,6 +13,7 @@ export class AttendancesController {
   constructor(private readonly attendancesService: AttendancesService) {}
 
   @Get()
+  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'GESTOR_SSO')
   findAll() {
     return this.attendancesService.findAll();
   }
