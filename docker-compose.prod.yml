@@ -1,0 +1,130 @@
+# ============================================================
+# Stack de produção para um único servidor (VPS) — API + Postgres +
+# frontend + proxy HTTPS, tudo num docker compose só.
+#
+# Uso:
+#   1. cp .env.prod.example .env
+#   2. Preencha o .env (senha do banco, JWT_SECRET, domínios, CORS).
+#   3. Crie um .env.production na raiz do projeto com as variáveis
+#      VITE_* (ver .env.example) — o build do frontend as lê em
+#      build-time, o Vite carrega esse arquivo sozinho.
+#   4. Aponte o DNS de DOMAIN_APP e DOMAIN_API pro IP deste servidor.
+#   5. docker compose -f docker-compose.prod.yml up -d --build
+#
+# O Caddy (serviço "proxy") emite e renova o certificado HTTPS
+# automaticamente via Let's Encrypt — não precisa configurar certbot
+# nem nginx com TLS manualmente.
+# ============================================================
+
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: falcao-db
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-falcao}
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env, nunca reaproveite a senha de exemplo do compose de dev}'
+      POSTGRES_DB: ${POSTGRES_DB:-falcao}
+    volumes:
+      - falcao_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-falcao}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks: [falcao_internal]
+    # Sem "ports:" de propósito — o Postgres não fica exposto à internet.
+    # Pra rodar `npm run seed` uma vez, abra um túnel SSH até o VPS e
+    # aponte DATABASE_URL do seed pra localhost (ver server/README.md).
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: falcao-api:latest
+    container_name: falcao-api
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Sem "read_only" aqui de propósito: o CMD do server/Dockerfile roda
+    # `npx prisma db push` a cada start, e o npx precisa gravar cache em
+    # $HOME/.npm do usuário "node" — travar o filesystem quebraria isso.
+    environment:
+      DATABASE_URL: 'postgresql://${POSTGRES_USER:-falcao}:${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}@db:5432/${POSTGRES_DB:-falcao}?schema=public'
+      JWT_SECRET: '${JWT_SECRET:?defina JWT_SECRET no .env, gere com openssl rand -base64 48}'
+      PORT: 3000
+      CORS_ORIGIN: 'https://${DOMAIN_APP:?defina DOMAIN_APP no .env, por exemplo app.falcao.com}'
+      FRONTEND_URL: 'https://${DOMAIN_APP:?defina DOMAIN_APP no .env}'
+      AZURE_AD_TENANT_ID: ${AZURE_AD_TENANT_ID:-}
+      AZURE_AD_CLIENT_ID: ${AZURE_AD_CLIENT_ID:-}
+      AZURE_AD_CLIENT_SECRET: ${AZURE_AD_CLIENT_SECRET:-}
+      AZURE_AD_REDIRECT_URI: ${AZURE_AD_REDIRECT_URI:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:3000/api/health']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks: [falcao_internal]
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: falcao-web:latest
+    container_name: falcao-web
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+    healthcheck:
+      test: ['CMD', 'wget', '--spider', '-q', 'http://localhost:8080/health']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks: [falcao_internal]
+
+  proxy:
+    image: caddy:2-alpine
+    container_name: falcao-proxy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      DOMAIN_APP: '${DOMAIN_APP:?defina DOMAIN_APP no .env, por exemplo app.falcao.com}'
+      DOMAIN_API: '${DOMAIN_API:?defina DOMAIN_API no .env, por exemplo api.falcao.com}'
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+      - api
+    networks: [falcao_internal]
+
+networks:
+  falcao_internal:
+
+volumes:
+  falcao_db_data:
+  caddy_data:
+  caddy_config:

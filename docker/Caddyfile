@@ -1,0 +1,12 @@
+# Proxy reverso do stack de produção (docker-compose.prod.yml).
+# HTTPS automático via Let's Encrypt — só funciona com o DNS de
+# DOMAIN_APP/DOMAIN_API já apontando pro IP deste servidor e as
+# portas 80/443 liberadas no firewall.
+
+{$DOMAIN_APP} {
+	reverse_proxy web:8080
+}
+
+{$DOMAIN_API} {
+	reverse_proxy api:3000
+}
