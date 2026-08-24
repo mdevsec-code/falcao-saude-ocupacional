@@ -4,6 +4,7 @@
 
 [![CI](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml)
+[![Secured by GitGuard](https://img.shields.io/badge/Secured%20by-GitGuard-success?style=flat-square)](https://www.gitguard.com.br/mdevsec-code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node 20+](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](.nvmrc)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6.svg)](https://www.typescriptlang.org/)
