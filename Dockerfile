@@ -19,7 +19,9 @@ COPY . .
 RUN npm run build
 
 # ---------- 2. Runtime ----------
-FROM nginx:1.27-alpine AS runtime
+# Imagem "unprivileged": já roda como usuário não-root de fábrica (uid 101),
+# sem precisar ajustar permissões de /var/cache, /var/run etc. manualmente.
+FROM nginxinc/nginx-unprivileged:1.27-alpine AS runtime
 
 # Configuração do Nginx com fallback SPA + headers de segurança
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
@@ -27,5 +29,5 @@ COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 # Copia o bundle gerado
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

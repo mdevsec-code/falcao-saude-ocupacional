@@ -21,6 +21,9 @@ RUN npm ci --omit=dev
 RUN npx prisma generate
 COPY --from=build /app/dist ./dist
 
+# Roda como usuário não-root (uid 1000, já vem na imagem node:alpine).
+USER node
+
 EXPOSE 3000
 # Sincroniza o schema com o banco antes de subir (sem histórico de migrations
 # ainda — ver server/README.md). Idempotente: seguro em todo restart.

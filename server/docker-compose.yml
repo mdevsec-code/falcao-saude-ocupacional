@@ -7,16 +7,24 @@ services:
     image: postgres:16-alpine
     container_name: falcao-db
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
     environment:
-      POSTGRES_USER: falcao
-      POSTGRES_PASSWORD: falcao
-      POSTGRES_DB: falcao
+      POSTGRES_USER: ${POSTGRES_USER:-falcao}
+      # Só dev local (porta não exposta fora do host) — em produção use
+      # docker-compose.prod.yml, que exige POSTGRES_PASSWORD via .env.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-falcao}
+      POSTGRES_DB: ${POSTGRES_DB:-falcao}
     ports:
       - '5432:5432'
     volumes:
       - falcao_db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U falcao']
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-falcao}']
       interval: 10s
       timeout: 5s
       retries: 5

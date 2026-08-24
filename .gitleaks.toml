@@ -1,0 +1,15 @@
+# Configuração do gitleaks para este repositório.
+# Estende o conjunto de regras padrão e só adiciona um allowlist de caminho:
+# os campos "integrity": "sha512-<base64>" dos lockfiles do npm são hashes
+# de integridade de pacotes, não segredos — mas têm entropia alta o
+# suficiente pra disparar falsos positivos na regra genérica de API key.
+title = "falcao-saude-ocupacional gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''package-lock\.json''',
+  '''server/package-lock\.json''',
+]
