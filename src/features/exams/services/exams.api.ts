@@ -3,21 +3,21 @@ import type { ExamTypeRecord } from '../types';
 
 export const examsApi = {
   async getAll(): Promise<ExamTypeRecord[]> {
-    const { data } = await httpClient.get<ExamTypeRecord[]>('/exams');
+    const { data } = await httpClient.get<ExamTypeRecord[]>('/exam-types');
     return data;
   },
 
   async create(input: Omit<ExamTypeRecord, 'id'>): Promise<ExamTypeRecord> {
-    const { data } = await httpClient.post<ExamTypeRecord>('/exams', input);
+    const { data } = await httpClient.post<ExamTypeRecord>('/exam-types', input);
     return data;
   },
 
   async update(id: string, patch: Partial<ExamTypeRecord>): Promise<ExamTypeRecord> {
-    const { data } = await httpClient.patch<ExamTypeRecord>(`/exams/${id}`, patch);
+    const { data } = await httpClient.patch<ExamTypeRecord>(`/exam-types/${id}`, patch);
     return data;
   },
 
   async remove(id: string): Promise<void> {
-    await httpClient.delete(`/exams/${id}`);
+    await httpClient.delete(`/exam-types/${id}`);
   },
 };

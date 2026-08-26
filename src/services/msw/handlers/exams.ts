@@ -28,12 +28,12 @@ function logExamEvent(
 }
 
 export const examsHandlers = [
-  http.get('/api/exams', async () => {
+  http.get('/api/exam-types', async () => {
     await delay(150);
     return HttpResponse.json(store);
   }),
 
-  http.post('/api/exams', async ({ request }) => {
+  http.post('/api/exam-types', async ({ request }) => {
     await delay(200);
     const body = (await request.json()) as Omit<ExamTypeRecord, 'id'>;
     const record: ExamTypeRecord = { ...body, id: `exam-${String(nextId++).padStart(3, '0')}` };
@@ -42,7 +42,7 @@ export const examsHandlers = [
     return HttpResponse.json(record, { status: 201 });
   }),
 
-  http.patch('/api/exams/:id', async ({ request, params }) => {
+  http.patch('/api/exam-types/:id', async ({ request, params }) => {
     await delay(200);
     const { id } = params;
     const patch = (await request.json()) as Partial<ExamTypeRecord>;
@@ -60,7 +60,7 @@ export const examsHandlers = [
     return HttpResponse.json(updated);
   }),
 
-  http.delete('/api/exams/:id', async ({ params }) => {
+  http.delete('/api/exam-types/:id', async ({ params }) => {
     await delay(200);
     const { id } = params;
     const existing = store.find((r) => r.id === id);
