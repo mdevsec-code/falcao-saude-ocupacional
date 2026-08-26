@@ -121,14 +121,20 @@ function ComingSoonPlaceholder(): ReactNode {
 const protectedRoutes: RouteObject[] = [
   { path: ROUTE_PATHS.AGENDA, element: withSuspense(<AgendaPage />) },
   { path: ROUTE_PATHS.AGENDAMENTOS, element: withSuspense(<AppointmentsPage />) },
-  { path: ROUTE_PATHS.PACIENTES, element: withSuspense(<PatientsPage />) },
+  {
+    path: ROUTE_PATHS.PACIENTES,
+    element: withPermission(PERMISSIONS.PATIENT_READ, <PatientsPage />),
+  },
   { path: ROUTE_PATHS.ATENDIMENTOS, element: withSuspense(<AttendancesPage />) },
   { path: ROUTE_PATHS.PRONTUARIOS, element: withSuspense(<RecordsPage />) },
-  { path: ROUTE_PATHS.CID, element: withSuspense(<CidPage />) },
+  { path: ROUTE_PATHS.CID, element: withPermission(PERMISSIONS.CID_READ, <CidPage />) },
   { path: ROUTE_PATHS.EXAMES, element: withSuspense(<ExamTypesPage />) },
-  { path: ROUTE_PATHS.ASO, element: withSuspense(<AsoPage />) },
+  { path: ROUTE_PATHS.ASO, element: withPermission(PERMISSIONS.ASO_READ, <AsoPage />) },
   { path: ROUTE_PATHS.RELATORIOS, element: withSuspense(<ReportsPage />) },
-  { path: ROUTE_PATHS.ATESTADOS, element: withSuspense(<AtestadosPage />) },
+  {
+    path: ROUTE_PATHS.ATESTADOS,
+    element: withPermission(PERMISSIONS.ATESTADO_READ, <AtestadosPage />),
+  },
   {
     path: ROUTE_PATHS.FERIAS,
     element: withPermission(PERMISSIONS.EMPLOYEE_READ, <FeriasPage />),

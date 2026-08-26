@@ -97,16 +97,20 @@ export function UserDialog({
             required
           />
 
-          {isCreate && (
-            <Input
-              {...register('password')}
-              type="password"
-              label={t('users:form.password')}
-              placeholder={t('users:form.passwordPlaceholder')}
-              error={errors.password?.message}
-              required
-            />
-          )}
+          <Input
+            {...register('password')}
+            type="password"
+            autoComplete="new-password"
+            label={isCreate ? t('users:form.password') : t('users:form.newPassword')}
+            placeholder={
+              isCreate
+                ? t('users:form.passwordPlaceholder')
+                : t('users:form.newPasswordPlaceholder')
+            }
+            hint={isCreate ? undefined : t('users:form.newPasswordHint')}
+            error={errors.password?.message}
+            required={isCreate}
+          />
 
           <div className="grid grid-cols-2 gap-3">
             <div>

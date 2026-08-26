@@ -29,6 +29,8 @@
     "auditRead": "查看审计记录",
     "deviationRead": "查看安全偏差",
     "deviationWrite": "登记安全偏差",
-    "atestadoWrite": "创建/编辑病假证明"
+    "atestadoRead": "查看病假证明",
+    "atestadoWrite": "创建/编辑病假证明",
+    "cidRead": "查看 CID 目录"
   }
 }

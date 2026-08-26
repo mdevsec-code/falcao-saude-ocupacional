@@ -1,5 +1,5 @@
 import { httpClient } from '@/services/http/client';
-import type { CreateUserPayload, UserRecord } from '../types';
+import type { CreateUserPayload, UpdateUserPayload, UserRecord } from '../types';
 
 export const usersApi = {
   async getAll(): Promise<UserRecord[]> {
@@ -12,7 +12,7 @@ export const usersApi = {
     return data;
   },
 
-  async update(id: string, patch: Partial<UserRecord>): Promise<UserRecord> {
+  async update(id: string, patch: Partial<UpdateUserPayload>): Promise<UserRecord> {
     const { data } = await httpClient.patch<UserRecord>(`/users/${id}`, patch);
     return data;
   },

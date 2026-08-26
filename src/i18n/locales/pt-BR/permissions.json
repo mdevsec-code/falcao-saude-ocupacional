@@ -29,6 +29,8 @@
     "auditRead": "Ver auditoria",
     "deviationRead": "Ver desvios de segurança",
     "deviationWrite": "Registrar desvios de segurança",
-    "atestadoWrite": "Criar/editar atestados"
+    "atestadoRead": "Ver atestados",
+    "atestadoWrite": "Criar/editar atestados",
+    "cidRead": "Ver catálogo de CID"
   }
 }

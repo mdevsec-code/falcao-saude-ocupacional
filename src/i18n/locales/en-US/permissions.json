@@ -29,6 +29,8 @@
     "auditRead": "View audit trail",
     "deviationRead": "View safety deviations",
     "deviationWrite": "Register safety deviations",
-    "atestadoWrite": "Create/edit certificates"
+    "atestadoRead": "View certificates",
+    "atestadoWrite": "Create/edit certificates",
+    "cidRead": "View ICD catalog"
   }
 }

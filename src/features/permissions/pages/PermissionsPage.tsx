@@ -25,7 +25,9 @@ const PERMISSION_LABEL_KEYS: Record<Permission, string> = {
   'audit:read': 'auditRead',
   'deviation:read': 'deviationRead',
   'deviation:write': 'deviationWrite',
+  'atestado:read': 'atestadoRead',
   'atestado:write': 'atestadoWrite',
+  'cid:read': 'cidRead',
 };
 
 export function PermissionsPage() {

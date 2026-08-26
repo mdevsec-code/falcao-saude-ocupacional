@@ -30,7 +30,10 @@
     "role": "Access role",
     "status": "Status",
     "password": "Initial password",
-    "passwordPlaceholder": "At least 12 characters"
+    "passwordPlaceholder": "At least 12 characters",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Leave blank to keep the current password",
+    "newPasswordHint": "Only fill this in if you want to reset this user's password."
   },
   "validation": {
     "passwordMinLength": "Password must be at least {{count}} characters"

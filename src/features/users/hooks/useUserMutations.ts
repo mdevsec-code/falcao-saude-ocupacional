@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import i18n from '@/i18n';
 import { usersApi } from '../services/users.api';
 import { usersKeys } from './useUsers';
-import type { CreateUserPayload, UserRecord } from '../types';
+import type { CreateUserPayload, UpdateUserPayload } from '../types';
 
 export function useCreateUser() {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ export function useCreateUser() {
 export function useUpdateUser() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, patch }: { id: string; patch: Partial<UserRecord> }) =>
+    mutationFn: ({ id, patch }: { id: string; patch: Partial<UpdateUserPayload> }) =>
       usersApi.update(id, patch),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: usersKeys.all });

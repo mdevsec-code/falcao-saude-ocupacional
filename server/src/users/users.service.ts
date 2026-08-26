@@ -53,6 +53,8 @@ export class UsersService {
     const existing = await this.prisma.user.findUnique({ where: { id } });
     if (!existing) throw new NotFoundException('Usuário não encontrado.');
 
+    const passwordHash = dto.password ? await bcrypt.hash(dto.password, 12) : undefined;
+
     const user = await this.prisma.user.update({
       where: { id },
       data: {
@@ -60,6 +62,7 @@ export class UsersService {
         email: dto.email?.trim().toLowerCase(),
         role: dto.role,
         status: dto.status,
+        passwordHash,
       },
     });
 
@@ -71,6 +74,7 @@ export class UsersService {
       entityType: 'user',
       entityId: user.id,
       entityLabel: user.name,
+      detail: dto.password ? 'Senha redefinida pelo administrador' : undefined,
     });
 
     return toSafeUser(user);

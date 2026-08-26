@@ -14,7 +14,10 @@ export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
   @Get()
-  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'RECEPCAO', 'GESTOR_SSO')
+  // RH e TECNICO_SEGURANCA entram aqui porque a tela de ASO (apto/inapto por
+  // atividade de risco) precisa da lista de pacientes — ver ASO_READ em
+  // src/constants/permissions.ts no frontend.
+  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'RECEPCAO', 'GESTOR_SSO', 'RH', 'TECNICO_SEGURANCA')
   findAll(): Promise<Patient[]> {
     return this.patientsService.findAll();
   }

@@ -64,7 +64,13 @@ const SECTIONS: NavSection[] = [
         icon: CalendarPlus,
         enabled: true,
       },
-      { label: 'nav.patients', to: ROUTE_PATHS.PACIENTES, icon: Users, enabled: true },
+      {
+        label: 'nav.patients',
+        to: ROUTE_PATHS.PACIENTES,
+        icon: Users,
+        enabled: true,
+        requires: PERMISSIONS.PATIENT_READ,
+      },
       {
         label: 'nav.attendances',
         to: ROUTE_PATHS.ATENDIMENTOS,
@@ -77,10 +83,28 @@ const SECTIONS: NavSection[] = [
   {
     title: 'sidebar.clinical',
     items: [
-      { label: 'nav.cid', to: ROUTE_PATHS.CID, icon: Stethoscope, enabled: true },
+      {
+        label: 'nav.cid',
+        to: ROUTE_PATHS.CID,
+        icon: Stethoscope,
+        enabled: true,
+        requires: PERMISSIONS.CID_READ,
+      },
       { label: 'nav.exams', to: ROUTE_PATHS.EXAMES, icon: FlaskConical, enabled: true },
-      { label: 'nav.aso', to: ROUTE_PATHS.ASO, icon: ShieldCheck, enabled: true },
-      { label: 'nav.atestados', to: ROUTE_PATHS.ATESTADOS, icon: Activity, enabled: true },
+      {
+        label: 'nav.aso',
+        to: ROUTE_PATHS.ASO,
+        icon: ShieldCheck,
+        enabled: true,
+        requires: PERMISSIONS.ASO_READ,
+      },
+      {
+        label: 'nav.atestados',
+        to: ROUTE_PATHS.ATESTADOS,
+        icon: Activity,
+        enabled: true,
+        requires: PERMISSIONS.ATESTADO_READ,
+      },
     ],
   },
   {

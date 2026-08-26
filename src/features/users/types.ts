@@ -13,7 +13,7 @@ export interface UserFilters {
   busca?: string;
 }
 
-/** Senha exigida só ao criar (a API não tem endpoint de troca de senha na edição ainda). */
+/** Senha exigida ao criar; na edição é opcional — só é enviada se o admin quiser redefini-la. */
 export const USER_PASSWORD_MIN_LENGTH = 12;
 
 export const userFormSchema = z.object({
@@ -29,12 +29,20 @@ export const userFormSchema = z.object({
     ROLES.GESTOR_SSO,
   ]),
   status: z.enum(['active', 'inactive']),
-  password: z.string().optional(),
+  // Na edição fica em branco por padrão (mantém a senha atual); se o admin
+  // digitar algo, precisa bater com o mínimo — por isso o refine abaixo em
+  // vez de só `.optional()`.
+  password: z
+    .string()
+    .optional()
+    .refine((value) => !value || value.length >= USER_PASSWORD_MIN_LENGTH, {
+      message: i18n.t('users:validation.passwordMinLength', { count: USER_PASSWORD_MIN_LENGTH }),
+    }),
 });
 
 export type UserFormInput = z.infer<typeof userFormSchema>;
 
-/** Usado só ao criar — exige a senha mínima que a API vai checar de qualquer forma. */
+/** Só na criação a senha é obrigatória; na edição é sempre opcional (reset). */
 export function buildUserFormSchema(requirePassword: boolean) {
   if (!requirePassword) return userFormSchema;
   return userFormSchema.extend({
@@ -76,12 +84,18 @@ export function fromCreateFormInput(input: UserFormInput): CreateUserPayload {
   };
 }
 
-/** Payload de edição — nunca inclui senha (a API rejeita campos não esperados no PATCH). */
-export function fromUpdateFormInput(input: UserFormInput): Omit<UserFixture, 'id'> {
+export interface UpdateUserPayload extends Omit<UserFixture, 'id'> {
+  /** Só vai no PATCH se o admin preencheu — reseta a senha do usuário. */
+  password?: string;
+}
+
+/** Payload de edição — senha só entra se o admin digitou algo no campo de reset. */
+export function fromUpdateFormInput(input: UserFormInput): UpdateUserPayload {
   return {
     name: input.name,
     email: input.email,
     role: input.role,
     status: input.status,
+    ...(input.password ? { password: input.password } : {}),
   };
 }

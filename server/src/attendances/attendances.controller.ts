@@ -13,7 +13,9 @@ export class AttendancesController {
   constructor(private readonly attendancesService: AttendancesService) {}
 
   @Get()
-  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'GESTOR_SSO')
+  // RH e TECNICO_SEGURANCA entram aqui pelo mesmo motivo de patients.controller.ts:
+  // a tela de ASO precisa do histórico de conclusão/aptidão dos atendimentos.
+  @Roles('ADMIN', 'MEDICO', 'ENFERMEIRO', 'GESTOR_SSO', 'RH', 'TECNICO_SEGURANCA')
   findAll() {
     return this.attendancesService.findAll();
   }

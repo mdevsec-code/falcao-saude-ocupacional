@@ -19,7 +19,9 @@ export const PERMISSIONS = {
   AUDIT_READ: 'audit:read',
   DEVIATION_READ: 'deviation:read',
   DEVIATION_WRITE: 'deviation:write',
+  ATESTADO_READ: 'atestado:read',
   ATESTADO_WRITE: 'atestado:write',
+  CID_READ: 'cid:read',
 } as const;
 
 export type Permission = (typeof PERMISSIONS)[keyof typeof PERMISSIONS];
@@ -38,6 +40,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.ASO_WRITE,
     PERMISSIONS.EXAM_READ,
     PERMISSIONS.REPORT_READ,
+    PERMISSIONS.CID_READ,
   ],
 
   [ROLES.ENFERMEIRO]: [
@@ -47,6 +50,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.ASO_READ,
     PERMISSIONS.EXAM_READ,
     PERMISSIONS.EXAM_WRITE,
+    PERMISSIONS.CID_READ,
   ],
 
   [ROLES.TECNICO_SEGURANCA]: [
@@ -65,7 +69,9 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.EMPLOYEE_READ,
     PERMISSIONS.EMPLOYEE_WRITE,
     PERMISSIONS.REPORT_READ,
+    PERMISSIONS.ATESTADO_READ,
     PERMISSIONS.ATESTADO_WRITE,
+    PERMISSIONS.ASO_READ,
   ],
 
   [ROLES.RECEPCAO]: [
@@ -74,6 +80,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.PATIENT_READ,
     PERMISSIONS.PATIENT_WRITE,
     PERMISSIONS.EMPLOYEE_READ,
+    PERMISSIONS.ATESTADO_READ,
     PERMISSIONS.ATESTADO_WRITE,
   ],
 
@@ -88,6 +95,7 @@ export const ROLE_PERMISSIONS: Record<Role, readonly Permission[]> = {
     PERMISSIONS.REPORT_READ,
     PERMISSIONS.DEVIATION_READ,
     PERMISSIONS.DEVIATION_WRITE,
+    PERMISSIONS.CID_READ,
   ],
 };
 
