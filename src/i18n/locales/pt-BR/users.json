@@ -30,7 +30,7 @@
     "role": "Perfil de acesso",
     "status": "Status",
     "password": "Senha inicial",
-    "passwordPlaceholder": "Mínimo de 12 caracteres",
+    "passwordPlaceholder": "Mínimo de 8 caracteres",
     "newPassword": "Nova senha",
     "newPasswordPlaceholder": "Deixe em branco para manter a senha atual",
     "newPasswordHint": "Só preencha se quiser redefinir a senha deste usuário."

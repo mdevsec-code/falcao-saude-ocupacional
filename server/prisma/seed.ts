@@ -104,8 +104,8 @@ async function main() {
       'Defina SEED_ADMIN_EMAIL e SEED_ADMIN_PASSWORD antes de rodar o seed (ex.: no .env).',
     );
   }
-  if (password.length < 12) {
-    throw new Error('SEED_ADMIN_PASSWORD deve ter pelo menos 12 caracteres.');
+  if (password.length < 8) {
+    throw new Error('SEED_ADMIN_PASSWORD deve ter pelo menos 8 caracteres.');
   }
 
   const passwordHash = await bcrypt.hash(password, 12);

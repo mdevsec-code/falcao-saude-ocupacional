@@ -30,7 +30,7 @@
     "role": "访问角色",
     "status": "状态",
     "password": "初始密码",
-    "passwordPlaceholder": "至少 12 个字符",
+    "passwordPlaceholder": "至少 8 个字符",
     "newPassword": "新密码",
     "newPasswordPlaceholder": "留空则保留当前密码",
     "newPasswordHint": "仅在需要重置此用户密码时填写。"

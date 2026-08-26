@@ -17,6 +17,6 @@ export class CreateUserDto {
 
   /** Senha inicial — o usuário deve trocá-la no primeiro acesso (fluxo a implementar). */
   @IsString()
-  @MinLength(12)
+  @MinLength(8)
   password!: string;
 }

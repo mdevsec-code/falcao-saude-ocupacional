@@ -14,7 +14,7 @@ export interface UserFilters {
 }
 
 /** Senha exigida ao criar; na edição é opcional — só é enviada se o admin quiser redefini-la. */
-export const USER_PASSWORD_MIN_LENGTH = 12;
+export const USER_PASSWORD_MIN_LENGTH = 8;
 
 export const userFormSchema = z.object({
   name: nonEmptyString.min(3, i18n.t('validation:nameRequired')),

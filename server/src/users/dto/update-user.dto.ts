@@ -6,6 +6,6 @@ export class UpdateUserDto extends PartialType(OmitType(CreateUserDto, ['passwor
   /** Opcional — só enviar quando um admin estiver resetando a senha do usuário. */
   @IsOptional()
   @IsString()
-  @MinLength(12)
+  @MinLength(8)
   password?: string;
 }
