@@ -134,6 +134,18 @@ const config: Config = {
           from: { transform: 'scale(1)', opacity: '1' },
           to: { transform: 'scale(0.96)', opacity: '0' },
         },
+        // Variante do scale-in/out que preserva a centralização por
+        // transform (-translate-x-1/2 -translate-y-1/2) do DialogContent —
+        // usar `scale-in`/`scale-out` puro ali sobrescreve o translate
+        // durante a animação e o modal "pula" pro canto por um instante.
+        'dialog-in': {
+          from: { transform: 'translate(-50%, -50%) scale(0.96)', opacity: '0' },
+          to: { transform: 'translate(-50%, -50%) scale(1)', opacity: '1' },
+        },
+        'dialog-out': {
+          from: { transform: 'translate(-50%, -50%) scale(1)', opacity: '1' },
+          to: { transform: 'translate(-50%, -50%) scale(0.96)', opacity: '0' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -168,6 +180,8 @@ const config: Config = {
         'slide-out-left': 'slide-out-left var(--duration-base) var(--ease-out)',
         'scale-in': 'scale-in var(--duration-base) var(--ease-out)',
         'scale-out': 'scale-out var(--duration-fast) var(--ease-in-out)',
+        'dialog-in': 'dialog-in var(--duration-base) var(--ease-out)',
+        'dialog-out': 'dialog-out var(--duration-base) var(--ease-in-out)',
         'accordion-down': 'accordion-down var(--duration-base) var(--ease-out)',
         'accordion-up': 'accordion-up var(--duration-base) var(--ease-out)',
         shimmer: 'shimmer 1.6s linear infinite',
