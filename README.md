@@ -1,14 +1,44 @@
-# 🦅 Falcão · Saúde Ocupacional
+<p align="center">
+  <img src="src/assets/logo/falcao-wordmark.png" alt="Falcão Construções e Engenharia" width="300">
+</p>
 
-> Plataforma profissional de gestão de Saúde Ocupacional para Recepção, Médicos, Enfermeiros, Técnicos de Segurança, RH e Administradores — Falcão Construções e Engenharia.
+<h1 align="center">🦅 Falcão · Saúde Ocupacional</h1>
 
-[![CI](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml/badge.svg)](https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml)
-[![Secured by GitGuard](https://img.shields.io/badge/Secured%20by-GitGuard-success?style=flat-square)](https://www.gitguard.com.br/mdevsec-code)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Node 20+](https://img.shields.io/badge/node-%E2%89%A520-339933.svg)](.nvmrc)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6.svg)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF.svg)](https://vitejs.dev/)
+<p align="center">
+  <em>Saúde ocupacional de alto padrão, do agendamento ao prontuário.</em>
+</p>
+
+> Plataforma de gestão de Saúde Ocupacional para Recepção, Médicos, Enfermeiros, Técnicos de Segurança, RH e Administradores da Falcão Construções e Engenharia — 17 módulos, RBAC, auditoria LGPD e 3 idiomas (pt-BR, en-US, zh-CN).
+
+<p align="center">
+  <a href="https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml"><img alt="CodeQL" src="https://github.com/mdevsec-code/falcao-saude-ocupacional/actions/workflows/codeql.yml/badge.svg"></a>
+  <a href="https://www.gitguard.com.br/mdevsec-code"><img alt="Secured by GitGuard" src="https://img.shields.io/badge/Secured%20by-GitGuard-success?style=flat-square"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
+  <a href=".nvmrc"><img alt="Node 20+" src="https://img.shields.io/badge/node-%E2%89%A520-339933?style=flat-square"></a>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.6_strict-3178C6?style=flat-square">
+  <img alt="i18n" src="https://img.shields.io/badge/i18n-pt--BR_·_en--US_·_zh--CN-B9861F?style=flat-square">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radixui&logoColor=white" alt="Radix UI">
+  <img src="https://img.shields.io/badge/TanStack_Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white" alt="TanStack Query">
+  <br>
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS">
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+  <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest">
+</p>
+
+<p align="center">
+  <a href="https://falcao-saude-ocupacional-eta.vercel.app"><strong>Ver demonstração no ar →</strong></a>
+</p>
 
 Aplicação web enterprise, modular, tipada e testada, para uso diário na
 gestão de saúde e segurança ocupacional da Falcão Construções e Engenharia.
@@ -16,6 +46,45 @@ Construída com **React 18 + TypeScript + Vite + TailwindCSS + Radix UI +
 TanStack Query + Axios + Zod + React Hook Form + Framer Motion + i18next +
 MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
 (`server/`).
+
+---
+
+## 📑 Sumário
+
+- [📸 Telas](#-telas)
+- [✨ Recursos](#-recursos)
+- [🛠️ Stack](#️-stack)
+- [🏗️ Arquitetura](#️-arquitetura)
+- [🚀 Getting Started](#-getting-started)
+- [📂 Project Structure](#-project-structure)
+- [📍 Roadmap](#-roadmap)
+- [🤝 Como contribuir](#-como-contribuir)
+- [🛡️ Segurança](#️-segurança)
+- [📜 Licença](#-licença)
+
+---
+
+## 📸 Telas
+
+<p align="center">
+  <img src="docs/screenshots/login.png" alt="Tela de login" width="100%">
+</p>
+
+|                                               Dashboard                                                |                                Agenda                                 |
+| :----------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| <img src="docs/screenshots/dashboard.png" alt="Dashboard com indicadores e acesso rápido aos módulos"> |   <img src="docs/screenshots/agenda.png" alt="Agenda de consultas">   |
+|                                             **Pacientes**                                              |                                **ASO**                                |
+|                 <img src="docs/screenshots/pacientes.png" alt="Cadastro de pacientes">                 | <img src="docs/screenshots/aso.png" alt="ASO por atividade de risco"> |
+|                                       **Segurança do Trabalho**                                        |                         **Auditoria (LGPD)**                          |
+|          <img src="docs/screenshots/seguranca.png" alt="Desvios e indicadores de acidentes">           | <img src="docs/screenshots/auditoria.png" alt="Trilha de auditoria">  |
+
+<details>
+<summary>Tema escuro</summary>
+<br>
+<img src="docs/screenshots/dashboard-escuro.png" alt="Dashboard no tema escuro">
+</details>
+
+> Telas capturadas com a API simulada (MSW) e a conta de demonstração local.
 
 ---
 
@@ -52,7 +121,7 @@ MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
 | Categoria       | Ferramenta                                    |
 | --------------- | --------------------------------------------- |
 | Build           | Vite 5 + TypeScript 5.6 strict                |
-| UI              | React 18 + React Router v6                    |
+| UI              | React 18 + React Router v7                    |
 | Estilo          | Tailwind CSS 3 (tokens via CSS variables)     |
 | Componentes     | Radix UI Primitives                           |
 | Ícones          | Lucide React                                  |
@@ -268,3 +337,9 @@ Veja [`SECURITY.md`](SECURITY.md) para política de reportar vulnerabilidades.
 ## 📜 Licença
 
 [MIT](LICENSE) © Falcão Construções e Engenharia.
+
+---
+
+<p align="center">
+  <sub>Feito para a <strong>Falcão Construções e Engenharia</strong> · parte da família de sistemas Falcão, ao lado do <a href="https://github.com/mdevsec-code/falcao-ERP-suprimentos-master">ERP de Suprimentos</a></sub>
+</p>
