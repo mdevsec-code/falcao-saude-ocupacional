@@ -110,7 +110,7 @@ export function LoginPage(): ReactNode {
       {/* ────────── Esquerda: painel decorativo (apenas ≥lg) ────────── */}
       <aside
         aria-hidden="true"
-        className="relative hidden overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-900 to-brand-gold-900 p-10 lg:flex lg:flex-col lg:justify-between xl:p-12"
+        className="to-brand-gold-900 relative hidden overflow-hidden bg-linear-to-br from-neutral-900 via-neutral-900 p-10 lg:flex lg:flex-col lg:justify-between xl:p-12"
       >
         {/* Textura de grade sutil — dá profundidade sem competir com o conteúdo */}
         <div
@@ -124,21 +124,21 @@ export function LoginPage(): ReactNode {
 
         {/* Camadas de glow ambiente — cada uma deriva num ritmo diferente para sensação "viva" sem distrair */}
         <div
-          className="pointer-events-none absolute -left-20 -top-20 h-[28rem] w-[28rem] animate-drift rounded-full opacity-70 blur-3xl"
+          className="animate-drift pointer-events-none absolute -top-20 -left-20 h-112 w-md rounded-full opacity-70 blur-3xl"
           style={{
             background:
               'radial-gradient(circle, rgb(var(--color-brand-gold-500) / 0.28), transparent 70%)',
           }}
         />
         <div
-          className="pointer-events-none absolute -bottom-24 right-0 h-[24rem] w-[24rem] animate-drift-reverse rounded-full opacity-60 blur-3xl"
+          className="animate-drift-reverse pointer-events-none absolute right-0 -bottom-24 h-96 w-[24rem] rounded-full opacity-60 blur-3xl"
           style={{
             background:
               'radial-gradient(circle, rgb(var(--color-brand-gold-300) / 0.16), transparent 70%)',
           }}
         />
         <div
-          className="pointer-events-none absolute inset-0 animate-glow-pulse"
+          className="animate-glow-pulse pointer-events-none absolute inset-0"
           style={{
             background:
               'radial-gradient(60% 50% at 30% 30%, rgb(var(--color-brand-gold-500) / 0.18), transparent 70%)',
@@ -157,16 +157,16 @@ export function LoginPage(): ReactNode {
         <img
           src={falcaoMark}
           alt=""
-          className="pointer-events-none absolute -bottom-16 -right-16 h-[26rem] w-auto animate-drift object-contain opacity-[0.07] grayscale invert"
+          className="animate-drift pointer-events-none absolute -right-16 -bottom-16 h-104 w-auto object-contain opacity-[0.07] grayscale invert"
         />
 
         <FalcaoLogo
           variant="wordmark"
-          className="relative h-16 w-auto max-w-[280px] animate-fade-in drop-shadow-[0_0_24px_rgba(253,191,42,0.15)]"
+          className="animate-fade-in relative h-16 w-auto max-w-[280px] drop-shadow-[0_0_24px_rgba(253,191,42,0.15)]"
           bgClassName="rounded-lg bg-white p-3 shadow-md ring-1 ring-black/5"
         />
 
-        <div className="relative animate-slide-up space-y-4">
+        <div className="animate-slide-up relative space-y-4">
           <div className="space-y-2">
             <p className="font-display text-2xl font-semibold text-white">
               {t('auth:login.sidePanel.title')}
@@ -178,7 +178,7 @@ export function LoginPage(): ReactNode {
             {sidePanelRoles.map((role, idx) => (
               <span
                 key={role}
-                className="animate-slide-up rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-2xs font-medium text-white/80 backdrop-blur-sm transition-colors hover:border-white/25 hover:bg-white/10"
+                className="animate-slide-up text-2xs rounded-full border border-white/15 bg-white/5 px-2.5 py-1 font-medium text-white/80 backdrop-blur-xs transition-colors hover:border-white/25 hover:bg-white/10"
                 style={{ animationDelay: `${120 + idx * 60}ms`, animationFillMode: 'backwards' }}
               >
                 {role}
@@ -194,10 +194,10 @@ export function LoginPage(): ReactNode {
       </aside>
 
       {/* ────────── Direita: formulário ────────── */}
-      <main className="relative flex flex-col items-center justify-center overflow-hidden bg-bg px-4 py-10 sm:px-8">
+      <main className="bg-bg relative flex flex-col items-center justify-center overflow-hidden px-4 py-10 sm:px-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 animate-glow-pulse"
+          className="animate-glow-pulse pointer-events-none absolute inset-0"
           style={{
             background:
               'radial-gradient(50% 40% at 50% 0%, rgb(var(--color-brand-gold-500) / 0.08), transparent 70%)',
@@ -205,19 +205,19 @@ export function LoginPage(): ReactNode {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 animate-drift-reverse rounded-full opacity-60 blur-3xl"
+          className="animate-drift-reverse pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full opacity-60 blur-3xl"
           style={{
             background:
               'radial-gradient(circle, rgb(var(--color-brand-gold-300) / 0.06), transparent 70%)',
           }}
         />
 
-        <div className="absolute right-4 top-4 flex items-center gap-1 sm:right-6 sm:top-6">
+        <div className="absolute top-4 right-4 flex items-center gap-1 sm:top-6 sm:right-6">
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
 
-        <div className="relative w-full max-w-md animate-scale-in">
+        <div className="animate-scale-in relative w-full max-w-md">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-4 rounded-2xl opacity-60 blur-2xl"
@@ -226,10 +226,10 @@ export function LoginPage(): ReactNode {
                 'radial-gradient(60% 60% at 50% 40%, rgb(var(--color-brand-gold-500) / 0.12), transparent 70%)',
             }}
           />
-          <Card className="relative overflow-hidden border-border shadow-lg">
+          <Card className="border-border relative overflow-hidden shadow-lg">
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-gold-300 via-brand-gold-500 to-brand-gold-300"
+              className="from-brand-gold-300 via-brand-gold-500 to-brand-gold-300 absolute inset-x-0 top-0 h-1 bg-linear-to-r"
             />
             <CardHeader className="items-center text-center">
               <FalcaoLogo
@@ -282,7 +282,7 @@ export function LoginPage(): ReactNode {
                             : t('auth:login.actions.showPassword')
                         }
                         aria-pressed={showPwd}
-                        className="text-ink-soft transition-colors hover:text-ink focus:outline-none focus-visible:text-ink"
+                        className="text-ink-soft hover:text-ink focus-visible:text-ink transition-colors focus:outline-hidden"
                       >
                         {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
@@ -292,7 +292,7 @@ export function LoginPage(): ReactNode {
                     required
                   />
                   {capsLockOn && (
-                    <p className="mt-1.5 flex animate-slide-up items-center gap-1.5 text-xs text-warning">
+                    <p className="animate-slide-up text-warning mt-1.5 flex items-center gap-1.5 text-xs">
                       <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                       {t('auth:login.fields.capsLockWarning')}
                     </p>
@@ -300,10 +300,10 @@ export function LoginPage(): ReactNode {
                 </div>
 
                 <div
-                  className="flex animate-slide-up items-center justify-between"
+                  className="animate-slide-up flex items-center justify-between"
                   style={{ animationDelay: '160ms', animationFillMode: 'backwards' }}
                 >
-                  <Label className="flex items-center gap-2 font-normal text-ink-soft">
+                  <Label className="text-ink-soft flex items-center gap-2 font-normal">
                     <Controller
                       control={control}
                       name="rememberMe"
@@ -328,7 +328,7 @@ export function LoginPage(): ReactNode {
                 {credentialsError && (
                   <p
                     role="alert"
-                    className="animate-slide-up rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-xs text-danger"
+                    className="animate-slide-up border-danger/30 bg-danger/5 text-danger rounded-md border px-3 py-2 text-xs"
                   >
                     {credentialsError}
                   </p>
@@ -354,18 +354,18 @@ export function LoginPage(): ReactNode {
               {env.VITE_ENABLE_MICROSOFT_SSO && (
                 <>
                   <div
-                    className="mt-5 flex animate-slide-up items-center gap-3"
+                    className="animate-slide-up mt-5 flex items-center gap-3"
                     style={{ animationDelay: '250ms', animationFillMode: 'backwards' }}
                   >
-                    <span className="h-px flex-1 bg-border" />
-                    <span className="text-2xs uppercase tracking-wider text-ink-soft">
+                    <span className="bg-border h-px flex-1" />
+                    <span className="text-2xs text-ink-soft tracking-wider uppercase">
                       {t('auth:login.sso.divider')}
                     </span>
-                    <span className="h-px flex-1 bg-border" />
+                    <span className="bg-border h-px flex-1" />
                   </div>
 
                   <div
-                    className="mt-4 animate-slide-up"
+                    className="animate-slide-up mt-4"
                     style={{ animationDelay: '280ms', animationFillMode: 'backwards' }}
                   >
                     <Button
@@ -385,7 +385,7 @@ export function LoginPage(): ReactNode {
           </Card>
         </div>
 
-        <p className="relative mt-6 text-2xs text-muted">{brand.copyright}</p>
+        <p className="text-2xs text-muted relative mt-6">{brand.copyright}</p>
       </main>
     </div>
   );

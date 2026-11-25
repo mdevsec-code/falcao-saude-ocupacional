@@ -17,29 +17,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn('flex w-full flex-col gap-1.5', className)}>
         {label && (
-          <label htmlFor={inputId} className="text-xs font-semibold text-ink-soft">
+          <label htmlFor={inputId} className="text-ink-soft text-xs font-semibold">
             {label}
           </label>
         )}
 
         <div
           className={cn(
-            'group flex h-10 w-full items-center gap-2 rounded-md border bg-surface px-3',
-            'transition-[border-color,box-shadow] duration-fast',
+            'group bg-surface flex h-10 w-full items-center gap-2 rounded-md border px-3',
+            'duration-fast transition-[border-color,box-shadow]',
             'border-border',
             'focus-within:border-brand-gold-500 focus-within:shadow-focus',
             error && 'border-danger focus-within:border-danger focus-within:shadow-focus',
             rest.disabled && 'cursor-not-allowed opacity-60',
           )}
         >
-          {leftIcon && <span className="flex shrink-0 items-center text-ink-soft">{leftIcon}</span>}
+          {leftIcon && <span className="text-ink-soft flex shrink-0 items-center">{leftIcon}</span>}
 
           <input
             ref={ref}
             id={inputId}
             className={cn(
-              'h-full w-full flex-1 bg-transparent text-sm text-ink placeholder:text-muted',
-              'focus:outline-none disabled:cursor-not-allowed',
+              'text-ink placeholder:text-muted h-full w-full flex-1 bg-transparent text-sm',
+              'focus:outline-hidden disabled:cursor-not-allowed',
               inputClassName,
             )}
             aria-invalid={!!error || undefined}
@@ -48,16 +48,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {rightIcon && (
-            <span className="flex shrink-0 items-center text-ink-soft">{rightIcon}</span>
+            <span className="text-ink-soft flex shrink-0 items-center">{rightIcon}</span>
           )}
         </div>
 
         {error ? (
-          <p id={`${inputId}-error`} className="text-xs text-danger">
+          <p id={`${inputId}-error`} className="text-danger text-xs">
             {error}
           </p>
         ) : hint ? (
-          <p id={`${inputId}-hint`} className="text-xs text-ink-soft">
+          <p id={`${inputId}-hint`} className="text-ink-soft text-xs">
             {hint}
           </p>
         ) : null}

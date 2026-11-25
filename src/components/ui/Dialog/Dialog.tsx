@@ -16,7 +16,7 @@ export const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'fixed inset-0 z-modal-backdrop bg-neutral-900/50 backdrop-blur-sm',
+      'z-modal-backdrop fixed inset-0 bg-neutral-900/50 backdrop-blur-xs',
       'data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in',
       className,
     )}
@@ -36,8 +36,8 @@ export const DialogContent = React.forwardRef<
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
-          'fixed left-1/2 top-1/2 z-modal max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto',
-          '-translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-surface p-6 shadow-lg',
+          'z-modal fixed top-1/2 left-1/2 max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto',
+          'border-border bg-surface -translate-x-1/2 -translate-y-1/2 rounded-lg border p-6 shadow-lg',
           'data-[state=closed]:animate-dialog-out data-[state=open]:animate-dialog-in',
           className,
         )}
@@ -45,7 +45,7 @@ export const DialogContent = React.forwardRef<
       >
         {children}
         <DialogPrimitive.Close
-          className="absolute right-4 top-4 rounded-md p-1 text-ink-soft hover:bg-hover hover:text-ink focus:outline-none focus-visible:shadow-focus"
+          className="text-ink-soft hover:bg-hover hover:text-ink focus-visible:shadow-focus absolute top-4 right-4 rounded-md p-1 focus:outline-hidden"
           aria-label={t('actions.close')}
         >
           <X className="h-4 w-4" />
@@ -70,7 +70,7 @@ export const DialogTitle = React.forwardRef<
 >(({ className, ...rest }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn('font-display text-lg font-semibold text-ink', className)}
+    className={cn('font-display text-ink text-lg font-semibold', className)}
     {...rest}
   />
 ));
@@ -82,7 +82,7 @@ export const DialogDescription = React.forwardRef<
 >(({ className, ...rest }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-ink-soft', className)}
+    className={cn('text-ink-soft text-sm', className)}
     {...rest}
   />
 ));

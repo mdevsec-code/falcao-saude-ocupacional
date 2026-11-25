@@ -15,8 +15,8 @@ const SelectTrigger = forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 w-full items-center justify-between rounded-md border border-border bg-surface px-3 text-sm',
-      'placeholder:text-ink-soft focus:outline-none focus-visible:shadow-focus',
+      'border-border bg-surface flex h-10 w-full items-center justify-between rounded-md border px-3 text-sm',
+      'placeholder:text-ink-soft focus-visible:shadow-focus focus:outline-hidden',
       'disabled:cursor-not-allowed disabled:opacity-60',
       '[&>span]:line-clamp-1',
       className,
@@ -40,8 +40,8 @@ const SelectContent = forwardRef<
       ref={ref}
       position={position}
       className={cn(
-        'relative z-popover max-h-96 min-w-[10rem] overflow-hidden rounded-md border border-border bg-surface text-ink shadow-md',
-        'origin-[var(--radix-select-content-transform-origin)]',
+        'z-popover border-border bg-surface text-ink relative max-h-96 min-w-40 overflow-hidden rounded-md border shadow-md',
+        'origin-(--radix-select-content-transform-origin)',
         'data-[state=closed]:animate-scale-out data-[state=open]:animate-scale-in',
         position === 'popper' && 'data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1',
         className,
@@ -52,7 +52,7 @@ const SelectContent = forwardRef<
         className={cn(
           'p-1',
           position === 'popper' &&
-            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
+            'h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width)',
         )}
       >
         {children}
@@ -69,9 +69,9 @@ const SelectItem = forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none',
-      'focus:bg-hover focus:text-ink data-[state=checked]:font-semibold data-[state=checked]:text-brand-gold-700',
-      'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default items-center rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none',
+      'focus:bg-hover focus:text-ink data-[state=checked]:text-brand-gold-700 data-[state=checked]:font-semibold',
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
       className,
     )}
     {...props}
@@ -92,7 +92,7 @@ const SelectLabel = forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
     ref={ref}
-    className={cn('px-2 py-1.5 text-2xs font-semibold uppercase text-ink-soft', className)}
+    className={cn('text-2xs text-ink-soft px-2 py-1.5 font-semibold uppercase', className)}
     {...props}
   />
 ));
@@ -104,7 +104,7 @@ const SelectSeparator = forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-border', className)}
+    className={cn('bg-border -mx-1 my-1 h-px', className)}
     {...props}
   />
 ));

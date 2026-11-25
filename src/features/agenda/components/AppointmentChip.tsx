@@ -17,8 +17,8 @@ export function AppointmentChip({ record, onClick, className }: AppointmentChipP
       type="button"
       onClick={() => onClick(record)}
       className={cn(
-        'block w-full truncate rounded border px-1.5 py-0.5 text-left text-2xs font-medium',
-        'transition-colors duration-fast hover:brightness-95 focus:outline-none focus-visible:shadow-focus',
+        'text-2xs block w-full truncate rounded border px-1.5 py-0.5 text-left font-medium',
+        'duration-fast focus-visible:shadow-focus transition-colors hover:brightness-95 focus:outline-hidden',
         STATUS_CHIP_CLASSES[record.status],
         className,
       )}

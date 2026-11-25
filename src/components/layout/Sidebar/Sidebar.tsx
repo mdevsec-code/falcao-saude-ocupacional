@@ -196,20 +196,20 @@ export function Sidebar(): ReactNode {
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay
             className={cn(
-              'fixed inset-0 z-modal-backdrop bg-neutral-900/50 backdrop-blur-sm',
+              'z-modal-backdrop fixed inset-0 bg-neutral-900/50 backdrop-blur-xs',
               'data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in',
             )}
           />
           <DialogPrimitive.Content
             className={cn(
-              'fixed inset-y-0 left-0 z-modal flex h-full w-72 max-w-[85vw] flex-col',
-              'border-r border-border bg-surface shadow-lg focus:outline-none',
+              'z-modal fixed inset-y-0 left-0 flex h-full w-72 max-w-[85vw] flex-col',
+              'border-border bg-surface border-r shadow-lg focus:outline-hidden',
               'data-[state=closed]:animate-slide-out-left data-[state=open]:animate-slide-in-left',
             )}
           >
             <DialogPrimitive.Title className="sr-only">{t('app.shortName')}</DialogPrimitive.Title>
             <DialogPrimitive.Close
-              className="absolute right-3 top-3 rounded-md p-1.5 text-ink-soft hover:bg-hover hover:text-ink focus:outline-none focus-visible:shadow-focus"
+              className="text-ink-soft hover:bg-hover hover:text-ink focus-visible:shadow-focus absolute top-3 right-3 rounded-md p-1.5 focus:outline-hidden"
               aria-label={t('actions.close')}
             >
               <X className="h-4 w-4" />
@@ -225,9 +225,9 @@ export function Sidebar(): ReactNode {
     <aside
       aria-label={mainNavAriaLabel}
       className={cn(
-        'flex h-full min-h-0 flex-col border-r border-border bg-surface',
+        'border-border bg-surface flex h-full min-h-0 flex-col border-r',
         isCompact ? 'w-[68px]' : 'w-64',
-        'transition-[width] duration-base ease-out',
+        'duration-base transition-[width] ease-out',
       )}
     >
       <SidebarBody isCompact={isCompact} />
@@ -247,27 +247,27 @@ function SidebarBody({ isCompact, onNavigate }: SidebarBodyProps): ReactNode {
     <>
       <div
         className={cn(
-          'flex items-center gap-2.5 border-b border-border px-4 py-4',
+          'border-border flex items-center gap-2.5 border-b px-4 py-4',
           isCompact && 'justify-center px-2',
         )}
       >
         <FalcaoLogo className="h-9 w-auto shrink-0" bgClassName="rounded-md bg-neutral-0 p-1" />
         {!isCompact && (
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ink">{t('app.shortName')}</p>
-            <p className="truncate text-2xs uppercase tracking-wider text-ink-soft">
+            <p className="text-ink truncate text-sm font-semibold">{t('app.shortName')}</p>
+            <p className="text-2xs text-ink-soft truncate tracking-wider uppercase">
               {t('branding.health')}
             </p>
           </div>
         )}
       </div>
 
-      <nav className="scrollbar-thin flex-1 overflow-y-auto px-2 py-4">
+      <nav className="flex-1 scrollbar-thin overflow-y-auto px-2 py-4">
         <ul className="space-y-5">
           {SECTIONS.map((section) => (
             <li key={section.title}>
               {!isCompact && (
-                <p className="mb-1.5 px-3 font-mono text-2xs uppercase tracking-[0.12em] text-ink-soft">
+                <p className="text-2xs text-ink-soft mb-1.5 px-3 font-mono tracking-[0.12em] uppercase">
                   {t(section.title as never)}
                 </p>
               )}
@@ -285,7 +285,7 @@ function SidebarBody({ isCompact, onNavigate }: SidebarBodyProps): ReactNode {
 
       <div
         className={cn(
-          'border-t border-border px-4 py-3 text-2xs text-ink-soft',
+          'border-border text-2xs text-ink-soft border-t px-4 py-3',
           isCompact && 'px-2 text-center',
         )}
       >
@@ -318,7 +318,7 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
     return (
       <div
         aria-disabled="true"
-        className={cn(baseClasses, 'cursor-not-allowed text-ink-soft opacity-70')}
+        className={cn(baseClasses, 'text-ink-soft cursor-not-allowed opacity-70')}
         title={t('sidebar.comingSoon')}
       >
         <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -348,7 +348,7 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
           {isActive && (
             <motion.span
               layoutId="sidebar-active-pill"
-              className="absolute inset-0 rounded-md bg-brand-gold-50"
+              className="bg-brand-gold-50 absolute inset-0 rounded-md"
               transition={{ type: 'spring', stiffness: 500, damping: 34, mass: 0.9 }}
             />
           )}

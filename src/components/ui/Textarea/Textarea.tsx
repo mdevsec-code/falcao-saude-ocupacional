@@ -15,7 +15,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className={cn('flex w-full flex-col gap-1.5', className)}>
         {label && (
-          <label htmlFor={inputId} className="text-xs font-semibold text-ink-soft">
+          <label htmlFor={inputId} className="text-ink-soft text-xs font-semibold">
             {label}
           </label>
         )}
@@ -25,9 +25,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           rows={rows}
           className={cn(
-            'w-full resize-y rounded-md border bg-surface px-3 py-2 text-sm text-ink placeholder:text-muted',
-            'border-border transition-[border-color,box-shadow] duration-fast',
-            'focus:border-brand-gold-500 focus:shadow-focus focus:outline-none',
+            'bg-surface text-ink placeholder:text-muted w-full resize-y rounded-md border px-3 py-2 text-sm',
+            'border-border duration-fast transition-[border-color,box-shadow]',
+            'focus:border-brand-gold-500 focus:shadow-focus focus:outline-hidden',
             error && 'border-danger focus:border-danger focus:shadow-focus',
             rest.disabled && 'cursor-not-allowed opacity-60',
             inputClassName,
@@ -38,11 +38,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
 
         {error ? (
-          <p id={`${inputId}-error`} className="text-xs text-danger">
+          <p id={`${inputId}-error`} className="text-danger text-xs">
             {error}
           </p>
         ) : hint ? (
-          <p id={`${inputId}-hint`} className="text-xs text-ink-soft">
+          <p id={`${inputId}-hint`} className="text-ink-soft text-xs">
             {hint}
           </p>
         ) : null}

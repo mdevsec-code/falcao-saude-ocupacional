@@ -27,22 +27,22 @@ export function AttendanceTimeline({ records }: AttendanceTimelineProps) {
   const sorted = [...records].sort((a, b) => b.attendanceDate.localeCompare(a.attendanceDate));
 
   return (
-    <ol className="relative space-y-5 border-l border-border pl-5">
+    <ol className="border-border relative space-y-5 border-l pl-5">
       {sorted.map((record) => (
         <li key={record.id} className="relative">
           <span
             aria-hidden="true"
-            className="absolute -left-[25px] top-1 h-2.5 w-2.5 rounded-full border-2 border-surface bg-brand-gold-500"
+            className="border-surface bg-brand-gold-500 absolute top-1 left-[-25px] h-2.5 w-2.5 rounded-full border-2"
           />
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-ink">
+            <p className="text-ink text-sm font-semibold">
               {formatDate(record.attendanceDate) ?? '—'}
             </p>
             <Badge variant={CONCLUSION_BADGE_VARIANT[record.conclusion]} size="sm">
               {APPOINTMENT_CONCLUSION_LABELS[record.conclusion]}
             </Badge>
           </div>
-          <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-soft">
+          <p className="text-ink-soft mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
             <span className="flex items-center gap-1">
               <Stethoscope className="h-3 w-3" aria-hidden="true" />
               {record.examType}
@@ -53,11 +53,11 @@ export function AttendanceTimeline({ records }: AttendanceTimelineProps) {
             </span>
           </p>
           {record.restrictionNotes && (
-            <p className="mt-1.5 rounded-md border border-brand-gold-300 bg-brand-gold-50/60 px-2.5 py-1.5 text-xs text-brand-gold-900">
+            <p className="border-brand-gold-300 bg-brand-gold-50/60 text-brand-gold-900 mt-1.5 rounded-md border px-2.5 py-1.5 text-xs">
               {record.restrictionNotes}
             </p>
           )}
-          {record.notes && <p className="mt-1.5 text-xs text-ink-soft">{record.notes}</p>}
+          {record.notes && <p className="text-ink-soft mt-1.5 text-xs">{record.notes}</p>}
         </li>
       ))}
     </ol>

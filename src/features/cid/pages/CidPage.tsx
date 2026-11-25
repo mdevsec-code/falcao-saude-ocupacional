@@ -168,28 +168,28 @@ export function CidPage() {
           <EmptyState title={t('cid:empty.title')} description={t('cid:empty.description')} />
         ) : (
           <>
-            <p className="animate-fade-in text-xs text-ink-soft">
+            <p className="animate-fade-in text-ink-soft text-xs">
               {t('cid:results.count', { count: filtered.length })}
             </p>
-            <div className="overflow-x-auto rounded-md border border-border">
+            <div className="border-border overflow-x-auto rounded-md border">
               <table className="w-full text-left text-sm">
                 <thead className="bg-brand-gold-50/60 text-ink">
                   <tr>
-                    <th className="w-24 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    <th className="text-ink-soft w-24 px-3 py-2 text-xs font-semibold tracking-wider uppercase">
                       {t('cid:table.code')}
                     </th>
-                    <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    <th className="text-ink-soft px-3 py-2 text-xs font-semibold tracking-wider uppercase">
                       {t('cid:table.description')}
                     </th>
-                    <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    <th className="text-ink-soft px-3 py-2 text-xs font-semibold tracking-wider uppercase">
                       {t('cid:table.category')}
                     </th>
-                    <th className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    <th className="text-ink-soft px-3 py-2 text-xs font-semibold tracking-wider uppercase">
                       {t('cid:table.actions')}
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border bg-surface">
+                <tbody className="divide-border bg-surface divide-y">
                   {filtered.map((entry, idx) => (
                     <tr
                       key={entry.code}
@@ -204,16 +204,16 @@ export function CidPage() {
                           type="button"
                           onClick={() => void handleCopyCode(entry.code)}
                           aria-label={t('cid:table.copyAria', { code: entry.code })}
-                          className="group inline-flex items-center gap-1.5 rounded-sm font-mono font-semibold text-ink transition-colors hover:text-brand-gold-700 focus-visible:shadow-focus focus-visible:outline-none"
+                          className="group text-ink hover:text-brand-gold-700 focus-visible:shadow-focus inline-flex items-center gap-1.5 rounded-sm font-mono font-semibold transition-colors focus-visible:outline-hidden"
                         >
                           {entry.code}
                           <Copy
-                            className="h-3 w-3 text-ink-soft opacity-0 transition-opacity group-hover:opacity-100"
+                            className="text-ink-soft h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100"
                             aria-hidden="true"
                           />
                         </button>
                       </td>
-                      <td className="px-3 py-2 text-ink">{entry.description}</td>
+                      <td className="text-ink px-3 py-2">{entry.description}</td>
                       <td className="px-3 py-2">
                         <Badge variant={CATEGORY_BADGE_VARIANT[entry.category]} size="sm">
                           {entry.category}
@@ -234,7 +234,7 @@ export function CidPage() {
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-8 w-8 text-danger hover:text-danger"
+                              className="text-danger hover:text-danger h-8 w-8"
                               aria-label={t('cid:table.deleteAria')}
                               onClick={() => setDeleteTarget(entry.custom)}
                             >
@@ -251,7 +251,7 @@ export function CidPage() {
           </>
         )}
 
-        <p className="text-xs text-ink-soft">{t('cid:page.footnote')}</p>
+        <p className="text-ink-soft text-xs">{t('cid:page.footnote')}</p>
       </div>
 
       <CidDialog

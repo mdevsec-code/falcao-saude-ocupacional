@@ -27,9 +27,9 @@ export const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1.5 text-sm font-medium',
-      'text-ink-soft transition-all duration-fast',
-      'focus-visible:shadow-focus focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+      'inline-flex items-center justify-center rounded px-3 py-1.5 text-sm font-medium whitespace-nowrap',
+      'text-ink-soft duration-fast transition-all',
+      'focus-visible:shadow-focus focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50',
       'data-[state=active]:bg-surface data-[state=active]:text-ink data-[state=active]:shadow-sm',
       className,
     )}
@@ -45,7 +45,7 @@ export const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'mt-3 focus-visible:outline-none',
+      'mt-3 focus-visible:outline-hidden',
       'data-[state=active]:animate-fade-in',
       className,
     )}

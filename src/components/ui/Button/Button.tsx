@@ -67,9 +67,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ref={ref as never}
           data-loading={isLoading || undefined}
           className={cn(
-            'inline-flex select-none items-center justify-center font-medium',
-            'transition-[background,box-shadow,transform,color] duration-fast ease-out',
-            'focus:outline-none focus-visible:shadow-focus',
+            'inline-flex items-center justify-center font-medium select-none',
+            'duration-fast transition-[background,box-shadow,transform,color] ease-out',
+            'focus-visible:shadow-focus focus:outline-hidden',
             'disabled:cursor-not-allowed disabled:opacity-60',
             'active:scale-[0.985]',
             variantClasses[variant],
@@ -93,9 +93,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         data-loading={isLoading || undefined}
         className={cn(
-          'inline-flex select-none items-center justify-center font-medium',
-          'transition-[background,box-shadow,transform,color] duration-fast ease-out',
-          'focus:outline-none focus-visible:shadow-focus',
+          'inline-flex items-center justify-center font-medium select-none',
+          'duration-fast transition-[background,box-shadow,transform,color] ease-out',
+          'focus-visible:shadow-focus focus:outline-hidden',
           'disabled:cursor-not-allowed disabled:opacity-60',
           'active:scale-[0.985]',
           variantClasses[variant],

@@ -1,9 +1,306 @@
-@import './tokens.css';
-@import './reset.css';
+@import './tokens.css' layer(base);
+@import './reset.css' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-brand-gold-50: rgb(var(--color-brand-gold-50));
+  --color-brand-gold-100: rgb(var(--color-brand-gold-100));
+  --color-brand-gold-300: rgb(var(--color-brand-gold-300));
+  --color-brand-gold-500: rgb(var(--color-brand-gold-500));
+  --color-brand-gold-700: rgb(var(--color-brand-gold-700));
+  --color-brand-gold-900: rgb(var(--color-brand-gold-900));
+
+  --color-neutral-0: rgb(var(--color-neutral-0));
+  --color-neutral-50: rgb(var(--color-neutral-50));
+  --color-neutral-100: rgb(var(--color-neutral-100));
+  --color-neutral-200: rgb(var(--color-neutral-200));
+  --color-neutral-300: rgb(var(--color-neutral-300));
+  --color-neutral-500: rgb(var(--color-neutral-500));
+  --color-neutral-700: rgb(var(--color-neutral-700));
+  --color-neutral-900: rgb(var(--color-neutral-900));
+
+  --color-accent-50: rgb(var(--color-accent-50));
+  --color-accent-100: rgb(var(--color-accent-100));
+  --color-accent-500: rgb(var(--color-accent-500));
+  --color-accent-700: rgb(var(--color-accent-700));
+  --color-accent-900: rgb(var(--color-accent-900));
+
+  --color-success: rgb(var(--color-success));
+  --color-warning: rgb(var(--color-warning));
+  --color-danger: rgb(var(--color-danger));
+  --color-info: rgb(var(--color-info));
+  --color-bg: rgb(var(--color-bg));
+  --color-surface: rgb(var(--color-surface));
+  --color-surface-elevated: rgb(var(--color-surface-elevated));
+  --color-border: rgb(var(--color-border));
+  --color-hover: rgb(var(--color-hover));
+  --color-ink: rgb(var(--color-text-primary));
+  --color-ink-soft: rgb(var(--color-text-secondary));
+  --color-muted: rgb(var(--color-text-muted));
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.0625rem;
+  --text-lg--line-height: 1.625rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-focus: var(--shadow-focus);
+  --shadow-inner-soft: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  --z-index-dropdown: var(--z-dropdown);
+  --z-index-sticky: var(--z-sticky);
+  --z-index-modal-backdrop: var(--z-modal-backdrop);
+  --z-index-modal: var(--z-modal);
+  --z-index-popover: var(--z-popover);
+  --z-index-toast: var(--z-toast);
+  --z-index-tooltip: var(--z-tooltip);
+
+  --ease-out: var(--ease-out);
+
+  --transition-duration-fast: var(--duration-fast);
+  --transition-duration-base: var(--duration-base);
+  --transition-duration-slow: var(--duration-slow);
+
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-out);
+  --animate-fade-out: fade-out var(--duration-base) var(--ease-out);
+  --animate-slide-in-right: slide-in-right var(--duration-base) var(--ease-out);
+  --animate-slide-up: slide-up var(--duration-base) var(--ease-out);
+  --animate-slide-in-left: slide-in-left var(--duration-base) var(--ease-out);
+  --animate-slide-out-left: slide-out-left var(--duration-base) var(--ease-out);
+  --animate-scale-in: scale-in var(--duration-base) var(--ease-out);
+  --animate-scale-out: scale-out var(--duration-fast) var(--ease-in-out);
+  --animate-dialog-in: dialog-in var(--duration-base) var(--ease-out);
+  --animate-dialog-out: dialog-out var(--duration-base) var(--ease-in-out);
+  --animate-accordion-down: accordion-down var(--duration-base) var(--ease-out);
+  --animate-accordion-up: accordion-up var(--duration-base) var(--ease-out);
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-glow-pulse: glow-pulse 6s var(--ease-in-out) infinite;
+  --animate-drift: drift 14s var(--ease-in-out) infinite;
+  --animate-drift-reverse: drift-reverse 18s var(--ease-in-out) infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(8px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-up {
+    from {
+      transform: translateY(8px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-out-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      transform: scale(0.96);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes scale-out {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.96);
+      opacity: 0;
+    }
+  }
+  @keyframes dialog-in {
+    from {
+      transform: translate(-50%, -50%) scale(0.96);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes dialog-out {
+    from {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(0.96);
+      opacity: 0;
+    }
+  }
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-2%, -3%) scale(1.04);
+    }
+  }
+  @keyframes drift-reverse {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(3%, 2%) scale(1.06);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility scrollbar-thin {
+  /* Scrollbars discretas */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-neutral-300)) transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--color-neutral-300));
+    border-radius: 4px;
+  }
+  .dark & {
+    scrollbar-color: rgb(var(--color-neutral-700)) transparent;
+  }
+  .dark &::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--color-neutral-700));
+  }
+}
+
+@utility dark {
+  & .scrollbar-thin {
+    scrollbar-color: rgb(var(--color-neutral-700)) transparent;
+  }
+  & .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--color-neutral-700));
+  }
+}
 
 /* ============================================
    Componentes utilitários (camada base do Tailwind)
@@ -28,30 +325,5 @@
   .dark ::selection {
     background-color: rgb(var(--color-brand-gold-700));
     color: rgb(var(--color-brand-gold-50));
-  }
-}
-
-@layer components {
-  /* Scrollbars discretas */
-  .scrollbar-thin {
-    scrollbar-width: thin;
-    scrollbar-color: rgb(var(--color-neutral-300)) transparent;
-  }
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-neutral-300));
-    border-radius: 4px;
-  }
-  .dark .scrollbar-thin {
-    scrollbar-color: rgb(var(--color-neutral-700)) transparent;
-  }
-  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-neutral-700));
   }
 }
