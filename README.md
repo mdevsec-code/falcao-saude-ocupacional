@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
   <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
@@ -42,7 +42,7 @@
 
 Aplicação web enterprise, modular, tipada e testada, para uso diário na
 gestão de saúde e segurança ocupacional da Falcão Construções e Engenharia.
-Construída com **React 18 + TypeScript + Vite + TailwindCSS + Radix UI +
+Construída com **React 19 + TypeScript + Vite 8 + Tailwind CSS 4 + Radix UI +
 TanStack Query + Axios + Zod + React Hook Form + Framer Motion + i18next +
 MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
 (`server/`).
@@ -98,7 +98,8 @@ MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
 - **Backend real** (`server/`, NestJS + Prisma + PostgreSQL) — auth JWT,
   RBAC por perfil, auditoria persistida; ver [`server/README.md`](server/README.md)
 - **Design System próprio** baseado em tokens (CSS variables) com light/dark
-  mode cuidado nas duas direções, não só invertido
+  mode cuidado nas duas direções, não só invertido — mesma paleta, fontes e
+  menu lateral escuro do padrão visual Falcão (Falcão RH)
 - **Autenticação & RBAC** com `RequireAuth`, `RequirePermission` (bloqueio
   por rota, não só esconder o link), gate declarativo `<Can>` e 6 perfis
 - **Camada HTTP** central (Axios com interceptors + `ApiError` normalizado)
@@ -118,26 +119,27 @@ MSW + Vitest**, com backend real em **NestJS + Prisma + PostgreSQL**
 
 ## 🛠️ Stack
 
-| Categoria       | Ferramenta                                    |
-| --------------- | --------------------------------------------- |
-| Build           | Vite 5 + TypeScript 5.6 strict                |
-| UI              | React 18 + React Router v7                    |
-| Estilo          | Tailwind CSS 3 (tokens via CSS variables)     |
-| Componentes     | Radix UI Primitives                           |
-| Ícones          | Lucide React                                  |
-| Animações       | Framer Motion                                 |
-| Estado servidor | TanStack Query 5                              |
-| Estado cliente  | Zustand 4 (com persistência)                  |
-| Formulários     | React Hook Form 7 + Zod                       |
-| HTTP            | Axios 1                                       |
-| Mock API        | MSW 2                                         |
-| Toast           | Sonner                                        |
-| i18n            | i18next 23 + react-i18next 15                 |
-| Testes          | Vitest 2 + React Testing Library + jsdom      |
-| Lint/Format     | ESLint 8 + Prettier 3 (+ tailwind plugin)     |
-| Commits         | Husky 9 + lint-staged 15 + commitlint 19      |
-| CI/CD           | GitHub Actions (CI + CodeQL)                  |
-| Deploy          | Vercel · Netlify · Azure SWA · Docker (Nginx) |
+| Categoria       | Ferramenta                                                     |
+| --------------- | -------------------------------------------------------------- |
+| Build           | Vite 8 (Rolldown) + TypeScript strict                          |
+| UI              | React 19 + React Router v7                                     |
+| Estilo          | Tailwind CSS 4 (`@tailwindcss/vite`, tokens via CSS variables) |
+| Componentes     | Radix UI Primitives                                            |
+| Ícones          | Lucide React                                                   |
+| Animações       | Framer Motion + GSAP 3                                         |
+| Tipografia      | Geist · Barlow Condensed · Newsreader                          |
+| Estado servidor | TanStack Query 5                                               |
+| Estado cliente  | Zustand 4 (com persistência)                                   |
+| Formulários     | React Hook Form 7 + Zod                                        |
+| HTTP            | Axios 1                                                        |
+| Mock API        | MSW 2                                                          |
+| Toast           | Sonner                                                         |
+| i18n            | i18next 23 + react-i18next 15                                  |
+| Testes          | Vitest 5 + React Testing Library + jsdom                       |
+| Lint/Format     | ESLint 8 + Prettier 3 (+ tailwind plugin)                      |
+| Commits         | Husky 9 + lint-staged 15 + commitlint 19                       |
+| CI/CD           | GitHub Actions (CI + CodeQL)                                   |
+| Deploy          | Vercel · Netlify · Azure SWA · Docker (Nginx)                  |
 
 ---
 
@@ -287,8 +289,6 @@ depois de entrar:
 ├── LICENSE
 ├── netlify.toml
 ├── package.json
-├── postcss.config.js
-├── tailwind.config.ts
 ├── tsconfig.json
 ├── tsconfig.app.json
 ├── tsconfig.node.json

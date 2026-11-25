@@ -43,6 +43,7 @@
 
   --font-sans: var(--f-sans);
   --font-display: var(--f-display);
+  --font-serif: 'Newsreader Variable', Georgia, serif;
   --font-mono: var(--f-mono);
 
   --text-2xs: 0.6875rem;
