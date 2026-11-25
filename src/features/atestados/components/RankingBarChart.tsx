@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-const AXIS_TICK = { fill: 'rgb(var(--color-text-secondary))', fontSize: 12 };
-const GRID_STROKE = 'rgb(var(--color-border))';
+const AXIS_TICK = { fill: 'rgb(var(--c-text-secondary))', fontSize: 12 };
+const GRID_STROKE = 'rgb(var(--c-border))';
 
 interface RankingBarChartProps {
   data: [string, number][];
@@ -72,7 +72,7 @@ export function RankingBarChart({
           </>
         )}
         <Tooltip
-          cursor={{ fill: 'rgb(var(--color-hover))' }}
+          cursor={{ fill: 'rgb(var(--c-hover))' }}
           content={<RankingTooltip valueLabel={valueLabel} />}
         />
         <Bar
@@ -99,10 +99,10 @@ function RankingTooltip({
   if (!active || !payload?.length) return null;
   const { value, payload: row } = payload[0]!;
   return (
-    <div className="rounded-md border border-border bg-surface px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-ink">{row.label}</p>
+    <div className="border-border bg-surface rounded-md border px-3 py-2 text-xs shadow-md">
+      <p className="text-ink font-semibold">{row.label}</p>
       <p className="text-ink-soft">
-        <span className="font-semibold text-ink">{value.toLocaleString('pt-BR')}</span> {valueLabel}
+        <span className="text-ink font-semibold">{value.toLocaleString('pt-BR')}</span> {valueLabel}
       </p>
     </div>
   );

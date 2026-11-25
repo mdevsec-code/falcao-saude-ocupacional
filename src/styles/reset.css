@@ -8,7 +8,7 @@
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: rgb(var(--color-border));
+  border-color: rgb(var(--c-border));
 }
 
 html {
@@ -22,7 +22,7 @@ html {
 body {
   margin: 0;
   line-height: inherit;
-  font-family: var(--font-sans);
+  font-family: var(--f-sans);
 }
 
 hr {
@@ -64,7 +64,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--font-mono);
+  font-family: var(--f-mono);
   font-size: 1em;
 }
 
@@ -166,9 +166,9 @@ video {
 
 /* Better focus visibility for keyboard users */
 :focus-visible {
-  outline: 2px solid rgb(var(--color-brand-gold-500));
+  outline: 2px solid rgb(var(--c-brand-gold-500));
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--r-sm);
 }
 
 button:focus,
@@ -177,6 +177,6 @@ button:focus-visible {
 }
 
 button:focus-visible {
-  outline: 2px solid rgb(var(--color-brand-gold-500));
+  outline: 2px solid rgb(var(--c-brand-gold-500));
   outline-offset: 2px;
 }

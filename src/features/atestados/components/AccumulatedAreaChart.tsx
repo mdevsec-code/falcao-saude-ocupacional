@@ -12,8 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { formatDate } from '@/utils/format';
 import type { AtestadoRecord } from '../types';
 
-const AXIS_TICK = { fill: 'rgb(var(--color-text-secondary))', fontSize: 12 };
-const GRID_STROKE = 'rgb(var(--color-border))';
+const AXIS_TICK = { fill: 'rgb(var(--c-text-secondary))', fontSize: 12 };
+const GRID_STROKE = 'rgb(var(--c-border))';
 
 interface AccumulatedAreaChartProps {
   records: readonly AtestadoRecord[];
@@ -90,10 +90,10 @@ function AreaTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-md border border-border bg-surface px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-ink">{label}</p>
+    <div className="border-border bg-surface rounded-md border px-3 py-2 text-xs shadow-md">
+      <p className="text-ink font-semibold">{label}</p>
       <p className="text-ink-soft">
-        <span className="font-semibold text-ink">{payload[0]!.value.toLocaleString('pt-BR')}</span>{' '}
+        <span className="text-ink font-semibold">{payload[0]!.value.toLocaleString('pt-BR')}</span>{' '}
         {unit}
       </p>
     </div>

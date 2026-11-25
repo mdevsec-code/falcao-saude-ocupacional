@@ -6,44 +6,44 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-brand-gold-50: rgb(var(--color-brand-gold-50));
-  --color-brand-gold-100: rgb(var(--color-brand-gold-100));
-  --color-brand-gold-300: rgb(var(--color-brand-gold-300));
-  --color-brand-gold-500: rgb(var(--color-brand-gold-500));
-  --color-brand-gold-700: rgb(var(--color-brand-gold-700));
-  --color-brand-gold-900: rgb(var(--color-brand-gold-900));
+  --color-brand-gold-50: rgb(var(--c-brand-gold-50));
+  --color-brand-gold-100: rgb(var(--c-brand-gold-100));
+  --color-brand-gold-300: rgb(var(--c-brand-gold-300));
+  --color-brand-gold-500: rgb(var(--c-brand-gold-500));
+  --color-brand-gold-700: rgb(var(--c-brand-gold-700));
+  --color-brand-gold-900: rgb(var(--c-brand-gold-900));
 
-  --color-neutral-0: rgb(var(--color-neutral-0));
-  --color-neutral-50: rgb(var(--color-neutral-50));
-  --color-neutral-100: rgb(var(--color-neutral-100));
-  --color-neutral-200: rgb(var(--color-neutral-200));
-  --color-neutral-300: rgb(var(--color-neutral-300));
-  --color-neutral-500: rgb(var(--color-neutral-500));
-  --color-neutral-700: rgb(var(--color-neutral-700));
-  --color-neutral-900: rgb(var(--color-neutral-900));
+  --color-neutral-0: rgb(var(--c-neutral-0));
+  --color-neutral-50: rgb(var(--c-neutral-50));
+  --color-neutral-100: rgb(var(--c-neutral-100));
+  --color-neutral-200: rgb(var(--c-neutral-200));
+  --color-neutral-300: rgb(var(--c-neutral-300));
+  --color-neutral-500: rgb(var(--c-neutral-500));
+  --color-neutral-700: rgb(var(--c-neutral-700));
+  --color-neutral-900: rgb(var(--c-neutral-900));
 
-  --color-accent-50: rgb(var(--color-accent-50));
-  --color-accent-100: rgb(var(--color-accent-100));
-  --color-accent-500: rgb(var(--color-accent-500));
-  --color-accent-700: rgb(var(--color-accent-700));
-  --color-accent-900: rgb(var(--color-accent-900));
+  --color-accent-50: rgb(var(--c-accent-50));
+  --color-accent-100: rgb(var(--c-accent-100));
+  --color-accent-500: rgb(var(--c-accent-500));
+  --color-accent-700: rgb(var(--c-accent-700));
+  --color-accent-900: rgb(var(--c-accent-900));
 
-  --color-success: rgb(var(--color-success));
-  --color-warning: rgb(var(--color-warning));
-  --color-danger: rgb(var(--color-danger));
-  --color-info: rgb(var(--color-info));
-  --color-bg: rgb(var(--color-bg));
-  --color-surface: rgb(var(--color-surface));
-  --color-surface-elevated: rgb(var(--color-surface-elevated));
-  --color-border: rgb(var(--color-border));
-  --color-hover: rgb(var(--color-hover));
-  --color-ink: rgb(var(--color-text-primary));
-  --color-ink-soft: rgb(var(--color-text-secondary));
-  --color-muted: rgb(var(--color-text-muted));
+  --color-success: rgb(var(--c-success));
+  --color-warning: rgb(var(--c-warning));
+  --color-danger: rgb(var(--c-danger));
+  --color-info: rgb(var(--c-info));
+  --color-bg: rgb(var(--c-bg));
+  --color-surface: rgb(var(--c-surface));
+  --color-surface-elevated: rgb(var(--c-surface-elevated));
+  --color-border: rgb(var(--c-border));
+  --color-hover: rgb(var(--c-hover));
+  --color-ink: rgb(var(--c-text-primary));
+  --color-ink-soft: rgb(var(--c-text-secondary));
+  --color-muted: rgb(var(--c-text-muted));
 
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
-  --font-mono: var(--font-mono);
+  --font-sans: var(--f-sans);
+  --font-display: var(--f-display);
+  --font-mono: var(--f-mono);
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
@@ -64,11 +64,11 @@
   --text-4xl: 2.25rem;
   --text-4xl--line-height: 2.5rem;
 
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-2xl);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
+  --radius-2xl: var(--r-2xl);
 
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
@@ -266,14 +266,14 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--c-gray-200, currentcolor);
   }
 }
 
 @utility scrollbar-thin {
   /* Scrollbars discretas */
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--color-neutral-300)) transparent;
+  scrollbar-color: rgb(var(--c-neutral-300)) transparent;
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -282,23 +282,23 @@
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-neutral-300));
+    background-color: rgb(var(--c-neutral-300));
     border-radius: 4px;
   }
   .dark & {
-    scrollbar-color: rgb(var(--color-neutral-700)) transparent;
+    scrollbar-color: rgb(var(--c-neutral-700)) transparent;
   }
   .dark &::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-neutral-700));
+    background-color: rgb(var(--c-neutral-700));
   }
 }
 
 @utility dark {
   & .scrollbar-thin {
-    scrollbar-color: rgb(var(--color-neutral-700)) transparent;
+    scrollbar-color: rgb(var(--c-neutral-700)) transparent;
   }
   & .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgb(var(--color-neutral-700));
+    background-color: rgb(var(--c-neutral-700));
   }
 }
 
@@ -308,9 +308,9 @@
 
 @layer base {
   html {
-    font-family: var(--font-sans);
-    color: rgb(var(--color-text-primary));
-    background-color: rgb(var(--color-bg));
+    font-family: var(--f-sans);
+    color: rgb(var(--c-text-primary));
+    background-color: rgb(var(--c-bg));
   }
 
   body {
@@ -318,12 +318,12 @@
   }
 
   ::selection {
-    background-color: rgb(var(--color-brand-gold-100));
-    color: rgb(var(--color-brand-gold-900));
+    background-color: rgb(var(--c-brand-gold-100));
+    color: rgb(var(--c-brand-gold-900));
   }
 
   .dark ::selection {
-    background-color: rgb(var(--color-brand-gold-700));
-    color: rgb(var(--color-brand-gold-50));
+    background-color: rgb(var(--c-brand-gold-700));
+    color: rgb(var(--c-brand-gold-50));
   }
 }

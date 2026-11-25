@@ -19,10 +19,10 @@ interface IndicadoresChartProps {
   records: readonly AccidentIndicatorRecord[];
 }
 
-const AXIS_TICK = { fill: 'rgb(var(--color-text-secondary))', fontSize: 12 };
-const GRID_STROKE = 'rgb(var(--color-border))';
-const FREQUENCY_COLOR = 'rgb(var(--color-brand-gold-700))';
-const SEVERITY_COLOR = 'rgb(var(--color-danger))';
+const AXIS_TICK = { fill: 'rgb(var(--c-text-secondary))', fontSize: 12 };
+const GRID_STROKE = 'rgb(var(--c-border))';
+const FREQUENCY_COLOR = 'rgb(var(--c-brand-gold-700))';
+const SEVERITY_COLOR = 'rgb(var(--c-danger))';
 
 export function IndicadoresChart({ records }: IndicadoresChartProps) {
   const { t } = useTranslation('seguranca');
@@ -57,7 +57,7 @@ export function IndicadoresChart({ records }: IndicadoresChartProps) {
         <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} width={40} />
         <Tooltip
           contentStyle={{
-            background: 'rgb(var(--color-surface))',
+            background: 'rgb(var(--c-surface))',
             border: `1px solid ${GRID_STROKE}`,
             borderRadius: 8,
             fontSize: 12,
@@ -71,7 +71,7 @@ export function IndicadoresChart({ records }: IndicadoresChartProps) {
           stroke={FREQUENCY_COLOR}
           strokeWidth={2}
           dot={{ r: 4, fill: FREQUENCY_COLOR, strokeWidth: 0 }}
-          activeDot={{ r: 5, stroke: 'rgb(var(--color-surface))', strokeWidth: 2 }}
+          activeDot={{ r: 5, stroke: 'rgb(var(--c-surface))', strokeWidth: 2 }}
           animationDuration={600}
         />
         <Line
@@ -81,7 +81,7 @@ export function IndicadoresChart({ records }: IndicadoresChartProps) {
           stroke={SEVERITY_COLOR}
           strokeWidth={2}
           dot={{ r: 4, fill: SEVERITY_COLOR, strokeWidth: 0 }}
-          activeDot={{ r: 5, stroke: 'rgb(var(--color-surface))', strokeWidth: 2 }}
+          activeDot={{ r: 5, stroke: 'rgb(var(--c-surface))', strokeWidth: 2 }}
           animationDuration={600}
           animationBegin={150}
         />

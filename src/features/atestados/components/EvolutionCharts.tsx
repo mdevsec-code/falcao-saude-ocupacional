@@ -15,8 +15,8 @@ interface EvolutionChartsProps {
   groups: CompetenciaGroup[];
 }
 
-const AXIS_TICK = { fill: 'rgb(var(--color-text-secondary))', fontSize: 12 };
-const GRID_STROKE = 'rgb(var(--color-border))';
+const AXIS_TICK = { fill: 'rgb(var(--c-text-secondary))', fontSize: 12 };
+const GRID_STROKE = 'rgb(var(--c-border))';
 
 export function EvolutionCharts({ groups }: EvolutionChartsProps) {
   const { t } = useTranslation('atestados');
@@ -33,7 +33,7 @@ export function EvolutionCharts({ groups }: EvolutionChartsProps) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <div>
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
+        <p className="text-ink-soft mb-1 text-xs font-semibold tracking-wide uppercase">
           {t('atestados:chartLabels.evolution.certificatesAxis')}
         </p>
         <ResponsiveContainer width="100%" height={220}>
@@ -64,14 +64,14 @@ export function EvolutionCharts({ groups }: EvolutionChartsProps) {
               stroke="var(--atestados-series-1)"
               strokeWidth={2}
               dot={{ r: 4, fill: 'var(--atestados-series-1)', strokeWidth: 0 }}
-              activeDot={{ r: 5, stroke: 'rgb(var(--color-surface))', strokeWidth: 2 }}
+              activeDot={{ r: 5, stroke: 'rgb(var(--c-surface))', strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
       <div>
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">
+        <p className="text-ink-soft mb-1 text-xs font-semibold tracking-wide uppercase">
           {t('atestados:chartLabels.evolution.daysAxis')}
         </p>
         <ResponsiveContainer width="100%" height={220}>
@@ -100,7 +100,7 @@ export function EvolutionCharts({ groups }: EvolutionChartsProps) {
               stroke="var(--atestados-series-2)"
               strokeWidth={2}
               dot={{ r: 4, fill: 'var(--atestados-series-2)', strokeWidth: 0 }}
-              activeDot={{ r: 5, stroke: 'rgb(var(--color-surface))', strokeWidth: 2 }}
+              activeDot={{ r: 5, stroke: 'rgb(var(--c-surface))', strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -122,10 +122,10 @@ function AtestadosTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-md border border-border bg-surface px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-ink">{label}</p>
+    <div className="border-border bg-surface rounded-md border px-3 py-2 text-xs shadow-md">
+      <p className="text-ink font-semibold">{label}</p>
       <p className="text-ink-soft">
-        <span className="font-semibold text-ink">{payload[0]!.value.toLocaleString('pt-BR')}</span>{' '}
+        <span className="text-ink font-semibold">{payload[0]!.value.toLocaleString('pt-BR')}</span>{' '}
         {unit}
       </p>
     </div>

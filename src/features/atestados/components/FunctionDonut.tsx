@@ -41,7 +41,7 @@ export function FunctionDonut({ records }: FunctionDonutProps) {
           outerRadius="85%"
           paddingAngle={2}
           strokeWidth={2}
-          stroke="rgb(var(--color-surface))"
+          stroke="rgb(var(--c-surface))"
         >
           {data.map((entry, idx) => (
             <Cell key={entry.name} fill={SERIES_COLORS[idx % SERIES_COLORS.length]} />
@@ -50,7 +50,7 @@ export function FunctionDonut({ records }: FunctionDonutProps) {
         <Tooltip content={<DonutTooltip total={total} />} />
         <Legend
           verticalAlign="bottom"
-          formatter={(value: string) => <span className="text-xs text-ink-soft">{value}</span>}
+          formatter={(value: string) => <span className="text-ink-soft text-xs">{value}</span>}
         />
       </PieChart>
     </ResponsiveContainer>
@@ -70,10 +70,10 @@ function DonutTooltip({
   const { name, value } = payload[0]!;
   const pct = total ? ((value / total) * 100).toFixed(1) : '0.0';
   return (
-    <div className="rounded-md border border-border bg-surface px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-ink">{name}</p>
+    <div className="border-border bg-surface rounded-md border px-3 py-2 text-xs shadow-md">
+      <p className="text-ink font-semibold">{name}</p>
       <p className="text-ink-soft">
-        <span className="font-semibold text-ink">{value.toLocaleString('pt-BR')}</span> ({pct}%)
+        <span className="text-ink font-semibold">{value.toLocaleString('pt-BR')}</span> ({pct}%)
       </p>
     </div>
   );

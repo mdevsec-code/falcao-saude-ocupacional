@@ -117,7 +117,7 @@ export function LoginPage(): ReactNode {
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
-              'linear-gradient(rgb(var(--color-neutral-0)) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--color-neutral-0)) 1px, transparent 1px)',
+              'linear-gradient(rgb(var(--c-neutral-0)) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--c-neutral-0)) 1px, transparent 1px)',
             backgroundSize: '44px 44px',
           }}
         />
@@ -127,21 +127,21 @@ export function LoginPage(): ReactNode {
           className="animate-drift pointer-events-none absolute -top-20 -left-20 h-112 w-md rounded-full opacity-70 blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, rgb(var(--color-brand-gold-500) / 0.28), transparent 70%)',
+              'radial-gradient(circle, rgb(var(--c-brand-gold-500) / 0.28), transparent 70%)',
           }}
         />
         <div
           className="animate-drift-reverse pointer-events-none absolute right-0 -bottom-24 h-96 w-[24rem] rounded-full opacity-60 blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, rgb(var(--color-brand-gold-300) / 0.16), transparent 70%)',
+              'radial-gradient(circle, rgb(var(--c-brand-gold-300) / 0.16), transparent 70%)',
           }}
         />
         <div
           className="animate-glow-pulse pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(60% 50% at 30% 30%, rgb(var(--color-brand-gold-500) / 0.18), transparent 70%)',
+              'radial-gradient(60% 50% at 30% 30%, rgb(var(--c-brand-gold-500) / 0.18), transparent 70%)',
           }}
         />
 
@@ -150,7 +150,7 @@ export function LoginPage(): ReactNode {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(120% 100% at 50% 50%, transparent 55%, rgb(var(--color-neutral-900) / 0.35) 100%)',
+              'radial-gradient(120% 100% at 50% 50%, transparent 55%, rgb(var(--c-neutral-900) / 0.35) 100%)',
           }}
         />
 
@@ -200,7 +200,7 @@ export function LoginPage(): ReactNode {
           className="animate-glow-pulse pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(50% 40% at 50% 0%, rgb(var(--color-brand-gold-500) / 0.08), transparent 70%)',
+              'radial-gradient(50% 40% at 50% 0%, rgb(var(--c-brand-gold-500) / 0.08), transparent 70%)',
           }}
         />
         <div
@@ -208,7 +208,7 @@ export function LoginPage(): ReactNode {
           className="animate-drift-reverse pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full opacity-60 blur-3xl"
           style={{
             background:
-              'radial-gradient(circle, rgb(var(--color-brand-gold-300) / 0.06), transparent 70%)',
+              'radial-gradient(circle, rgb(var(--c-brand-gold-300) / 0.06), transparent 70%)',
           }}
         />
 
@@ -223,7 +223,7 @@ export function LoginPage(): ReactNode {
             className="pointer-events-none absolute -inset-4 rounded-2xl opacity-60 blur-2xl"
             style={{
               background:
-                'radial-gradient(60% 60% at 50% 40%, rgb(var(--color-brand-gold-500) / 0.12), transparent 70%)',
+                'radial-gradient(60% 60% at 50% 40%, rgb(var(--c-brand-gold-500) / 0.12), transparent 70%)',
             }}
           />
           <Card className="border-border relative overflow-hidden shadow-lg">
