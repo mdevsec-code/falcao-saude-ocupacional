@@ -8,51 +8,51 @@
 
 :root {
   /* ---------- Brand — Dourado (hue ~44°, da logo) ---------- */
-  --c-brand-gold-50: 255 248 230;
-  --c-brand-gold-100: 255 235 179;
-  --c-brand-gold-300: 253 191 42; /* = #FDBF2A, tom quase idêntico ao dourado da logo */
-  --c-brand-gold-500: 172 126 6; /* primary brand — ações/botões (contraste com branco) */
-  --c-brand-gold-700: 138 99 4;
-  --c-brand-gold-900: 62 42 2;
+  --c-brand-gold-50: 255 246 214;
+  --c-brand-gold-100: 255 234 163;
+  --c-brand-gold-300: 254 190 2; /* #FEBE02, o amarelo do padrão Falcão */
+  --c-brand-gold-500: 232 172 0; /* primary brand — ações/botões (contraste com branco) */
+  --c-brand-gold-700: 107 78 0;
+  --c-brand-gold-900: 61 44 0;
 
   /* ---------- Accent — Preto/grafite (da logo) ---------- */
-  --c-accent-50: 233 233 230;
-  --c-accent-100: 214 214 208;
-  --c-accent-500: 43 43 38;
-  --c-accent-700: 26 26 22;
-  --c-accent-900: 12 12 10; /* ≈ #0C0C0A, preto da logo */
+  --c-accent-50: 243 243 240;
+  --c-accent-100: 231 231 226;
+  --c-accent-500: 42 44 47;
+  --c-accent-700: 21 22 24;
+  --c-accent-900: 11 11 12; /* ≈ #0C0C0A, preto da logo */
 
   /* ---------- Neutrals ---------- */
   --c-neutral-0: 255 255 255;
-  --c-neutral-50: 250 250 249;
-  --c-neutral-100: 244 244 242;
-  --c-neutral-200: 231 231 227;
-  --c-neutral-300: 210 210 204;
-  --c-neutral-500: 138 138 130;
-  --c-neutral-700: 74 74 69;
-  --c-neutral-900: 20 20 15;
+  --c-neutral-50: 243 243 240;
+  --c-neutral-100: 238 238 234;
+  --c-neutral-200: 231 231 226;
+  --c-neutral-300: 207 207 200;
+  --c-neutral-500: 147 151 156;
+  --c-neutral-700: 97 102 107;
+  --c-neutral-900: 11 11 12;
 
   /* ---------- Semantic ---------- */
-  --c-success: 47 125 90;
-  --c-warning: 172 126 6;
-  --c-danger: 178 58 50;
-  --c-info: 44 93 138;
+  --c-success: 27 122 75;
+  --c-warning: 232 172 0;
+  --c-danger: 180 35 24;
+  --c-info: 37 87 167;
 
   /* ---------- Surfaces (light) ---------- */
-  --c-bg: 250 250 249; /* var(--c-neutral-50) */
+  --c-bg: 243 243 240; /* var(--c-neutral-50) */
   --c-surface: 255 255 255; /* var(--c-neutral-0) */
   --c-surface-elevated: 255 255 255;
-  --c-border: 231 231 227;
-  --c-hover: 244 244 242;
+  --c-border: 231 231 226;
+  --c-hover: 238 238 234;
 
   /* ---------- Text (light) ---------- */
-  --c-text-primary: 20 20 15;
-  --c-text-secondary: 74 74 69;
-  --c-text-muted: 138 138 130;
+  --c-text-primary: 11 11 12;
+  --c-text-secondary: 42 44 47;
+  --c-text-muted: 97 102 107;
 
   /* ---------- Type ---------- */
-  --f-display: 'Fraunces', 'Times New Roman', serif;
-  --f-sans: 'Inter', 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-display: 'Barlow Condensed', 'Geist Variable', sans-serif;
+  --f-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', monospace;
 
   /* ---------- Spacing (4px base) ---------- */
@@ -105,15 +105,15 @@
    Dark theme
    ============================================ */
 .dark {
-  --c-bg: 14 14 11;
-  --c-surface: 24 24 19;
-  --c-surface-elevated: 34 34 27;
-  --c-border: 42 42 35;
-  --c-hover: 32 32 25;
+  --c-bg: 9 9 10;
+  --c-surface: 21 22 24;
+  --c-surface-elevated: 31 32 35;
+  --c-border: 42 43 47;
+  --c-hover: 31 32 35;
 
-  --c-text-primary: 244 244 240;
-  --c-text-secondary: 168 168 158;
-  --c-text-muted: 110 110 102;
+  --c-text-primary: 255 255 255;
+  --c-text-secondary: 196 198 201;
+  --c-text-muted: 147 151 156;
 
   /*
    * A escala "50/100" do dourado serve de fundo suave para chips/badges/
@@ -123,13 +123,13 @@
    * cima, ambos ilegíveis/deslocados sobre um fundo escuro. Invertemos a
    * escala tonal (50/100 escurecem, 700/900 clareiam) mantendo o matiz.
    */
-  --c-brand-gold-50: 56 45 18;
-  --c-brand-gold-100: 84 66 24;
-  --c-brand-gold-700: 224 172 62;
-  --c-brand-gold-900: 247 197 84;
+  --c-brand-gold-50: 43 35 6;
+  --c-brand-gold-100: 66 52 9;
+  --c-brand-gold-700: 255 215 106;
+  --c-brand-gold-900: 255 230 160;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-focus: 0 0 0 3px rgba(253, 191, 42, 0.32);
+  --shadow-focus: 0 0 0 3px rgba(254, 190, 2, 0.35);
 }

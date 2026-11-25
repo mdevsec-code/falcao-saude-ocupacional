@@ -203,13 +203,13 @@ export function Sidebar(): ReactNode {
           <DialogPrimitive.Content
             className={cn(
               'z-modal fixed inset-y-0 left-0 flex h-full w-72 max-w-[85vw] flex-col',
-              'border-border bg-surface border-r shadow-lg focus:outline-hidden',
+              'border-r border-[#2a2b2f] bg-[#0b0b0c] shadow-lg focus:outline-hidden',
               'data-[state=closed]:animate-slide-out-left data-[state=open]:animate-slide-in-left',
             )}
           >
             <DialogPrimitive.Title className="sr-only">{t('app.shortName')}</DialogPrimitive.Title>
             <DialogPrimitive.Close
-              className="text-ink-soft hover:bg-hover hover:text-ink focus-visible:shadow-focus absolute top-3 right-3 rounded-md p-1.5 focus:outline-hidden"
+              className="focus-visible:shadow-focus absolute top-3 right-3 z-10 rounded-md p-1.5 text-[#5d5e64] hover:bg-black/5 hover:text-[#0b0b0c] focus:outline-hidden"
               aria-label={t('actions.close')}
             >
               <X className="h-4 w-4" />
@@ -225,7 +225,7 @@ export function Sidebar(): ReactNode {
     <aside
       aria-label={mainNavAriaLabel}
       className={cn(
-        'border-border bg-surface flex h-full min-h-0 flex-col border-r',
+        'flex h-full min-h-0 flex-col border-r border-[#2a2b2f] bg-[#0b0b0c] bg-[radial-gradient(120%_60%_at_0%_100%,rgb(254_190_2/0.10),transparent_60%)]',
         isCompact ? 'w-[68px]' : 'w-64',
         'duration-base transition-[width] ease-out',
       )}
@@ -247,27 +247,31 @@ function SidebarBody({ isCompact, onNavigate }: SidebarBodyProps): ReactNode {
     <>
       <div
         className={cn(
-          'border-border flex items-center gap-2.5 border-b px-4 py-4',
+          'relative z-10 mb-6 flex h-16 shrink-0 items-center gap-2.5 bg-white px-5',
+          'before:pointer-events-none before:absolute before:inset-x-0 before:top-full before:h-12 before:bg-[linear-gradient(to_bottom,rgb(255_255_255)_0%,rgb(255_255_255/0.55)_18%,rgb(255_255_255/0.22)_42%,rgb(255_255_255/0.07)_70%,transparent_100%)]',
+          'after:pointer-events-none after:absolute after:inset-x-6 after:bottom-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[#febe02] after:to-transparent',
           isCompact && 'justify-center px-2',
         )}
       >
         <FalcaoLogo className="h-9 w-auto shrink-0" bgClassName="rounded-md bg-neutral-0 p-1" />
         {!isCompact && (
           <div className="min-w-0">
-            <p className="text-ink truncate text-sm font-semibold">{t('app.shortName')}</p>
-            <p className="text-2xs text-ink-soft truncate tracking-wider uppercase">
+            <p className="font-display truncate text-xl leading-none font-semibold text-[#0b0b0c]">
+              {t('app.shortName')}
+            </p>
+            <p className="mt-1 truncate text-[10px] font-medium tracking-[0.18em] text-[#5d5e64] uppercase">
               {t('branding.health')}
             </p>
           </div>
         )}
       </div>
 
-      <nav className="flex-1 scrollbar-thin overflow-y-auto px-2 py-4">
+      <nav className="flex-1 scrollbar-thin overflow-y-auto px-3 pb-4">
         <ul className="space-y-5">
           {SECTIONS.map((section) => (
             <li key={section.title}>
               {!isCompact && (
-                <p className="text-2xs text-ink-soft mb-1.5 px-3 font-mono tracking-[0.12em] uppercase">
+                <p className="mb-2 px-3 text-[10.5px] font-medium tracking-[0.16em] text-[#a3a6ab]/55 uppercase">
                   {t(section.title as never)}
                 </p>
               )}
@@ -285,7 +289,7 @@ function SidebarBody({ isCompact, onNavigate }: SidebarBodyProps): ReactNode {
 
       <div
         className={cn(
-          'border-border text-2xs text-ink-soft border-t px-4 py-3',
+          'text-2xs border-t border-[#2a2b2f] px-4 py-3 text-[#a3a6ab]/60',
           isCompact && 'px-2 text-center',
         )}
       >
@@ -307,7 +311,7 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
   const { can } = useAuth();
 
   const baseClasses = cn(
-    'group flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium',
+    'group flex h-10 items-center gap-3 rounded-sm px-3 text-[14.5px]',
     'transition-colors duration-fast',
     compact && 'justify-center px-2',
   );
@@ -318,7 +322,7 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
     return (
       <div
         aria-disabled="true"
-        className={cn(baseClasses, 'text-ink-soft cursor-not-allowed opacity-70')}
+        className={cn(baseClasses, 'cursor-not-allowed text-[#a3a6ab] opacity-50')}
         title={t('sidebar.comingSoon')}
       >
         <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -340,7 +344,7 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
       end={to === ROUTE_PATHS.DASHBOARD}
       onClick={onNavigate}
       className={({ isActive }) =>
-        cn(baseClasses, 'relative', isActive ? 'text-brand-gold-900' : 'text-ink hover:bg-hover')
+        cn(baseClasses, 'relative', isActive ? 'text-white' : 'text-[#a3a6ab] hover:text-white')
       }
     >
       {({ isActive }) => (
@@ -348,14 +352,16 @@ function SidebarLink({ item, compact, onNavigate }: SidebarLinkProps): ReactNode
           {isActive && (
             <motion.span
               layoutId="sidebar-active-pill"
-              className="bg-brand-gold-50 absolute inset-0 rounded-md"
+              className="absolute inset-0 rounded-sm bg-gradient-to-r from-white/[0.09] to-white/[0.04] ring-1 ring-white/[0.07] ring-inset before:absolute before:inset-y-2.5 before:-left-px before:w-[3px] before:rounded-r-full before:bg-[#febe02] before:shadow-[0_0_14px_2px_rgb(254_190_2/0.45)]"
               transition={{ type: 'spring', stiffness: 500, damping: 34, mass: 0.9 }}
             />
           )}
           <Icon
             className={cn(
               'relative h-4 w-4 shrink-0',
-              isActive ? 'text-brand-gold-700' : 'text-ink-soft',
+              isActive
+                ? 'text-[#febe02]'
+                : 'text-[#a3a6ab] transition-transform duration-300 group-hover:scale-110 group-hover:text-white',
             )}
             aria-hidden="true"
           />

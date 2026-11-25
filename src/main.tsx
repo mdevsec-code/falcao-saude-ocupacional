@@ -4,6 +4,10 @@ import { App } from '@/app/App';
 import { RuntimeErrorBoundary } from '@/app/RuntimeErrorBoundary';
 import { env } from '@/config/env';
 import '@/i18n';
+import '@fontsource-variable/geist';
+import '@fontsource/barlow-condensed/500.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource-variable/newsreader/opsz.css';
 import '@/styles/tailwind.css';
 
 async function enableMocking(): Promise<void> {
